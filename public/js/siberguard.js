@@ -170,3 +170,314 @@ dialog?.addEventListener("click", (e) => {
 });
 const topic = Number(new URLSearchParams(location.search).get("topic"));
 if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
+
+/* =========================================
+   VERIFY NAVBAR
+   ========================================= */
+
+(() => {
+    const header = document.getElementById('verifyHeader');
+    const toggle = document.getElementById('verifyMenuToggle');
+    const navigation = document.getElementById('verifyNavigation');
+
+    if (!header || !toggle || !navigation) {
+        return;
+    }
+
+    const mobileQuery = window.matchMedia('(max-width: 1000px)');
+
+    function updateHeader() {
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+    }
+
+    function setMenuOpen(open, returnFocus = false) {
+        navigation.classList.toggle('is-open', open);
+
+        toggle.setAttribute('aria-expanded', String(open));
+
+        toggle.setAttribute(
+            'aria-label',
+            open ? 'Tutup navigasi' : 'Buka navigasi'
+        );
+
+        if (returnFocus) {
+            toggle.focus();
+        }
+    }
+
+    toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setMenuOpen(!isOpen);
+    });
+
+    navigation.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            setMenuOpen(false);
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!header.contains(event.target)) {
+            setMenuOpen(false);
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (
+            event.key === 'Escape' &&
+            toggle.getAttribute('aria-expanded') === 'true'
+        ) {
+            setMenuOpen(false, true);
+        }
+    });
+
+    header.addEventListener('focusout', (event) => {
+        if (!header.contains(event.relatedTarget)) {
+            setMenuOpen(false);
+        }
+    });
+
+    mobileQuery.addEventListener('change', () => {
+        setMenuOpen(false);
+    });
+
+    window.addEventListener('scroll', updateHeader, { passive: true });
+
+    updateHeader();
+})();
+
+/* =========================================
+   VERIFY STAT COUNTERS
+   ========================================= */
+
+(() => {
+    const counters = document.querySelectorAll(
+        '[data-verify-counter]'
+    );
+
+    if (!counters.length) {
+        return;
+    }
+
+    const reducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+    );
+
+    const formatter = new Intl.NumberFormat('id-ID');
+
+    function animateCounter(element) {
+        const target = Number(element.dataset.verifyCounter);
+
+        if (!Number.isFinite(target) || target < 0) {
+            return;
+        }
+
+        if (reducedMotion.matches) {
+            element.textContent = formatter.format(target);
+            return;
+        }
+
+        const duration = 1000;
+        let startTime = null;
+
+        function update(timestamp) {
+            if (startTime === null) {
+                startTime = timestamp;
+            }
+
+            if (reducedMotion.matches) {
+                element.textContent = formatter.format(target);
+                return;
+            }
+
+            const progress = Math.min(
+                (timestamp - startTime) / duration,
+                1
+            );
+
+            const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+            element.textContent = formatter.format(
+                Math.round(target * easedProgress)
+            );
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            });
+        },
+        { threshold: 0.5 }
+    );
+
+    counters.forEach((counter) => {
+        observer.observe(counter);
+    });
+})();
+
+/* =========================================
+   VERIFY — PHONE DEMO & SCROLL HINT
+   Versi tanpa tombol Jeda
+   ========================================= */
+
+(() => {
+    function initVerifyHero() {
+        const reducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        );
+
+        /* Scroll ke How It Works */
+        const scrollHint = document.querySelector(
+            '.verify-scroll-hint'
+        );
+
+        scrollHint?.addEventListener('click', (event) => {
+            const target = document.getElementById(
+                'how-it-works'
+            );
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior: reducedMotion.matches
+                    ? 'instant'
+                    : 'smooth',
+                block: 'start'
+            });
+        });
+
+        /* Ilustrasi ponsel */
+        const demo = document.querySelector(
+            '[data-phone-demo]'
+        );
+
+        if (!demo || demo.dataset.initialized === 'true') {
+            return;
+        }
+
+        const scenes = [
+            ...demo.querySelectorAll('[data-phone-scene]')
+        ];
+
+        const dots = [
+            ...demo.querySelectorAll('[data-phone-dot]')
+        ];
+
+        if (scenes.length < 2) {
+            return;
+        }
+
+        demo.dataset.initialized = 'true';
+
+        let currentScene = 0;
+        let timer = null;
+
+        const duration = 4500;
+
+        function showScene(index) {
+            currentScene = index;
+
+            scenes.forEach((scene, sceneIndex) => {
+                const active = sceneIndex === index;
+
+                scene.hidden = !active;
+                scene.classList.toggle(
+                    'is-visible',
+                    active
+                );
+            });
+
+            dots.forEach((dot, dotIndex) => {
+                const active = dotIndex === index;
+
+                dot.classList.toggle(
+                    'is-active',
+                    active
+                );
+
+                dot.setAttribute(
+                    'aria-pressed',
+                    String(active)
+                );
+            });
+        }
+
+        function stopAutoplay() {
+            if (timer !== null) {
+                window.clearInterval(timer);
+                timer = null;
+            }
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+
+            /*
+             * Hormati pengaturan pengurangan animasi.
+             * Tombol titik tetap bisa digunakan.
+             */
+            if (document.hidden || reducedMotion.matches) {
+                return;
+            }
+
+            timer = window.setInterval(() => {
+                showScene(
+                    (currentScene + 1) % scenes.length
+                );
+            }, duration);
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showScene(index);
+
+                /* Setelah dipilih, autoplay mulai lagi */
+                startAutoplay();
+            });
+        });
+
+        document.addEventListener(
+            'visibilitychange',
+            startAutoplay
+        );
+
+        reducedMotion.addEventListener(
+            'change',
+            startAutoplay
+        );
+
+        showScene(0);
+        startAutoplay();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            initVerifyHero,
+            { once: true }
+        );
+    } else {
+        initVerifyHero();
+    }
+})();

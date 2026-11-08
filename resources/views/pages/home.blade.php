@@ -1,223 +1,586 @@
 @extends('layouts.app')
-@section('title','Jelajah Dunia Digital dengan Aman')
+
+@section('title', 'Jelajah Dunia Digital dengan Aman')
+
 @section('content')
-<section class="hero">
-    <div class="hero-copy"><span class="eyebrow">KENALI RISIKONYA, LINDUNGI DIRIMU</span>
-        <h1>Jelajah Dunia Digital<br>dengan <em>Aman!</em></h1>
-        <p>SiberGuard membantu kamu mengenali penipuan,<br>melindungi data, dan lebih percaya diri di dunia digital.</p>
-        <div class="actions"><a class="button yellow" href="{{ route('modules') }}">Mulai Belajar <span>→</span></a><a class="button white" href="{{ route('detect') }}">Deteksi Scam →</a></div>
-        <div class="hero-meta"><span>6 modul pembelajaran</span><span>6 latihan interaktif</span></div>
-    </div>
-    <div class="hero-art" aria-label="Ilustrasi perlindungan digital">
-        <div class="float-card card-a"><x-icon name="lock" /><span>Data terlindungi</span></div>
-        <div class="phone">
-            <div class="notch"></div>
-            <div class="phone-body">
-                <div class="phone-shield"><x-icon /></div>
-                <h3>Stay safe.<br>Stay smart.</h3>
-                <p>Keamanan digital<br>dimulai dari kamu.</p>
-                <div class="phone-check">✓ Kenali • Cek • Lindungi</div>
-            </div>
-        </div>
-        <div class="float-card card-b"><x-icon name="link" /><span>Periksa tautan</span></div>
-        <div class="float-card card-c"><x-icon /><span>Kenali penipuan</span></div>
-    </div>
-</section>
 
-{{-- HOW IT WORKS SECTION --}}
-<section class="container process">
+{{-- HERO --}}
+<section class="hero verify-hero">
 
-    <div class="section-heading">
-        <span class="eyebrow">THE PROCESS</span>
-        <h1>How It Works</h1>
-        <p>Tiga langkah untuk lebih aman di dunia digital.</p>
-    </div>
+    {{-- Teks dan statistik --}}
+    <div class="hero-copy">
 
-    <div class="process-tabs" role="tablist" aria-label="Langkah penggunaan">
-        @foreach(['Belajar','Berlatih','Melindungi'] as $label)
-            <button
-                id="tab-{{ $loop->index }}"
-                role="tab"
-                aria-controls="step-{{ $loop->index }}"
-                aria-selected="{{ $loop->first?'true':'false' }}"
-                tabindex="{{ $loop->first?'0':'-1' }}"
-                data-step="{{ $loop->index }}"
-                class="{{ $loop->first?'selected':'' }}"
-            >
-                0{{ $loop->iteration }} {{ $label }}
-            </button>
-        @endforeach
-    </div>
+        <span class="verify-hero-label">
+            <span
+                class="verify-status-dot"
+                aria-hidden="true"></span>
 
-    @foreach([
-        [
-            'Kenali Tanda-Tanda Penipuan',
-            'Jelajahi enam modul pembelajaran untuk memahami modus scam, mengenali perilaku mencurigakan, dan mengetahui cara kerja penipuan digital.',
-            '6 Modules',
-            'Edukasi Scam',
-            'modules',
-            'blue',
-            'report'
-        ],
-        [
-            'Uji Kemampuanmu',
-            'Ikuti simulasi interaktif untuk melatih kemampuan mengenali pesan penipuan, tautan mencurigakan, dan penawaran palsu.',
-            '6 Simulator',
-            'Interaktif',
-            'simulator',
-            'purple',
-            'brain'
-        ],
-        [
-            'Lindungi Diri dan Ambil Tindakan',
-            'Periksa pesan mencurigakan, lindungi data pribadi, dan pelajari langkah yang dapat diambil saat menemukan dugaan penipuan.',
-            'Deteksi Tautan',
-            'Pencegahan Scam',
-            'detect',
-            'green',
-            'shield'
-        ]
-    ] as $s)
+            KENALI RISIKONYA, LINDUNGI DIRIMU
+        </span>
 
-        <article
-            id="step-{{ $loop->index }}"
-            role="tabpanel"
-            aria-labelledby="tab-{{ $loop->index }}"
-            class="step-panel {{ $s[5] }}"
-            {{ $loop->first?'':'hidden' }}
-        >
-            <span class="step-number">
-                LANGKAH 0{{ $loop->iteration }}
-            </span>
+        <h1>
+            Jelajah Dunia Digital<br>
+            dengan <em>Aman!</em>
+        </h1>
 
-            <div class="step-icon">
-                <x-icon :name="$s[6]" />
-            </div>
-
-            <h2>{{ $s[0] }}</h2>
-
-            <p>{{ $s[1] }}</p>
-
-            <div class="pills">
-                <a href="{{ route($s[4]) }}">
-                    {{ $s[2] }} →
-                </a>
-                <span>{{ $s[3] }}</span>
-            </div>
-        </article>
-
-    @endforeach
-
-</section>
-
-
-{{-- EVERYTHING YOU NEED SECTION --}}
-<section class="feature-section">
-
-    <div class="feature-heading">
-        <span class="eyebrow">EXPLORE OUR FEATURES</span>
-
-        <h2>Everything You Need to Stay Safe Online</h2>
-
-        <p>
-            From instant URL analysis to in-depth scam education,
-            SiberGuard equips you with the knowledge and tools
-            to navigate the web with confidence.
+        <p class="verify-hero-description">
+            Kenali modus penipuan, periksa pesan mencurigakan,
+            dan bangun kebiasaan digital yang lebih aman
+            bersama <span>VeriFy.</span>
         </p>
+
+        {{-- Statistik mini --}}
+        <div class="verify-hero-summary">
+
+            <div
+                class="verify-mini-stats"
+                role="group"
+                aria-label="Ringkasan platform VeriFy">
+                {{-- Pemeriksaan URL --}}
+                <div class="verify-mini-stat">
+
+                    <span class="verify-mini-stat-value">
+                        @if(isset($urlChecksCount))
+                        <span
+                            data-verify-counter="{{ (int) $urlChecksCount }}">
+                            {{ number_format((int) $urlChecksCount, 0, ',', '.') }}
+                        </span>
+                        @else
+                        <span aria-label="Data belum tersedia">
+                            —
+                        </span>
+                        @endif
+                    </span>
+
+                    <span class="verify-mini-stat-label">
+                        Pemeriksaan URL
+                    </span>
+
+                </div>
+
+                {{-- Modul --}}
+                <a
+                    class="verify-mini-stat"
+                    href="{{ route('modules') }}">
+                    <span class="verify-mini-stat-value">
+                        <span data-verify-counter="6">6</span>
+                    </span>
+
+                    <span class="verify-mini-stat-label">
+                        Modul belajar
+                    </span>
+                </a>
+
+                {{-- Simulator --}}
+                <a
+                    class="verify-mini-stat"
+                    href="{{ route('simulator') }}">
+                    <span class="verify-mini-stat-value">
+                        <span data-verify-counter="6">6</span>
+                    </span>
+
+                    <span class="verify-mini-stat-label">
+                        Topik simulasi
+                    </span>
+                </a>
+
+            </div>
+
+            @unless(isset($urlChecksCount))
+            <p class="verify-mini-stats-note">
+                Statistik pemeriksaan URL belum tersedia.
+            </p>
+            @endunless
+
+        </div>
+
     </div>
+    {{-- Akhir hero-copy --}}
 
-    <div class="feature-grid">
 
-        {{-- 1. URL Checker --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-blue">
-                <x-icon name="search" />
+    {{-- Ilustrasi ponsel dan kartu melayang --}}
+    <div
+        class="hero-art"
+        role="group"
+        aria-label="Ilustrasi edukasi perlindungan digital">
+
+        {{-- Kartu pertama --}}
+        <div class="float-card card-a">
+            <x-icon name="lock" />
+            <span>Lindungi data</span>
+        </div>
+
+        {{-- Ponsel --}}
+        <div class="phone">
+
+            <div class="notch"></div>
+
+            <div
+                class="phone-body verify-phone-demo"
+                data-phone-demo>
+
+                <span class="verify-demo-label">
+                    ILUSTRASI EDUKASI
+                </span>
+
+                {{-- Tampilan pertama --}}
+                <div
+                    class="verify-demo-scene is-visible"
+                    data-phone-scene>
+                    <div class="phone-shield">
+                        <x-icon name="shield" />
+                    </div>
+
+                    <h3>
+                        Stay safe.<br>
+                        Stay smart.
+                    </h3>
+
+                    <p>
+                        Keamanan digital<br>
+                        dimulai dari kamu.
+                    </p>
+
+                    <div class="phone-check">
+                        ✓ Kenali • Cek • Lindungi
+                    </div>
+                </div>
+
+                {{-- Tampilan kedua: contoh pesan fiktif --}}
+                <div
+                    class="verify-demo-scene"
+                    data-phone-scene
+                    hidden>
+                    <div class="verify-demo-message">
+
+                        <span class="verify-demo-sender">
+                            Pengirim tidak dikenal
+                        </span>
+
+                        <p>
+                            “Selamat! Kamu mendapat hadiah.
+                            Kirim biaya admin sekarang!”
+                        </p>
+
+                        <span class="verify-demo-message-note">
+                            Contoh pesan fiktif
+                        </span>
+
+                    </div>
+
+                    <div class="verify-demo-reminder">
+
+                        <span
+                            class="verify-demo-reminder-icon"
+                            aria-hidden="true">
+                            !
+                        </span>
+
+                        <span>
+                            Jangan terburu-buru.<br>
+                            Periksa sebelum percaya.
+                        </span>
+
+                    </div>
+                </div>
+
+                {{-- Tampilan ketiga: langkah verifikasi --}}
+                <div
+                    class="verify-demo-scene"
+                    data-phone-scene
+                    hidden>
+                    <div
+                        class="verify-demo-check-icon"
+                        aria-hidden="true">
+                        <x-icon name="shield" />
+                    </div>
+
+                    <h3 class="verify-demo-check-title">
+                        Berhenti sejenak.<br>
+                        Cek lebih teliti.
+                    </h3>
+
+                    <ul class="verify-demo-checklist">
+                        <li>Periksa identitas pengirim</li>
+                        <li>Jangan bagikan OTP</li>
+                        <li>Verifikasi lewat kanal resmi</li>
+                    </ul>
+                </div>
+
+                {{-- Kontrol titik, tanpa tombol Jeda --}}
+                <div class="verify-demo-controls">
+
+                    <div
+                        class="verify-demo-dots"
+                        role="group"
+                        aria-label="Pilih tampilan ilustrasi">
+                        <button
+                            class="verify-demo-dot is-active"
+                            type="button"
+                            data-phone-dot="0"
+                            aria-label="Tampilan 1: pengantar"
+                            aria-pressed="true"></button>
+
+                        <button
+                            class="verify-demo-dot"
+                            type="button"
+                            data-phone-dot="1"
+                            aria-label="Tampilan 2: contoh pesan"
+                            aria-pressed="false"></button>
+
+                        <button
+                            class="verify-demo-dot"
+                            type="button"
+                            data-phone-dot="2"
+                            aria-label="Tampilan 3: langkah verifikasi"
+                            aria-pressed="false"></button>
+                    </div>
+
+                </div>
+
+            </div>
+            {{-- Akhir phone-body --}}
+
+        </div>
+        {{-- Akhir phone --}}
+
+        {{-- Kartu kedua --}}
+        <div class="float-card card-b">
+            <x-icon name="link" />
+            <span>Periksa tautan</span>
+        </div>
+
+        {{-- Kartu ketiga --}}
+        <div class="float-card card-c">
+            <x-icon name="shield" />
+            <span>Kenali penipuan</span>
+        </div>
+
+    </div>
+    {{-- Akhir hero-art --}}
+
+</section>
+{{-- Akhir HERO --}}
+
+
+{{-- EVERYTHING YOU NEED --}}
+{{-- RINGKASAN FITUR VERIFY --}}
+<section
+    class="verify-features"
+    aria-labelledby="verify-features-title">
+    <div class="verify-features-container">
+
+        {{-- Judul section --}}
+        <div class="verify-features-heading">
+
+            <div class="verify-features-heading-main">
+                <span class="verify-section-label">
+                    <span aria-hidden="true"></span>
+                    FITUR VERIFY
+                </span>
+
+                <h2 id="verify-features-title">
+                    Kenali risikonya.<br>
+                    <span>Lebih bijak bertindak.</span>
+                </h2>
             </div>
 
-            <h3>URL Checker</h3>
+        </div>
 
-            <p>
-                Instantly check suspicious links and identify
-                potential online threats before you click.
-            </p>
-        </article>
+        {{-- Daftar fitur --}}
+        <div class="verify-features-grid">
 
+            {{-- 1. Detect Scam --}}
+            <article class="verify-feature-card">
 
-        {{-- 2. Learning Modules --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-purple">
-                <x-icon name="book-open" />
-            </div>
+                <div class="verify-feature-top">
+                    <span
+                        class="verify-feature-icon"
+                        aria-hidden="true">
+                        {{-- Kaca pembesar dengan simbol tautan --}}
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <circle cx="10.5" cy="10.5" r="7.5" />
 
-            <h3>Learning Modules</h3>
+                            <path d="M16 16L21 21" />
 
-            <p>
-                Explore different types of digital scams through
-                structured and easy-to-understand learning materials.
-            </p>
-        </article>
+                            <path d="
+            M9.3 9.2L10.7 7.8
+            A1.9 1.9 0 0 1 13.4 10.5
+            L12 11.9
+        " />
 
+                            <path d="
+            M11.7 11.8L10.3 13.2
+            A1.9 1.9 0 0 1 7.6 10.5
+            L9 9.1
+        " />
 
-        {{-- 3. Scam Simulator --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-violet">
-                <x-icon name="gamepad-2" />
-            </div>
+                            <path d="M9.2 11.8L11.8 9.2" />
+                        </svg>
+                    </span>
+                    <span class="verify-feature-number">
+                        01
+                    </span>
+                </div>
 
-            <h3>Scam Simulator</h3>
+                <span class="verify-feature-category">
+                    PERIKSA
+                </span>
 
-            <p>
-                Practice identifying scam patterns through
-                interactive scenarios in a safe learning environment.
-            </p>
-        </article>
+                <h3>
+                    Detect Scam
+                </h3>
 
+                <p>
+                    Tinjau indikator mencurigakan pada pesan
+                    dan tautan melalui pemeriksaan awal
+                    berbasis aturan.
+                </p>
 
-        {{-- 4. Check History --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-pink">
-                <x-icon name="clock" />
-            </div>
+                <div class="verify-feature-bottom">
+                    <a
+                        class="verify-feature-link"
+                        href="{{ route('detect') }}">
+                        <span>Periksa pesan atau tautan</span>
 
-            <h3>Check History</h3>
+                        <span
+                            class="verify-feature-arrow"
+                            aria-hidden="true">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12H19M13 6L19 12L13 18" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
 
-            <p>
-                Review your previous URL checks and revisit
-                the results of your past analyses.
-            </p>
-        </article>
+            </article>
 
+            {{-- 2. Learning Modules --}}
+            <article class="verify-feature-card">
 
-        {{-- 5. Report Scam --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-orange">
-                <x-icon name="flag" />
-            </div>
+                <div class="verify-feature-top">
+                    <span
+                        class="verify-feature-icon"
+                        aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M12 5V21" />
+                            <path d="
+                                M12 5C9 3 5 3 2 4V19
+                                C5 18 9 18 12 21
+                                C15 18 19 18 22 19V4
+                                C19 3 15 3 12 5Z
+                            " />
+                        </svg>
+                    </span>
 
-            <h3>Report Scam</h3>
+                    <span class="verify-feature-number">
+                        02
+                    </span>
+                </div>
 
-            <p>
-                Report suspicious links, phone numbers, or messages
-                to help raise awareness of potential digital scams.
-            </p>
-        </article>
+                <span class="verify-feature-category">
+                    PELAJARI
+                </span>
 
+                <h3>
+                    Learning Modules
+                </h3>
 
-        {{-- 6. Security Tips --}}
-        <article class="feature-card">
-            <div class="feature-icon icon-green">
-                <x-icon name="lightbulb" />
-            </div>
+                <p>
+                    Pahami modus penipuan digital melalui
+                    enam modul pembelajaran yang terstruktur
+                    dan mudah diikuti.
+                </p>
 
-            <h3>Security Tips</h3>
+                <div class="verify-feature-bottom">
+                    <a
+                        class="verify-feature-link"
+                        href="{{ route('modules') }}">
+                        <span>Jelajahi modul</span>
 
-            <p>
-                Discover practical tips to protect your personal data,
-                secure your accounts, and stay safe online.
-            </p>
-        </article>
+                        <span
+                            class="verify-feature-arrow"
+                            aria-hidden="true">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12H19M13 6L19 12L13 18" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+            </article>
+
+            {{-- 3. Scam Simulator --}}
+            <article class="verify-feature-card">
+
+                <div class="verify-feature-top">
+                    <span
+                        class="verify-feature-icon"
+                        aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="
+                                M7 6H17
+                                C19 6 20 8 20.5 10
+                                L22 17
+                                C22.5 20 20 21 18 19
+                                L15 16H9L6 19
+                                C4 21 1.5 20 2 17
+                                L3.5 10
+                                C4 8 5 6 7 6Z
+                            " />
+                            <path d="M7 9V13M5 11H9" />
+                            <circle cx="16" cy="10" r=".8" />
+                            <circle cx="18" cy="12" r=".8" />
+                        </svg>
+                    </span>
+
+                    <span class="verify-feature-number">
+                        03
+                    </span>
+                </div>
+
+                <span class="verify-feature-category">
+                    BERLATIH
+                </span>
+
+                <h3>
+                    Scam Simulator
+                </h3>
+
+                <p>
+                    Uji pilihanmu melalui skenario fiktif.
+                    Pelajari alasan di balik tindakan
+                    yang disarankan dalam setiap latihan.
+                </p>
+
+                <div class="verify-feature-bottom">
+                    <a
+                        class="verify-feature-link"
+                        href="{{ route('simulator') }}">
+                        <span>Coba simulasi</span>
+
+                        <span
+                            class="verify-feature-arrow"
+                            aria-hidden="true">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12H19M13 6L19 12L13 18" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+            </article>
+
+            {{-- 4. Security Tips: bagian dari materi modul --}}
+            <article class="verify-feature-card">
+
+                <div class="verify-feature-top">
+                    <span
+                        class="verify-feature-icon"
+                        aria-hidden="true">
+                        <x-icon name="shield" />
+                    </span>
+
+                    <span class="verify-feature-number">
+                        04
+                    </span>
+                </div>
+
+                <span class="verify-feature-category">
+                    LINDUNGI
+                </span>
+
+                <h3>
+                    Security Tips
+                </h3>
+
+                <p>
+                    Temukan panduan menjaga data pribadi,
+                    melindungi akun, dan membangun kebiasaan
+                    digital yang lebih aman di dalam modul.
+                </p>
+
+                <div class="verify-feature-bottom">
+                    <a
+                        class="verify-feature-link"
+                        href="{{ route('lesson', ['id' => 5]) }}">
+                        <span>Pelajari perlindungan akun</span>
+
+                        <span
+                            class="verify-feature-arrow"
+                            aria-hidden="true">
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                                stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M5 12H19M13 6L19 12L13 18" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+
+            </article>
+
+        </div>
+
+        {{-- Catatan batasan fitur --}}
+        <p class="verify-features-note">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 11V16M12 7.5V8" />
+            </svg>
+
+            <span>
+                VeriFy membantu proses belajar dan pemeriksaan awal.
+                Hasil deteksi bukan jaminan bahwa pesan atau tautan aman.
+            </span>
+        </p>
 
     </div>
 </section>
-
 @endsection
