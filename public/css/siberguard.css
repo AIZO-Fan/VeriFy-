@@ -721,9 +721,12 @@ textarea::placeholder {
     width: 30px;
     height: 30px;
 }
+
 .module-section {
-    background: linear-gradient(#f0f6ff, white);
-    max-width: 1200px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 45px 6% 65px;
 }
 .section-description {
     font-size: 14px;
@@ -1428,4163 +1431,568 @@ dialog::backdrop {
     }
 }
 
-/* =========================================
-   VERIFY NAVBAR
-   ========================================= */
 
-:root {
-    --verify-navy: #152d4b;
-    --verify-navy-dark: #10243d;
-    --verify-cyan: #20b4cb;
-    --verify-cyan-dark: #087f94;
-    --verify-text: #5b6d83;
-    --verify-border: #e5edf4;
-}
+/* ==========================================
+   VERIFY - MODULES PAGE REDESIGN
+   Theme: Navy, Cyan, White
+========================================== */
 
-/* Sticky mengikuti alur halaman sehingga tidak
-   membutuhkan padding-top tambahan pada body. */
-.verify-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* SECTION */
 
+.container.module-section {
     width: 100%;
-    background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid var(--verify-border);
-
-    -webkit-backdrop-filter: blur(18px);
-    backdrop-filter: blur(18px);
-
-    transition:
-        background-color 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.verify-header.is-scrolled {
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 8px 28px rgba(21, 45, 75, 0.08);
-}
-
-.verify-navbar {
-    max-width: 1240px;
-    min-height: 84px;
-    margin: 0 auto;
-    padding: 0 32px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 32px;
-}
-
-/* Brand */
-.verify-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-
-    flex-shrink: 0;
-    text-decoration: none;
-    color: var(--verify-navy);
-}
-
-.verify-brand-symbol {
-    display: block;
-    width: 39px;
-    height: 45px;
-    flex-shrink: 0;
-
-    transition: transform 0.2s ease;
-}
-
-.verify-brand:hover .verify-brand-symbol {
-    transform: translateY(-2px);
-}
-
-.verify-brand-name {
-    font-family:
-        "Plus Jakarta Sans",
-        system-ui,
-        sans-serif;
-
-    font-size: 29px;
-    font-weight: 800;
-    letter-spacing: -1.4px;
-    line-height: 1.1;
-    color: var(--verify-navy);
-}
-
-.verify-brand-name > span {
-    color: var(--verify-cyan-dark);
-}
-
-/* Navigation */
-.verify-navigation {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.verify-nav-link {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 11px 16px;
-    border-radius: 12px;
-
-    color: var(--verify-text);
-    font-size: 14px;
-    font-weight: 650;
-    line-height: 1.4;
-    text-decoration: none;
-    white-space: nowrap;
-
-    transition:
-        color 0.2s ease,
-        background-color 0.2s ease;
-}
-
-.verify-nav-link:hover {
-    color: var(--verify-navy);
-    background: #f2f7fb;
-}
-
-.verify-nav-link.is-active {
-    color: var(--verify-navy);
-    background: #eaf7fa;
-}
-
-.verify-nav-link.is-active::after {
-    content: "";
-
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-
-    width: 18px;
-    height: 3px;
-    border-radius: 999px;
-
-    background: var(--verify-cyan);
-    transform: translateX(-50%);
-}
-
-/* Right-side actions */
-.verify-nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Jangan tampilkan pemisah jika belum ada tombol akun */
-.verify-nav-actions:empty {
-    display: none;
-}
-
-.verify-nav-actions:not(:empty) {
-    margin-left: 16px;
-    padding-left: 22px;
-    border-left: 1px solid var(--verify-border);
-}
-
-.verify-login-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-
-    padding: 11px 20px;
-    border: 1px solid var(--verify-navy);
-    border-radius: 12px;
-
-    background: var(--verify-navy);
-    color: #fff;
-
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-
-    box-shadow: 0 5px 12px rgba(21, 45, 75, 0.12);
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.verify-login-button:hover {
-    background: var(--verify-navy-dark);
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 7px 16px rgba(21, 45, 75, 0.18);
-}
-
-.verify-login-button svg {
-    width: 17px;
-    height: 17px;
-}
-
-/* Profile shortcut */
-.verify-profile-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 5px 10px 5px 5px;
-    border: 1px solid var(--verify-border);
-    border-radius: 999px;
-
-    background: #fff;
-    color: var(--verify-navy);
-    text-decoration: none;
-
-    transition:
-        border-color 0.2s ease,
-        background-color 0.2s ease;
-}
-
-.verify-profile-link:hover {
-    border-color: #b8e6ee;
-    background: #f5fbfc;
-}
-
-.verify-avatar {
-    display: grid;
-    place-items: center;
-
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-
-    background: #e3f5f8;
-    color: var(--verify-navy);
-
-    font-size: 14px;
-    font-weight: 800;
-    flex-shrink: 0;
-}
-
-.verify-profile-name {
-    max-width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.verify-profile-link > svg {
-    width: 14px;
-    height: 14px;
-    color: #73849a;
-}
-
-/* Mobile toggle */
-.verify-menu-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    width: 42px;
-    height: 42px;
-    padding: 9px;
-
-    border: 1px solid var(--verify-border);
-    border-radius: 12px;
-
-    background: #f5f9fc;
-    color: var(--verify-navy);
-    cursor: pointer;
-}
-
-.verify-menu-toggle svg {
-    width: 23px;
-    height: 23px;
-}
-
-/* Keyboard focus */
-.verify-header a:focus-visible,
-.verify-header button:focus-visible {
-    outline: 3px solid var(--verify-cyan);
-    outline-offset: 4px;
-}
-
-/* Anchor target tidak tertutup navbar */
-html {
-    scroll-padding-top: 100px;
-}
-
-/* Tablet and mobile */
-@media (max-width: 1000px) {
-    .verify-navbar {
-        min-height: 74px;
-        padding: 0 22px;
-        gap: 18px;
-    }
-
-    .verify-brand-name {
-        font-size: 27px;
-    }
-
-    .verify-brand-symbol {
-        width: 35px;
-        height: 41px;
-    }
-
-    .verify-menu-toggle {
-        display: inline-flex;
-    }
-
-    .verify-navigation {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-
-        align-items: stretch;
-        flex-direction: column;
-        gap: 6px;
-
-        max-height: calc(100dvh - 74px);
-        overflow-y: auto;
-
-        padding: 16px 22px 22px;
-
-        background: #fff;
-        border-bottom: 1px solid var(--verify-border);
-        box-shadow: 0 18px 25px rgba(21, 45, 75, 0.08);
-    }
-
-    .verify-navigation.is-open {
-        display: flex;
-    }
-
-    .verify-nav-link {
-        justify-content: flex-start;
-        padding: 14px 16px;
-        border-radius: 11px;
-    }
-
-    .verify-nav-link.is-active::after {
-        left: auto;
-        right: 15px;
-        bottom: 50%;
-
-        width: 6px;
-        height: 6px;
-
-        transform: translateY(50%);
-    }
-
-    .verify-nav-actions:not(:empty) {
-        margin: 10px 0 0;
-        padding: 16px 0 0;
-        border-left: 0;
-        border-top: 1px solid var(--verify-border);
-    }
-
-    .verify-login-button {
-        width: 100%;
-    }
-
-    .verify-profile-link {
-        width: 100%;
-        border-radius: 12px;
-        padding: 8px;
-    }
-
-    .verify-profile-name {
-        max-width: none;
-        flex: 1;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-header,
-    .verify-header * {
-        transition: none;
-    }
-}
-
-/* Ukuran wordmark lebih ringkas */
-.verify-brand-name {
-    font-size: 25px;
-    letter-spacing: -1.1px;
-}
-
-.verify-brand-symbol {
-    width: 33px;
-    height: 39px;
-}
-
-@media (max-width: 1000px) {
-    .verify-brand-name {
-        font-size: 23px;
-    }
-
-    .verify-brand-symbol {
-        width: 31px;
-        height: 36px;
-    }
-}
-
-/* =========================================
-   NAVBAR ACTIONS
-   ========================================= */
-
-.verify-register-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 10px 15px;
-    border: 1px solid #dce7ee;
-    border-radius: 12px;
-
-    background: #fff;
-    color: #152d4b;
-
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-
-    transition:
-        border-color .2s ease,
-        background-color .2s ease,
-        transform .2s ease;
-}
-
-.verify-register-button:hover {
-    border-color: #a7dfe8;
-    background: #eefafd;
-    transform: translateY(-2px);
-}
-
-.verify-settings-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 42px;
-    height: 42px;
-    padding: 10px;
-    flex-shrink: 0;
-
-    border: 1px solid #dce7ee;
-    border-radius: 12px;
-
-    background: #f6f9fc;
-    color: #526a83;
-    text-decoration: none;
-    cursor: pointer;
-
-    transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease;
-}
-
-.verify-settings-button svg {
-    width: 22px;
-    height: 22px;
-    transition: transform .45s ease;
-}
-
-.verify-settings-button:not(:disabled):hover {
-    color: #087f94;
-    background: #eaf8fb;
-    border-color: #b5e4ec;
-}
-
-.verify-settings-button:not(:disabled):hover svg {
-    transform: rotate(65deg);
-}
-
-.verify-settings-button:disabled {
-    opacity: .5;
-    cursor: not-allowed;
-}
-
-.verify-navbar-user {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-}
-
-/* =========================================
-   HERO REFINEMENT
-   ========================================= */
-
-.verify-hero {
-    min-height: 590px;
-    padding-top: 60px;
-    padding-bottom: 100px;
-
-    background:
-        radial-gradient(
-            ellipse at 74% 38%,
-            #def4f8 0%,
-            #f1f8fc 33%,
-            #fff 70%
-        );
-}
-
-.verify-hero::after {
-    height: 155px;
-
-    background:
-        linear-gradient(
-            110deg,
-            #20b4cb 0%,
-            #257eaa 42%,
-            #152d4b 100%
-        );
-
-    clip-path: polygon(
-        0 80%,
-        25% 67%,
-        54% 39%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
-}
-
-.verify-hero .hero-copy {
-    animation: verify-enter .7s ease both;
-}
-
-.verify-hero-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    padding: 8px 12px;
-    border: 1px solid #d3edf2;
-    border-radius: 999px;
-
-    background: #f0fbfd;
-    color: #227084;
-
-    font-size: 10px;
-    font-weight: 750;
-    letter-spacing: 1px;
-}
-
-.verify-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #20b4cb;
-
-    box-shadow: 0 0 0 4px #20b4cb14;
-}
-
-.verify-hero h1 {
-    color: #152d4b;
-    font-size: clamp(34px, 4vw, 49px);
-    line-height: 1.2;
-    letter-spacing: -1.8px;
-}
-
-.verify-hero h1 em {
-    position: relative;
-    display: inline-block;
-
-    color: #078a9f;
-    font-style: normal;
-}
-
-.verify-hero h1 em::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -6px;
-
-    height: 7px;
-    border-radius: 50%;
-
-    background: #a4e6ee;
-    transform: rotate(-3deg);
-}
-
-.verify-hero-description {
-    max-width: 450px;
-    margin-top: 25px;
-
-    color: #6a8097;
-    font-size: 15px;
-    line-height: 1.9;
-}
-
-.verify-hero-description > span {
-    color: #152d4b;
-    font-weight: 750;
-}
-
-.verify-hero-note {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-
-    margin-top: 20px;
-    padding: 12px 17px 12px 12px;
-
-    border: 1px solid #e5edf5;
-    border-radius: 17px;
-
-    background: rgba(255, 255, 255, .85);
-    color: #304761;
-
-    font-size: 12px;
-    font-weight: 700;
-
-    box-shadow: 0 8px 24px #152d4b06;
-}
-
-.verify-hero-note small {
-    font-size: 11px;
-    font-weight: 400;
-    color: #7d90a5;
-}
-
-.verify-note-icon {
-    display: grid;
-    place-items: center;
-
-    width: 39px;
-    height: 39px;
-
-    border-radius: 13px;
-    background: #e6f8f5;
-    color: #16a58a;
-}
-
-.verify-note-icon svg {
-    width: 25px;
-    height: 25px;
-}
-
-.verify-hero .phone {
-    box-shadow:
-        0 0 0 4px #20b4cb,
-        0 22px 65px #152d4b26;
-}
-
-.verify-hero .phone-shield {
-    color: #20b4cb;
-}
-
-.verify-hero .phone-body h3 {
-    color: #152d4b;
-}
-
-.verify-hero .float-card {
-    background: rgba(246, 252, 255, .96);
-    color: #36889e;
-
-    transition:
-        background-color .2s ease,
-        box-shadow .2s ease;
-}
-
-/* Floating illustrations */
-.verify-hero .card-a {
-    animation: verify-float-a 5s ease-in-out infinite;
-}
-
-.verify-hero .card-b {
-    animation: verify-float-b 6s ease-in-out infinite;
-}
-
-.verify-hero .card-c {
-    animation: verify-float-c 5.5s ease-in-out infinite;
-}
-
-.verify-hero .float-card:hover {
-    animation-play-state: paused;
-    background: #fff;
-    box-shadow: 0 18px 35px #20b4cb30;
-}
-
-@keyframes verify-float-a {
-    0%, 100% {
-        transform: translateY(0) rotate(-7deg);
-    }
-    50% {
-        transform: translateY(-12px) rotate(-3deg);
-    }
-}
-
-@keyframes verify-float-b {
-    0%, 100% {
-        transform: translateY(0) rotate(10deg);
-    }
-    50% {
-        transform: translateY(13px) rotate(6deg);
-    }
-}
-
-@keyframes verify-float-c {
-    0%, 100% {
-        transform: translateY(0) rotate(-6deg);
-    }
-    50% {
-        transform: translateY(-10px) rotate(-9deg);
-    }
-}
-
-@keyframes verify-enter {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* =========================================
-   HERO INFORMATION BAR
-   ========================================= */
-
-.verify-stats-section {
-    position: relative;
-    z-index: 2;
-
-    max-width: 1180px;
-    margin: -30px auto 0;
-    padding: 0 28px 25px;
-}
-
-.verify-stats-bar {
-    display: grid;
-    grid-template-columns: 1.05fr 1fr 1fr 1fr;
-    align-items: center;
-    gap: 10px;
-
-    padding: 24px;
-    border: 1px solid #e4edf4;
-    border-radius: 23px;
-
-    background: #fff;
-    box-shadow:
-        0 18px 45px #152d4b09,
-        0 3px 10px #152d4b04;
-}
-
-.verify-stats-intro {
-    padding: 0 16px 0 4px;
-}
-
-.verify-mini-label {
-    color: #34879a;
-    font-size: 9px;
-    font-weight: 750;
-    letter-spacing: 1.1px;
-}
-
-.verify-stats-intro h2 {
-    margin: 7px 0 0;
-    color: #152d4b;
-    font-size: 21px;
-    line-height: 1.35;
-    letter-spacing: -.5px;
-}
-
-.verify-stat-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    min-width: 0;
-    min-height: 82px;
-    padding: 15px 12px;
-    border-radius: 16px;
-    color: inherit;
-    text-decoration: none;
-
-    transition:
-        background-color .2s ease,
-        transform .2s ease;
-}
-
-.verify-stat-item > div {
-    min-width: 0;
-}
-
-.verify-stat-link:hover {
-    background: #f4fafc;
-    transform: translateY(-4px);
-}
-
-.verify-stat-icon {
-    display: grid;
-    place-items: center;
-
-    width: 43px;
-    height: 43px;
-    flex-shrink: 0;
-    border-radius: 14px;
-}
-
-.verify-stat-icon svg {
-    width: 26px;
-    height: 26px;
-}
-
-.stat-cyan {
-    background: #e5f8fb;
-    color: #159fb7;
-}
-
-.stat-blue {
-    background: #eaf2ff;
-    color: #477fe5;
-}
-
-.stat-purple {
-    background: #f2eaff;
-    color: #9862db;
-}
-
-.verify-stat-number {
-    display: block;
-    color: #152d4b;
-
-    font-size: 29px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -1px;
-    font-variant-numeric: tabular-nums;
-}
-
-.verify-stat-pending {
-    display: block;
-    color: #526b84;
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.verify-stat-label {
-    display: block;
-    margin-top: 5px;
-    color: #7b8da1;
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-.verify-stat-arrow {
-    margin-left: auto;
-    color: #9cb0bf;
-    font-size: 17px;
-
-    transition:
-        color .2s ease,
-        transform .2s ease;
-}
-
-.verify-stat-link:hover .verify-stat-arrow {
-    color: #159fb7;
-    transform: translate(2px, -2px);
-}
-
-.verify-stats-caption {
-    margin: 12px 0 0;
-    color: #8394a6;
-    font-size: 10px;
-    text-align: center;
-}
-
-/* =========================================
-   PROCESS AND FEATURE CARDS
-   ========================================= */
-
-.process .section-heading h1,
-.feature-heading h2 {
-    color: #152d4b;
-    letter-spacing: -.7px;
-}
-
-.process .process-tabs {
-    border: 1px solid #e2edf4;
-    background: #f3f8fc;
-    box-shadow: none;
-}
-
-.process .step-panel {
-    border-radius: 19px;
-    box-shadow: 0 10px 30px #152d4b04;
-}
-
-.feature-section {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 25px 28px 80px;
-}
-
-.feature-heading {
-    max-width: 650px;
-    margin: 0 auto 35px;
-    text-align: center;
-}
-
-.feature-heading h2 {
-    margin: 10px 0 15px;
-    font-size: clamp(25px, 3vw, 34px);
-}
-
-.feature-heading p {
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-}
-
-.feature-card {
-    position: relative;
-
-    padding: 28px;
-    border: 1px solid #e7eef5;
-    border-radius: 21px;
-
-    background: #fff;
-    box-shadow: 0 6px 20px #152d4b03;
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-7px);
-    border-color: #c1e7ee;
-
-    box-shadow: 0 18px 35px #152d4b0b;
-}
-
-.feature-icon {
-    display: grid;
-    place-items: center;
-
-    width: 49px;
-    height: 49px;
-
-    margin-bottom: 21px;
-    border-radius: 16px;
-
-    transition: transform .25s ease;
-}
-
-.feature-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-.feature-card:hover .feature-icon {
-    transform: rotate(-7deg) scale(1.08);
-}
-
-.feature-card h3 {
-    margin-bottom: 11px;
-    color: #152d4b;
-    font-size: 16px;
-}
-
-.feature-card p {
-    margin-bottom: 0;
-    color: #7a8da2;
-    font-size: 13px;
-    line-height: 1.8;
-}
-
-.icon-blue {
-    background: #e9f2ff;
-    color: #4481dd;
-}
-
-.icon-purple,
-.icon-violet {
-    background: #f2eaff;
-    color: #9961db;
-}
-
-.icon-pink {
-    background: #fdebf1;
-    color: #dc7098;
-}
-
-.icon-orange {
-    background: #fff1df;
-    color: #dc963c;
-}
-
-.icon-green {
-    background: #e5f7ef;
-    color: #31a77d;
-}
-
-/* =========================================
-   RESPONSIVE
-   ========================================= */
-
-@media (max-width: 1100px) {
-    .verify-stats-bar {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .verify-stats-intro {
-        grid-column: 1 / -1;
-        padding: 0 10px 15px;
-        border-bottom: 1px solid #edf2f7;
-    }
-
-    .verify-stats-intro h2 br {
-        display: none;
-    }
-}
-
-@media (max-width: 1000px) {
-    .verify-nav-actions:not(:empty) {
-        flex-wrap: wrap;
-    }
-
-    .verify-nav-actions .verify-register-button,
-    .verify-nav-actions .verify-login-button {
-        width: auto;
-        flex: 1;
-    }
-}
-
-@media (max-width: 720px) {
-    .verify-hero {
-        min-height: 820px;
-        padding: 35px 24px 85px;
-    }
-
-    .verify-hero-label {
-        font-size: 8px;
-        letter-spacing: .6px;
-    }
-
-    .verify-hero h1 {
-        font-size: 35px;
-        letter-spacing: -1.2px;
-    }
-
-    .verify-hero-description {
-        font-size: 14px;
-    }
-
-    .verify-hero-note {
-        margin-top: 12px;
-    }
-
-    .verify-hero .hero-art {
-        margin-top: 32px;
-    }
-
-    .verify-stats-section {
-        margin-top: -24px;
-        padding: 0 18px 15px;
-    }
-
-    .verify-stats-bar {
-        grid-template-columns: 1fr;
-        gap: 5px;
-        padding: 18px;
-        border-radius: 20px;
-    }
-
-    .verify-stats-intro {
-        padding-bottom: 18px;
-        margin-bottom: 5px;
-    }
-
-    .verify-stat-item {
-        min-height: 74px;
-        padding: 12px 8px;
-    }
-
-    .verify-stat-number {
-        font-size: 26px;
-    }
-
-    .verify-stat-label {
-        font-size: 12px;
-    }
-
-    .feature-section {
-        padding: 15px 22px 55px;
-    }
-
-    .feature-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-hero .hero-copy,
-    .verify-hero .float-card {
-        animation: none;
-    }
-
-    .verify-register-button,
-    .verify-settings-button,
-    .verify-settings-button svg,
-    .verify-stat-item,
-    .verify-stat-arrow,
-    .feature-card,
-    .feature-icon {
-        transition: none;
-    }
-
-    .verify-stat-link:hover,
-    .feature-card:hover,
-    .feature-card:hover .feature-icon {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — REVISI UKURAN DAN LAYOUT
-   Tempel di bagian paling bawah file CSS
-   ========================================= */
-
-
-/* -----------------------------------------
-   1. NAVBAR LEBIH LEBAR DAN BRAND LEBIH KECIL
-   ----------------------------------------- */
-
-.verify-header .verify-navbar {
-    max-width: 1440px;
-    min-height: 76px;
-
-    padding-inline: clamp(22px, 4vw, 64px);
-    gap: 24px;
-}
-
-.verify-header .verify-brand {
-    gap: 8px;
-}
-
-.verify-header .verify-brand-symbol {
-    width: 29px;
-    height: 35px;
-}
-
-.verify-header .verify-brand-name {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: -0.85px;
-}
-
-/* Warna wordmark lebih tenang */
-.verify-header .verify-brand-name,
-.verify-header .verify-brand-name > span {
-    color: #152d4b;
-}
-
-.verify-header .verify-navigation {
-    gap: 5px;
-}
-
-.verify-header .verify-nav-link {
-    padding: 10px 14px;
-    font-size: 13px;
-}
-
-
-/* -----------------------------------------
-   2. REGISTER, LOGIN, DAN SETTINGS
-   ----------------------------------------- */
-
-.verify-header .verify-nav-actions:not(:empty) {
-    gap: 8px;
-    margin-left: 13px;
-    padding-left: 18px;
-}
-
-/* Dasar tombol akun: ukuran dan radius konsisten */
-.verify-header .verify-register-button,
-.verify-header .verify-login-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 39px;
-    padding: 9px 17px;
-    border-radius: 10px;
-
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: 0;
-
-    text-decoration: none;
-    box-shadow: none;
-
-    transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-/* Register: tombol sekunder yang ringan */
-.verify-header .verify-register-button {
-    border: 1px solid #dce6ee;
-    background: #fff;
-    color: #52677f;
-}
-
-.verify-header .verify-register-button:hover {
-    border-color: #b8dce4;
-    background: #f2fafc;
-    color: #152d4b;
-    transform: translateY(-1px);
-}
-
-/* Login: tombol utama */
-.verify-header .verify-login-button {
-    gap: 8px;
-    border: 1px solid #152d4b;
-    background: #152d4b;
-    color: #fff;
-}
-
-.verify-header .verify-login-button:hover {
-    border-color: #214665;
-    background: #214665;
-    color: #fff;
-    box-shadow: none;
-    transform: translateY(-1px);
-}
-
-.verify-header .verify-login-button svg {
-    width: 14px;
-    height: 14px;
-}
-
-/* Settings: lebih ringan, tidak bersaing dengan Login */
-.verify-header .verify-settings-button {
-    width: 39px;
-    height: 39px;
-
-    margin-left: 2px;
-    padding: 9px;
-
-    border: 1px solid transparent;
-    border-radius: 10px;
-
-    background: transparent;
-    color: #75879b;
-}
-
-.verify-header .verify-settings-button svg {
-    width: 20px;
-    height: 20px;
-}
-
-.verify-header .verify-settings-button:not(:disabled):hover {
-    border-color: #dcecf1;
-    background: #edf7fa;
-    color: #087f94;
-}
-
-
-/* -----------------------------------------
-   3. HERO: LEBIH LEBAR, JARAK LEBIH SEIMBANG
-   ----------------------------------------- */
-
-section.hero.verify-hero {
-    width: 100%;
-    min-height: 555px;
-
-    display: grid;
-    grid-template-columns:
-        minmax(0, 1.15fr)
-        minmax(0, 1fr);
-
-    align-items: center;
-    justify-content: normal;
-
-    column-gap: clamp(24px, 4vw, 65px);
-
-    /*
-       Pada layar biasa: jarak tepi sekitar 4vw.
-       Pada layar sangat lebar: isi tetap dibatasi
-       agar tidak melebar tanpa batas.
-    */
-    padding-inline: max(
-        clamp(24px, 4vw, 64px),
-        calc((100% - 1320px) / 2)
-    );
-
-    padding-top: 45px;
-    padding-bottom: 85px;
-}
-
-.verify-hero .hero-copy {
-    width: 100%;
-    max-width: 650px;
-    min-width: 0;
-}
-
-/* Judul lebih proporsional terhadap lebar layar */
-.verify-hero .hero-copy h1 {
-    margin: 22px 0 20px;
-
-    font-size: clamp(35px, 3.4vw, 49px);
-    line-height: 1.23;
-    letter-spacing: -1.6px;
-}
-
-.verify-hero .verify-hero-label {
-    padding: 7px 11px;
-
-    font-size: 9px;
-    letter-spacing: .85px;
-}
-
-.verify-hero .verify-hero-description {
-    max-width: 530px;
-    margin-top: 24px;
-    margin-bottom: 0;
-
-    font-size: 15px;
-    line-height: 1.85;
-}
-
-.verify-hero .verify-hero-note {
-    margin-top: 24px;
-}
-
-/* Ilustrasi tetap seimbang dengan teks */
-.verify-hero .hero-art {
-    justify-self: center;
-    align-self: center;
-
-    width: 460px;
-    height: 450px;
-    margin-top: 0;
-}
-
-
-/* -----------------------------------------
-   4. BAR INFORMASI LEBIH LEBAR
-   ----------------------------------------- */
-
-.verify-stats-section {
-    max-width: 1440px;
-    padding-inline: clamp(24px, 4vw, 64px);
-}
-
-.verify-stats-bar {
-    gap: 16px;
-    padding: 24px 28px;
-    border-radius: 20px;
-}
-
-.verify-stats-intro h2 {
-    font-size: 20px;
-}
-
-.verify-stat-number {
-    font-size: 27px;
-}
-
-.verify-stat-label {
-    font-size: 11px;
-}
-
-
-/* -----------------------------------------
-   5. HOW IT WORKS DAN FITUR LEBIH LEBAR
-   ----------------------------------------- */
-
-/* Hanya section process, bukan semua .container */
-section.container.process {
-    max-width: 1440px;
-
-    padding-inline: clamp(24px, 4vw, 64px);
-    padding-top: 48px;
-    padding-bottom: 55px;
-}
-
-.process .section-heading {
-    margin-bottom: 30px;
-}
-
-.process .section-heading h1 {
-    font-size: clamp(25px, 2.4vw, 31px);
-}
-
-.process .section-heading p {
-    font-size: 14px;
-}
-
-.process .step-panel {
-    padding: 28px 32px;
-}
-
-.process .step-panel h2 {
-    font-size: 20px;
-}
-
-.process .step-panel p {
     max-width: 100%;
-    font-size: 15px;
-    line-height: 1.8;
-}
-
-section.feature-section {
-    max-width: 1440px;
-
-    padding-inline: clamp(24px, 4vw, 64px);
-}
-
-.feature-heading {
-    max-width: 720px;
-}
-
-.feature-heading h2 {
-    font-size: clamp(25px, 2.5vw, 34px);
-    line-height: 1.3;
-}
-
-.feature-grid {
-    gap: 22px;
-}
-
-.feature-card {
-    padding: 27px;
-}
-
-
-/* -----------------------------------------
-   6. TABLET
-   ----------------------------------------- */
-
-@media (min-width: 1001px) and (max-width: 1150px) {
-    .verify-hero .hero-art {
-        transform: scale(.82);
-        transform-origin: center;
-    }
-}
-
-@media (min-width: 761px) and (max-width: 1000px) {
-    section.hero.verify-hero {
-        grid-template-columns:
-            minmax(0, 1.1fr)
-            minmax(0, .9fr);
-
-        column-gap: 14px;
-        min-height: 510px;
-    }
-
-    .verify-hero .hero-copy h1 {
-        font-size: 35px;
-    }
-
-    .verify-hero .verify-hero-description {
-        font-size: 14px;
-    }
-
-    .verify-hero .hero-art {
-        width: 390px;
-        height: 420px;
-
-        transform: scale(.74);
-        transform-origin: center;
-    }
-}
-
-@media (max-width: 1000px) {
-    .verify-header .verify-navbar {
-        min-height: 70px;
-        padding-inline: 22px;
-    }
-
-    .verify-header .verify-brand-name {
-        font-size: 19px;
-    }
-
-    .verify-header .verify-brand-symbol {
-        width: 27px;
-        height: 32px;
-    }
-
-    .verify-header .verify-navigation {
-        gap: 6px;
-        padding: 16px 22px 22px;
-        max-height: calc(100dvh - 70px);
-    }
-
-    .verify-header .verify-nav-link {
-        justify-content: flex-start;
-        padding: 13px 15px;
-        font-size: 13px;
-    }
-
-    .verify-header .verify-nav-actions:not(:empty) {
-        gap: 9px;
-
-        margin: 10px 0 0;
-        padding: 16px 0 0;
-
-        border-left: 0;
-        border-top: 1px solid #e5edf4;
-    }
-
-    .verify-header .verify-register-button,
-    .verify-header .verify-login-button {
-        flex: 1;
-        min-height: 41px;
-    }
-
-    .verify-header .verify-settings-button {
-        flex: 0 0 41px;
-        width: 41px;
-        height: 41px;
-    }
-}
-
-
-/* -----------------------------------------
-   7. MOBILE
-   ----------------------------------------- */
-
-@media (max-width: 760px) {
-    section.hero.verify-hero {
-        grid-template-columns: minmax(0, 1fr);
-        row-gap: 20px;
-
-        min-height: auto;
-        padding: 35px 24px 80px;
-    }
-
-    .verify-hero .hero-copy {
-        max-width: 100%;
-    }
-
-    .verify-hero .hero-copy h1 {
-        font-size: clamp(31px, 7.5vw, 40px);
-        letter-spacing: -1.1px;
-        line-height: 1.24;
-    }
-
-    .verify-hero .verify-hero-label {
-        font-size: 8px;
-        letter-spacing: .55px;
-    }
-
-    .verify-hero .verify-hero-description {
-        max-width: 100%;
-        font-size: 14px;
-        line-height: 1.85;
-    }
-
-    .verify-hero .hero-art {
-        width: 420px;
-        height: 340px;
-
-        margin-top: 12px;
-
-        transform: scale(.72);
-        transform-origin: top center;
-    }
-
-    .verify-stats-section {
-        padding-inline: 20px;
-    }
-
-    .verify-stats-bar {
-        padding: 19px;
-        gap: 7px;
-    }
-
-    section.container.process {
-        padding: 38px 22px 45px;
-    }
-
-    .process .step-panel {
-        padding: 25px 21px;
-    }
-
-    .process .step-panel h2 {
-        font-size: 18px;
-    }
-
-    .process .step-panel p {
-        font-size: 14px;
-    }
-
-    section.feature-section {
-        padding-inline: 22px;
-    }
-
-    .feature-card {
-        padding: 24px;
-    }
-}
-
-
-/* -----------------------------------------
-   8. REDUCED MOTION
-   ----------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-header .verify-register-button,
-    .verify-header .verify-login-button {
-        transition: none;
-    }
-
-    .verify-header .verify-register-button:hover,
-    .verify-header .verify-login-button:hover {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — NAVBAR & HERO FINAL REFINEMENT
-   ========================================= */
-
-
-/* -----------------------------------------
-   1. BRAND: FY KEMBALI CYAN
-   ----------------------------------------- */
-
-.verify-header .verify-brand-name {
-    color: #152d4b;
-}
-
-.verify-header .verify-brand-name > span {
-    color: #20b4cb;
-}
-
-
-/* -----------------------------------------
-   2. NAVBAR MENU
-   ----------------------------------------- */
-
-.verify-header .verify-navigation {
-    gap: 6px;
-}
-
-.verify-header .verify-nav-link {
-    position: relative;
-    isolation: isolate;
-
-    padding: 11px 15px;
-    border: 1px solid transparent;
-    border-radius: 12px;
-
-    background: transparent;
-    color: #65768b;
-
-    font-size: 13px;
-    font-weight: 650;
-    line-height: 1.3;
-
-    transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-}
-
-/* Garis indikator: awalnya tersembunyi */
-.verify-header .verify-nav-link::after {
-    content: "";
-
-    position: absolute;
-    left: 50%;
-    right: auto;
-    bottom: 5px;
-
-    width: 14px;
-    height: 3px;
-    border-radius: 999px;
-
-    background: #20b4cb;
-    opacity: 0;
-
-    transform: translateX(-50%) scaleX(.4);
-
-    transition:
-        opacity .2s ease,
-        transform .2s ease;
-}
-
-.verify-header .verify-nav-link:hover {
-    color: #152d4b;
-    background: #f3f8fb;
-    border-color: #e8f0f5;
-}
-
-.verify-header .verify-nav-link:hover::after {
-    opacity: .55;
-    transform: translateX(-50%) scaleX(1);
-}
-
-/* Menu halaman yang sedang aktif */
-.verify-header .verify-nav-link.is-active {
-    color: #152d4b;
-    background: #edf9fb;
-    border-color: #d6edf2;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .9),
-        0 3px 8px rgba(21, 45, 75, .025);
-}
-
-.verify-header .verify-nav-link.is-active::after {
-    opacity: 1;
-    transform: translateX(-50%) scaleX(1);
-}
-
-/* Login tanpa ruang untuk panah */
-.verify-header .verify-login-button {
-    min-width: 74px;
-    padding-inline: 18px;
-    gap: 0;
-}
-
-
-/* -----------------------------------------
-   3. HERO MEMENUHI SISA TINGGI LAYAR
-   ----------------------------------------- */
-
-section.hero.verify-hero {
-    /*
-       Navbar desktop: 76px.
-       Hero mengisi sisa layar, tetapi tetap dapat
-       membesar jika kontennya membutuhkan ruang.
-    */
-    min-height: max(590px, calc(100vh - 76px));
-    min-height: max(590px, calc(100svh - 76px));
-
-    position: relative;
-    overflow: hidden;
-}
-
-/* Lapisan konten berada di atas bidang gradasi */
-.verify-hero .hero-copy,
-.verify-hero .hero-art {
-    position: relative;
-    z-index: 1;
-}
-
-/* Bidang bawah lebih tinggi, tersambung sampai tepi */
-section.hero.verify-hero::after {
-    content: "";
-
-    position: absolute;
-    z-index: 0;
-
-    left: 0;
-    right: 0;
-    bottom: -1px;
-
-    height: clamp(170px, 25vh, 250px);
+    min-height: calc(100vh - 82px);
+    margin: 0 auto;
+    padding: 45px 6% 70px;
 
     background: linear-gradient(
-        108deg,
-        #20b4cb 0%,
-        #2388a6 38%,
-        #1a5475 67%,
-        #152d4b 100%
+        120deg,
+        #ffffff 0%,
+        #f5faff 55%,
+        #edf8fb 100%
     );
-
-    clip-path: polygon(
-        0 76%,
-        30% 60%,
-        63% 33%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
-
-    pointer-events: none;
 }
 
+/* TITLE */
 
-/* -----------------------------------------
-   4. STATISTIK MINI PENGGANTI HERO NOTE
-   ----------------------------------------- */
+.module-section .ribbon {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
 
-.verify-hero-summary {
-    max-width: 470px;
-    margin-top: 28px;
+    background: linear-gradient(
+        110deg,
+        #172f50,
+        #205c83
+    );
+
+    color: #ffffff;
+    border-radius: 30px;
+    padding: 10px 25px 10px 16px;
+
+    font-size: 22px;
+    font-weight: 800;
+    box-shadow: 0 5px 15px #172f5018;
 }
 
-.verify-mini-stats {
+.module-section .ribbon svg {
+    width: 27px;
+    height: 27px;
+    color: #36c1cf;
+}
+
+/* DESCRIPTION */
+
+.module-section .section-description {
+    color: #71869c;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 15px 0 35px;
+}
+
+/* GRID */
+
+.module-section .module-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-
-    padding: 17px 10px;
-
-    border: 1px solid #e2edf2;
-    border-radius: 16px;
-
-    background: rgba(255, 255, 255, .9);
-
-    box-shadow:
-        0 8px 24px rgba(21, 45, 75, .035),
-        inset 0 1px 0 #fff;
+    gap: 25px;
+    width: 100%;
 }
 
-.verify-mini-stat {
+/* MODULE CARD */
+
+.module-section .module-card {
     position: relative;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-
-    min-width: 0;
-    padding: 2px 9px;
-
-    color: inherit;
-    text-align: center;
-    text-decoration: none;
-}
-
-.verify-mini-stat + .verify-mini-stat {
-    border-left: 1px solid #e5edf3;
-}
-
-.verify-mini-stat-value {
-    display: block;
-
-    color: #152d4b;
-    font-size: 24px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -.6px;
-
-    font-variant-numeric: tabular-nums;
-
-    transition:
-        color .2s ease,
-        transform .2s ease;
-}
-
-.verify-mini-stat-label {
-    display: block;
-
-    color: #7c8d9f;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 1.5;
-}
-
-a.verify-mini-stat:hover .verify-mini-stat-value {
-    color: #098b9f;
-    transform: translateY(-2px);
-}
-
-a.verify-mini-stat:focus-visible {
-    outline: 2px solid #20b4cb;
-    outline-offset: 3px;
-    border-radius: 6px;
-}
-
-.verify-mini-stats-note {
-    margin: 9px 3px 0;
-
-    color: #8494a5;
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-
-/* -----------------------------------------
-   5. TABLET / MOBILE NAVBAR
-   ----------------------------------------- */
-
-@media (max-width: 1000px) {
-    section.hero.verify-hero {
-        min-height: max(560px, calc(100vh - 70px));
-        min-height: max(560px, calc(100svh - 70px));
-    }
-
-    .verify-header .verify-nav-link {
-        justify-content: flex-start;
-        padding: 14px 15px;
-    }
-
-    .verify-header .verify-nav-link::after,
-    .verify-header .verify-nav-link.is-active::after {
-        left: auto;
-        right: 14px;
-        bottom: 50%;
-
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-
-        transform: translateY(50%);
-    }
-
-    .verify-header .verify-nav-link:hover::after {
-        transform: translateY(50%);
-    }
-}
-
-
-/* -----------------------------------------
-   6. MOBILE HERO
-   ----------------------------------------- */
-
-@media (max-width: 760px) {
-    section.hero.verify-hero {
-        /*
-           Di ponsel, hero boleh lebih tinggi dari layar
-           agar teks dan ilustrasi tidak bertumpuk.
-        */
-        min-height: calc(100vh - 70px);
-        min-height: calc(100svh - 70px);
-
-        padding-bottom: 90px;
-    }
-
-    .verify-hero-summary {
-        max-width: 440px;
-        margin-top: 24px;
-    }
-
-    .verify-mini-stats {
-        padding: 15px 5px;
-        border-radius: 14px;
-    }
-
-    .verify-mini-stat {
-        padding-inline: 5px;
-    }
-
-    .verify-mini-stat-value {
-        font-size: 22px;
-    }
-
-    .verify-mini-stat-label {
-        font-size: 9px;
-    }
-
-    section.hero.verify-hero::after {
-        height: 180px;
-
-        clip-path: polygon(
-            0 68%,
-            45% 45%,
-            100% 10%,
-            100% 100%,
-            0 100%
-        );
-    }
-}
-
-
-/* -----------------------------------------
-   7. REDUCED MOTION
-   ----------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-header .verify-nav-link,
-    .verify-header .verify-nav-link::after,
-    .verify-mini-stat-value {
-        transition: none;
-    }
-
-    a.verify-mini-stat:hover .verify-mini-stat-value {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — HERO VISUAL DETAILS
-   ========================================= */
-
-
-/* -----------------------------------------
-   1. CAHAYA DAN POLA TITIK DI BELAKANG PONSEL
-   ----------------------------------------- */
-
-.verify-hero .hero-art {
     isolation: isolate;
-}
-
-/* Cahaya lembut */
-.verify-hero .hero-art::before {
-    content: "";
-
-    position: absolute;
-    z-index: -2;
-
-    width: 470px;
-    height: 470px;
-
-    left: 50%;
-    top: 48%;
-
-    border-radius: 50%;
-
-    background: radial-gradient(
-        circle,
-        rgba(32, 180, 203, .16) 0%,
-        rgba(32, 180, 203, .07) 40%,
-        rgba(32, 180, 203, 0) 72%
-    );
-
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-/* Titik dekoratif */
-.verify-hero .hero-art::after {
-    content: "";
-
-    position: absolute;
-    z-index: -1;
-
-    width: 390px;
-    height: 350px;
-
-    left: 50%;
-    top: 48%;
-
-    background-image: radial-gradient(
-        circle,
-        rgba(18, 121, 145, .19) 1px,
-        transparent 1px
-    );
-
-    background-size: 19px 19px;
-
-    -webkit-mask-image: radial-gradient(
-        ellipse,
-        #000 25%,
-        transparent 72%
-    );
-
-    mask-image: radial-gradient(
-        ellipse,
-        #000 25%,
-        transparent 72%
-    );
-
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
-
-/* -----------------------------------------
-   2. AREA DEMO DI DALAM PONSEL
-   ----------------------------------------- */
-
-.verify-hero .phone-body.verify-phone-demo {
-    position: relative;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
 
-    height: calc(100% - 19px);
-    padding: 23px 13px 13px;
-
-    text-align: center;
-}
-
-.verify-demo-label {
-    display: inline-block;
-    align-self: center;
-
-    margin-bottom: 16px;
-    padding: 4px 7px;
-
-    border: 1px solid #e2edf3;
-    border-radius: 999px;
-
-    background: #f7fafc;
-    color: #8091a4;
-
-    font-size: 7px;
-    font-weight: 750;
-    line-height: 1.4;
-    letter-spacing: .8px;
-}
-
-/* Tinggi area tetap agar ponsel tidak meloncat */
-.verify-demo-scene {
-    flex: 1;
-    min-height: 0;
-
-    animation: verify-scene-appear .55s ease both;
-}
-
-.verify-demo-scene[hidden] {
-    display: none;
-}
-
-@keyframes verify-scene-appear {
-    from {
-        opacity: 0;
-        transform: translateY(7px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Tampilan pertama */
-.verify-phone-demo .phone-shield {
-    width: 63px;
-    height: 69px;
-    margin: 5px auto 0;
-}
-
-.verify-hero .verify-phone-demo h3 {
-    margin: 16px 0 11px;
-
-    color: #152d4b;
-    font-size: 23px;
-    line-height: 1.25;
-    letter-spacing: -.6px;
-}
-
-.verify-hero .verify-phone-demo p {
-    margin-bottom: 0;
-
-    font-size: 11px;
-    line-height: 1.7;
-}
-
-.verify-phone-demo .phone-check {
-    margin-top: 20px;
-    padding: 8px 5px;
-
-    border-radius: 10px;
-    font-size: 9px;
-}
-
-
-/* -----------------------------------------
-   3. TAMPILAN CONTOH PESAN
-   ----------------------------------------- */
-
-.verify-demo-message {
-    margin-top: 13px;
-    padding: 15px 12px;
-
-    border: 1px solid #e2eaf2;
-    border-radius: 15px 15px 15px 4px;
-
-    background: #f3f7fc;
-    text-align: left;
-
-    box-shadow: 0 5px 15px rgba(21, 45, 75, .035);
-}
-
-.verify-demo-sender {
-    display: block;
-
-    margin-bottom: 9px;
-
-    color: #637b94;
-    font-size: 8px;
-    font-weight: 750;
-}
-
-.verify-hero .verify-demo-message p {
-    margin: 0;
-
-    color: #304761;
-    font-size: 11px;
-    line-height: 1.75;
-}
-
-.verify-demo-message-note {
-    display: block;
-
-    margin-top: 12px;
-
-    color: #91a0b1;
-    font-size: 7px;
-}
-
-.verify-demo-reminder {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-top: 17px;
-    padding: 11px 9px;
-
-    border: 1px solid #f3e5c9;
-    border-radius: 11px;
-
-    background: #fff9ec;
-    color: #8e7136;
-
-    font-size: 9px;
-    line-height: 1.6;
-    text-align: left;
-}
-
-.verify-demo-reminder-icon {
-    display: grid;
-    place-items: center;
-
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
-
-    border-radius: 50%;
-
-    background: #f7e6ba;
-    color: #8e7136;
-
-    font-size: 12px;
-    font-weight: 800;
-}
-
-
-/* -----------------------------------------
-   4. TAMPILAN LANGKAH VERIFIKASI
-   ----------------------------------------- */
-
-.verify-demo-check-icon {
-    display: grid;
-    place-items: center;
-
-    width: 58px;
-    height: 58px;
-
-    margin: 5px auto 0;
-    border-radius: 18px;
-
-    background: #eaf9f6;
-    color: #21a38d;
-}
-
-.verify-demo-check-icon svg {
-    width: 37px;
-    height: 37px;
-}
-
-.verify-hero .verify-phone-demo .verify-demo-check-title {
-    margin: 14px 0;
-    font-size: 19px;
-}
-
-.verify-demo-checklist {
-    display: grid;
-    gap: 7px;
-
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-    text-align: left;
-}
-
-.verify-demo-checklist li {
-    position: relative;
-
-    padding: 8px 6px 8px 22px;
-    border-radius: 8px;
-
-    background: #f3f9fb;
-    color: #5d778c;
-
-    font-size: 8px;
-    line-height: 1.5;
-}
-
-.verify-demo-checklist li::before {
-    content: "✓";
-
-    position: absolute;
-    left: 8px;
-    top: 8px;
-
-    color: #19a38e;
-    font-weight: 800;
-}
-
-
-/* -----------------------------------------
-   5. KONTROL DEMO
-   ----------------------------------------- */
-
-.verify-demo-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-
-    min-height: 30px;
-    margin-top: 10px;
-    padding-top: 7px;
-
-    border-top: 1px solid #edf2f6;
-}
-
-.verify-demo-dots {
-    display: flex;
-    align-items: center;
-    gap: 0;
-}
-
-.verify-demo-dot {
-    display: grid;
-    place-items: center;
-
-    width: 25px;
-    height: 25px;
-    padding: 0;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: transparent;
-    cursor: pointer;
-}
-
-.verify-demo-dot::before {
-    content: "";
-
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-
-    background: #cfdae4;
-
-    transition:
-        background-color .2s ease,
-        transform .2s ease;
-}
-
-.verify-demo-dot.is-active::before {
-    background: #20b4cb;
-    transform: scale(1.35);
-}
-
-.verify-demo-toggle {
-    min-height: 27px;
-    padding: 4px 8px;
-
-    border: 1px solid #e3ebf2;
-    border-radius: 7px;
-
-    background: #f8fbfd;
-    color: #6d8197;
-
-    font-size: 8px;
-    font-weight: 650;
-    line-height: 1.3;
-
-    cursor: pointer;
-}
-
-.verify-demo-toggle[hidden] {
-    display: none;
-}
-
-.verify-demo-toggle:hover {
-    background: #eaf8fb;
-    color: #087f94;
-}
-
-.verify-demo-dot:focus-visible,
-.verify-demo-toggle:focus-visible {
-    outline: 2px solid #20b4cb;
-    outline-offset: 2px;
-}
-
-
-/* -----------------------------------------
-   6. PETUNJUK SCROLL
-   ----------------------------------------- */
-
-.verify-hero .verify-scroll-hint {
-    position: absolute;
-    z-index: 3;
-
-    left: 50%;
-    bottom: 17px;
-
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-
-    color: #fff;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: .5px;
-    line-height: 1.5;
-
-    text-decoration: none;
-
-    transform: translateX(-50%);
-}
-
-.verify-scroll-icon {
-    display: grid;
-    place-items: center;
-
-    width: 28px;
-    height: 28px;
-
-    border: 1px solid rgba(255, 255, 255, .45);
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, .08);
-
-    transition:
-        background-color .2s ease,
-        transform .2s ease;
-}
-
-.verify-scroll-icon svg {
-    width: 15px;
-    height: 15px;
-}
-
-.verify-scroll-hint:hover .verify-scroll-icon {
-    background: rgba(255, 255, 255, .2);
-    transform: translateY(3px);
-}
-
-.verify-scroll-hint:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 5px;
-    border-radius: 5px;
-}
-
-
-/* -----------------------------------------
-   7. MOBILE
-   ----------------------------------------- */
-
-@media (max-width: 760px) {
-    .verify-hero .hero-art::before {
-        width: 420px;
-        height: 420px;
-    }
-
-    .verify-hero .hero-art::after {
-        width: 350px;
-        height: 320px;
-    }
-
-    .verify-hero .verify-scroll-hint {
-        bottom: 14px;
-        font-size: 9px;
-    }
-}
-
-
-/* -----------------------------------------
-   8. REDUCED MOTION
-   ----------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-demo-scene {
-        animation: none;
-    }
-
-    .verify-demo-dot::before,
-    .verify-scroll-icon {
-        transition: none;
-    }
-
-    .verify-scroll-hint:hover .verify-scroll-icon {
-        transform: none;
-    }
-}
-
-/* Kontrol titik tetap di tengah setelah tombol Jeda dihapus */
-.verify-phone-demo .verify-demo-controls {
-    justify-content: center;
-}
-
-/* Pastikan scene yang disembunyikan tidak tampil */
-.verify-phone-demo .verify-demo-scene[hidden] {
-    display: none;
-}
-
-/* Petunjuk scroll: lebih kontras dan jelas */
-section.hero.verify-hero > .verify-scroll-hint {
-    position: absolute;
-    z-index: 5;
-
-    left: 50%;
-    right: auto;
-    top: auto;
-    bottom: 16px;
-
-    display: inline-flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-
-    width: max-content;
-    max-width: calc(100% - 32px);
-
-    padding: 8px 12px 8px 15px;
-    border: 1px solid rgba(255, 255, 255, .3);
-    border-radius: 999px;
-
-    background: #153c56;
-    color: #fff;
-
-    font-size: 11px;
-    font-weight: 650;
-    line-height: 1.4;
-    letter-spacing: .2px;
-    text-decoration: none;
-
-    opacity: 1;
-    visibility: visible;
-
-    box-shadow: 0 5px 16px rgba(10, 35, 55, .12);
-
-    transform: translateX(-50%);
-
-    transition:
-        background-color .2s ease,
-        box-shadow .2s ease;
-}
-
-section.hero.verify-hero > .verify-scroll-hint:hover {
-    background: #1c506b;
-    box-shadow: 0 7px 20px rgba(10, 35, 55, .18);
-}
-
-.verify-scroll-hint .verify-scroll-icon {
-    width: 25px;
-    height: 25px;
-
-    border: 0;
-    background: rgba(255, 255, 255, .12);
-}
-
-.verify-scroll-hint .verify-scroll-icon svg {
-    width: 14px;
-    height: 14px;
-}
-
-@media (max-width: 760px) {
-    section.hero.verify-hero > .verify-scroll-hint {
-        bottom: 15px;
-        font-size: 10px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    section.hero.verify-hero > .verify-scroll-hint {
-        transition: none;
-    }
-}
-
-/* =========================================
-   VERIFY — FEATURE SUMMARY
-   ========================================= */
-
-.verify-features {
-    position: relative;
-    padding: 70px 0 55px;
-
-    background:
-        radial-gradient(
-            ellipse at 100% 0%,
-            rgba(32, 180, 203, .055),
-            transparent 48%
-        ),
-        linear-gradient(
-            180deg,
-            #f6fafc 0%,
-            #fff 100%
-        );
-
-    border-top: 1px solid #e7eff4;
-}
-
-.verify-features-container {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding-inline: clamp(24px, 4vw, 64px);
-}
-
-
-/* -----------------------------------------
-   HEADING
-   ----------------------------------------- */
-
-.verify-features-heading {
-    display: grid;
-    grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(0, .8fr);
-
-    align-items: end;
-    gap: 45px;
-
-    margin-bottom: 35px;
-}
-
-.verify-section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    color: #367c8e;
-    font-size: 10px;
-    font-weight: 750;
-    letter-spacing: 1.6px;
-    line-height: 1.5;
-}
-
-.verify-section-label > span {
-    width: 7px;
-    height: 7px;
-
-    border-radius: 50%;
-    background: #20b4cb;
-
-    box-shadow: 0 0 0 4px rgba(32, 180, 203, .09);
-}
-
-.verify-features-heading h2 {
-    margin: 16px 0 0;
-
-    color: #152d4b;
-    font-size: clamp(28px, 2.8vw, 39px);
-    font-weight: 750;
-    line-height: 1.25;
-    letter-spacing: -1.2px;
-}
-
-.verify-features-heading h2 > span {
-    color: #168da2;
-}
-
-.verify-features-description {
-    max-width: 390px;
-    margin: 0 0 3px;
-    justify-self: end;
-
-    color: #75899d;
-    font-size: 14px;
-    line-height: 1.9;
-}
-
-
-/* -----------------------------------------
-   GRID
-   ----------------------------------------- */
-
-.verify-features-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-}
-
-
-/* -----------------------------------------
-   CARD
-   ----------------------------------------- */
-
-.verify-feature-card {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-    padding: 25px 22px 19px;
-
-    border: 1px solid #e0eaf1;
-    border-radius: 20px;
-
-    background: #fff;
-
-    box-shadow:
-        0 4px 12px rgba(21, 45, 75, .018),
-        0 15px 30px rgba(21, 45, 75, .015);
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
-}
-
-/* Garis cyan pendek pada bagian atas kartu */
-.verify-feature-card::before {
-    content: "";
-
-    position: absolute;
-    top: -1px;
-    left: 24px;
-
-    width: 32px;
-    height: 3px;
-    border-radius: 0 0 5px 5px;
-
-    background: #20b4cb;
-    opacity: .5;
-
-    transition:
-        width .25s ease,
-        opacity .25s ease;
-}
-
-.verify-feature-card:hover,
-.verify-feature-card:focus-within {
-    transform: translateY(-5px);
-    border-color: #b5dfe8;
-
-    box-shadow:
-        0 8px 18px rgba(21, 45, 75, .025),
-        0 20px 35px rgba(21, 45, 75, .055);
-}
-
-.verify-feature-card:hover::before,
-.verify-feature-card:focus-within::before {
-    width: 58px;
-    opacity: 1;
-}
-
-.verify-feature-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 26px;
-}
-
-.verify-feature-icon {
-    display: grid;
-    place-items: center;
-
-    width: 49px;
-    height: 49px;
-
-    border: 1px solid #d6edf2;
-    border-radius: 15px;
+    min-height: 315px;
+    padding: 26px;
 
     background: linear-gradient(
         145deg,
-        #edfafd,
-        #e5f3f7
+        #ffffff,
+        #f7fcff
     );
 
-    color: #168da2;
+    border: 1px solid #dcebf0;
+    border-radius: 22px;
+
+    box-shadow: 0 5px 20px #172f500c;
 
     transition:
-        transform .25s ease,
-        background-color .25s ease;
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
 }
 
-.verify-feature-icon svg {
-    display: block;
-    width: 28px;
-    height: 28px;
-}
+/* TOP ACCENT */
 
-.verify-feature-card:hover .verify-feature-icon {
-    transform: rotate(-5deg);
-}
-
-.verify-feature-number {
-    color: #c8d8e3;
-
-    font-size: 24px;
-    font-weight: 750;
-    line-height: 1;
-    letter-spacing: -1px;
-
-    transition: color .25s ease;
-}
-
-.verify-feature-card:hover .verify-feature-number {
-    color: #91cdd9;
-}
-
-.verify-feature-category {
-    display: block;
-    margin-bottom: 9px;
-
-    color: #43879a;
-
-    font-size: 9px;
-    font-weight: 750;
-    line-height: 1.5;
-    letter-spacing: 1.5px;
-}
-
-.verify-feature-card h3 {
-    margin: 0 0 12px;
-
-    color: #152d4b;
-    font-size: 18px;
-    font-weight: 750;
-    line-height: 1.4;
-    letter-spacing: -.4px;
-}
-
-.verify-feature-card > p {
-    flex: 1;
-    margin: 0 0 25px;
-
-    color: #788b9e;
-    font-size: 12px;
-    line-height: 1.9;
-}
-
-
-/* -----------------------------------------
-   CARD LINKS
-   ----------------------------------------- */
-
-.verify-feature-bottom {
-    margin-top: auto;
-    padding-top: 15px;
-
-    border-top: 1px solid #edf2f6;
-}
-
-.verify-feature-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-
-    color: #284b66;
-
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.6;
-    text-decoration: none;
-}
-
-.verify-feature-arrow {
-    display: grid;
-    place-items: center;
-
-    width: 29px;
-    height: 29px;
-    flex-shrink: 0;
-
-    border: 1px solid #e4edf3;
-    border-radius: 50%;
-
-    background: #f6f9fc;
-    color: #63869b;
-
-    transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
-}
-
-.verify-feature-arrow svg {
-    width: 15px;
-    height: 15px;
-}
-
-.verify-feature-link:hover {
-    color: #087f94;
-}
-
-.verify-feature-link:hover .verify-feature-arrow,
-.verify-feature-link:focus-visible .verify-feature-arrow {
-    border-color: #20b4cb;
-    background: #20b4cb;
-    color: #fff;
-
-    transform: translateX(2px);
-}
-
-.verify-feature-link:focus-visible {
-    outline: 2px solid #20b4cb;
-    outline-offset: 5px;
-    border-radius: 4px;
-}
-
-
-/* -----------------------------------------
-   BOTTOM NOTE
-   ----------------------------------------- */
-
-.verify-features-note {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 8px;
-
-    max-width: 760px;
-    margin: 25px auto 0;
-
-    color: #8798a9;
-    font-size: 11px;
-    line-height: 1.8;
-    text-align: center;
-}
-
-.verify-features-note > svg {
-    width: 16px;
-    height: 16px;
-
-    margin-top: 2px;
-    flex-shrink: 0;
-
-    color: #6b9ba9;
-}
-
-
-/* -----------------------------------------
-   TABLET
-   ----------------------------------------- */
-
-@media (max-width: 1100px) {
-    .verify-features-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-    }
-
-    .verify-feature-card {
-        padding: 25px;
-    }
-
-    .verify-feature-card > p {
-        font-size: 13px;
-    }
-}
-
-
-/* -----------------------------------------
-   MOBILE
-   ----------------------------------------- */
-
-@media (max-width: 640px) {
-    .verify-features {
-        padding: 45px 0 35px;
-    }
-
-    .verify-features-container {
-        padding-inline: 22px;
-    }
-
-    .verify-features-heading {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 18px;
-
-        margin-bottom: 27px;
-    }
-
-    .verify-features-heading h2 {
-        margin-top: 13px;
-        font-size: 30px;
-        letter-spacing: -.8px;
-    }
-
-    .verify-features-description {
-        max-width: none;
-        justify-self: start;
-
-        font-size: 13px;
-        line-height: 1.85;
-    }
-
-    .verify-features-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-    }
-
-    .verify-feature-card {
-        padding: 24px;
-        border-radius: 18px;
-    }
-
-    .verify-feature-top {
-        margin-bottom: 20px;
-    }
-
-    .verify-feature-card > p {
-        margin-bottom: 21px;
-    }
-
-    .verify-feature-link {
-        font-size: 12px;
-    }
-
-    .verify-features-note {
-        justify-content: flex-start;
-        margin-top: 22px;
-
-        font-size: 10px;
-        text-align: left;
-    }
-}
-
-
-/* -----------------------------------------
-   REDUCED MOTION
-   ----------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-feature-card,
-    .verify-feature-card::before,
-    .verify-feature-icon,
-    .verify-feature-number,
-    .verify-feature-arrow {
-        transition: none;
-    }
-
-    .verify-feature-card:hover,
-    .verify-feature-card:focus-within,
-    .verify-feature-card:hover .verify-feature-icon,
-    .verify-feature-link:hover .verify-feature-arrow,
-    .verify-feature-link:focus-visible .verify-feature-arrow {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — SIMPLE FEATURE POLISH
-   Tanpa preview, badge, atau konten tambahan
-   ========================================= */
-
-
-/* -----------------------------------------
-   1. LATAR SECTION
-   ----------------------------------------- */
-
-section.verify-features {
-    padding: 62px 0 48px;
-
-    border-top: 1px solid #e3edf3;
-
-    background:
-        radial-gradient(
-            ellipse at 95% 5%,
-            rgba(32, 180, 203, .045),
-            transparent 48%
-        ),
-        linear-gradient(
-            180deg,
-            #f5f9fc 0%,
-            #fbfdfe 65%,
-            #fff 100%
-        );
-}
-
-
-/* -----------------------------------------
-   2. HEADING SETELAH PARAGRAF DIHAPUS
-   ----------------------------------------- */
-
-.verify-features .verify-features-heading {
-    display: block;
-
-    margin-bottom: 31px;
-    padding-bottom: 0;
-
-    border-bottom: 0;
-}
-
-/* Hilangkan aksen heading dari revisi preview jika tersisa */
-.verify-features .verify-features-heading::after {
-    content: none;
-}
-
-.verify-features .verify-features-heading-main {
-    max-width: 720px;
-}
-
-.verify-features .verify-features-heading h2 {
-    margin: 14px 0 0;
-
-    color: #152d4b;
-    font-size: clamp(28px, 2.7vw, 37px);
-    line-height: 1.25;
-    letter-spacing: -1.1px;
-}
-
-.verify-features .verify-features-heading h2 > span {
-    color: #168da2;
-}
-
-.verify-features .verify-section-label {
-    font-size: 10px;
-    letter-spacing: 1.5px;
-}
-
-
-/* -----------------------------------------
-   3. GRID KARTU
-   ----------------------------------------- */
-
-.verify-features .verify-features-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    align-items: stretch;
-    gap: 20px;
-}
-
-
-/* -----------------------------------------
-   4. KARTU SEDERHANA
-   ----------------------------------------- */
-
-.verify-features .verify-feature-card {
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
-    padding: 25px 23px 20px;
-
-    border: 1px solid #e0e9f0;
-    border-radius: 18px;
-
-    background: #fff;
-
-    box-shadow: 0 5px 18px rgba(21, 45, 75, .025);
-
-    transition:
-        transform .22s ease,
-        border-color .22s ease,
-        box-shadow .22s ease;
-}
-
-/* Hilangkan garis dekoratif lama agar lebih bersih */
-.verify-features .verify-feature-card::before {
-    content: none;
-}
-
-.verify-features .verify-feature-card:hover,
-.verify-features .verify-feature-card:focus-within {
-    transform: translateY(-4px);
-    border-color: #9ed6e2;
-
-    box-shadow: 0 12px 26px rgba(21, 45, 75, .065);
-}
-
-
-/* -----------------------------------------
-   5. IKON DAN NOMOR
-   ----------------------------------------- */
-
-.verify-features .verify-feature-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 24px;
-}
-
-.verify-features .verify-feature-icon {
-    display: grid;
-    place-items: center;
-
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-
-    border: 1px solid #d8edf2;
-    border-radius: 14px;
-
-    background: #edf8fb;
-    color: #168da2;
-
-    transform: none;
-    transition:
-        background-color .22s ease,
-        border-color .22s ease;
-}
-
-.verify-features .verify-feature-icon svg {
-    display: block;
-    width: 27px;
-    height: 27px;
-}
-
-.verify-features .verify-feature-card:hover .verify-feature-icon {
-    border-color: #c5e6ee;
-    background: #e4f5f9;
-    transform: none;
-}
-
-.verify-features .verify-feature-number {
-    color: #c7d6e1;
-
-    font-size: 23px;
-    font-weight: 750;
-    line-height: 1;
-    letter-spacing: -.8px;
-}
-
-.verify-features .verify-feature-card:hover .verify-feature-number {
-    color: #a6c7d3;
-}
-
-
-/* -----------------------------------------
-   6. TEKS KARTU
-   ----------------------------------------- */
-
-.verify-features .verify-feature-category {
-    margin-bottom: 9px;
-
-    color: #4a8798;
-    font-size: 9px;
-    font-weight: 750;
-    line-height: 1.5;
-    letter-spacing: 1.4px;
-}
-
-.verify-features .verify-feature-card h3 {
-    margin: 0 0 12px;
-
-    color: #152d4b;
-    font-size: 18px;
-    font-weight: 750;
-    line-height: 1.4;
-    letter-spacing: -.4px;
-}
-
-.verify-features .verify-feature-card > p {
-    flex: 1;
-
-    margin: 0 0 25px;
-
-    color: #74879a;
-    font-size: 12px;
-    line-height: 1.9;
-}
-
-
-/* -----------------------------------------
-   7. TAUTAN SEJAJAR DI BAWAH
-   ----------------------------------------- */
-
-.verify-features .verify-feature-bottom {
-    margin-top: auto;
-    padding-top: 15px;
-
-    border-top: 1px solid #edf2f6;
-}
-
-.verify-features .verify-feature-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-
-    min-height: 32px;
-
-    color: #34556d;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.6;
-    text-decoration: none;
-}
-
-.verify-features .verify-feature-arrow {
-    display: grid;
-    place-items: center;
-
-    width: 29px;
-    height: 29px;
-    flex-shrink: 0;
-
-    border: 1px solid #e0eaf0;
-    border-radius: 50%;
-
-    background: #f7fafc;
-    color: #6a8a9d;
-
-    transform: none;
-
-    transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease;
-}
-
-.verify-features .verify-feature-arrow svg {
-    width: 15px;
-    height: 15px;
-}
-
-.verify-features .verify-feature-link:hover {
-    color: #087f94;
-}
-
-.verify-features .verify-feature-link:hover .verify-feature-arrow,
-.verify-features .verify-feature-link:focus-visible .verify-feature-arrow {
-    border-color: #b7dfe8;
-    background: #e7f6fa;
-    color: #087f94;
-    transform: none;
-}
-
-.verify-features .verify-feature-link:focus-visible {
-    outline: 2px solid #20b4cb;
-    outline-offset: 5px;
-    border-radius: 4px;
-}
-
-
-/* -----------------------------------------
-   8. CATATAN DI BAWAH KARTU
-   ----------------------------------------- */
-
-.verify-features .verify-features-note {
-    max-width: 760px;
-    margin-top: 23px;
-
-    color: #8798a8;
-    font-size: 10px;
-    line-height: 1.8;
-}
-
-
-/* -----------------------------------------
-   9. TABLET
-   ----------------------------------------- */
-
-@media (max-width: 1100px) {
-    .verify-features .verify-features-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 20px;
-    }
-
-    .verify-features .verify-feature-card {
-        padding: 26px;
-    }
-
-    .verify-features .verify-feature-card > p {
-        font-size: 13px;
-    }
-
-    .verify-features .verify-feature-link {
-        font-size: 12px;
-    }
-}
-
-
-/* -----------------------------------------
-   10. MOBILE
-   ----------------------------------------- */
-
-@media (max-width: 640px) {
-    section.verify-features {
-        padding: 43px 0 33px;
-    }
-
-    .verify-features .verify-features-heading {
-        margin-bottom: 26px;
-    }
-
-    .verify-features .verify-features-heading h2 {
-        font-size: 29px;
-        letter-spacing: -.8px;
-    }
-
-    .verify-features .verify-features-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 16px;
-    }
-
-    .verify-features .verify-feature-card {
-        padding: 24px;
-        border-radius: 16px;
-    }
-
-    .verify-features .verify-feature-top {
-        margin-bottom: 21px;
-    }
-}
-
-
-/* -----------------------------------------
-   11. REDUCED MOTION
-   ----------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    .verify-features .verify-feature-card,
-    .verify-features .verify-feature-icon,
-    .verify-features .verify-feature-arrow {
-        transition: none;
-    }
-
-    .verify-features .verify-feature-card:hover,
-    .verify-features .verify-feature-card:focus-within {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — FOOTER
-   ========================================= */
-
-footer.verify-footer {
-    position: relative;
-
-    display: block;
-    width: 100%;
-    max-width: none;
-
-    margin: 0;
-    padding: 0;
-
-    border: 0;
-
-    background:
-        radial-gradient(
-            ellipse at 95% 0%,
-            rgba(32, 180, 203, .09),
-            transparent 50%
-        ),
-        #152d4b;
-
-    color: #c3cfdd;
-    font-size: 14px;
-}
-
-/* Garis aksen halus di tepi atas */
-.verify-footer::before {
+.module-section .module-card::before {
     content: "";
-
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
 
-    height: 2px;
+    width: 100%;
+    height: 4px;
 
     background: linear-gradient(
         90deg,
-        transparent 0%,
-        rgba(32, 180, 203, .65) 30%,
-        rgba(32, 180, 203, .2) 70%,
-        transparent 100%
+        #24afc0,
+        #8ce0e5
     );
-}
-
-.verify-footer-container {
-    max-width: 1440px;
-    margin: 0 auto;
-
-    padding-inline: clamp(24px, 4vw, 64px);
-}
-
-
-/* -----------------------------------------
-   1. MAIN LAYOUT
-   ----------------------------------------- */
-
-.verify-footer-main {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.2fr)
-        minmax(0, .7fr)
-        minmax(0, 1fr);
-
-    gap: clamp(35px, 5vw, 85px);
-
-    padding-top: 49px;
-    padding-bottom: 40px;
-}
-
-
-/* -----------------------------------------
-   2. BRAND
-   ----------------------------------------- */
-
-.verify-footer-brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-
-    width: fit-content;
-
-    color: #fff;
-    text-decoration: none;
-}
-
-.verify-footer-symbol {
-    display: block;
-
-    width: 31px;
-    height: 37px;
-    flex-shrink: 0;
-}
-
-.verify-footer-wordmark {
-    color: #fff;
-
-    font-family:
-        "Plus Jakarta Sans",
-        system-ui,
-        sans-serif;
-
-    font-size: 23px;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -.9px;
-}
-
-.verify-footer-wordmark > span {
-    color: #20b4cb;
-}
-
-.verify-footer .verify-footer-tagline {
-    margin: 20px 0 12px;
-
-    color: #edf4fb;
-    font-size: 18px;
-    font-weight: 650;
-    line-height: 1.55;
-    letter-spacing: -.3px;
-}
-
-.verify-footer .verify-footer-description {
-    max-width: 310px;
-    margin: 0;
-
-    color: #a5b6ca;
-    font-size: 12px;
-    line-height: 1.9;
-}
-
-
-/* -----------------------------------------
-   3. NAVIGATION
-   ----------------------------------------- */
-
-.verify-footer-heading {
-    margin: 8px 0 20px;
-
-    color: #eef5fc;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: .1px;
-}
-
-.verify-footer-links {
-    display: grid;
-    justify-items: start;
-    gap: 12px;
-}
-
-.verify-footer-links a {
-    position: relative;
-
-    padding: 2px 0;
-
-    color: #acbdd0;
-    font-size: 12px;
-    line-height: 1.6;
-    text-decoration: none;
-
-    transition: color .2s ease;
-}
-
-/* Underline muncul saat hover */
-.verify-footer-links a::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -2px;
-
-    height: 1px;
-
-    background: #20b4cb;
 
     transform: scaleX(0);
     transform-origin: left;
 
-    transition: transform .2s ease;
+    transition: transform .35s ease;
 }
 
-.verify-footer-links a:hover {
-    color: #fff;
-}
-
-.verify-footer-links a:hover::after {
+.module-section .module-card:hover::before {
     transform: scaleX(1);
 }
 
+/* HOVER EFFECT */
 
-/* -----------------------------------------
-   4. MESSAGE CARD
-   ----------------------------------------- */
+.module-section .module-card:hover {
+    transform: translateY(-8px);
 
-.verify-footer-message {
-    align-self: start;
+    border-color: #9bdce4;
 
-    padding: 23px;
-
-    border: 1px solid rgba(166, 203, 224, .16);
-    border-radius: 17px;
-
-    background: rgba(255, 255, 255, .035);
+    box-shadow:
+        0 18px 35px #172f5018,
+        0 5px 15px #24afc018;
 }
 
-.verify-footer-message-label {
-    display: block;
+/* CLICK EFFECT */
 
-    margin-bottom: 11px;
-
-    color: #82d9e6;
-    font-size: 9px;
-    font-weight: 750;
-    line-height: 1.5;
-    letter-spacing: 1.5px;
+.module-section .module-card:active {
+    transform: scale(.975);
+    transition: transform .12s ease;
 }
 
-.verify-footer-message h2 {
-    margin: 0 0 12px;
+/* BADGE */
 
-    color: #f1f6fc;
-    font-size: 20px;
-    font-weight: 650;
-    line-height: 1.4;
-    letter-spacing: -.4px;
-}
+.module-section .module-card .badge {
+    position: relative;
+    z-index: 2;
 
-.verify-footer-message h2 > span {
-    color: #84d8e5;
-}
-
-.verify-footer .verify-footer-message p {
-    margin: 0;
-
-    color: #a7b9cc;
-    font-size: 11px;
-    line-height: 1.9;
-}
-
-.verify-footer-cta {
     display: inline-flex;
     align-items: center;
+
+    padding: 7px 13px;
+
+    background: #e8f8fa;
+    color: #218c9d;
+
+    border: 1px solid #d5f0f3;
+    border-radius: 30px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .4px;
+}
+
+
+/* ICON */
+
+.module-section .module-card .module-icon {
+    position: absolute;
+    top: 24px;
+    right: 26px;
+    z-index: 2;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px;
+    margin: 0;
+
+    background: #e8f8fa;
+    color: #24afc0;
+
+    border: 1px solid #d8f0f3;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 14px #24afc015;
+
+    transition:
+        transform .35s ease,
+        border-radius .35s ease;
+}
+
+.module-section .module-card:hover .module-icon {
+    transform: translateY(-4px) rotate(-6deg);
+    border-radius: 50%;
+}
+
+/* TITLE */
+
+.module-section .module-card h2 {
+    position: relative;
+    z-index: 2;
+
+    max-width: 100%;
+    margin: 23px 0 10px;
+
+    color: #172f50;
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.4;
+}
+
+/* DESCRIPTION */
+
+.module-section .module-card p {
+    position: relative;
+    z-index: 2;
+
+    max-width: 95%;
+    margin: 0 0 22px;
+
+    color: #71869c;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* EXPLORE BUTTON */
+
+.module-section .module-card .mini-button {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    z-index: 3;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 
-    margin-top: 17px;
-    padding: 7px 0;
+    margin-top: auto;
+    padding: 10px 17px;
 
-    color: #91e1ec;
+    background: #172f50;
+    color: #ffffff;
+
+    border-radius: 30px;
     font-size: 11px;
-    font-weight: 650;
-    line-height: 1.6;
-    text-decoration: none;
+    font-weight: 750;
 
-    transition: color .2s ease;
+    box-shadow: 0 5px 12px #172f5018;
+
+    transition:
+        background .3s ease,
+        gap .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
-.verify-footer-cta svg {
-    width: 15px;
-    height: 15px;
-    flex-shrink: 0;
+.module-section .module-card .mini-button:hover {
+    background: #159eaf;
+    color: #ffffff;
+    gap: 16px;
 
-    transition: transform .2s ease;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px #24afc030;
 }
 
-.verify-footer-cta:hover {
-    color: #c1f3f9;
+/* EXPLORE BUTTON CHEVRON */
+.module-section .module-card .mini-button span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+    transform: translateY(-1px);
+    transition: transform 0.25s ease;
 }
 
-.verify-footer-cta:hover svg {
-    transform: translateX(3px);
+.module-section .module-card .mini-button:hover span {
+    transform: translate(5px, -1px);
 }
 
+/* MODULE NUMBER */
 
-/* -----------------------------------------
-   5. BOTTOM BAR
-   ----------------------------------------- */
+.module-section .module-card .card-number {
+    position: absolute;
+    right: 12px;
+    bottom: -20px;
+    z-index: 0;
 
-.verify-footer-bottom {
+    color: #24afc0;
+    opacity: .08;
+
+    font-size: 110px;
+    font-weight: 900;
+    line-height: 1;
+
+    pointer-events: none;
+
+    transition:
+        transform .4s ease,
+        opacity .4s ease;
+}
+
+.module-section .module-card:hover .card-number {
+    transform: translateY(-9px);
+    opacity: .15;
+}
+
+/* DECORATION */
+
+.module-section .card-decoration {
+    position: absolute;
+    top: -65px;
+    right: -65px;
+    z-index: 0;
+
+    width: 150px;
+    height: 150px;
+
+    border-radius: 50%;
+    background: #24afc0;
+    opacity: .045;
+
+    pointer-events: none;
+
+    transition: transform .5s ease;
+}
+
+.module-section .module-card:hover .card-decoration {
+    transform: scale(1.8);
+}
+
+/* KEYBOARD FOCUS */
+
+.module-section .module-card:focus-within {
+    outline: 3px solid #24afc0;
+    outline-offset: 4px;
+}
+
+/* WELCOME SECTION */
+.module-section .welcome-section {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
+    gap: 24px;
 
-    gap: 30px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
 
-    padding-top: 21px;
-    padding-bottom: 23px;
+    background: linear-gradient(
+        135deg,
+        #172f50,
+        #206080
+    );
 
-    border-top: 1px solid rgba(174, 201, 225, .14);
+    border-radius: 22px;
+    color: #ffffff;
+
+    box-shadow: 0 8px 24px rgba(23, 47, 80, 0.15);
 }
 
-.verify-footer .verify-footer-copyright {
+.module-section .welcome-section h2 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.module-section .welcome-section p {
     margin: 0;
-
-    color: #b6c6d7;
-    font-size: 10px;
-    line-height: 1.9;
+    color: #dceef5;
+    font-size: 14px;
+    line-height: 1.7;
 }
 
-.verify-footer-copyright > span {
-    display: block;
-    color: #849bb4;
+.module-section .welcome-section i {
+    font-size: 42px;
+    color: #35c5d2;
 }
 
-.verify-footer .verify-footer-disclaimer {
-    max-width: 330px;
+/* LEARNING REMINDER */
+.module-section .learning-reminder {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 18px 22px;
+    margin-bottom: 32px;
+
+    background: #f3fafb;
+    border: 1px solid #d5ebee;
+    border-left: 5px solid #159eaf;
+
+    border-radius: 16px;
+
+    box-shadow: 0 5px 16px rgba(23, 47, 80, 0.05);
+}
+
+.module-section .learning-reminder i {
+    font-size: 25px;
+    color: #159eaf;
+}
+
+.module-section .learning-reminder h4 {
+    margin: 0 0 5px;
+    color: #172f50;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.module-section .learning-reminder p {
     margin: 0;
+    color: #638098;
+    font-size: 13px;
+    line-height: 1.6;
+}
 
-    color: #93a9c0;
-    font-size: 10px;
-    line-height: 1.9;
-    text-align: right;
+.module-section .module-description {
+    margin: 18px 0 32px;
+    color: #638098;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================================
+   CHEVRON EXPLORE MODULE
+========================================= */
+
+.module-section .module-card .mini-button span {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 24px;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.module-section .module-card .mini-button:hover span {
+    transform: translateX(5px);
 }
 
 
-/* -----------------------------------------
-   6. KEYBOARD FOCUS
-   ----------------------------------------- */
+/* =========================================
+   RESPONSIVE
+========================================= */
 
-.verify-footer a:focus-visible {
-    outline: 2px solid #70d5e5;
-    outline-offset: 5px;
-    border-radius: 3px;
-}
-
-
-/* -----------------------------------------
-   7. TABLET
-   ----------------------------------------- */
-
-@media (max-width: 1000px) {
-    .verify-footer-main {
-        grid-template-columns:
-            minmax(0, 1.1fr)
-            minmax(0, .8fr);
-
-        gap: 30px;
+@media (max-width: 768px) {
+    .module-section .welcome-section {
+        padding: 22px;
+        gap: 15px;
     }
 
-    .verify-footer-message {
-        grid-column: 1 / -1;
+    .module-section .welcome-section h2 {
+        font-size: 21px;
     }
 
-    .verify-footer .verify-footer-message p {
-        max-width: 560px;
+    .module-section .welcome-section i {
+        font-size: 30px;
+    }
+
+    .module-section .learning-reminder {
+        padding: 15px;
     }
 }
 
-
-/* -----------------------------------------
-   8. MOBILE
-   ----------------------------------------- */
-
-@media (max-width: 600px) {
-    .verify-footer-container {
-        padding-inline: 24px;
+@media (max-width: 480px) {
+    .module-section .welcome-section {
+        padding: 18px;
     }
 
-    .verify-footer-main {
-        grid-template-columns: minmax(0, 1fr);
-
-        gap: 30px;
-
-        padding-top: 36px;
-        padding-bottom: 29px;
-    }
-
-    .verify-footer-wordmark {
-        font-size: 22px;
-    }
-
-    .verify-footer .verify-footer-tagline {
-        margin-top: 17px;
-        font-size: 18px;
-    }
-
-    .verify-footer .verify-footer-description {
-        max-width: 100%;
-    }
-
-    .verify-footer-heading {
-        margin-top: 0;
-        margin-bottom: 15px;
-    }
-
-    .verify-footer-links {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 11px 20px;
-    }
-
-    .verify-footer-message {
-        grid-column: auto;
-        padding: 21px;
-    }
-
-    .verify-footer-message h2 {
+    .module-section .welcome-section h2 {
         font-size: 19px;
     }
 
-    .verify-footer-bottom {
-        flex-direction: column;
-        gap: 13px;
-
-        padding-top: 19px;
-        padding-bottom: 22px;
-    }
-
-    .verify-footer .verify-footer-disclaimer {
-        max-width: 100%;
-        text-align: left;
+    .module-section .welcome-section p {
+        font-size: 12px;
     }
 }
 
+@media (max-width: 768px) {
+    .module-section .welcome-section {
+        padding: 22px;
+        gap: 15px;
+    }
 
-/* -----------------------------------------
-   9. REDUCED MOTION
-   ----------------------------------------- */
+    .module-section .welcome-section h2 {
+        font-size: 21px;
+    }
+
+    .module-section .welcome-section i {
+        font-size: 32px;
+    }
+
+    .module-section .learning-reminder {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .module-section .welcome-section {
+        padding: 18px;
+    }
+
+    .module-section .welcome-section h2 {
+        font-size: 19px;
+    }
+
+    .module-section .welcome-section p {
+        font-size: 12px;
+    }
+}
+
+/* RESPONSIVE TABLET */
+
+@media (max-width: 1000px) {
+    .module-section .module-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* RESPONSIVE MOBILE */
+
+@media (max-width: 600px) {
+    .container.module-section {
+        padding: 32px 5% 50px;
+    }
+
+    .module-section .ribbon {
+        font-size: 18px;
+    }
+
+    .module-section .module-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .module-section .module-card {
+        min-height: 290px;
+        padding: 23px;
+    }
+
+    .module-section .module-card h2 {
+        font-size: 18px;
+    }
+}
+
+/* REDUCED MOTION */
 
 @media (prefers-reduced-motion: reduce) {
-    .verify-footer-links a,
-    .verify-footer-links a::after,
-    .verify-footer-cta,
-    .verify-footer-cta svg {
-        transition: none;
+    .module-section .module-card,
+    .module-section .module-card *,
+    .module-section .module-card::before {
+        transition: none !important;
     }
-
-    .verify-footer-cta:hover svg {
-        transform: none;
-    }
-}
-
-/* =========================================
-   VERIFY — COMPACT FOOTER
-   Tanpa kolom navigasi
-   ========================================= */
-
-/* Isi lebih sempit dan tetap di tengah */
-.verify-footer .verify-footer-container {
-    max-width: 1120px;
-    margin-inline: auto;
-    padding-inline: 32px;
-}
-
-/* Dua kolom: identitas dan pesan singkat */
-.verify-footer .verify-footer-main {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.1fr)
-        minmax(0, 1fr);
-
-    align-items: start;
-    gap: 60px;
-
-    padding-top: 30px;
-    padding-bottom: 25px;
-}
-
-/* Logo lebih kecil */
-.verify-footer .verify-footer-brand {
-    gap: 7px;
-}
-
-.verify-footer .verify-footer-symbol {
-    width: 25px;
-    height: 30px;
-}
-
-.verify-footer .verify-footer-wordmark {
-    font-size: 20px;
-    letter-spacing: -.7px;
-}
-
-/* Teks identitas lebih ringkas */
-.verify-footer .verify-footer-tagline {
-    margin: 13px 0 8px;
-
-    font-size: 15px;
-    line-height: 1.5;
-}
-
-.verify-footer .verify-footer-description {
-    max-width: 340px;
-
-    font-size: 11px;
-    line-height: 1.8;
-}
-
-/* Pesan kanan tanpa kotak besar */
-.verify-footer .verify-footer-message {
-    grid-column: auto;
-
-    padding: 4px 0 0 25px;
-    border: 0;
-    border-left: 1px solid rgba(174, 201, 225, .16);
-    border-radius: 0;
-
-    background: transparent;
-}
-
-.verify-footer .verify-footer-message-label {
-    margin-bottom: 8px;
-
-    font-size: 8px;
-    letter-spacing: 1.3px;
-}
-
-.verify-footer .verify-footer-message h2 {
-    margin-bottom: 8px;
-
-    font-size: 17px;
-    line-height: 1.45;
-}
-
-.verify-footer .verify-footer-message p {
-    max-width: 340px;
-
-    font-size: 10px;
-    line-height: 1.8;
-}
-
-.verify-footer .verify-footer-cta {
-    margin-top: 9px;
-    padding-block: 5px;
-
-    font-size: 10px;
-}
-
-/* Copyright lebih tipis */
-.verify-footer .verify-footer-bottom {
-    gap: 24px;
-
-    padding-top: 14px;
-    padding-bottom: 16px;
-}
-
-.verify-footer .verify-footer-copyright,
-.verify-footer .verify-footer-disclaimer {
-    font-size: 9px;
-    line-height: 1.8;
-}
-
-.verify-footer .verify-footer-copyright > span {
-    display: inline;
-    margin-left: 7px;
-}
-
-.verify-footer .verify-footer-disclaimer {
-    max-width: 290px;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-    .verify-footer .verify-footer-container {
-        padding-inline: 24px;
-    }
-
-    .verify-footer .verify-footer-main {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 22px;
-
-        padding-top: 27px;
-        padding-bottom: 22px;
-    }
-
-    .verify-footer .verify-footer-description {
-        max-width: 100%;
-    }
-
-    .verify-footer .verify-footer-message {
-        padding: 18px 0 0;
-
-        border-left: 0;
-        border-top: 1px solid rgba(174, 201, 225, .14);
-    }
-
-    .verify-footer .verify-footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .verify-footer .verify-footer-copyright > span {
-        display: block;
-        margin-left: 0;
-    }
-
-    .verify-footer .verify-footer-disclaimer {
-        max-width: 100%;
-        text-align: left;
-    }
-}
-
-/* =========================================
-   VERIFY — FOOTER ALIGNMENT
-   Meratakan isi ke kiri dan kanan
-   ========================================= */
-
-/* Lebar dan jarak tepi mengikuti konten Dashboard */
-.verify-footer .verify-footer-container {
-    width: 100%;
-    max-width: 1440px;
-
-    margin-inline: auto;
-    padding-inline: clamp(24px, 4vw, 64px);
-}
-
-/* Dua kolom dengan ruang kosong di antaranya */
-.verify-footer .verify-footer-main {
-    display: grid;
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(0, 1fr);
-
-    align-items: start;
-    column-gap: clamp(40px, 8vw, 140px);
-}
-
-/* Identitas tetap di kiri */
-.verify-footer .verify-footer-brand-column {
-    width: 100%;
-    max-width: 390px;
-    justify-self: start;
-    text-align: left;
-}
-
-.verify-footer .verify-footer-description {
-    max-width: 350px;
-}
-
-/* Pesan ditempatkan di sisi kanan */
-.verify-footer .verify-footer-message {
-    grid-column: auto;
-    justify-self: end;
-
-    width: 100%;
-    max-width: 360px;
-
-    padding: 4px 0 0;
-    border: 0;
-
-    background: transparent;
-    text-align: left;
-}
-
-.verify-footer .verify-footer-message p {
-    max-width: 100%;
-}
-
-/* Copyright di kiri, catatan di kanan */
-.verify-footer .verify-footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-}
-
-.verify-footer .verify-footer-copyright {
-    margin: 0;
-    text-align: left;
-}
-
-.verify-footer .verify-footer-disclaimer {
-    max-width: 360px;
-    margin: 0;
-    text-align: right;
-}
-
-/* Ponsel: kembali satu kolom agar tetap nyaman dibaca */
-@media (max-width: 600px) {
-    .verify-footer .verify-footer-container {
-        padding-inline: 24px;
-    }
-
-    .verify-footer .verify-footer-main {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 22px;
-    }
-
-    .verify-footer .verify-footer-brand-column {
-        max-width: 100%;
-    }
-
-    .verify-footer .verify-footer-message {
-        justify-self: start;
-        max-width: 100%;
-
-        padding-top: 18px;
-        border-top: 1px solid rgba(174, 201, 225, .14);
-    }
-
-    .verify-footer .verify-footer-bottom {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .verify-footer .verify-footer-disclaimer {
-        max-width: 100%;
-        text-align: left;
-    }
-}
-
-/* Footer: teks lebih horizontal, bukan bertumpuk */
-
-.verify-footer .verify-footer-brand-column,
-.verify-footer .verify-footer-message {
-    width: 100%;
-    max-width: none;
-}
-
-.verify-footer .verify-footer-tagline {
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-.verify-footer .verify-footer-description,
-.verify-footer .verify-footer-message p {
-    max-width: none;
-    line-height: 1.8;
-}
-
-.verify-footer .verify-footer-message h2 {
-    font-size: 17px;
-    line-height: 1.6;
-}
-
-/* Bagian cyan tetap menyambung dengan teks sebelumnya */
-.verify-footer .verify-footer-message h2 > span {
-    display: inline;
 }
