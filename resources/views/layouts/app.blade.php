@@ -6,50 +6,40 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+        content="width=device-width, initial-scale=1">
 
     <meta
         name="description"
-        content="VeriFy — belajar mengenali penipuan digital."
-    >
+        content="VeriFy — belajar mengenali penipuan digital.">
 
     <title>@yield('title', 'VeriFy') | VeriFy</title>
 
     {{-- Font wordmark --}}
     <link
         rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+        href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
         href="https://fonts.gstatic.com"
-        crossorigin
-    >
+        crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
-        rel="stylesheet"
-    >
+        rel="stylesheet">
 
-    {{-- Stylesheet aplikasi --}}
     <link
         rel="stylesheet"
-        href="{{ asset('css/siberguard.css') }}"
-    >
+        href="{{ asset('css/verify.css') }}">
 
-    {{-- JavaScript aplikasi --}}
     <script
-        src="{{ asset('js/siberguard.js') }}"
-        defer
-    ></script>
+        src="{{ asset('js/verify.js') }}"
+        defer></script>
 
     {{-- Lucide, dipertahankan untuk halaman yang menggunakannya --}}
     <script
         src="https://unpkg.com/lucide@latest"
-        defer
-    ></script>
+        defer></script>
 </head>
 
 <body>
@@ -65,30 +55,25 @@
             <a
                 class="verify-brand"
                 href="{{ route('home') }}"
-                aria-label="VeriFy — kembali ke Dashboard"
-            >
+                aria-label="VeriFy — kembali ke Dashboard">
                 <svg
                     class="verify-brand-symbol"
                     viewBox="0 0 64 64"
                     fill="none"
-                    aria-hidden="true"
-                >
+                    aria-hidden="true">
                     <path
                         d="M5 8H19L30 43H16L5 8Z"
-                        fill="currentColor"
-                    />
+                        fill="currentColor" />
 
                     <path
                         d="M45 8H59L45 43H31L45 8Z"
-                        fill="currentColor"
-                    />
+                        fill="currentColor" />
 
                     <circle
                         cx="31"
                         cy="55"
                         r="7"
-                        fill="#20B4CB"
-                    />
+                        fill="#20B4CB" />
                 </svg>
 
                 <span class="verify-brand-name">
@@ -103,16 +88,14 @@
                 type="button"
                 aria-label="Buka navigasi"
                 aria-expanded="false"
-                aria-controls="verifyNavigation"
-            >
+                aria-controls="verifyNavigation">
                 <svg
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.8"
                     stroke-linecap="round"
-                    aria-hidden="true"
-                >
+                    aria-hidden="true">
                     <path d="M4 6H20M4 12H20M4 18H20" />
                 </svg>
             </button>
@@ -121,15 +104,14 @@
             <nav
                 class="verify-navigation"
                 id="verifyNavigation"
-                aria-label="Navigasi utama"
-            >
+                aria-label="Navigasi utama">
                 <a
                     href="{{ route('home') }}"
                     class="verify-nav-link {{ request()->routeIs('home') ? 'is-active' : '' }}"
                     @if(request()->routeIs('home'))
-                        aria-current="page"
+                    aria-current="page"
                     @endif
-                >
+                    >
                     Dashboard
                 </a>
 
@@ -137,9 +119,9 @@
                     href="{{ route('detect') }}"
                     class="verify-nav-link {{ request()->routeIs('detect', 'analyze') ? 'is-active' : '' }}"
                     @if(request()->routeIs('detect', 'analyze'))
-                        aria-current="page"
+                    aria-current="page"
                     @endif
-                >
+                    >
                     Detect Scam
                 </a>
 
@@ -147,9 +129,9 @@
                     href="{{ route('modules') }}"
                     class="verify-nav-link {{ request()->routeIs('modules', 'lesson') ? 'is-active' : '' }}"
                     @if(request()->routeIs('modules', 'lesson'))
-                        aria-current="page"
+                    aria-current="page"
                     @endif
-                >
+                    >
                     Modules
                 </a>
 
@@ -157,9 +139,9 @@
                     href="{{ route('simulator') }}"
                     class="verify-nav-link {{ request()->routeIs('simulator') ? 'is-active' : '' }}"
                     @if(request()->routeIs('simulator'))
-                        aria-current="page"
+                    aria-current="page"
                     @endif
-                >
+                    >
                     Scam Simulator
                 </a>
 
@@ -168,60 +150,56 @@
 
                     @guest
 
-                        @if(\Illuminate\Support\Facades\Route::has('register'))
-                            <a
-                                class="verify-register-button"
-                                href="{{ route('register') }}"
-                            >
-                                Register
-                            </a>
-                        @endif
+                    @if(\Illuminate\Support\Facades\Route::has('register'))
+                    <a
+                        class="verify-register-button"
+                        href="{{ route('register') }}">
+                        Register
+                    </a>
+                    @endif
 
-                        @if(\Illuminate\Support\Facades\Route::has('login'))
-                            <a
-                                class="verify-login-button"
-                                href="{{ route('login') }}"
-                            >
-                                Login
-                            </a>
-                        @endif
+                    @if(\Illuminate\Support\Facades\Route::has('login'))
+                    <a
+                        class="verify-login-button"
+                        href="{{ route('login') }}">
+                        Login
+                    </a>
+                    @endif
 
                     @endguest
 
                     @auth
 
-                        <span class="verify-navbar-user">
+                    <span class="verify-navbar-user">
 
-                            <span class="verify-avatar">
-                                {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
-                            </span>
-
-                            <span class="verify-profile-name">
-                                {{ auth()->user()->name ?? 'Pengguna' }}
-                            </span>
-
+                        <span class="verify-avatar">
+                            {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
                         </span>
+
+                        <span class="verify-profile-name">
+                            {{ auth()->user()->name ?? 'Pengguna' }}
+                        </span>
+
+                    </span>
 
                     @endauth
 
                     @if(\Illuminate\Support\Facades\Route::has('settings'))
 
-                        <a
-                            class="verify-settings-button"
-                            href="{{ route('settings') }}"
-                            aria-label="Buka Settings"
-                            title="Settings"
-                        >
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.7"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <path d="
+                    <a
+                        class="verify-settings-button"
+                        href="{{ route('settings') }}"
+                        aria-label="Buka Settings"
+                        title="Settings">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true">
+                            <path d="
                                     M9.5 3H14.5L15.2 5.4
                                     L17.4 6.7L19.8 6.1
                                     L22.3 10.4L20.6 12.2
@@ -236,39 +214,35 @@
                                     L8.8 5.4Z
                                 " transform="translate(1.2 -.4) scale(.9)" />
 
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="3.2"
-                                />
-                            </svg>
-                        </a>
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="3.2" />
+                        </svg>
+                    </a>
 
                     @else
 
-                        <button
-                            class="verify-settings-button"
-                            type="button"
-                            disabled
-                            aria-label="Settings belum tersedia"
-                            title="Halaman Settings belum dibuat"
-                        >
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.7"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                            >
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="3.2"
-                                />
+                    <button
+                        class="verify-settings-button"
+                        type="button"
+                        disabled
+                        aria-label="Settings belum tersedia"
+                        title="Halaman Settings belum dibuat">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true">
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="3.2" />
 
-                                <path d="
+                            <path d="
                                     M12 2V5
                                     M12 19V22
                                     M2 12H5
@@ -279,13 +253,12 @@
                                     M16.9 7.1L19 5
                                 " />
 
-                                <circle
-                                    cx="12"
-                                    cy="12"
-                                    r="7"
-                                />
-                            </svg>
-                        </button>
+                            <circle
+                                cx="12"
+                                cy="12"
+                                r="7" />
+                        </svg>
+                    </button>
 
                     @endif
 
@@ -321,30 +294,25 @@
                     <a
                         class="verify-footer-brand"
                         href="{{ route('home') }}"
-                        aria-label="VeriFy — kembali ke Dashboard"
-                    >
+                        aria-label="VeriFy — kembali ke Dashboard">
                         <svg
                             class="verify-footer-symbol"
                             viewBox="0 0 64 64"
                             fill="none"
-                            aria-hidden="true"
-                        >
+                            aria-hidden="true">
                             <path
                                 d="M5 8H19L30 43H16L5 8Z"
-                                fill="currentColor"
-                            />
+                                fill="currentColor" />
 
                             <path
                                 d="M45 8H59L45 43H31L45 8Z"
-                                fill="currentColor"
-                            />
+                                fill="currentColor" />
 
                             <circle
                                 cx="31"
                                 cy="55"
                                 r="7"
-                                fill="#20B4CB"
-                            />
+                                fill="#20B4CB" />
                         </svg>
 
                         <span class="verify-footer-wordmark">
@@ -353,7 +321,7 @@
                     </a>
 
                     <p class="verify-footer-tagline">
-                        Kenali risikonya.Lebih bijak bertindak.
+                        Kenali risikonya. Lebih bijak bertindak.
                     </p>
 
                     <p class="verify-footer-description">
@@ -383,8 +351,7 @@
 
                     <a
                         class="verify-footer-cta"
-                        href="{{ route('detect') }}"
-                    >
+                        href="{{ route('detect') }}">
                         <span>Periksa pesan mencurigakan</span>
 
                         <svg
@@ -394,8 +361,7 @@
                             stroke-width="1.8"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            aria-hidden="true"
-                        >
+                            aria-hidden="true">
                             <path d="M5 12H19M13 6L19 12L13 18" />
                         </svg>
                     </a>
@@ -429,7 +395,7 @@
 
     {{-- Inisialisasi Lucide --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             if (window.lucide) {
                 window.lucide.createIcons();
             }
