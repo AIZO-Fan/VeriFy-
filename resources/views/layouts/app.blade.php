@@ -8,10 +8,12 @@
     <title>@yield('title', 'VeriFy') | VeriFy</title>
     <link rel="stylesheet" href="{{ asset('css/siberguard.css') }}">
     <script src="{{ asset('js/siberguard.js') }}" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 
 <body>
-    <header class="header">
+   
+<header class="header">
     <a class="brand" href="{{ route('home') }}">
         <svg class="brand-logo" viewBox="0 0 100 100"
             xmlns="http://www.w3.org/2000/svg">
@@ -30,13 +32,49 @@
         aria-controls="navigation">
         ☰
     </button>
-        <nav id="navigation" aria-label="Navigasi utama">
-            @foreach (['home' => 'Dashboard', 'detect' => 'Detect Scam', 'modules' => 'Modules', 'simulator' => 'Scam Simulator'] as $route => $label)
-                <a class="{{ request()->routeIs($route, $route === 'modules' ? 'lesson' : $route) ? 'active' : '' }}"
-                    href="{{ route($route) }}">{{ $label }}</a>
-            @endforeach
-        </nav><a class="help-link" href="{{ route('how') }}" aria-label="Panduan penggunaan">?</a>
-    </header>
+
+    <nav id="navigation" aria-label="Navigasi utama">
+        @foreach (['home' => 'Dashboard', 'detect' => 'Detect Scam', 'modules' => 'Modules', 'simulator' => 'Scam Simulator'] as $route => $label)
+            <a class="{{ request()->routeIs($route, $route === 'modules' ? 'lesson' : $route) ? 'active' : '' }}"
+                href="{{ route($route) }}">{{ $label }}</a>
+        @endforeach
+    </nav>
+
+    <div class="header-actions">
+
+        <a class="settings-link" href="{{ route('settings') }}" aria-label="Settings" title="Settings">
+    <i data-lucide="settings"></i>
+</a>
+
+        @guest
+            <a href="{{ route('login') }}" class="login-button">
+                Login
+            </a>
+
+            <a href="{{ route('register') }}" class="register-button">
+                Register
+            </a>
+        @else
+            <div class="user-menu">
+                <button type="button" class="user-button">
+                    <i data-lucide="user-circle"></i>
+                    <span>{{ Auth::user()->name }}</span>
+                    <i data-lucide="chevron-down"></i>
+                </button>
+
+                <div class="user-dropdown">
+                    <a href="{{ route('profile') }}">My Profile</a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        @endguest
+
+    </div>
+</header>
     <main>@yield('content')</main>
   
 <footer class="footer">
@@ -70,6 +108,14 @@
         <span>Your Digital Safety Partner</span>
     </div>
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    });
+</script>
 
 </body>
 

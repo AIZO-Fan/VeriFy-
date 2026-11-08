@@ -23,15 +23,201 @@
         <div class="float-card card-c"><x-icon /><span>Kenali penipuan</span></div>
     </div>
 </section>
+
+{{-- HOW IT WORKS SECTION --}}
 <section class="container process">
-    <div class="section-heading"><span class="eyebrow">THE PROCESS</span>
+
+    <div class="section-heading">
+        <span class="eyebrow">THE PROCESS</span>
         <h1>How It Works</h1>
         <p>Tiga langkah untuk lebih aman di dunia digital.</p>
     </div>
-    <div class="process-tabs" role="tablist" aria-label="Langkah penggunaan">@foreach(['Belajar','Berlatih','Melindungi'] as $label)<button id="tab-{{ $loop->index }}" role="tab" aria-controls="step-{{ $loop->index }}" aria-selected="{{ $loop->first?'true':'false' }}" tabindex="{{ $loop->first?'0':'-1' }}" data-step="{{ $loop->index }}" class="{{ $loop->first?'selected':'' }}">0{{ $loop->iteration }} {{ $label }}</button>@endforeach</div>@foreach([['Kenali Tanda-Tanda Penipuan','Jelajahi enam modul pembelajaran untuk memahami modus scam, mengenali perilaku mencurigakan, dan mengetahui cara kerja penipuan digital.','6 Modules','Edukasi Scam','modules','blue','report'],['Uji Kemampuanmu','Ikuti simulasi interaktif untuk melatih kemampuan mengenali pesan penipuan, tautan mencurigakan, dan penawaran palsu.','6 Simulator','Interaktif','simulator','purple','brain'],['Lindungi Diri dan Ambil Tindakan','Periksa pesan mencurigakan, lindungi data pribadi, dan pelajari langkah yang dapat diambil saat menemukan dugaan penipuan.','Deteksi Tautan','Pencegahan Scam','detect','green','shield']] as $s)<article id="step-{{ $loop->index }}" role="tabpanel" aria-labelledby="tab-{{ $loop->index }}" class="step-panel {{ $s[5] }}" {{ $loop->first?'':'hidden' }}><span class="step-number">LANGKAH 0{{ $loop->iteration }}</span>
-        <div class="step-icon"><x-icon :name="$s[6]" /></div>
-        <h2>{{ $s[0] }}</h2>
-        <p>{{ $s[1] }}</p>
-        <div class="pills"><a href="{{ route($s[4]) }}">{{ $s[2] }} →</a><span>{{ $s[3] }}</span></div>
-    </article>@endforeach
+
+    <div class="process-tabs" role="tablist" aria-label="Langkah penggunaan">
+        @foreach(['Belajar','Berlatih','Melindungi'] as $label)
+            <button
+                id="tab-{{ $loop->index }}"
+                role="tab"
+                aria-controls="step-{{ $loop->index }}"
+                aria-selected="{{ $loop->first?'true':'false' }}"
+                tabindex="{{ $loop->first?'0':'-1' }}"
+                data-step="{{ $loop->index }}"
+                class="{{ $loop->first?'selected':'' }}"
+            >
+                0{{ $loop->iteration }} {{ $label }}
+            </button>
+        @endforeach
+    </div>
+
+    @foreach([
+        [
+            'Kenali Tanda-Tanda Penipuan',
+            'Jelajahi enam modul pembelajaran untuk memahami modus scam, mengenali perilaku mencurigakan, dan mengetahui cara kerja penipuan digital.',
+            '6 Modules',
+            'Edukasi Scam',
+            'modules',
+            'blue',
+            'report'
+        ],
+        [
+            'Uji Kemampuanmu',
+            'Ikuti simulasi interaktif untuk melatih kemampuan mengenali pesan penipuan, tautan mencurigakan, dan penawaran palsu.',
+            '6 Simulator',
+            'Interaktif',
+            'simulator',
+            'purple',
+            'brain'
+        ],
+        [
+            'Lindungi Diri dan Ambil Tindakan',
+            'Periksa pesan mencurigakan, lindungi data pribadi, dan pelajari langkah yang dapat diambil saat menemukan dugaan penipuan.',
+            'Deteksi Tautan',
+            'Pencegahan Scam',
+            'detect',
+            'green',
+            'shield'
+        ]
+    ] as $s)
+
+        <article
+            id="step-{{ $loop->index }}"
+            role="tabpanel"
+            aria-labelledby="tab-{{ $loop->index }}"
+            class="step-panel {{ $s[5] }}"
+            {{ $loop->first?'':'hidden' }}
+        >
+            <span class="step-number">
+                LANGKAH 0{{ $loop->iteration }}
+            </span>
+
+            <div class="step-icon">
+                <x-icon :name="$s[6]" />
+            </div>
+
+            <h2>{{ $s[0] }}</h2>
+
+            <p>{{ $s[1] }}</p>
+
+            <div class="pills">
+                <a href="{{ route($s[4]) }}">
+                    {{ $s[2] }} →
+                </a>
+                <span>{{ $s[3] }}</span>
+            </div>
+        </article>
+
+    @endforeach
+
+</section>
+
+
+{{-- EVERYTHING YOU NEED SECTION --}}
+<section class="feature-section">
+
+    <div class="feature-heading">
+        <span class="eyebrow">EXPLORE OUR FEATURES</span>
+
+        <h2>Everything You Need to Stay Safe Online</h2>
+
+        <p>
+            From instant URL analysis to in-depth scam education,
+            SiberGuard equips you with the knowledge and tools
+            to navigate the web with confidence.
+        </p>
+    </div>
+
+    <div class="feature-grid">
+
+        {{-- 1. URL Checker --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-blue">
+                <x-icon name="search" />
+            </div>
+
+            <h3>URL Checker</h3>
+
+            <p>
+                Instantly check suspicious links and identify
+                potential online threats before you click.
+            </p>
+        </article>
+
+
+        {{-- 2. Learning Modules --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-purple">
+                <x-icon name="book-open" />
+            </div>
+
+            <h3>Learning Modules</h3>
+
+            <p>
+                Explore different types of digital scams through
+                structured and easy-to-understand learning materials.
+            </p>
+        </article>
+
+
+        {{-- 3. Scam Simulator --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-violet">
+                <x-icon name="gamepad-2" />
+            </div>
+
+            <h3>Scam Simulator</h3>
+
+            <p>
+                Practice identifying scam patterns through
+                interactive scenarios in a safe learning environment.
+            </p>
+        </article>
+
+
+        {{-- 4. Check History --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-pink">
+                <x-icon name="clock" />
+            </div>
+
+            <h3>Check History</h3>
+
+            <p>
+                Review your previous URL checks and revisit
+                the results of your past analyses.
+            </p>
+        </article>
+
+
+        {{-- 5. Report Scam --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-orange">
+                <x-icon name="flag" />
+            </div>
+
+            <h3>Report Scam</h3>
+
+            <p>
+                Report suspicious links, phone numbers, or messages
+                to help raise awareness of potential digital scams.
+            </p>
+        </article>
+
+
+        {{-- 6. Security Tips --}}
+        <article class="feature-card">
+            <div class="feature-icon icon-green">
+                <x-icon name="lightbulb" />
+            </div>
+
+            <h3>Security Tips</h3>
+
+            <p>
+                Discover practical tips to protect your personal data,
+                secure your accounts, and stay safe online.
+            </p>
+        </article>
+
+    </div>
+</section>
+
 @endsection
