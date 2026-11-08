@@ -41,13 +41,14 @@ button:disabled {
     cursor: default;
 }
 .header {
+    width: 100%;
+    max-width: none;
     height: 82px;
-    max-width: 1280px;
-    margin: auto;
+    margin: 0;
     display: flex;
     align-items: center;
     gap: 38px;
-    padding: 0 38px;
+    padding: 0 5%;
     background: #fff;
     position: relative;
     z-index: 5;
@@ -86,15 +87,58 @@ button:disabled {
     font-weight: 750;
     color: #245995;
 }
-.help-link {
-    border: 1.5px solid #6288b5;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
+
+/* HEADER ACTIONS */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.settings-link {
+    width: 36px;
+    height: 36px;
     display: grid;
     place-items: center;
-    font-weight: 700;
+    border: 1.5px solid #6288b5;
+    border-radius: 50%;
+    color: #245995;
+    flex-shrink: 0;
+    transition: 0.25s ease;
 }
+
+.settings-link i,
+.settings-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+.settings-link:hover {
+    background: #ecf4ff;
+    transform: rotate(45deg);
+}
+
+.login-button,
+.register-button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.login-button {
+    color: #287bed;
+    border: 1px solid #287bed;
+}
+
+.register-button {
+    color: white;
+    background: #287bed;
+    border: 1px solid #287bed;
+}
+
 .menu-button {
     display: none;
     border: 0;
@@ -978,6 +1022,176 @@ dialog::backdrop {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
 }
+
+
+/* ==============================
+   EVERYTHING YOU NEED SECTION
+================================ */
+
+.feature-section {
+    width: 100%;
+    padding: 65px 5% 75px;
+    background: #f6f9fc;
+}
+
+.feature-heading {
+    max-width: 800px;
+    margin: 0 auto 58px;
+    text-align: center;
+}
+
+.feature-heading h2 {
+    color: #102642;
+    font-size: 38px;
+    line-height: 1.3;
+    margin-bottom: 18px;
+}
+
+.feature-heading p {
+    color: #526b88;
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.feature-grid {
+    max-width: 1360px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    min-height: 268px;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #dce5ef;
+    border-radius: 16px;
+    box-shadow: 0 2px 3px #1830520a;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #18305212;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 15px;
+    margin-bottom: 22px;
+}
+
+.feature-icon svg {
+    width: 29px;
+    height: 29px;
+    stroke-width: 2;
+}
+
+.icon-blue {
+    background: #e0ecff;
+    color: #287bed;
+}
+
+.icon-purple {
+    background: #eeeaff;
+    color: #6250ee;
+}
+
+.icon-violet {
+    background: #f5eaff;
+    color: #a02ff0;
+}
+
+.icon-green {
+    background: #e5faf1;
+    color: #10a875;
+}
+
+.icon-orange {
+    background: #fff7e5;
+    color: #e58a00;
+}
+
+.icon-pink {
+    background: #ffedf1;
+    color: #ed4265;
+}
+
+.feature-card h3 {
+    color: #142d4e;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
+}
+
+.feature-card p {
+    color: #526b88;
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .feature-heading h2 {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .feature-section {
+        padding: 45px 22px 55px;
+    }
+
+    .feature-heading {
+        margin-bottom: 35px;
+    }
+
+    .feature-heading h2 {
+        font-size: 26px;
+    }
+
+    .feature-heading p {
+        font-size: 14px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .feature-card {
+        min-height: auto;
+        padding: 24px;
+    }
+
+    .feature-icon {
+        width: 52px;
+        height: 52px;
+        margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+        font-size: 17px;
+    }
+
+    .feature-card p {
+        font-size: 14px;
+    }
+}
+
+
 @media (min-width: 1500px) {
     .hero {
         min-height: 740px;
@@ -1029,9 +1243,20 @@ dialog::backdrop {
         display: block;
         margin-left: auto;
     }
-    .help-link {
-        display: none;
-    }
+    .header-actions {
+    gap: 8px;
+}
+
+.login-button,
+.register-button {
+    padding: 7px 10px;
+    font-size: 11px;
+}
+
+.settings-link {
+    width: 32px;
+    height: 32px;
+}
     .header nav {
         display: none;
         position: absolute;
@@ -1194,6 +1419,8 @@ dialog::backdrop {
         padding: 18px 22px;
         font-size: 10px;
     }
+
+
 }
 @media (prefers-reduced-motion: reduce) {
     * {

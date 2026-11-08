@@ -8,3 +8,6 @@ Route::get('/how-it-works', [SiberGuardController::class, 'how'])->name('how');
 Route::get('/modules', [SiberGuardController::class, 'modules'])->name('modules');
 Route::get('/modules/{id}', [SiberGuardController::class, 'lesson'])->whereNumber('id')->name('lesson');
 Route::get('/scam-simulator', [SiberGuardController::class, 'simulator'])->name('simulator');
+Route::get('/settings', function () { return view('settings');})->name('settings');
+Route::get('/login', function () { return view('login');})->name('login');
+Route::get('/register', function () { return view('register');})->name('register');
