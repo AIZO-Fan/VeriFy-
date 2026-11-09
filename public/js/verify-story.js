@@ -222,7 +222,7 @@
         });
     }
 
-    function saveProgress() {
+    async function saveProgress() {
         if (!pendingResult || !pendingResult.attempt_uuid) {
             $("save-status").textContent =
                 "Hasil latihan belum siap. Silakan kembali ke hasil.";
@@ -230,52 +230,93 @@
         }
 
         const authenticated = dialog.dataset.authenticated === "true";
-
         const loginUrl = dialog.dataset.loginUrl;
 
-        if (!authenticated && !loginUrl) {
-            $("save-status").textContent =
-                "Halaman login belum tersedia. Hasil belum disimpan.";
-            return;
-        }
-
-        try {
-            sessionStorage.setItem(
-                PENDING_RESULT_KEY,
-                JSON.stringify({
-                    payload: pendingResult,
-                    owner_user_id: authenticated ? dialog.dataset.userId : null,
-                    requested_at: new Date().toISOString(),
-                    return_path: window.location.pathname,
-                }),
-            );
-        } catch (error) {
-            console.error(error);
-
-            $("save-status").textContent =
-                "Hasil belum dapat dititipkan di browser. Silakan coba lagi.";
-            return;
-        }
-
+       // 1. JIKA BELUM LOGIN: Titipkan format JSON API ke Session Storage dan arahkan ke Login
         if (!authenticated) {
+            try {
+                const pathData = history.map(entry => entry.choice_id || entry.action);
+                const outcomeNode = scenario.story.nodes[currentNodeId];
+                const scoring = outcomeNode.scoring ?? outcomeNode;
+
+                // Kita simpan format payload API-nya langsung agar gampang dieksekusi setelah login
+                sessionStorage.setItem(
+                    PENDING_RESULT_KEY,
+                    JSON.stringify({
+                        api_payload: {
+                            scenario_id: pendingResult.scenario_id,
+                            decision_path: pathData,
+                            score: scoring.score,
+                            max_score: scoring.max_score,
+                            scenario_version: pendingResult.scenario_version
+                        }
+                    }),
+                );
+            } catch (error) {
+                console.error(error);
+                $("save-status").textContent = "Hasil belum dapat dititipkan. Silakan coba lagi.";
+                return;
+            }
+
             $("save-button").disabled = true;
             $("save-button").textContent = "Menuju login…";
-
-            $("save-status").textContent =
-                "Hasil dititipkan sementara di tab ini, belum tersimpan ke akun.";
-
-            window.location.assign(loginUrl);
+            $("save-status").textContent = "Mengarahkan ke halaman login...";
+            
+            if (loginUrl) {
+                window.location.assign(loginUrl);
+            }
             return;
         }
 
-        /*
-         * Nanti diganti request POST ke backend.
-         */
-        $("save-status").textContent =
-            "Hasil dititipkan sementara di tab ini. Penyimpanan ke akun belum tersedia karena backend belum terhubung.";
-
+        // 2. JIKA SUDAH LOGIN: Tembak ke API Backend (Tugas Kamu Beraksi Di Sini)
         $("save-button").disabled = true;
-        $("save-button").textContent = "Menunggu backend";
+        $("save-button").textContent = "Menyimpan...";
+        $("save-status").textContent = "Sedang menyimpan hasil simulasi...";
+
+        try {
+            // Kita bungkus data history decision path hanya dengan array ID
+            const pathData = history.map(entry => entry.choice_id || entry.action);
+            
+            // Ambil informasi skor
+            const outcomeNode = scenario.story.nodes[currentNodeId];
+            const scoring = outcomeNode.scoring ?? outcomeNode;
+
+            const response = await fetch('/api/simulator/attempts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    scenario_id: pendingResult.scenario_id,
+                    decision_path: pathData,
+                    score: scoring.score,
+                    max_score: scoring.max_score,
+                    scenario_version: pendingResult.scenario_version
+                })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                $("save-button").textContent = "Tersimpan ✔";
+                $("save-status").textContent = "Mantap! Hasil latihanmu berhasil disimpan ke riwayat akun.";
+                
+                // Tambahan: Otomatis tutup dialog setelah 2 detik
+                setTimeout(() => {
+                    dialog.close();
+                }, 2000);
+            } else {
+                $("save-button").disabled = false;
+                $("save-button").textContent = "Simpan & selesai";
+                $("save-status").textContent = result.message || "Gagal menyimpan, silakan coba lagi.";
+            }
+        } catch (error) {
+            console.error("Error API:", error);
+            $("save-button").disabled = false;
+            $("save-button").textContent = "Simpan & selesai";
+            $("save-status").textContent = "Terjadi kesalahan saat menghubungi server.";
+        }
     }
 
     function hidden(name, value = true) {
