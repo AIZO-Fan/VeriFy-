@@ -2,6 +2,98 @@
 <html lang="id">
 
 <head>
+    <style>
+        /* Custom Modal VeriFy */
+        .verify-custom-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .verify-custom-modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .verify-custom-modal-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(10px);
+            transition: transform 0.3s ease;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .verify-custom-modal.is-open .verify-custom-modal-box {
+            transform: translateY(0);
+        }
+
+        .verify-custom-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .verify-custom-modal-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .verify-custom-modal-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 0;
+        }
+
+        .verify-custom-modal-body {
+            font-size: 0.950rem;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .verify-custom-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .verify-custom-modal-btn {
+            background-color: #0f172a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .verify-custom-modal-btn:hover {
+            background-color: #1e293b;
+        }
+    </style>
     <meta charset="UTF-8">
 
     <meta
@@ -401,6 +493,69 @@
             }
         });
     </script>
+
+    {{-- SCRIPT AUTO-SAVE SIMULATOR UNTUK USER YANG BARU LOGIN --}}
+    @auth
+    {{-- HTML CUSTOM MODAL --}}
+    <div id="verifyAlertModal" class="verify-custom-modal">
+        <div class="verify-custom-modal-box">
+            <div class="verify-custom-modal-header">
+                <div class="verify-custom-modal-icon">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <h3 class="verify-custom-modal-title">Berhasil Disimpan!</h3>
+            </div>
+            <div class="verify-custom-modal-body" id="verifyAlertMessage">
+                <!-- Pesan akan masuk sini secara dinamis -->
+            </div>
+            <div class="verify-custom-modal-footer">
+                <button type="button" class="verify-custom-modal-btn" onclick="closeVerifyModal()">Mengerti</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showVerifyModal(message) {
+            document.getElementById('verifyAlertMessage').textContent = message;
+            document.getElementById('verifyAlertModal').classList.add('is-open');
+        }
+
+        function closeVerifyModal() {
+            document.getElementById('verifyAlertModal').classList.remove('is-open');
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const pendingKey = "verify.pendingSimulationResult.v1";
+            const pendingData = sessionStorage.getItem(pendingKey);
+
+            if (pendingData) {
+                const data = JSON.parse(pendingData);
+
+                if (data.api_payload) {
+                    data.api_payload.user_id = "{{ auth()->id() }}";
+
+                    fetch('/api/simulator/attempts', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(data.api_payload)
+                    }).then(response => {
+                        if (response.ok) {
+                            sessionStorage.removeItem(pendingKey);
+                            // Mengganti alert() bawaan browser dengan custom modal kita
+                            showVerifyModal('Selamat datang! Hasil simulasi Scam Simulator Anda sebelumnya telah otomatis disimpan ke riwayat akun.');
+                        }
+                    }).catch(err => console.error("Gagal auto-save:", err));
+                }
+            }
+        });
+    </script>
+    @endauth
 
 </body>
 
