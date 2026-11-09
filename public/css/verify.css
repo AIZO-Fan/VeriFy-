@@ -486,11 +486,7 @@ body:has(.detect-grid) {
     align-items: start;
     padding-top: 65px;
 }
-.small-title {
-    font-size: 25px;
-    color: #3b5fba;
-    margin: 16px 0;
-}
+
 .detect-grid p {
     font-size: 14px;
 }
@@ -9917,3 +9913,466 @@ dialog.verify-story-dialog {
         transition: none;
     }
 }
+
+/* ==========================================
+   DETECT SCAM - VERIFY THEME ENHANCEMENT
+   Mempertahankan layout asli
+========================================== */
+
+/* Jarak dan animasi halaman */
+.detect-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+    padding-top: 30px;
+}
+.detect-grid > div,
+.detect-grid .analysis {
+    min-height: 510px;
+    height: 100%;
+    padding: 28px 30px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid #dceaf0;
+    box-shadow: 0 10px 30px rgba(23, 47, 80, .06);
+}
+.detect-heading {
+    grid-column: 1 / -1;
+    color: #172f50;
+    font-size: 38px;
+    font-weight: 850;
+    letter-spacing: -1px;
+    margin: 0 0 5px;
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #159eaf;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #20bf78;
+    box-shadow: 0 0 0 4px rgba(32,191,120,.12);
+}
+/* Judul */
+.detect-grid .small-title {
+    color: #172f50;
+    font-weight: 850;
+    letter-spacing: .5px;
+    position: relative;
+}
+
+.detect-grid .eyebrow {
+    color: #159eaf;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+/* Deskripsi */
+.detect-grid > div > p {
+    color: #638098;
+    line-height: 1.8;
+}
+
+/* Form dan panel analisis */
+.detect-grid > div,
+.detect-grid .analysis {
+    background: #ffffff;
+    border: 1px solid #e0edf1;
+    border-radius: 18px;
+    padding: 25px;
+
+    box-shadow: 0 7px 22px rgba(23, 47, 80, .06);
+
+    transition:
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.detect-grid > div:hover,
+.detect-grid .analysis:hover {
+    border-color: #c4e5e9;
+    box-shadow: 0 12px 28px rgba(23, 47, 80, .09);
+}
+
+/* Tab pilihan */
+.detect-grid .input-tabs {
+    gap: 12px;
+}
+
+.detect-grid .input-tabs label {
+    color: #304761;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.detect-grid .input-tabs label:hover {
+    color: #159eaf;
+}
+
+/* Area teks */
+.detect-grid textarea {
+    width: 100%;
+    height: 145px;
+    resize: vertical;
+    padding: 17px;
+    border: 1px solid #d9e6ed;
+    border-radius: 14px;
+    background: #f8fbfc;
+    color: #304761;
+    font-size: 14px;
+    line-height: 1.7;
+    outline: none;
+    transition: .25s ease;
+}
+
+.detect-grid textarea:focus {
+    background: #ffffff;
+    border-color: #159eaf;
+    box-shadow: 0 0 0 4px rgba(21,158,175,.10);
+}
+
+.detect-grid textarea::placeholder {
+    color: #91a8bb;
+}
+
+.notice.danger {
+    background: #fff1f3;
+    color: #c62842;
+    border: 1px solid #f2c5cc;
+    border-left: 4px solid #d93650;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.notice.danger h3,
+.notice.danger li {
+    color: #c62842;
+}
+
+.notice.warning {
+    background: #fff9ed;
+    color: #a56a08;
+    border-left: 4px solid #e5a12c;
+}
+
+.notice.safe {
+    background: #effaf4;
+    color: #168354;
+    border-left: 4px solid #20bf78;
+}
+
+@media (max-width: 768px) {
+    .detect-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .detect-heading {
+        font-size: 30px;
+    }
+
+    .detect-grid > div,
+    .detect-grid .analysis {
+        min-height: auto;
+        height: auto;
+        padding: 22px;
+    }
+}
+/* Tombol periksa */
+.detect-grid .button {
+    background: linear-gradient(110deg, #172f50, #206080);
+    color: #ffffff;
+
+    border: none;
+    border-radius: 30px;
+
+    box-shadow: 0 5px 14px rgba(23, 47, 80, .15);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.detect-grid .button:hover {
+    background: linear-gradient(110deg, #206080, #159eaf);
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px rgba(21, 158, 175, .22);
+}
+
+.detect-grid .button span {
+    display: inline-block;
+    transition: transform .25s ease;
+}
+
+.detect-grid .button:hover span {
+    transform: translateX(5px);
+}
+
+/* Panel hasil analisis */
+.detect-grid .analysis h2 {
+    color: #172f50;
+    font-weight: 800;
+}
+
+.detect-grid .empty-state {
+    background: #f3fafb;
+    border: 1px dashed #c7e4e8;
+    border-radius: 14px;
+    padding: 25px 18px;
+    transition: .3s ease;
+}
+
+.detect-grid .empty-state:hover {
+    background: #edf8fa;
+    border-color: #159eaf;
+}
+
+.detect-grid .empty-state h3 {
+    color: #172f50;
+}
+
+.detect-grid .empty-state p {
+    color: #638098;
+    line-height: 1.7;
+}
+
+/* Kotak informasi */
+.detect-grid .info-box {
+    background: #f7fafb;
+    border: 1px solid #e2edf0;
+    border-radius: 13px;
+    padding: 17px;
+
+    transition: .25s ease;
+}
+
+.detect-grid .info-box:hover {
+    border-color: #b9dfe4;
+    transform: translateY(-2px);
+}
+
+.detect-grid .info-box h3 {
+    color: #172f50;
+}
+
+.detect-grid .info-box p,
+.detect-grid .info-box li {
+    color: #638098;
+    line-height: 1.8;
+}
+
+/* Rekomendasi */
+.detect-grid .recommendation {
+    background: #f0f9fa;
+    border-left: 4px solid #159eaf;
+}
+
+/* Catatan kecil */
+.detect-grid .fine-print {
+    color: #8296a8;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+/* Status hasil */
+.detect-grid .notice {
+    border-radius: 12px;
+    transition: .25s ease;
+}
+
+.detect-grid .notice.danger {
+    border-left: 4px solid #d95362;
+}
+
+/* Animasi masuk */
+@keyframes detectAppear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive: hanya penyesuaian ukuran */
+@media (max-width: 768px) {
+    .detect-grid {
+        padding-top: 22px;
+        padding-bottom: 35px;
+    }
+
+    .detect-grid > div,
+    .detect-grid .analysis {
+        padding: 19px;
+    }
+}
+
+/* Hormati preferensi gerakan pengguna */
+@media (prefers-reduced-motion: reduce) {
+    .detect-grid,
+    .detect-grid * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* =================================
+   DETECT SCAM HEADER
+================================= */
+
+.detect-page {
+    padding-top: 35px;
+    padding-bottom: 55px;
+}
+
+/* Header di luar card */
+.detect-header {
+    width: 100%;
+    margin-bottom: 28px;
+}
+
+/* Label pill */
+.detect-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 15px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ccebf0;
+    border-radius: 30px;
+
+    background: #effafd;
+
+    color: #187c91;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.1px;
+}
+
+/* Lampu indikator */
+.detect-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+
+    border-radius: 50%;
+    background: #18b9ce;
+
+    box-shadow: 0 0 0 5px rgba(24,185,206,.12);
+}
+
+/* Judul gradient */
+.detect-title {
+    margin: 0;
+
+     font:
+        15px/1.6 system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    font-size: clamp(36px, 4vw, 46px);
+    font-weight: 850;
+    letter-spacing: -1.8px;
+    line-height: 1.2;
+
+    background: linear-gradient(
+        100deg,
+        #172f50 0%,
+        #17617e 55%,
+        #159eaf 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Deskripsi header */
+.detect-description {
+    margin-top: 12px;
+    color: #71879c;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* =================================
+   DETECT GRID
+================================= */
+
+.detect-page .detect-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+
+    align-items: stretch;
+    padding-top: 0;
+}
+
+/* Kedua card sama tinggi */
+.detect-page .detect-form-area,
+.detect-page .detect-analysis {
+    min-width: 0;
+    min-height: 510px;
+    height: 100%;
+
+    padding: 28px 30px;
+
+    background: #ffffff;
+    border: 1px solid #dceaf0;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(23,47,80,.06);
+}
+
+/* Font mengikuti dashboard */
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 768px) {
+
+    .detect-page {
+        padding-top: 25px;
+    }
+
+    .detect-page .detect-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .detect-title {
+        font-size: 35px;
+    }
+
+    .detect-page .detect-form-area,
+    .detect-page .detect-analysis {
+        min-height: auto;
+        height: auto;
+        padding: 22px;
+    }
+
+}
+
+
+
