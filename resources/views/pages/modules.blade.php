@@ -5,80 +5,51 @@
 @section('content')
 <section class="container module-section">
 
-  <!-- WELCOME SECTION -->
-<div class="welcome-section">
-    <div>
-        <span>WELCOME TO YOUR LEARNING SPACE 👋</span>
+    {{-- WELCOME HERO BANNER --}}
+    <div class="welcome-section">
+        <div>
+            <span>RUANG BELAJAR VERIFY</span>
+            <h2>Kenali modusnya.<br>Bangun kebiasaan digital yang lebih aman.</h2>
+            <p>Pelajari cara mengenali penipuan, melindungi data, dan mengambil keputusan dengan lebih hati-hati.</p>
+        </div>
 
-        <h2>Let's Learn Something New Today!</h2>
-
-        <p>
-            Tingkatkan pengetahuan dan bangun kebiasaan
-            digital yang lebih aman melalui pembelajaran interaktif.
-        </p>
+        <i class="fas fa-graduation-cap"></i>
     </div>
 
-    <i class="fas fa-graduation-cap"></i>
-</div>
-
-
-<!-- LEARNING REMINDER -->
-<div class="learning-reminder">
-    <i class="fas fa-lightbulb"></i>
-
-    <div>
-        <h4>Learning Reminder</h4>
-        <p>
-            Jangan lupa luangkan waktu setiap hari untuk belajar.
-            Satu modul kecil hari ini bisa membawa perubahan besar
-            untuk masa depan digitalmu!
-        </p>
-    </div>
-</div>
-
-    {{-- Module Section --}}
+    {{-- HEADING JUDUL --}}
     <h1 class="ribbon">
         <x-icon name="report" />
         Modul Pembelajaran
     </h1>
 
     <p class="module-description">
-    Bangun kebiasaan digital yang lebih aman,
-    satu modul setiap hari. Pelajari berbagai materi
-    menarik untuk meningkatkan pengetahuan dan
-    kesadaranmu dalam menjaga keamanan digital.
-</p>
+        Pilih topik yang ingin kamu pelajari, lalu lanjutkan sesuai urutan atau kebutuhanmu.
+    </p>
 
+    {{-- GRID DAFTAR MODUL --}}
     <div class="module-grid">
         @foreach ($modules as $module)
+            <a class="module-card" href="{{ $module['detail_url'] }}">
 
-            <article class="module-card {{ $module['color'] }}">
+                <div class="module-card-top">
+                    <span class="badge">
+                        Modul {{ $module['display_number'] }}
+                    </span>
 
-                <span class="badge">
-                    Modul {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
-                </span>
-
-                <div class="module-icon">
-                    <x-icon :name="$module['icon']" />
+                    <div class="module-icon">
+                        <x-icon :name="$module['icon']" />
+                    </div>
                 </div>
 
                 <h2>{{ $module['title'] }}</h2>
 
                 <p>{{ $module['description'] }}</p>
 
-                <a class="mini-button"
-                   href="{{ route('lesson', $module['id']) }}">
+                <div class="mini-button">
                     Explore Module <span>›</span>
-                </a>
+                </div>
 
-                <span class="card-number">
-                    {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
-                </span>
-
-                <div class="card-decoration"></div>
-
-            </article>
-
+            </a>
         @endforeach
     </div>
 

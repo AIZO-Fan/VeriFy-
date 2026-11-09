@@ -10,11 +10,14 @@ class SimulationScenario extends Model
     use HasFactory;
 
     protected $fillable = [
+        'module_id', 
         'topic_id',
         'slug',
         'title',
         'description',
         'difficulty',
+        'status',    
+        'sort_order', 
         'is_active',
         'version',
         'story'
@@ -24,4 +27,9 @@ class SimulationScenario extends Model
         'is_active' => 'boolean',
         'story' => 'array',
     ];
+
+    public function module()
+    {
+        return $this->belongsTo(Module::class);
+    }
 }
