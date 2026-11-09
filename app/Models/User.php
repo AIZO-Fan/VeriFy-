@@ -10,12 +10,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
+
+    /**
+     * Relasi ke riwayat pemindaian detect scam
+     */
+    public function scanHistories()
+    {
+        return $this->hasMany(ScanHistory::class)->latest();
+    }
+
+    /**
+     * Relasi ke riwayat simulasi scam
+     */
+    public function simulationAttempts()
+    {
+        return $this->hasMany(SimulationAttempt::class)->latest();
+    }
 
     /**
      * Get the attributes that should be cast.
@@ -28,5 +44,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Determine if the user has admin role.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
     }
 }

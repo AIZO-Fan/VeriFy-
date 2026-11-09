@@ -260,6 +260,20 @@
                     Scam Simulator
                 </a>
 
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <a
+                            href="{{ route('admin.dashboard') }}"
+                            class="verify-nav-link {{ request()->is('admin*') ? 'is-active' : '' }}"
+                            style="color: #20B4CB; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            Panel Admin
+                        </a>
+                    @endif
+                @endauth
+
                 {{-- Tombol akun dan Settings --}}
 <div class="verify-nav-actions">
 
