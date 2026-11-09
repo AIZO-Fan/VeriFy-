@@ -176,28 +176,28 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
    ========================================= */
 
 (() => {
-    const header = document.getElementById('verifyHeader');
-    const toggle = document.getElementById('verifyMenuToggle');
-    const navigation = document.getElementById('verifyNavigation');
+    const header = document.getElementById("verifyHeader");
+    const toggle = document.getElementById("verifyMenuToggle");
+    const navigation = document.getElementById("verifyNavigation");
 
     if (!header || !toggle || !navigation) {
         return;
     }
 
-    const mobileQuery = window.matchMedia('(max-width: 1000px)');
+    const mobileQuery = window.matchMedia("(max-width: 1000px)");
 
     function updateHeader() {
-        header.classList.toggle('is-scrolled', window.scrollY > 12);
+        header.classList.toggle("is-scrolled", window.scrollY > 12);
     }
 
     function setMenuOpen(open, returnFocus = false) {
-        navigation.classList.toggle('is-open', open);
+        navigation.classList.toggle("is-open", open);
 
-        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute("aria-expanded", String(open));
 
         toggle.setAttribute(
-            'aria-label',
-            open ? 'Tutup navigasi' : 'Buka navigasi'
+            "aria-label",
+            open ? "Tutup navigasi" : "Buka navigasi",
         );
 
         if (returnFocus) {
@@ -205,43 +205,43 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
         }
     }
 
-    toggle.addEventListener('click', () => {
-        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.addEventListener("click", () => {
+        const isOpen = toggle.getAttribute("aria-expanded") === "true";
         setMenuOpen(!isOpen);
     });
 
-    navigation.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
+    navigation.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
             setMenuOpen(false);
         });
     });
 
-    document.addEventListener('click', (event) => {
+    document.addEventListener("click", (event) => {
         if (!header.contains(event.target)) {
             setMenuOpen(false);
         }
     });
 
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener("keydown", (event) => {
         if (
-            event.key === 'Escape' &&
-            toggle.getAttribute('aria-expanded') === 'true'
+            event.key === "Escape" &&
+            toggle.getAttribute("aria-expanded") === "true"
         ) {
             setMenuOpen(false, true);
         }
     });
 
-    header.addEventListener('focusout', (event) => {
+    header.addEventListener("focusout", (event) => {
         if (!header.contains(event.relatedTarget)) {
             setMenuOpen(false);
         }
     });
 
-    mobileQuery.addEventListener('change', () => {
+    mobileQuery.addEventListener("change", () => {
         setMenuOpen(false);
     });
 
-    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener("scroll", updateHeader, { passive: true });
 
     updateHeader();
 })();
@@ -251,19 +251,15 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
    ========================================= */
 
 (() => {
-    const counters = document.querySelectorAll(
-        '[data-verify-counter]'
-    );
+    const counters = document.querySelectorAll("[data-verify-counter]");
 
     if (!counters.length) {
         return;
     }
 
-    const reducedMotion = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-    );
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    const formatter = new Intl.NumberFormat('id-ID');
+    const formatter = new Intl.NumberFormat("id-ID");
 
     function animateCounter(element) {
         const target = Number(element.dataset.verifyCounter);
@@ -290,15 +286,12 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
                 return;
             }
 
-            const progress = Math.min(
-                (timestamp - startTime) / duration,
-                1
-            );
+            const progress = Math.min((timestamp - startTime) / duration, 1);
 
             const easedProgress = 1 - Math.pow(1 - progress, 3);
 
             element.textContent = formatter.format(
-                Math.round(target * easedProgress)
+                Math.round(target * easedProgress),
             );
 
             if (progress < 1) {
@@ -309,7 +302,7 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
         requestAnimationFrame(update);
     }
 
-    if (!('IntersectionObserver' in window)) {
+    if (!("IntersectionObserver" in window)) {
         return;
     }
 
@@ -324,7 +317,7 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
                 observer.unobserve(entry.target);
             });
         },
-        { threshold: 0.5 }
+        { threshold: 0.5 },
     );
 
     counters.forEach((counter) => {
@@ -340,18 +333,14 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
 (() => {
     function initVerifyHero() {
         const reducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
+            "(prefers-reduced-motion: reduce)",
         );
 
         /* Scroll ke How It Works */
-        const scrollHint = document.querySelector(
-            '.verify-scroll-hint'
-        );
+        const scrollHint = document.querySelector(".verify-scroll-hint");
 
-        scrollHint?.addEventListener('click', (event) => {
-            const target = document.getElementById(
-                'how-it-works'
-            );
+        scrollHint?.addEventListener("click", (event) => {
+            const target = document.getElementById("how-it-works");
 
             if (!target) {
                 return;
@@ -360,35 +349,27 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
             event.preventDefault();
 
             target.scrollIntoView({
-                behavior: reducedMotion.matches
-                    ? 'instant'
-                    : 'smooth',
-                block: 'start'
+                behavior: reducedMotion.matches ? "instant" : "smooth",
+                block: "start",
             });
         });
 
         /* Ilustrasi ponsel */
-        const demo = document.querySelector(
-            '[data-phone-demo]'
-        );
+        const demo = document.querySelector("[data-phone-demo]");
 
-        if (!demo || demo.dataset.initialized === 'true') {
+        if (!demo || demo.dataset.initialized === "true") {
             return;
         }
 
-        const scenes = [
-            ...demo.querySelectorAll('[data-phone-scene]')
-        ];
+        const scenes = [...demo.querySelectorAll("[data-phone-scene]")];
 
-        const dots = [
-            ...demo.querySelectorAll('[data-phone-dot]')
-        ];
+        const dots = [...demo.querySelectorAll("[data-phone-dot]")];
 
         if (scenes.length < 2) {
             return;
         }
 
-        demo.dataset.initialized = 'true';
+        demo.dataset.initialized = "true";
 
         let currentScene = 0;
         let timer = null;
@@ -402,24 +383,15 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
                 const active = sceneIndex === index;
 
                 scene.hidden = !active;
-                scene.classList.toggle(
-                    'is-visible',
-                    active
-                );
+                scene.classList.toggle("is-visible", active);
             });
 
             dots.forEach((dot, dotIndex) => {
                 const active = dotIndex === index;
 
-                dot.classList.toggle(
-                    'is-active',
-                    active
-                );
+                dot.classList.toggle("is-active", active);
 
-                dot.setAttribute(
-                    'aria-pressed',
-                    String(active)
-                );
+                dot.setAttribute("aria-pressed", String(active));
             });
         }
 
@@ -442,14 +414,12 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
             }
 
             timer = window.setInterval(() => {
-                showScene(
-                    (currentScene + 1) % scenes.length
-                );
+                showScene((currentScene + 1) % scenes.length);
             }, duration);
         }
 
         dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
+            dot.addEventListener("click", () => {
                 showScene(index);
 
                 /* Setelah dipilih, autoplay mulai lagi */
@@ -457,27 +427,209 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
             });
         });
 
-        document.addEventListener(
-            'visibilitychange',
-            startAutoplay
-        );
+        document.addEventListener("visibilitychange", startAutoplay);
 
-        reducedMotion.addEventListener(
-            'change',
-            startAutoplay
-        );
+        reducedMotion.addEventListener("change", startAutoplay);
 
         showScene(0);
         startAutoplay();
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener(
-            'DOMContentLoaded',
-            initVerifyHero,
-            { once: true }
-        );
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initVerifyHero, {
+            once: true,
+        });
     } else {
         initVerifyHero();
     }
+})();
+
+/* VERIFY — DETECT SCAM */
+/* VERIFY — DETECT SCAM */
+(() => {
+    "use strict";
+
+    const form = document.getElementById("verify-detect-form");
+
+    if (!form || form.dataset.initialized === "true") return;
+
+    const input = form.querySelector('[name="content"]');
+    const clearButton = document.getElementById("verify-detect-clear");
+    const submitButton = form.querySelector(".verify-detect-submit");
+    const submitLabel = submitButton?.querySelector("span");
+
+    const counter = document.getElementById("verify-detect-character-count");
+
+    const resultPanel = document.getElementById("verify-detect-result");
+
+    const resultBody = document.getElementById("verify-detect-result-body");
+
+    const staleNotice = document.getElementById("verify-detect-stale");
+
+    const loadingPanel = document.getElementById("verify-detect-loading");
+
+    if (
+        !input ||
+        !clearButton ||
+        !submitButton ||
+        !submitLabel ||
+        !counter ||
+        !resultPanel ||
+        !resultBody ||
+        !staleNotice ||
+        !loadingPanel
+    ) {
+        console.warn("Elemen Detect Scam belum lengkap.");
+        return;
+    }
+
+    form.dataset.initialized = "true";
+
+    const exampleButtons = [...form.querySelectorAll("[data-detect-example]")];
+
+    const examples = {
+        prize:
+            "Selamat! Kamu terpilih mendapatkan hadiah Rp2.000.000. " +
+            "Segera transfer biaya administrasi Rp25.000 agar hadiah tidak hangus.",
+
+        otp:
+            "Kami dari layanan pelanggan bank. Untuk membatalkan transaksi " +
+            "yang tidak dikenal, segera kirim kode OTP yang kamu terima. " +
+            "Jangan beri tahu siapa pun tentang proses ini.",
+
+        link:
+            "Akun kamu akan dinonaktifkan. Segera verifikasi kata sandi " +
+            "melalui https://verifikasi-akun.example/login sebelum 30 menit.",
+    };
+
+    const initialContent = input.value;
+    const hasResult = form.dataset.hasResult === "true";
+    const maxLength = input.maxLength > 0 ? input.maxLength : 5000;
+    const formatter = new Intl.NumberFormat("id-ID");
+
+    let submitting = false;
+
+    function updateCharacterCount() {
+        const length = input.value.length;
+
+        counter.textContent =
+            `${formatter.format(length)} / ` + formatter.format(maxLength);
+
+        counter.classList.toggle("is-near-limit", length >= maxLength * 0.9);
+    }
+
+    function updateExampleSelection() {
+        exampleButtons.forEach((button) => {
+            const example = examples[button.dataset.detectExample];
+
+            const active =
+                typeof example === "string" && input.value === example;
+
+            button.classList.toggle("is-active", active);
+            button.setAttribute("aria-pressed", String(active));
+        });
+    }
+
+    function updateResultState() {
+        const stale = hasResult && input.value !== initialContent;
+
+        staleNotice.hidden = !stale;
+        resultBody.classList.toggle("is-stale", stale);
+    }
+
+    function updateInputState() {
+        updateCharacterCount();
+        updateExampleSelection();
+        updateResultState();
+    }
+
+    function setSubmitting(value) {
+        submitting = value;
+
+        submitButton.disabled = value;
+        clearButton.disabled = value;
+        input.readOnly = value;
+
+        exampleButtons.forEach((button) => {
+            button.disabled = value;
+        });
+
+        submitLabel.textContent = value ? "Memeriksa…" : "Periksa sekarang";
+
+        loadingPanel.hidden = !value;
+        resultBody.hidden = value;
+
+        if (value) {
+            staleNotice.hidden = true;
+            form.setAttribute("aria-busy", "true");
+        } else {
+            form.removeAttribute("aria-busy");
+            updateInputState();
+        }
+    }
+
+    input.addEventListener("input", updateInputState);
+
+    exampleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (submitting) return;
+
+            const example = examples[button.dataset.detectExample];
+
+            if (!example) return;
+
+            input.value = example;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+
+            input.focus();
+        });
+    });
+
+    clearButton.addEventListener("click", () => {
+        if (submitting) return;
+
+        input.value = "";
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+
+        input.focus();
+    });
+
+    form.addEventListener("submit", (event) => {
+        if (submitting) {
+            event.preventDefault();
+            return;
+        }
+
+        if (!input.value.trim()) {
+            event.preventDefault();
+
+            input.setCustomValidity(
+                "Masukkan pesan atau tautan terlebih dahulu.",
+            );
+
+            input.reportValidity();
+            return;
+        }
+
+        setSubmitting(true);
+
+        loadingPanel.focus({ preventScroll: true });
+
+        if (window.matchMedia("(max-width: 900px)").matches) {
+            resultPanel.scrollIntoView({
+                behavior: "auto",
+                block: "start",
+            });
+        }
+    });
+
+    input.addEventListener("input", () => {
+        input.setCustomValidity("");
+    });
+
+    window.addEventListener("pageshow", () => {
+        setSubmitting(false);
+    });
+
+    updateInputState();
 })();

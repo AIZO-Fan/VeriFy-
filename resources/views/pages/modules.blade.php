@@ -5,36 +5,49 @@
 @section('content')
 <section class="container module-section">
 
-  <!-- WELCOME SECTION -->
-<div class="welcome-section">
-    <div>
-        <span>WELCOME TO YOUR LEARNING SPACE 👋</span>
+    <header class="verify-modules-banner">
+        <div class="verify-modules-banner-copy">
 
-        <h2>Let's Learn Something New Today!</h2>
+            <span class="verify-modules-banner-eyebrow">
+                <span aria-hidden="true"></span>
+                RUANG BELAJAR VERIFY
+            </span>
 
-        <p>
-            Tingkatkan pengetahuan dan bangun kebiasaan
-            digital yang lebih aman melalui pembelajaran interaktif.
-        </p>
-    </div>
+            <h1>
+                Kenali modusnya.<br>
+                <span>Bangun kebiasaan digital yang lebih aman.</span>
+            </h1>
 
-    <i class="fas fa-graduation-cap"></i>
-</div>
+            <p>
+                Pelajari cara mengenali penipuan, melindungi data,
+                dan mengambil keputusan dengan lebih hati-hati.
+            </p>
 
+            <div class="verify-modules-banner-note">
+                <span class="verify-modules-note-line" aria-hidden="true"></span>
+                Mulai dari satu modul, lanjutkan sesuai waktumu.
+            </div>
+        </div>
 
-<!-- LEARNING REMINDER -->
-<div class="learning-reminder">
-    <i class="fas fa-lightbulb"></i>
+        <div class="verify-modules-banner-art" aria-hidden="true">
+            <span class="verify-modules-art-ring"></span>
 
-    <div>
-        <h4>Learning Reminder</h4>
-        <p>
-            Jangan lupa luangkan waktu setiap hari untuk belajar.
-            Satu modul kecil hari ini bisa membawa perubahan besar
-            untuk masa depan digitalmu!
-        </p>
-    </div>
-</div>
+            <div class="verify-modules-art-icon">
+                <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M32 17c-7-5-15-6-24-3v34c9-3 17-2 24 3 7-5 15-6 24-3V14c-9-3-17-2-24 3Z" />
+                    <path d="M32 17v34M15 23c4-1 7 0 10 1M15 31c4-1 7 0 10 1M39 24c3-1 6-2 10-1M39 32c3-1 6-2 10-1" />
+                </svg>
+            </div>
+
+            <span class="verify-modules-art-dot"></span>
+        </div>
+    </header>
 
     {{-- Module Section --}}
     <h1 class="ribbon">
@@ -42,42 +55,40 @@
         Modul Pembelajaran
     </h1>
 
-    <p class="module-description">
-    Bangun kebiasaan digital yang lebih aman,
-    satu modul setiap hari. Pelajari berbagai materi
-    menarik untuk meningkatkan pengetahuan dan
-    kesadaranmu dalam menjaga keamanan digital.
-</p>
+    <p class="section-description">
+        Pilih topik yang ingin kamu pelajari, lalu lanjutkan sesuai urutan
+        atau kebutuhanmu.
+    </p>
 
     <div class="module-grid">
         @foreach ($modules as $module)
 
-            <article class="module-card {{ $module['color'] }}">
+        <article class="module-card {{ $module['color'] }}">
 
-                <span class="badge">
-                    Modul {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
-                </span>
+            <span class="badge">
+                Modul {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+            </span>
 
-                <div class="module-icon">
-                    <x-icon :name="$module['icon']" />
-                </div>
+            <div class="module-icon">
+                <x-icon :name="$module['icon']" />
+            </div>
 
-                <h2>{{ $module['title'] }}</h2>
+            <h2>{{ $module['title'] }}</h2>
 
-                <p>{{ $module['description'] }}</p>
+            <p>{{ $module['description'] }}</p>
 
-                <a class="mini-button"
-                   href="{{ route('lesson', $module['id']) }}">
-                    Explore Module <span>›</span>
-                </a>
+            <a class="mini-button"
+                href="{{ route('lesson', $module['id']) }}">
+                Explore Module <span>›</span>
+            </a>
 
-                <span class="card-number">
-                    {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
-                </span>
+            <span class="card-number">
+                {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+            </span>
 
-                <div class="card-decoration"></div>
+            <div class="card-decoration"></div>
 
-            </article>
+        </article>
 
         @endforeach
     </div>
