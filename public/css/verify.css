@@ -11069,10 +11069,96 @@ dialog.verify-story-dialog {
     color: #80551d;
 }
 
+.verify-detect-status.is-danger {
+    border-color: #f5b8b8;
+    background: #fff2f2;
+    color: #8b1a1a;
+}
+
+.verify-detect-status.is-caution {
+    border-color: #f0e4b8;
+    background: #fffaed;
+    color: #7a6020;
+}
+
 .verify-detect-status.is-neutral {
     border-color: #d8e9f0;
     background: #f2f8fc;
     color: #345a74;
+}
+
+/* Skor risiko bar */
+.verify-detect-score-bar {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.verify-detect-score-track {
+    height: 8px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.verify-detect-score-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+}
+
+.verify-detect-score-fill.is-danger  { background: #e53e3e; }
+.verify-detect-score-fill.is-warning { background: #d97706; }
+.verify-detect-score-fill.is-caution { background: #ca8a04; }
+.verify-detect-score-fill.is-neutral { background: #22c55e; }
+
+.verify-detect-score-label {
+    font-size: 11px;
+    color: inherit;
+    opacity: 0.75;
+}
+
+.verify-detect-api-note {
+    margin: 8px 0 0;
+    font-size: 11px;
+    color: inherit;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Safe Browsing threat alert */
+.verify-detect-threat-alert {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: #fff0f0;
+    border: 1px solid #fca5a5;
+    color: #7f1d1d;
+    margin-top: 12px;
+}
+
+.verify-detect-threat-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.verify-detect-threat-alert strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.verify-detect-threat-list {
+    margin: 0;
+    padding-left: 16px;
+    font-size: 11px;
+    line-height: 1.8;
+    word-break: break-all;
 }
 
 .verify-detect-status-label {

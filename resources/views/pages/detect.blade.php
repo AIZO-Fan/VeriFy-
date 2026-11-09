@@ -5,8 +5,20 @@
 @section('content')
 @php
 $analysisResult = $result ?? null;
-$flags = $analysisResult['flags'] ?? [];
-$hasFlags = count($flags) > 0;
+$flags          = $analysisResult['flags'] ?? [];
+$hasFlags       = count($flags) > 0;
+$score          = $analysisResult['score'] ?? 0;
+$threatUrls     = $analysisResult['threat_urls'] ?? [];
+$urlsChecked    = $analysisResult['urls_checked'] ?? 0;
+$hasThreat      = count($threatUrls) > 0;
+
+// Tentukan warna skor
+$scoreClass = match(true) {
+    $score >= 60 => 'is-danger',
+    $score >= 30 => 'is-warning',
+    $score > 0   => 'is-caution',
+    default      => 'is-neutral',
+};
 @endphp
 
 <section class="verify-detect" aria-labelledby="detect-page-title">
@@ -49,6 +61,7 @@ $hasFlags = count($flags) > 0;
                     method="POST"
                     data-has-result="{{ $analysisResult ? 'true' : 'false' }}">
                     @csrf
+                    <input type="hidden" name="mode" id="verify-detect-mode" value="text">
 
                     <div class="verify-detect-field-heading">
                         <label for="content">Pesan atau tautan</label>
@@ -201,18 +214,62 @@ $hasFlags = count($flags) > 0;
 
                     @if($analysisResult)
 
-                    <div class="verify-detect-status {{ $hasFlags ? 'is-warning' : 'is-neutral' }}">
+                    {{-- STATUS + SKOR --}}
+                    <div class="verify-detect-status {{ $hasThreat ? 'is-danger' : ($hasFlags ? 'is-warning' : 'is-neutral') }}">
                         <span class="verify-detect-status-label">
-                            {{ $hasFlags ? 'PERLU DIPERHATIKAN' : 'PEMERIKSAAN AWAL SELESAI' }}
+                            @if($hasThreat)
+                                ⚠ ANCAMAN TERDETEKSI
+                            @elseif($hasFlags)
+                                PERLU DIPERHATIKAN
+                            @else
+                                PEMERIKSAAN AWAL SELESAI
+                            @endif
                         </span>
 
                         <h3>{{ $analysisResult['status'] }}</h3>
 
+                        {{-- Skor Risiko --}}
+                        <div class="verify-detect-score-bar" aria-label="Skor risiko: {{ $score }} dari 100">
+                            <div class="verify-detect-score-track">
+                                <div
+                                    class="verify-detect-score-fill {{ $scoreClass }}"
+                                    style="width: {{ $score }}%"
+                                    role="progressbar"
+                                    aria-valuenow="{{ $score }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                </div>
+                            </div>
+                            <span class="verify-detect-score-label">Skor risiko: <strong>{{ $score }}/100</strong></span>
+                        </div>
+
+                        @if($urlsChecked > 0)
+                        <p class="verify-detect-api-note">
+                            {{ $urlsChecked }} tautan diperiksa via Google Safe Browsing.
+                            Hasil ini bukan kepastian bahwa pesan merupakan penipuan atau aman.
+                        </p>
+                        @else
                         <p>
                             Hasil ini bukan kepastian bahwa pesan
                             merupakan penipuan atau aman.
                         </p>
+                        @endif
                     </div>
+
+                    {{-- SAFE BROWSING ALERT --}}
+                    @if($hasThreat)
+                    <div class="verify-detect-threat-alert" role="alert">
+                        <span class="verify-detect-threat-icon" aria-hidden="true">🛡</span>
+                        <div>
+                            <strong>Google Safe Browsing mendeteksi ancaman pada tautan berikut:</strong>
+                            <ul class="verify-detect-threat-list">
+                                @foreach($threatUrls as $tUrl)
+                                <li>{{ $tUrl }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="verify-detect-indicators">
                         <div class="verify-detect-section-heading">
@@ -235,7 +292,7 @@ $hasFlags = count($flags) > 0;
                         @else
                         <p class="verify-detect-no-flags">
                             Belum ditemukan indikator berdasarkan
-                            aturan demo. Tetap periksa identitas
+                            pemeriksaan ini. Tetap periksa identitas
                             pengirim dan sumber informasi secara terpisah.
                         </p>
                         @endif
