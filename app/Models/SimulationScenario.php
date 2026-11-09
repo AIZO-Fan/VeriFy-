@@ -21,7 +21,9 @@ class SimulationScenario extends Model
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
         'story' => 'array',
+        'is_active' => 'boolean',
+        'topic_id' => 'integer',
+        'version' => 'integer',
     ];
 }
