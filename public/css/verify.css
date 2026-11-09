@@ -14145,3 +14145,1188 @@ dialog.verify-story-dialog {
         transition: none;
     }
 }
+
+/* =====================================================
+   VERIFY — GLOBAL LIGHT MODE & DARK MODE
+   Letakkan di PALING BAWAH verify.css
+   Mengikuti JavaScript: html[data-theme="light/dark"]
+   ===================================================== */
+
+
+/* =====================================================
+   1. LIGHT MODE
+   ===================================================== */
+
+html[data-theme="light"] {
+    color-scheme: light;
+
+    --theme-page: #f8fbfd;
+    --theme-card: #ffffff;
+    --theme-card-soft: #f4f8fb;
+    --theme-border: #e2eaf1;
+
+    --theme-heading: #152d4b;
+    --theme-text: #304761;
+    --theme-muted: #71869b;
+
+    --theme-accent: #20b4cb;
+    --theme-accent-soft: #eaf8fb;
+
+    --theme-shadow: rgba(21, 45, 75, .07);
+
+    --theme-input: #ffffff;
+    --theme-hover: #edf7fa;
+}
+
+
+/* =====================================================
+   2. DARK MODE
+   ===================================================== */
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --theme-page: #0b1220;
+    --theme-card: #111a28;
+    --theme-card-soft: #162233;
+    --theme-border: #29384b;
+
+    --theme-heading: #e8eef5;
+    --theme-text: #d3dce6;
+    --theme-muted: #9aabbd;
+
+    --theme-accent: #35c5dc;
+    --theme-accent-soft: rgba(53, 197, 220, .12);
+
+    --theme-shadow: rgba(0, 0, 0, .25);
+
+    --theme-input: #101b2a;
+    --theme-hover: #1b2b3d;
+}
+
+
+/* =====================================================
+   3. DASAR SELURUH HALAMAN
+   ===================================================== */
+
+html {
+    background: var(--theme-page);
+}
+
+body {
+    background: var(--theme-page);
+    color: var(--theme-text);
+    transition:
+        background-color .25s ease,
+        color .25s ease;
+}
+
+main {
+    background: var(--theme-page);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--theme-heading);
+}
+
+p,
+small {
+    color: var(--theme-muted);
+}
+
+label {
+    color: var(--theme-text);
+}
+
+hr {
+    border-color: var(--theme-border);
+}
+
+
+/* =====================================================
+   4. NAVBAR — HEADER LAMA
+   ===================================================== */
+
+.header {
+    background: var(--theme-card);
+    border-bottom: 1px solid var(--theme-border);
+}
+
+.brand {
+    color: var(--theme-heading);
+}
+
+.header nav a {
+    color: var(--theme-muted);
+}
+
+.header nav a:hover,
+.header nav a.active {
+    background: var(--theme-accent-soft);
+    color: var(--theme-heading);
+}
+
+.settings-link {
+    color: var(--theme-accent);
+    border-color: var(--theme-accent);
+}
+
+.settings-link:hover {
+    background: var(--theme-accent-soft);
+}
+
+.login-button {
+    color: var(--theme-accent);
+    border-color: var(--theme-accent);
+}
+
+.menu-button {
+    background: var(--theme-card-soft);
+    color: var(--theme-heading);
+}
+
+
+/* =====================================================
+   5. NAVBAR — VERIFY HEADER
+   ===================================================== */
+
+.verify-header {
+    background: var(--theme-card);
+    border-bottom: 1px solid var(--theme-border);
+}
+
+.verify-header .verify-brand-name {
+    color: var(--theme-heading);
+}
+
+.verify-header .verify-nav-link {
+    color: var(--theme-muted);
+}
+
+.verify-header .verify-nav-link:hover,
+.verify-header .verify-nav-link.is-active {
+    color: var(--theme-heading);
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-header .verify-register-button {
+    background: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+.verify-header .verify-login-button {
+    background: var(--theme-heading);
+    color: var(--theme-page);
+    border-color: var(--theme-heading);
+}
+
+.verify-header .verify-settings-button {
+    color: var(--theme-text);
+}
+
+.verify-navigation {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+}
+
+
+/* =====================================================
+   6. DASHBOARD / HERO
+   ===================================================== */
+
+.hero {
+    background:
+        radial-gradient(
+            ellipse at 70% 45%,
+            var(--theme-accent-soft),
+            var(--theme-page) 65%
+        );
+}
+
+.hero h1 {
+    color: var(--theme-heading);
+}
+
+.hero-copy > p {
+    color: var(--theme-muted);
+}
+
+.hero-meta {
+    color: var(--theme-muted);
+}
+
+html[data-theme="dark"] .hero {
+    background:
+        radial-gradient(
+            ellipse at 70% 45%,
+            #172d43,
+            #0b1220 70%
+        );
+}
+
+html[data-theme="dark"] .phone {
+    background: #ffffff;
+}
+
+html[data-theme="dark"] .float-card {
+    background: #eaf3fc;
+    border-color: #ffffff;
+}
+
+
+/* =====================================================
+   7. SECTION DAN KONTEN UMUM
+   ===================================================== */
+
+.container,
+.section-heading,
+.section-description {
+    color: var(--theme-text);
+}
+
+.section-heading h1,
+.section-heading h2 {
+    color: var(--theme-heading);
+}
+
+.section-heading p,
+.section-description {
+    color: var(--theme-muted);
+}
+
+.process-tabs {
+    background: var(--theme-card);
+    border: 1px solid var(--theme-border);
+    box-shadow: 0 3px 12px var(--theme-shadow);
+}
+
+.process-tabs button {
+    color: var(--theme-text);
+}
+
+.step-panel {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+.step-panel h2,
+.step-panel h3 {
+    color: var(--theme-heading);
+}
+
+.step-panel p {
+    color: var(--theme-muted);
+}
+
+
+/* =====================================================
+   8. MODUL PEMBELAJARAN
+   ===================================================== */
+
+.module-section {
+    background: var(--theme-page);
+}
+
+.module-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.module-card h2 {
+    color: var(--theme-heading);
+}
+
+.module-card p {
+    color: var(--theme-muted);
+}
+
+.module-card .mini-button {
+    color: #ffffff;
+}
+
+html[data-theme="dark"] .module-card {
+    background: var(--theme-card);
+}
+
+html[data-theme="dark"] .module-card h2 {
+    color: var(--theme-heading);
+}
+
+
+/* =====================================================
+   9. SIMULATOR PADA DASHBOARD
+   ===================================================== */
+
+.simulator-track {
+    scrollbar-color: var(--theme-border) var(--theme-page);
+}
+
+.sim-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.sim-card h2 {
+    color: var(--theme-heading);
+}
+
+.sim-art {
+    background: var(--theme-card-soft);
+}
+
+.try-button {
+    background: var(--theme-card-soft);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+.try-button:hover {
+    background: var(--theme-accent-soft);
+}
+
+
+/* =====================================================
+   10. HALAMAN DETECT SCAM
+   ===================================================== */
+
+body:has(.detect-grid) {
+    background: var(--theme-page);
+}
+
+.detect-grid {
+    color: var(--theme-text);
+}
+
+.analysis {
+    background: var(--theme-card);
+    border: 1px solid var(--theme-border);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.analysis h2,
+.analysis h3 {
+    color: var(--theme-heading);
+}
+
+.notice {
+    background: var(--theme-accent-soft);
+    color: var(--theme-text);
+}
+
+.info-box {
+    background: var(--theme-card-soft);
+    border: 1px solid var(--theme-border);
+    color: var(--theme-text);
+}
+
+.info-box h3,
+.info-box li {
+    color: var(--theme-text);
+}
+
+.empty-state h3 {
+    color: var(--theme-heading);
+}
+
+.fine-print {
+    color: var(--theme-muted) !important;
+}
+
+
+/* =====================================================
+   11. FORM, INPUT, TEXTAREA
+   ===================================================== */
+
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+    background: var(--theme-input);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--theme-muted);
+    opacity: .8;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--theme-accent);
+    outline-color: var(--theme-accent);
+}
+
+.input-tabs label {
+    color: var(--theme-text);
+}
+
+
+/* =====================================================
+   12. HALAMAN VERIFY DETECT
+   ===================================================== */
+
+.verify-detect {
+    background:
+        radial-gradient(
+            ellipse at 90% 0,
+            var(--theme-accent-soft),
+            transparent 45%
+        ),
+        var(--theme-page);
+    color: var(--theme-text);
+}
+
+.verify-detect .verify-detect-header h1,
+.verify-detect .verify-detect-card h2,
+.verify-detect .verify-detect-card h3 {
+    color: var(--theme-heading);
+}
+
+.verify-detect .verify-detect-header > p,
+.verify-detect .verify-detect-card p {
+    color: var(--theme-muted);
+}
+
+.verify-detect .verify-detect-card,
+.verify-detect .verify-detect-panel,
+.verify-detect .verify-detect-result,
+.verify-detect .verify-detect-workspace > *,
+.verify-detect .verify-detect-input-card,
+.verify-detect .verify-detect-result-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.verify-detect .verify-detect-finding {
+    background: var(--theme-card-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-detect .verify-detect-finding p {
+    color: var(--theme-text);
+}
+
+.verify-detect .verify-detect-privacy {
+    background: var(--theme-card-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-detect .verify-detect-privacy p {
+    color: var(--theme-muted);
+}
+
+.verify-detect .verify-detect-empty-art {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-detect .verify-detect-loading h3 {
+    color: var(--theme-heading);
+}
+
+.verify-detect .verify-detect-loading p {
+    color: var(--theme-muted);
+}
+
+.verify-detect .verify-detect-example-list button {
+    background: var(--theme-card-soft);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+.verify-detect .verify-detect-example-list button:hover,
+.verify-detect .verify-detect-example-list button.is-active {
+    background: var(--theme-accent-soft);
+    color: var(--theme-accent);
+    border-color: var(--theme-accent);
+}
+
+
+/* =====================================================
+   13. HALAMAN SIMULATOR SCAM
+   ===================================================== */
+
+.verify-simulator {
+    background:
+        radial-gradient(
+            ellipse at 90% 0,
+            var(--theme-accent-soft),
+            transparent 45%
+        ),
+        var(--theme-page);
+    color: var(--theme-text);
+}
+
+.verify-simulator-heading h1 {
+    color: var(--theme-heading);
+}
+
+.verify-simulator-heading > p,
+.verify-simulator-heading-meta > span {
+    color: var(--theme-muted);
+}
+
+.verify-simulator-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.verify-simulator-card h2,
+.verify-simulator-card h3 {
+    color: var(--theme-heading);
+}
+
+.verify-simulator-card p {
+    color: var(--theme-muted);
+}
+
+
+/* =====================================================
+   14. HALAMAN DETAIL MATERI
+   ===================================================== */
+
+.verify-lesson {
+    background: var(--theme-page);
+    color: var(--theme-text);
+}
+
+.verify-lesson-heading h1,
+.verify-lesson-material h2,
+.verify-lesson-material h3 {
+    color: var(--theme-heading);
+}
+
+.verify-lesson-heading > p,
+.verify-lesson-material p {
+    color: var(--theme-muted);
+}
+
+.verify-lesson-material,
+.verify-lesson-practice {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+.verify-lesson-points > li {
+    border-color: var(--theme-border);
+}
+
+.verify-lesson-points p {
+    color: var(--theme-text);
+}
+
+.verify-lesson .verify-lesson-back {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+    color: var(--theme-accent);
+}
+
+
+/* =====================================================
+   15. DIALOG / KUIS / POPUP
+   ===================================================== */
+
+dialog {
+    background: var(--theme-card);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+}
+
+dialog h1,
+dialog h2,
+dialog h3 {
+    color: var(--theme-heading);
+}
+
+.quiz-top button {
+    background: var(--theme-card-soft);
+    color: var(--theme-text);
+}
+
+#quiz-message {
+    background: var(--theme-card-soft);
+    color: var(--theme-text);
+}
+
+#quiz-options button {
+    background: var(--theme-card);
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+#quiz-options button:hover {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
+}
+
+
+/* =====================================================
+   16. TOMBOL UMUM
+   ===================================================== */
+
+button:not(.button):not(.mini-button):not(.badge):not(.try-button) {
+    transition:
+        background-color .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+
+/* =====================================================
+   17. FOOTER
+   Footer tetap navy agar identitas desain terjaga.
+   ===================================================== */
+
+.footer {
+    background: #142d4e;
+    color: #ffffff;
+}
+
+.footer h3,
+.footer p,
+.footer span {
+    color: inherit;
+}
+
+
+/* =====================================================
+   18. TRANSISI PERGANTIAN TEMA
+   ===================================================== */
+
+.header,
+.verify-header,
+.verify-settings,
+.verify-settings-card,
+.verify-settings-profile,
+.module-card,
+.sim-card,
+.analysis,
+.step-panel,
+.verify-detect,
+.verify-simulator,
+.verify-simulator-card,
+.verify-lesson,
+.verify-lesson-material,
+.verify-lesson-practice,
+.footer {
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+
+/* =====================================================
+   19. RESPONSIVE — NAVBAR DARK MODE
+   ===================================================== */
+
+@media (max-width: 1000px) {
+    .header nav {
+        background: var(--theme-card);
+    }
+
+    .verify-navigation {
+        background: var(--theme-card);
+        border-color: var(--theme-border);
+    }
+}
+
+
+/* =====================================================
+   20. AKSESIBILITAS
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: .01ms !important;
+    }
+}
+
+
+/* =========================================
+   VERIFY FEATURES — LIGHT & DARK MODE
+   ========================================= */
+
+/* LIGHT MODE */
+html[data-theme="light"] .verify-features {
+    background: var(--theme-page);
+    color: var(--theme-text);
+}
+
+html[data-theme="light"] .verify-features .verify-features-heading h2 {
+    color: var(--theme-heading);
+}
+
+html[data-theme="light"] .verify-features .verify-feature-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 5px 18px var(--theme-shadow);
+}
+
+html[data-theme="light"] .verify-features .verify-feature-card h3 {
+    color: var(--theme-heading);
+}
+
+html[data-theme="light"] .verify-features .verify-feature-card p {
+    color: var(--theme-muted);
+}
+
+
+/* DARK MODE */
+html[data-theme="dark"] .verify-features {
+    background: var(--theme-page);
+    color: var(--theme-text);
+}
+
+html[data-theme="dark"] .verify-features .verify-features-heading h2 {
+    color: var(--theme-heading);
+}
+
+html[data-theme="dark"] .verify-features .verify-feature-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .18);
+}
+
+html[data-theme="dark"] .verify-features .verify-feature-card h3 {
+    color: var(--theme-heading);
+}
+
+html[data-theme="dark"] .verify-features .verify-feature-card p {
+    color: var(--theme-muted);
+}
+
+/* Nomor kartu */
+html[data-theme="dark"] .verify-features .verify-feature-number {
+    color: #71869b;
+}
+
+/* Ikon kartu */
+html[data-theme="dark"] .verify-features .verify-feature-icon {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+    color: var(--theme-accent);
+}
+
+/* Garis dan tombol bagian bawah kartu */
+html[data-theme="dark"] .verify-features .verify-feature-footer {
+    border-color: var(--theme-border);
+}
+
+html[data-theme="dark"] .verify-features .verify-feature-link {
+    color: var(--theme-heading);
+}
+
+/* Catatan di bawah kartu */
+html[data-theme="dark"] .verify-features .verify-features-note {
+    color: var(--theme-muted);
+}
+
+/* Hover kartu */
+html[data-theme="dark"] .verify-features .verify-feature-card:hover {
+    border-color: var(--theme-accent);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .25);
+}
+
+/* =========================================
+   NAVBAR — DARK MODE FIX
+   ========================================= */
+
+/* Background navbar */
+html[data-theme="dark"] .verify-header,
+html[data-theme="dark"] .verify-header:is(.scrolled, .is-scrolled, .sticky) {
+    background: #111a28 !important;
+    border-bottom: 1px solid #29384b !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .2);
+}
+
+/* Bagian dalam navbar */
+html[data-theme="dark"] .verify-navbar {
+    background: transparent !important;
+}
+
+/* Logo VeriFy */
+html[data-theme="dark"] .verify-header .verify-brand-name {
+    color: #e8eef5 !important;
+}
+
+html[data-theme="dark"] .verify-header .verify-brand-name > span {
+    color: #35c5dc !important;
+}
+
+/* Menu navigasi */
+html[data-theme="dark"] .verify-header .verify-nav-link {
+    color: #a8b7c8 !important;
+    background: transparent;
+    border-color: transparent;
+}
+
+/* Hover menu */
+html[data-theme="dark"] .verify-header .verify-nav-link:hover {
+    color: #ffffff !important;
+    background: #1b2b3d !important;
+    border-color: #29384b !important;
+}
+
+/* Menu aktif */
+html[data-theme="dark"] .verify-header .verify-nav-link.is-active {
+    color: #35c5dc !important;
+    background: rgba(53, 197, 220, .12) !important;
+    border-color: rgba(53, 197, 220, .25) !important;
+    box-shadow: none !important;
+}
+
+/* Tombol Settings */
+html[data-theme="dark"] .verify-header .verify-settings-button {
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-header .verify-settings-button:hover {
+    color: #35c5dc !important;
+    background: rgba(53, 197, 220, .12) !important;
+    border-color: #35c5dc !important;
+}
+
+/* Tombol Register */
+html[data-theme="dark"] .verify-header .verify-register-button {
+    color: #d3dce6 !important;
+    background: #162233 !important;
+    border-color: #29384b !important;
+}
+
+html[data-theme="dark"] .verify-header .verify-register-button:hover {
+    color: #35c5dc !important;
+    background: #1b2b3d !important;
+    border-color: #35c5dc !important;
+}
+
+/* Tombol Login */
+html[data-theme="dark"] .verify-header .verify-login-button {
+    color: #0b1220 !important;
+    background: #35c5dc !important;
+    border-color: #35c5dc !important;
+}
+
+/* Garis pemisah action navbar */
+html[data-theme="dark"] .verify-header .verify-nav-actions {
+    border-color: #29384b !important;
+}
+
+/* Tombol menu mobile */
+html[data-theme="dark"] .verify-header .verify-menu-toggle {
+    color: #e8eef5 !important;
+    background: #162233 !important;
+    border-color: #29384b !important;
+}
+
+/* Dropdown navbar mobile */
+html[data-theme="dark"] .verify-header .verify-navigation {
+    background: #111a28 !important;
+    border-bottom: 1px solid #29384b !important;
+    box-shadow: 0 18px 25px rgba(0, 0, 0, .3) !important;
+}
+
+/* Transisi */
+.verify-header,
+.verify-header .verify-navbar,
+.verify-header .verify-navigation,
+.verify-header .verify-nav-link,
+.verify-header .verify-register-button,
+.verify-header .verify-login-button {
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+/* =========================================
+   HOME — STATISTIK DARK MODE
+   ========================================= */
+
+html[data-theme="dark"] .verify-mini-stats {
+    background: #111a28 !important;
+    border-color: #29384b !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .2);
+}
+
+html[data-theme="dark"] .verify-mini-stat {
+    border-color: #29384b !important;
+}
+
+html[data-theme="dark"] .verify-mini-stat-value {
+    color: #35c5dc !important;
+}
+
+html[data-theme="dark"] .verify-mini-stat-label {
+    color: #a8b7c8 !important;
+}
+
+html[data-theme="dark"] .verify-mini-stat-description {
+    color: #93a3b3 !important;
+}
+
+/* =========================================
+   HOME — PHONE DEMO DARK MODE
+   ========================================= */
+
+/* Bagian dalam HP */
+html[data-theme="dark"] .verify-hero .phone-body.verify-phone-demo {
+    background: #111a28 !important;
+    color: #d3dce6 !important;
+}
+
+/* Label demo */
+html[data-theme="dark"] .verify-demo-label {
+    background: #1b2b3d !important;
+    border-color: #29384b !important;
+    color: #a8b7c8 !important;
+}
+
+/* Judul HP */
+html[data-theme="dark"] .verify-hero .verify-phone-demo h3 {
+    color: #e8eef5 !important;
+}
+
+/* Paragraf HP */
+html[data-theme="dark"] .verify-hero .verify-phone-demo p {
+    color: #a8b7c8;
+}
+
+/* Contoh pesan */
+html[data-theme="dark"] .verify-demo-message {
+    background: #1b2b3d !important;
+    border-color: #34465b !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .verify-demo-sender {
+    color: #93a3b3 !important;
+}
+
+html[data-theme="dark"] .verify-hero .verify-demo-message p {
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-message-note {
+    color: #93a3b3 !important;
+}
+
+/* Peringatan dalam HP */
+html[data-theme="dark"] .verify-demo-reminder {
+    background: #382e1b !important;
+    border-color: #66512a !important;
+    color: #f0d18b !important;
+}
+
+html[data-theme="dark"] .verify-demo-reminder-icon {
+    background: #66512a !important;
+    color: #ffe3a1 !important;
+}
+
+/* Ikon verifikasi */
+html[data-theme="dark"] .verify-demo-check-icon {
+    background: #153c38 !important;
+    color: #55d6b4 !important;
+}
+
+/* Checklist */
+html[data-theme="dark"] .verify-demo-checklist li {
+    background: #1b2b3d !important;
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-checklist li::before {
+    color: #55d6b4 !important;
+}
+
+/* Garis kontrol demo */
+html[data-theme="dark"] .verify-demo-controls {
+    border-color: #29384b !important;
+}
+
+/* Tombol kontrol */
+html[data-theme="dark"] .verify-demo-toggle {
+    background: #1b2b3d !important;
+    border-color: #34465b !important;
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-toggle:hover {
+    background: #24384d !important;
+    color: #35c5dc !important;
+}
+
+/* Titik indikator */
+html[data-theme="dark"] .verify-demo-dot::before {
+    background: #53677e;
+}
+
+html[data-theme="dark"] .verify-demo-dot.is-active::before {
+    background: #35c5dc;
+}
+
+/* Frame HP tetap memiliki tampilan perangkat */
+html[data-theme="dark"] .verify-hero .phone {
+    background: #080e19 !important;
+    border-color: #40536a !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+
+/* =========================================
+   HOME — PHONE SCREEN DARK MODE
+   ========================================= */
+
+/* Bingkai luar HP */
+html[data-theme="dark"] .verify-hero .phone {
+    background: #080e19 !important;
+    border-color: #40536a !important;
+}
+
+/* Seluruh layar HP */
+html[data-theme="dark"] .verify-hero .phone-body.verify-phone-demo {
+    background: #111a28 !important;
+    color: #d3dce6 !important;
+}
+
+/* Judul dan teks */
+html[data-theme="dark"] .verify-phone-demo h3 {
+    color: #e8eef5 !important;
+}
+
+html[data-theme="dark"] .verify-phone-demo p {
+    color: #a8b7c8 !important;
+}
+
+/* Label demo */
+html[data-theme="dark"] .verify-demo-label {
+    background: #1b2b3d !important;
+    border-color: #34465b !important;
+    color: #a8b7c8 !important;
+}
+
+/* Contoh pesan */
+html[data-theme="dark"] .verify-demo-message {
+    background: #1b2b3d !important;
+    border-color: #34465b !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .verify-demo-sender {
+    color: #93a3b3 !important;
+}
+
+html[data-theme="dark"] .verify-demo-message p {
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-message-note {
+    color: #93a3b3 !important;
+}
+
+/* Kotak peringatan */
+html[data-theme="dark"] .verify-demo-reminder {
+    background: #382e1b !important;
+    border-color: #66512a !important;
+    color: #f0d18b !important;
+}
+
+html[data-theme="dark"] .verify-demo-reminder-icon {
+    background: #66512a !important;
+    color: #ffe3a1 !important;
+}
+
+/* Ikon verifikasi */
+html[data-theme="dark"] .verify-demo-check-icon {
+    background: #153c38 !important;
+    color: #55d6b4 !important;
+}
+
+/* Checklist */
+html[data-theme="dark"] .verify-demo-checklist li {
+    background: #1b2b3d !important;
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-checklist li::before {
+    color: #55d6b4 !important;
+}
+
+/* Tombol dan indikator */
+html[data-theme="dark"] .verify-demo-controls {
+    border-color: #29384b !important;
+}
+
+html[data-theme="dark"] .verify-demo-toggle {
+    background: #1b2b3d !important;
+    border-color: #34465b !important;
+    color: #d3dce6 !important;
+}
+
+html[data-theme="dark"] .verify-demo-toggle:hover {
+    background: #24384d !important;
+    color: #35c5dc !important;
+}
+
+html[data-theme="dark"] .verify-demo-dot::before {
+    background: #53677e !important;
+}
+
+html[data-theme="dark"] .verify-demo-dot.is-active::before {
+    background: #35c5dc !important;
+}
+
+/* =========================================
+   HOME — FLOATING CARDS DARK MODE
+   ========================================= */
+
+html[data-theme="dark"] .verify-hero .float-card {
+    background: #172638 !important;
+    color: #d3dce6 !important;
+    border: 1px solid #34465b !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .3) !important;
+}
+
+/* Teks di dalam kartu */
+html[data-theme="dark"] .verify-hero .float-card h3,
+html[data-theme="dark"] .verify-hero .float-card strong {
+    color: #e8eef5 !important;
+}
+
+html[data-theme="dark"] .verify-hero .float-card p,
+html[data-theme="dark"] .verify-hero .float-card small {
+    color: #a8b7c8 !important;
+}
+
+/* Ikon kartu melayang */
+html[data-theme="dark"] .verify-hero .float-card svg {
+    color: #35c5dc;
+}
+
+/* Efek ketika diarahkan */
+html[data-theme="dark"] .verify-hero .float-card:hover {
+    background: #20364b !important;
+    border-color: #35c5dc !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .4) !important;
+}
+
