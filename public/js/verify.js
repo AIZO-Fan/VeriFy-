@@ -445,7 +445,6 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
 })();
 
 /* VERIFY — DETECT SCAM */
-/* VERIFY — DETECT SCAM */
 (() => {
     "use strict";
 
@@ -633,3 +632,59 @@ if (dialog && topic >= 1 && topic <= 6) openQuiz(topic);
 
     updateInputState();
 })();
+/* =========================================
+   VERIFY DARK MODE
+   Tempel di paling bawah verify.js
+   ========================================= */
+
+const VERIFY_THEME_KEY = 'verify-theme';
+
+const getSavedTheme = () => {
+    try {
+        const theme = localStorage.getItem(VERIFY_THEME_KEY);
+
+        return theme === 'light' || theme === 'dark' ? theme : null;
+    } catch (error) {
+        return null;
+    }
+};
+
+const getPreferredTheme = () => {
+    const savedTheme = getSavedTheme();
+
+    if (savedTheme) {
+        return savedTheme;
+    }
+
+    const prefersDark = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+    ).matches;
+
+    return prefersDark ? 'dark' : 'light';
+};
+
+const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+
+    try {
+        localStorage.setItem(VERIFY_THEME_KEY, theme);
+    } catch (error) {
+        // Jika localStorage diblokir, tema tetap aktif untuk sesi ini.
+    }
+
+    document.querySelectorAll('[data-theme-option]').forEach((button) => {
+        const isActive = button.dataset.themeOption === theme;
+
+        button.setAttribute('aria-pressed', String(isActive));
+    });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(getPreferredTheme());
+
+    document.querySelectorAll('[data-theme-option]').forEach((button) => {
+        button.addEventListener('click', () => {
+            applyTheme(button.dataset.themeOption);
+        });
+    });
+});

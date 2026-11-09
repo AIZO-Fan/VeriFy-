@@ -1,13 +1,43 @@
 * {
     box-sizing: border-box;
 }
-:root {
+:root,
+[data-theme="light"] {
+    color-scheme: light;
+
     --ink: #304761;
     --blue: #287bed;
     --navy: #174e9b;
     --muted: #6380a4;
     --surface: #eff6ff;
+
+    --theme-page: #f8fbfd;
+    --theme-card: #ffffff;
+    --theme-card-soft: #fbfdfe;
+    --theme-border: #e5edf4;
+    --theme-heading: #152d4b;
+    --theme-text: #304761;
+    --theme-muted: #6380a4;
+    --theme-accent: #20b4cb;
+    --theme-accent-soft: #eaf8fb;
+    --theme-shadow: rgba(21, 45, 75, .06);
 }
+
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --theme-page: #0b1220;
+    --theme-card: #111a28;
+    --theme-card-soft: #16202f;
+    --theme-border: #243244;
+    --theme-heading: #e8eef5;
+    --theme-text: #d3dce6;
+    --theme-muted: #93a3b3;
+    --theme-accent: #35c5dc;
+    --theme-accent-soft: rgba(53, 197, 220, .12);
+    --theme-shadow: rgba(0, 0, 0, .35);
+}
+
 body {
     margin: 0;
     background: #fff;
@@ -17,7 +47,7 @@ body {
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
-    color: var(--ink);
+     color: var(--theme-text);
 }
 a {
     text-decoration: none;
@@ -1443,8 +1473,12 @@ dialog::backdrop {
     z-index: 1000;
 
     width: 100%;
-    background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid var(--verify-border);
+   background: color-mix(
+        in srgb,
+        var(--theme-card) 96%,
+        transparent
+    );
+    border-bottom: 1px solid var(--theme-border);
 
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
@@ -1526,7 +1560,7 @@ dialog::backdrop {
     padding: 11px 16px;
     border-radius: 12px;
 
-    color: var(--verify-text);
+    color: var(--theme-muted);
     font-size: 14px;
     font-weight: 650;
     line-height: 1.4;
@@ -1539,13 +1573,13 @@ dialog::backdrop {
 }
 
 .verify-nav-link:hover {
-    color: var(--verify-navy);
-    background: #f2f7fb;
+    color: var(--theme-heading);
+    background: var(--theme-accent-soft);
 }
 
 .verify-nav-link.is-active {
-    color: var(--verify-navy);
-    background: #eaf7fa;
+     color: var(--theme-heading);
+    background: var(--theme-accent-soft);
 }
 
 .verify-nav-link.is-active::after {
@@ -1588,11 +1622,11 @@ dialog::backdrop {
     gap: 12px;
 
     padding: 11px 20px;
-    border: 1px solid var(--verify-navy);
+    border: 1px solid var(--theme-heading);
     border-radius: 12px;
 
-    background: var(--verify-navy);
-    color: #fff;
+    background: var(--theme-heading);
+    color: var(--theme-page);
 
     font-size: 13px;
     font-weight: 700;
@@ -1626,11 +1660,11 @@ dialog::backdrop {
     gap: 10px;
 
     padding: 5px 10px 5px 5px;
-    border: 1px solid var(--verify-border);
+    border: 1px solid var(--theme-border);
     border-radius: 999px;
 
-    background: #fff;
-    color: var(--verify-navy);
+    background: var(--theme-card);
+    color: var(--theme-text);
     text-decoration: none;
 
     transition:
@@ -1835,11 +1869,11 @@ html {
     justify-content: center;
 
     padding: 10px 15px;
-    border: 1px solid #dce7ee;
+    border: 1px solid var(--theme-border);
     border-radius: 12px;
 
-    background: #fff;
-    color: #152d4b;
+    background: var(--theme-card);
+    color: var(--theme-text);
 
     font-size: 13px;
     font-weight: 700;
@@ -1867,11 +1901,11 @@ html {
     padding: 10px;
     flex-shrink: 0;
 
-    border: 1px solid #dce7ee;
+    border: 1px solid var(--theme-border);
     border-radius: 12px;
 
-    background: #f6f9fc;
-    color: #526a83;
+   background: var(--theme-card);
+    color: var(--theme-text);
     text-decoration: none;
     cursor: pointer;
 
@@ -9494,13 +9528,9 @@ dialog.verify-story-dialog {
 
 .verify-settings {
     padding: 48px 0 65px;
-    background:
-        radial-gradient(
-            ellipse at 10% 0,
-            rgba(32, 180, 203, 0.06),
-            transparent 45%
-        ),
-        #f8fbfd;
+    .verify-settings {
+    background: var(--theme-page);
+}
 }
 
 .verify-settings-container {
@@ -9536,7 +9566,7 @@ dialog.verify-story-dialog {
 
 .verify-settings-heading h1 {
     margin: 14px 0 10px;
-    color: #152d4b;
+     color: var(--theme-heading);
     font-size: clamp(29px, 3vw, 38px);
     line-height: 1.25;
     letter-spacing: -1.1px;
@@ -9548,7 +9578,7 @@ dialog.verify-story-dialog {
 
 .verify-settings-heading > p {
     margin: 0;
-    color: #7a8fa0;
+     color: var(--theme-muted);
     font-size: 13px;
     line-height: 1.8;
 }
@@ -9565,10 +9595,11 @@ dialog.verify-story-dialog {
 .verify-settings-profile,
 .verify-settings-card {
     min-width: 0;
-    border: 1px solid #dfe9f0;
+     border: 1px solid var(--theme-border);
     border-radius: 19px;
-    background: #ffffff;
-    box-shadow: 0 7px 24px #152d4b03;
+    background: var(--theme-card);
+    box-shadow: 0 7px 24px var(--theme-shadow);
+
 }
 
 /* Profil kiri */
@@ -9602,7 +9633,7 @@ dialog.verify-story-dialog {
 
 .verify-settings-profile-email {
     margin: 0;
-    color: #7f94a4;
+     color: var(--theme-muted);
     font-size: 11px;
     line-height: 1.8;
     overflow-wrap: anywhere;
@@ -9628,7 +9659,7 @@ dialog.verify-story-dialog {
 
 .verify-settings-profile-note {
     margin: 0;
-    color: #8a9caa;
+    color: var(--theme-muted);
     font-size: 11px;
     line-height: 1.9;
 }
@@ -9676,10 +9707,10 @@ dialog.verify-story-dialog {
     flex-shrink: 0;
     width: 40px;
     height: 40px;
-    border: 1px solid #d8ebf1;
+     border: 1px solid var(--theme-border);
     border-radius: 12px;
-    background: #eff9fb;
-    color: #278ba0;
+    background: var(--theme-accent-soft);
+    color: var(--theme-accent);
 }
 
 .verify-settings-icon svg {
@@ -9689,14 +9720,14 @@ dialog.verify-story-dialog {
 
 .verify-settings-card-title-group h2 {
     margin: 1px 0 4px;
-    color: #24465f;
+    color: var(--theme-heading);
     font-size: 15px;
     line-height: 1.4;
 }
 
 .verify-settings-card-title-group p {
     margin: 0;
-    color: #8396a5;
+    color: var(--theme-muted);
     font-size: 11px;
     line-height: 1.8;
 }
@@ -9713,20 +9744,20 @@ dialog.verify-story-dialog {
 .verify-settings-details > div {
     min-width: 0;
     padding: 14px;
-    border: 1px solid #e2ebf1;
+     border: 1px solid var(--theme-border);
     border-radius: 11px;
-    background: #fbfdfe;
+    background: var(--theme-card-soft);
 }
 
 .verify-settings-details dt {
     margin-bottom: 6px;
-    color: #8799a7;
+     color: var(--theme-muted);
     font-size: 10px;
 }
 
 .verify-settings-details dd {
     margin: 0;
-    color: #375a71;
+    color: var(--theme-heading);
     font-size: 12px;
     line-height: 1.7;
     overflow-wrap: anywhere;
@@ -9748,8 +9779,8 @@ dialog.verify-story-dialog {
     flex-shrink: 0;
     padding: 4px 7px;
     border-radius: 6px;
-    background: #f0f4f7;
-    color: #7d91a0;
+    background: var(--theme-card);
+    color: var(--theme-muted);
     font-size: 8px;
     font-weight: 700;
     line-height: 1.6;
@@ -9766,21 +9797,21 @@ dialog.verify-story-dialog {
 
 .verify-settings-security-tip {
     padding: 15px 17px;
-    border: 1px solid #dcecf1;
-    border-radius: 12px;
-    background: #f3fafc;
+    border-radius: 12px;    
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
 }
 
 .verify-settings-security-tip h3 {
     margin: 0 0 6px;
-    color: #3b6a7e;
+     color: var(--theme-heading);
     font-size: 12px;
     line-height: 1.5;
 }
 
 .verify-settings-security-tip p {
     margin: 0;
-    color: #7893a2;
+    color: var(--theme-muted);
     font-size: 11px;
     line-height: 1.85;
 }
@@ -9796,14 +9827,14 @@ dialog.verify-story-dialog {
 
 .verify-settings-session-content h2 {
     margin: 0 0 6px;
-    color: #34536a;
+     color: var(--theme-heading);
     font-size: 14px;
     line-height: 1.5;
 }
 
 .verify-settings-session-content p {
     margin: 0;
-    color: #8496a5;
+    color: var(--theme-muted);
     font-size: 11px;
     line-height: 1.8;
 }
@@ -9820,10 +9851,11 @@ dialog.verify-story-dialog {
     gap: 9px;
     min-height: 40px;
     padding: 10px 15px;
-    border: 1px solid #ead6dc;
+  
     border-radius: 10px;
-    background: #fff8fa;
-    color: #a15c6d;
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
     font-size: 11px;
     font-weight: 700;
     transition:
@@ -9837,8 +9869,8 @@ dialog.verify-story-dialog {
 }
 
 .verify-settings-logout:hover {
-    border-color: #dcbbc5;
-    background: #fceff3;
+     background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
 }
 
 .verify-settings a:focus-visible,
@@ -10368,6 +10400,276 @@ dialog.verify-story-dialog {
 }
 
 /* VERIFY — DETECT SCAM */
+.verify-settings-theme-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 42px;
+    padding: 10px 14px;
+    border: 1px solid var(--theme-border);
+    border-radius: 11px;
+    background: var(--theme-card);
+    color: var(--theme-text);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.verify-settings-theme-button:hover {
+    border-color: var(--theme-accent);
+}
+
+.verify-settings-theme-button[aria-pressed="true"] {
+    border-color: var(--theme-accent);
+    background: var(--theme-accent-soft);
+    color: var(--theme-heading);
+}
+
+.verify-settings-theme-check {
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+
+.verify-settings-theme-button[aria-pressed="true"] .verify-settings-theme-check {
+    opacity: 1;
+}
+
+/* =========================================
+   VERIFY DARK MODE
+   Tempel di paling bawah verify.css
+   ========================================= */
+
+:root,
+[data-theme="light"] {
+    color-scheme: light;
+
+    --theme-page: #f8fbfd;
+    --theme-card: #ffffff;
+    --theme-card-soft: #fbfdfe;
+    --theme-border: #e5edf4;
+    --theme-heading: #152d4b;
+    --theme-text: #304761;
+    --theme-muted: #6380a4;
+    --theme-accent: #20b4cb;
+    --theme-accent-soft: #eaf8fb;
+    --theme-shadow: rgba(21, 45, 75, .06);
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+
+    --theme-page: #0b1220;
+    --theme-card: #111a28;
+    --theme-card-soft: #16202f;
+    --theme-border: #243244;
+    --theme-heading: #e8eef5;
+    --theme-text: #d3dce6;
+    --theme-muted: #93a3b3;
+    --theme-accent: #35c5dc;
+    --theme-accent-soft: rgba(53, 197, 220, .12);
+    --theme-shadow: rgba(0, 0, 0, .35);
+}
+
+/* Halaman Settings */
+.verify-settings {
+    background: var(--theme-page);
+    color: var(--theme-text);
+}
+
+/* Navbar */
+.verify-header {
+    background: color-mix(
+        in srgb,
+        var(--theme-card) 96%,
+        transparent
+    );
+    border-bottom-color: var(--theme-border);
+}
+
+.verify-header .verify-brand-name {
+    color: var(--theme-heading);
+}
+
+.verify-header .verify-brand-name span {
+    color: var(--theme-accent);
+}
+
+.verify-header .verify-nav-link {
+    color: var(--theme-muted);
+}
+
+.verify-header .verify-nav-link:hover {
+    color: var(--theme-heading);
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-header .verify-nav-link.is-active {
+    color: var(--theme-heading);
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-header .verify-register-button {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+.verify-header .verify-register-button:hover {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
+    color: var(--theme-heading);
+}
+
+.verify-header .verify-login-button {
+    background: var(--theme-heading);
+    border-color: var(--theme-heading);
+    color: var(--theme-page);
+}
+
+.verify-header .verify-settings-button {
+    color: var(--theme-muted);
+}
+
+.verify-header .verify-settings-button:not(:disabled):hover {
+    color: var(--theme-accent);
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
+}
+
+/* Kartu profil dan pengaturan */
+.verify-settings-profile,
+.verify-settings-card {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    box-shadow: 0 7px 24px var(--theme-shadow);
+}
+
+.verify-settings-heading h1,
+.verify-settings-heading h1 span,
+.verify-settings-profile h2,
+.verify-settings-card-title-group h2,
+.verify-settings-session h2,
+.verify-settings-security-tip h3 {
+    color: var(--theme-heading);
+}
+
+.verify-settings-heading h1 span {
+    color: var(--theme-accent);
+}
+
+.verify-settings-heading p,
+.verify-settings-card-title-group p,
+.verify-settings-profile-email,
+.verify-settings-profile-note,
+.verify-settings-session p,
+.verify-settings-security-tip p {
+    color: var(--theme-muted);
+}
+
+.verify-settings-profile-divider {
+    background: var(--theme-border);
+}
+
+.verify-settings-dashboard-link {
+    color: var(--theme-accent);
+}
+
+.verify-settings-dashboard-link:hover {
+    color: var(--theme-heading);
+}
+
+/* Informasi profil */
+.verify-settings-details div {
+    background: var(--theme-card-soft);
+    border-color: var(--theme-border);
+}
+
+.verify-settings-details dt {
+    color: var(--theme-muted);
+}
+
+.verify-settings-details dd {
+    color: var(--theme-text);
+}
+
+/* Ikon kartu */
+.verify-settings-icon {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+    color: var(--theme-accent);
+}
+
+/* Badge akun */
+.verify-settings-account-badge {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+    color: var(--theme-accent);
+}
+
+/* Fitur belum tersedia */
+.verify-settings-pending {
+    border-top-color: var(--theme-border);
+}
+
+.verify-settings-pending-badge {
+    background: var(--theme-card-soft);
+    color: var(--theme-muted);
+}
+
+.verify-settings-pending p {
+    color: var(--theme-muted);
+}
+
+/* Keamanan */
+.verify-settings-security-tip {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-border);
+}
+
+/* Tombol tema */
+.verify-settings-theme-button {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+.verify-settings-theme-button:hover {
+    border-color: var(--theme-accent);
+    color: var(--theme-heading);
+}
+
+.verify-settings-theme-button[aria-pressed="true"] {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
+    color: var(--theme-heading);
+}
+
+.verify-settings-theme-check {
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+
+.verify-settings-theme-button[aria-pressed="true"] .verify-settings-theme-check {
+    opacity: 1;
+}
+
+/* Logout */
+.verify-settings-logout {
+    background: var(--theme-card);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+}
+
+.verify-settings-logout:hover {
+    background: var(--theme-accent-soft);
+    border-color: var(--theme-accent);
+    color: var(--theme-heading);
+}
+
 
 .verify-detect {
     --vd-navy: #152d4b;
