@@ -16,21 +16,51 @@ class AuthController extends Controllers
     }
 
     // Memproses data pendaftaran
+    // Memproses data pendaftaran
     public function registerProcess(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8'
+        $validated = $request->validate(
+    [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|unique:users',
+        'password' => 'required|string|min:8',
+    ],
+    [
+        'name.required' => 'Masukkan nama lengkap kamu',
+        'name.string' => 'Masukkan nama yang valid',
+        'name.max' => 'Nama maksimal 255 karakter',
+
+        'email.required' => 'Masukkan alamat email kamu',
+        'email.string' => 'Masukkan alamat email yang valid',
+        'email.email' => 'Periksa kembali format email kamu',
+        'email.unique' => 'Email ini sudah terdaftar, Silakan login',
+
+        'password.required' => 'Buat password untuk akunmu',
+        'password.string' => 'Masukkan password yang valid',
+        'password.min' => 'Gunakan minimal 8 karakter',
+    ]
+);
+
+        // Buat akun dan simpan model pengguna ke variabel $user.
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Enkripsi password
-        ]);
+        // Langsung login menggunakan akun yang baru dibuat.
+        Auth::login($user);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil, silakan login!');
+        // Regenerasi session setelah autentikasi.
+        $request->session()->regenerate();
+
+        // Ke tujuan sebelumnya, atau Dashboard jika tidak ada.
+        return redirect()
+            ->intended(route('home'))
+            ->with(
+                'success',
+                'Akun berhasil dibuat. Selamat datang di VeriFy!'
+            );
     }
 
     // Menampilkan halaman form login
@@ -55,7 +85,7 @@ class AuthController extends Controllers
 
         // Jika gagal login
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'email' => 'Email atau password salah',
         ])->onlyInput('email');
     }
 

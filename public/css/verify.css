@@ -157,8 +157,8 @@ main {
     max-width: none;
     margin: 50px 0 0;
     padding: 35px 5% 20px;
-    background: #142D4E;
-    color: #FFFFFF;
+    background: #142d4e;
+    color: #ffffff;
     border-radius: 0;
     box-sizing: border-box;
 }
@@ -182,7 +182,7 @@ main {
     font-size: 23px;
     font-weight: 850;
     letter-spacing: 2px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .footer-logo svg {
@@ -191,18 +191,18 @@ main {
 }
 
 .footer-cyan {
-    color: #1DB6CF;
+    color: #1db6cf;
 }
 
 .footer-brand p {
     margin: 0;
     font-size: 12px;
-    color: #C2D4E8;
+    color: #c2d4e8;
 }
 
 .footer-tag {
-    background: #203D60;
-    color: #1DB6CF;
+    background: #203d60;
+    color: #1db6cf;
     font-size: 10px;
     font-weight: 750;
     letter-spacing: 1px;
@@ -218,7 +218,7 @@ main {
 .footer-description h3 {
     font-size: 19px;
     margin: 0 0 8px;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .footer-description p {
@@ -226,7 +226,7 @@ main {
     margin: 0;
     font-size: 13px;
     line-height: 1.7;
-    color: #C2D4E8;
+    color: #c2d4e8;
 }
 
 .footer-bottom {
@@ -236,11 +236,11 @@ main {
     justify-content: space-between;
     gap: 12px;
     font-size: 11px;
-    color: #B5C9DF;
+    color: #b5c9df;
 }
 
 .footer-bottom span:last-child {
-    color: #1DB6CF;
+    color: #1db6cf;
     font-weight: 650;
 }
 
@@ -1023,7 +1023,6 @@ dialog::backdrop {
     clip: rect(0, 0, 0, 0);
 }
 
-
 /* ==============================
    EVERYTHING YOU NEED SECTION
 ================================ */
@@ -1069,7 +1068,9 @@ dialog::backdrop {
     border: 1px solid #dce5ef;
     border-radius: 16px;
     box-shadow: 0 2px 3px #1830520a;
-    transition: transform .25s ease, box-shadow .25s ease;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .feature-card:hover {
@@ -1191,7 +1192,6 @@ dialog::backdrop {
     }
 }
 
-
 @media (min-width: 1500px) {
     .hero {
         min-height: 740px;
@@ -1244,19 +1244,19 @@ dialog::backdrop {
         margin-left: auto;
     }
     .header-actions {
-    gap: 8px;
-}
+        gap: 8px;
+    }
 
-.login-button,
-.register-button {
-    padding: 7px 10px;
-    font-size: 11px;
-}
+    .login-button,
+    .register-button {
+        padding: 7px 10px;
+        font-size: 11px;
+    }
 
-.settings-link {
-    width: 32px;
-    height: 32px;
-}
+    .settings-link {
+        width: 32px;
+        height: 32px;
+    }
     .header nav {
         display: none;
         position: absolute;
@@ -1419,8 +1419,6 @@ dialog::backdrop {
         padding: 18px 22px;
         font-size: 10px;
     }
-
-
 }
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -1502,10 +1500,7 @@ dialog::backdrop {
 }
 
 .verify-brand-name {
-    font-family:
-        "Plus Jakarta Sans",
-        system-ui,
-        sans-serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 
     font-size: 29px;
     font-weight: 800;
@@ -1855,9 +1850,9 @@ html {
     text-decoration: none;
 
     transition:
-        border-color .2s ease,
-        background-color .2s ease,
-        transform .2s ease;
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-register-button:hover {
@@ -1885,15 +1880,15 @@ html {
     cursor: pointer;
 
     transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease;
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .verify-settings-button svg {
     width: 22px;
     height: 22px;
-    transition: transform .45s ease;
+    transition: transform 0.45s ease;
 }
 
 .verify-settings-button:not(:disabled):hover {
@@ -1907,7 +1902,7 @@ html {
 }
 
 .verify-settings-button:disabled {
-    opacity: .5;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
@@ -1926,38 +1921,24 @@ html {
     padding-top: 60px;
     padding-bottom: 100px;
 
-    background:
-        radial-gradient(
-            ellipse at 74% 38%,
-            #def4f8 0%,
-            #f1f8fc 33%,
-            #fff 70%
-        );
+    background: radial-gradient(
+        ellipse at 74% 38%,
+        #def4f8 0%,
+        #f1f8fc 33%,
+        #fff 70%
+    );
 }
 
 .verify-hero::after {
     height: 155px;
 
-    background:
-        linear-gradient(
-            110deg,
-            #20b4cb 0%,
-            #257eaa 42%,
-            #152d4b 100%
-        );
+    background: linear-gradient(110deg, #20b4cb 0%, #257eaa 42%, #152d4b 100%);
 
-    clip-path: polygon(
-        0 80%,
-        25% 67%,
-        54% 39%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
+    clip-path: polygon(0 80%, 25% 67%, 54% 39%, 100% 0, 100% 100%, 0 100%);
 }
 
 .verify-hero .hero-copy {
-    animation: verify-enter .7s ease both;
+    animation: verify-enter 0.7s ease both;
 }
 
 .verify-hero-label {
@@ -2041,7 +2022,7 @@ html {
     border: 1px solid #e5edf5;
     border-radius: 17px;
 
-    background: rgba(255, 255, 255, .85);
+    background: rgba(255, 255, 255, 0.85);
     color: #304761;
 
     font-size: 12px;
@@ -2088,12 +2069,12 @@ html {
 }
 
 .verify-hero .float-card {
-    background: rgba(246, 252, 255, .96);
+    background: rgba(246, 252, 255, 0.96);
     color: #36889e;
 
     transition:
-        background-color .2s ease,
-        box-shadow .2s ease;
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 /* Floating illustrations */
@@ -2116,7 +2097,8 @@ html {
 }
 
 @keyframes verify-float-a {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-7deg);
     }
     50% {
@@ -2125,7 +2107,8 @@ html {
 }
 
 @keyframes verify-float-b {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(10deg);
     }
     50% {
@@ -2134,7 +2117,8 @@ html {
 }
 
 @keyframes verify-float-c {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0) rotate(-6deg);
     }
     50% {
@@ -2198,7 +2182,7 @@ html {
     color: #152d4b;
     font-size: 21px;
     line-height: 1.35;
-    letter-spacing: -.5px;
+    letter-spacing: -0.5px;
 }
 
 .verify-stat-item {
@@ -2214,8 +2198,8 @@ html {
     text-decoration: none;
 
     transition:
-        background-color .2s ease,
-        transform .2s ease;
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-stat-item > div {
@@ -2289,8 +2273,8 @@ html {
     font-size: 17px;
 
     transition:
-        color .2s ease,
-        transform .2s ease;
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-stat-link:hover .verify-stat-arrow {
@@ -2312,7 +2296,7 @@ html {
 .process .section-heading h1,
 .feature-heading h2 {
     color: #152d4b;
-    letter-spacing: -.7px;
+    letter-spacing: -0.7px;
 }
 
 .process .process-tabs {
@@ -2365,9 +2349,9 @@ html {
     box-shadow: 0 6px 20px #152d4b03;
 
     transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .feature-card:hover {
@@ -2387,7 +2371,7 @@ html {
     margin-bottom: 21px;
     border-radius: 16px;
 
-    transition: transform .25s ease;
+    transition: transform 0.25s ease;
 }
 
 .feature-icon svg {
@@ -2478,7 +2462,7 @@ html {
 
     .verify-hero-label {
         font-size: 8px;
-        letter-spacing: .6px;
+        letter-spacing: 0.6px;
     }
 
     .verify-hero h1 {
@@ -2566,7 +2550,6 @@ html {
    Tempel di bagian paling bawah file CSS
    ========================================= */
 
-
 /* -----------------------------------------
    1. NAVBAR LEBIH LEBAR DAN BRAND LEBIH KECIL
    ----------------------------------------- */
@@ -2609,7 +2592,6 @@ html {
     font-size: 13px;
 }
 
-
 /* -----------------------------------------
    2. REGISTER, LOGIN, DAN SETTINGS
    ----------------------------------------- */
@@ -2640,10 +2622,10 @@ html {
     box-shadow: none;
 
     transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 /* Register: tombol sekunder yang ringan */
@@ -2707,7 +2689,6 @@ html {
     color: #087f94;
 }
 
-
 /* -----------------------------------------
    3. HERO: LEBIH LEBAR, JARAK LEBIH SEIMBANG
    ----------------------------------------- */
@@ -2731,10 +2712,7 @@ section.hero.verify-hero {
        Pada layar sangat lebar: isi tetap dibatasi
        agar tidak melebar tanpa batas.
     */
-    padding-inline: max(
-        clamp(24px, 4vw, 64px),
-        calc((100% - 1320px) / 2)
-    );
+    padding-inline: max(clamp(24px, 4vw, 64px), calc((100% - 1320px) / 2));
 
     padding-top: 45px;
     padding-bottom: 85px;
@@ -2759,7 +2737,7 @@ section.hero.verify-hero {
     padding: 7px 11px;
 
     font-size: 9px;
-    letter-spacing: .85px;
+    letter-spacing: 0.85px;
 }
 
 .verify-hero .verify-hero-description {
@@ -2784,7 +2762,6 @@ section.hero.verify-hero {
     height: 450px;
     margin-top: 0;
 }
-
 
 /* -----------------------------------------
    4. BAR INFORMASI LEBIH LEBAR
@@ -2812,7 +2789,6 @@ section.hero.verify-hero {
 .verify-stat-label {
     font-size: 11px;
 }
-
 
 /* -----------------------------------------
    5. HOW IT WORKS DAN FITUR LEBIH LEBAR
@@ -2876,14 +2852,13 @@ section.feature-section {
     padding: 27px;
 }
 
-
 /* -----------------------------------------
    6. TABLET
    ----------------------------------------- */
 
 @media (min-width: 1001px) and (max-width: 1150px) {
     .verify-hero .hero-art {
-        transform: scale(.82);
+        transform: scale(0.82);
         transform-origin: center;
     }
 }
@@ -2892,7 +2867,7 @@ section.feature-section {
     section.hero.verify-hero {
         grid-template-columns:
             minmax(0, 1.1fr)
-            minmax(0, .9fr);
+            minmax(0, 0.9fr);
 
         column-gap: 14px;
         min-height: 510px;
@@ -2910,7 +2885,7 @@ section.feature-section {
         width: 390px;
         height: 420px;
 
-        transform: scale(.74);
+        transform: scale(0.74);
         transform-origin: center;
     }
 }
@@ -2965,7 +2940,6 @@ section.feature-section {
     }
 }
 
-
 /* -----------------------------------------
    7. MOBILE
    ----------------------------------------- */
@@ -2991,7 +2965,7 @@ section.feature-section {
 
     .verify-hero .verify-hero-label {
         font-size: 8px;
-        letter-spacing: .55px;
+        letter-spacing: 0.55px;
     }
 
     .verify-hero .verify-hero-description {
@@ -3006,7 +2980,7 @@ section.feature-section {
 
         margin-top: 12px;
 
-        transform: scale(.72);
+        transform: scale(0.72);
         transform-origin: top center;
     }
 
@@ -3044,7 +3018,6 @@ section.feature-section {
     }
 }
 
-
 /* -----------------------------------------
    8. REDUCED MOTION
    ----------------------------------------- */
@@ -3065,7 +3038,6 @@ section.feature-section {
    VERIFY — NAVBAR & HERO FINAL REFINEMENT
    ========================================= */
 
-
 /* -----------------------------------------
    1. BRAND: FY KEMBALI CYAN
    ----------------------------------------- */
@@ -3077,7 +3049,6 @@ section.feature-section {
 .verify-header .verify-brand-name > span {
     color: #20b4cb;
 }
-
 
 /* -----------------------------------------
    2. NAVBAR MENU
@@ -3103,10 +3074,10 @@ section.feature-section {
     line-height: 1.3;
 
     transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 /* Garis indikator: awalnya tersembunyi */
@@ -3125,11 +3096,11 @@ section.feature-section {
     background: #20b4cb;
     opacity: 0;
 
-    transform: translateX(-50%) scaleX(.4);
+    transform: translateX(-50%) scaleX(0.4);
 
     transition:
-        opacity .2s ease,
-        transform .2s ease;
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-header .verify-nav-link:hover {
@@ -3139,7 +3110,7 @@ section.feature-section {
 }
 
 .verify-header .verify-nav-link:hover::after {
-    opacity: .55;
+    opacity: 0.55;
     transform: translateX(-50%) scaleX(1);
 }
 
@@ -3150,8 +3121,8 @@ section.feature-section {
     border-color: #d6edf2;
 
     box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .9),
-        0 3px 8px rgba(21, 45, 75, .025);
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 3px 8px rgba(21, 45, 75, 0.025);
 }
 
 .verify-header .verify-nav-link.is-active::after {
@@ -3165,7 +3136,6 @@ section.feature-section {
     padding-inline: 18px;
     gap: 0;
 }
-
 
 /* -----------------------------------------
    3. HERO MEMENUHI SISA TINGGI LAYAR
@@ -3212,18 +3182,10 @@ section.hero.verify-hero::after {
         #152d4b 100%
     );
 
-    clip-path: polygon(
-        0 76%,
-        30% 60%,
-        63% 33%,
-        100% 0,
-        100% 100%,
-        0 100%
-    );
+    clip-path: polygon(0 76%, 30% 60%, 63% 33%, 100% 0, 100% 100%, 0 100%);
 
     pointer-events: none;
 }
-
 
 /* -----------------------------------------
    4. STATISTIK MINI PENGGANTI HERO NOTE
@@ -3243,10 +3205,10 @@ section.hero.verify-hero::after {
     border: 1px solid #e2edf2;
     border-radius: 16px;
 
-    background: rgba(255, 255, 255, .9);
+    background: rgba(255, 255, 255, 0.9);
 
     box-shadow:
-        0 8px 24px rgba(21, 45, 75, .035),
+        0 8px 24px rgba(21, 45, 75, 0.035),
         inset 0 1px 0 #fff;
 }
 
@@ -3278,13 +3240,13 @@ section.hero.verify-hero::after {
     font-size: 24px;
     font-weight: 800;
     line-height: 1.2;
-    letter-spacing: -.6px;
+    letter-spacing: -0.6px;
 
     font-variant-numeric: tabular-nums;
 
     transition:
-        color .2s ease,
-        transform .2s ease;
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-mini-stat-label {
@@ -3314,7 +3276,6 @@ a.verify-mini-stat:focus-visible {
     font-size: 10px;
     line-height: 1.5;
 }
-
 
 /* -----------------------------------------
    5. TABLET / MOBILE NAVBAR
@@ -3348,7 +3309,6 @@ a.verify-mini-stat:focus-visible {
         transform: translateY(50%);
     }
 }
-
 
 /* -----------------------------------------
    6. MOBILE HERO
@@ -3391,16 +3351,9 @@ a.verify-mini-stat:focus-visible {
     section.hero.verify-hero::after {
         height: 180px;
 
-        clip-path: polygon(
-            0 68%,
-            45% 45%,
-            100% 10%,
-            100% 100%,
-            0 100%
-        );
+        clip-path: polygon(0 68%, 45% 45%, 100% 10%, 100% 100%, 0 100%);
     }
 }
-
 
 /* -----------------------------------------
    7. REDUCED MOTION
@@ -3421,7 +3374,6 @@ a.verify-mini-stat:focus-visible {
 /* =========================================
    VERIFY — HERO VISUAL DETAILS
    ========================================= */
-
 
 /* -----------------------------------------
    1. CAHAYA DAN POLA TITIK DI BELAKANG PONSEL
@@ -3448,8 +3400,8 @@ a.verify-mini-stat:focus-visible {
 
     background: radial-gradient(
         circle,
-        rgba(32, 180, 203, .16) 0%,
-        rgba(32, 180, 203, .07) 40%,
+        rgba(32, 180, 203, 0.16) 0%,
+        rgba(32, 180, 203, 0.07) 40%,
         rgba(32, 180, 203, 0) 72%
     );
 
@@ -3472,28 +3424,19 @@ a.verify-mini-stat:focus-visible {
 
     background-image: radial-gradient(
         circle,
-        rgba(18, 121, 145, .19) 1px,
+        rgba(18, 121, 145, 0.19) 1px,
         transparent 1px
     );
 
     background-size: 19px 19px;
 
-    -webkit-mask-image: radial-gradient(
-        ellipse,
-        #000 25%,
-        transparent 72%
-    );
+    -webkit-mask-image: radial-gradient(ellipse, #000 25%, transparent 72%);
 
-    mask-image: radial-gradient(
-        ellipse,
-        #000 25%,
-        transparent 72%
-    );
+    mask-image: radial-gradient(ellipse, #000 25%, transparent 72%);
 
     transform: translate(-50%, -50%);
     pointer-events: none;
 }
-
 
 /* -----------------------------------------
    2. AREA DEMO DI DALAM PONSEL
@@ -3528,7 +3471,7 @@ a.verify-mini-stat:focus-visible {
     font-size: 7px;
     font-weight: 750;
     line-height: 1.4;
-    letter-spacing: .8px;
+    letter-spacing: 0.8px;
 }
 
 /* Tinggi area tetap agar ponsel tidak meloncat */
@@ -3536,7 +3479,7 @@ a.verify-mini-stat:focus-visible {
     flex: 1;
     min-height: 0;
 
-    animation: verify-scene-appear .55s ease both;
+    animation: verify-scene-appear 0.55s ease both;
 }
 
 .verify-demo-scene[hidden] {
@@ -3568,7 +3511,7 @@ a.verify-mini-stat:focus-visible {
     color: #152d4b;
     font-size: 23px;
     line-height: 1.25;
-    letter-spacing: -.6px;
+    letter-spacing: -0.6px;
 }
 
 .verify-hero .verify-phone-demo p {
@@ -3586,7 +3529,6 @@ a.verify-mini-stat:focus-visible {
     font-size: 9px;
 }
 
-
 /* -----------------------------------------
    3. TAMPILAN CONTOH PESAN
    ----------------------------------------- */
@@ -3601,7 +3543,7 @@ a.verify-mini-stat:focus-visible {
     background: #f3f7fc;
     text-align: left;
 
-    box-shadow: 0 5px 15px rgba(21, 45, 75, .035);
+    box-shadow: 0 5px 15px rgba(21, 45, 75, 0.035);
 }
 
 .verify-demo-sender {
@@ -3667,7 +3609,6 @@ a.verify-mini-stat:focus-visible {
     font-weight: 800;
 }
 
-
 /* -----------------------------------------
    4. TAMPILAN LANGKAH VERIFIKASI
    ----------------------------------------- */
@@ -3731,7 +3672,6 @@ a.verify-mini-stat:focus-visible {
     font-weight: 800;
 }
 
-
 /* -----------------------------------------
    5. KONTROL DEMO
    ----------------------------------------- */
@@ -3780,8 +3720,8 @@ a.verify-mini-stat:focus-visible {
     background: #cfdae4;
 
     transition:
-        background-color .2s ease,
-        transform .2s ease;
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-demo-dot.is-active::before {
@@ -3821,7 +3761,6 @@ a.verify-mini-stat:focus-visible {
     outline-offset: 2px;
 }
 
-
 /* -----------------------------------------
    6. PETUNJUK SCROLL
    ----------------------------------------- */
@@ -3841,7 +3780,7 @@ a.verify-mini-stat:focus-visible {
     color: #fff;
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     line-height: 1.5;
 
     text-decoration: none;
@@ -3856,14 +3795,14 @@ a.verify-mini-stat:focus-visible {
     width: 28px;
     height: 28px;
 
-    border: 1px solid rgba(255, 255, 255, .45);
+    border: 1px solid rgba(255, 255, 255, 0.45);
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, .08);
+    background: rgba(255, 255, 255, 0.08);
 
     transition:
-        background-color .2s ease,
-        transform .2s ease;
+        background-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-scroll-icon svg {
@@ -3872,7 +3811,7 @@ a.verify-mini-stat:focus-visible {
 }
 
 .verify-scroll-hint:hover .verify-scroll-icon {
-    background: rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(3px);
 }
 
@@ -3881,7 +3820,6 @@ a.verify-mini-stat:focus-visible {
     outline-offset: 5px;
     border-radius: 5px;
 }
-
 
 /* -----------------------------------------
    7. MOBILE
@@ -3903,7 +3841,6 @@ a.verify-mini-stat:focus-visible {
         font-size: 9px;
     }
 }
-
 
 /* -----------------------------------------
    8. REDUCED MOTION
@@ -3954,7 +3891,7 @@ section.hero.verify-hero > .verify-scroll-hint {
     max-width: calc(100% - 32px);
 
     padding: 8px 12px 8px 15px;
-    border: 1px solid rgba(255, 255, 255, .3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 999px;
 
     background: #153c56;
@@ -3963,24 +3900,24 @@ section.hero.verify-hero > .verify-scroll-hint {
     font-size: 11px;
     font-weight: 650;
     line-height: 1.4;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     text-decoration: none;
 
     opacity: 1;
     visibility: visible;
 
-    box-shadow: 0 5px 16px rgba(10, 35, 55, .12);
+    box-shadow: 0 5px 16px rgba(10, 35, 55, 0.12);
 
     transform: translateX(-50%);
 
     transition:
-        background-color .2s ease,
-        box-shadow .2s ease;
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 section.hero.verify-hero > .verify-scroll-hint:hover {
     background: #1c506b;
-    box-shadow: 0 7px 20px rgba(10, 35, 55, .18);
+    box-shadow: 0 7px 20px rgba(10, 35, 55, 0.18);
 }
 
 .verify-scroll-hint .verify-scroll-icon {
@@ -3988,7 +3925,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     height: 25px;
 
     border: 0;
-    background: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .verify-scroll-hint .verify-scroll-icon svg {
@@ -4020,14 +3957,10 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     background:
         radial-gradient(
             ellipse at 100% 0%,
-            rgba(32, 180, 203, .055),
+            rgba(32, 180, 203, 0.055),
             transparent 48%
         ),
-        linear-gradient(
-            180deg,
-            #f6fafc 0%,
-            #fff 100%
-        );
+        linear-gradient(180deg, #f6fafc 0%, #fff 100%);
 
     border-top: 1px solid #e7eff4;
 }
@@ -4038,7 +3971,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     padding-inline: clamp(24px, 4vw, 64px);
 }
 
-
 /* -----------------------------------------
    HEADING
    ----------------------------------------- */
@@ -4047,7 +3979,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     display: grid;
     grid-template-columns:
         minmax(0, 1.2fr)
-        minmax(0, .8fr);
+        minmax(0, 0.8fr);
 
     align-items: end;
     gap: 45px;
@@ -4074,7 +4006,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     border-radius: 50%;
     background: #20b4cb;
 
-    box-shadow: 0 0 0 4px rgba(32, 180, 203, .09);
+    box-shadow: 0 0 0 4px rgba(32, 180, 203, 0.09);
 }
 
 .verify-features-heading h2 {
@@ -4101,7 +4033,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     line-height: 1.9;
 }
 
-
 /* -----------------------------------------
    GRID
    ----------------------------------------- */
@@ -4111,7 +4042,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 18px;
 }
-
 
 /* -----------------------------------------
    CARD
@@ -4132,13 +4062,13 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     background: #fff;
 
     box-shadow:
-        0 4px 12px rgba(21, 45, 75, .018),
-        0 15px 30px rgba(21, 45, 75, .015);
+        0 4px 12px rgba(21, 45, 75, 0.018),
+        0 15px 30px rgba(21, 45, 75, 0.015);
 
     transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 /* Garis cyan pendek pada bagian atas kartu */
@@ -4154,11 +4084,11 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     border-radius: 0 0 5px 5px;
 
     background: #20b4cb;
-    opacity: .5;
+    opacity: 0.5;
 
     transition:
-        width .25s ease,
-        opacity .25s ease;
+        width 0.25s ease,
+        opacity 0.25s ease;
 }
 
 .verify-feature-card:hover,
@@ -4167,8 +4097,8 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     border-color: #b5dfe8;
 
     box-shadow:
-        0 8px 18px rgba(21, 45, 75, .025),
-        0 20px 35px rgba(21, 45, 75, .055);
+        0 8px 18px rgba(21, 45, 75, 0.025),
+        0 20px 35px rgba(21, 45, 75, 0.055);
 }
 
 .verify-feature-card:hover::before,
@@ -4195,17 +4125,13 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     border: 1px solid #d6edf2;
     border-radius: 15px;
 
-    background: linear-gradient(
-        145deg,
-        #edfafd,
-        #e5f3f7
-    );
+    background: linear-gradient(145deg, #edfafd, #e5f3f7);
 
     color: #168da2;
 
     transition:
-        transform .25s ease,
-        background-color .25s ease;
+        transform 0.25s ease,
+        background-color 0.25s ease;
 }
 
 .verify-feature-icon svg {
@@ -4226,7 +4152,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     line-height: 1;
     letter-spacing: -1px;
 
-    transition: color .25s ease;
+    transition: color 0.25s ease;
 }
 
 .verify-feature-card:hover .verify-feature-number {
@@ -4252,7 +4178,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     font-size: 18px;
     font-weight: 750;
     line-height: 1.4;
-    letter-spacing: -.4px;
+    letter-spacing: -0.4px;
 }
 
 .verify-feature-card > p {
@@ -4263,7 +4189,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     font-size: 12px;
     line-height: 1.9;
 }
-
 
 /* -----------------------------------------
    CARD LINKS
@@ -4305,10 +4230,10 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     color: #63869b;
 
     transition:
-        background-color .2s ease,
-        border-color .2s ease,
-        color .2s ease,
-        transform .2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .verify-feature-arrow svg {
@@ -4334,7 +4259,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     outline-offset: 5px;
     border-radius: 4px;
 }
-
 
 /* -----------------------------------------
    BOTTOM NOTE
@@ -4365,7 +4289,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     color: #6b9ba9;
 }
 
-
 /* -----------------------------------------
    TABLET
    ----------------------------------------- */
@@ -4384,7 +4307,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
         font-size: 13px;
     }
 }
-
 
 /* -----------------------------------------
    MOBILE
@@ -4409,7 +4331,7 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     .verify-features-heading h2 {
         margin-top: 13px;
         font-size: 30px;
-        letter-spacing: -.8px;
+        letter-spacing: -0.8px;
     }
 
     .verify-features-description {
@@ -4451,7 +4373,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
     }
 }
 
-
 /* -----------------------------------------
    REDUCED MOTION
    ----------------------------------------- */
@@ -4479,7 +4400,6 @@ section.hero.verify-hero > .verify-scroll-hint:hover {
    Tanpa preview, badge, atau konten tambahan
    ========================================= */
 
-
 /* -----------------------------------------
    1. LATAR SECTION
    ----------------------------------------- */
@@ -4492,17 +4412,11 @@ section.verify-features {
     background:
         radial-gradient(
             ellipse at 95% 5%,
-            rgba(32, 180, 203, .045),
+            rgba(32, 180, 203, 0.045),
             transparent 48%
         ),
-        linear-gradient(
-            180deg,
-            #f5f9fc 0%,
-            #fbfdfe 65%,
-            #fff 100%
-        );
+        linear-gradient(180deg, #f5f9fc 0%, #fbfdfe 65%, #fff 100%);
 }
-
 
 /* -----------------------------------------
    2. HEADING SETELAH PARAGRAF DIHAPUS
@@ -4544,7 +4458,6 @@ section.verify-features {
     letter-spacing: 1.5px;
 }
 
-
 /* -----------------------------------------
    3. GRID KARTU
    ----------------------------------------- */
@@ -4555,7 +4468,6 @@ section.verify-features {
     align-items: stretch;
     gap: 20px;
 }
-
 
 /* -----------------------------------------
    4. KARTU SEDERHANA
@@ -4575,12 +4487,12 @@ section.verify-features {
 
     background: #fff;
 
-    box-shadow: 0 5px 18px rgba(21, 45, 75, .025);
+    box-shadow: 0 5px 18px rgba(21, 45, 75, 0.025);
 
     transition:
-        transform .22s ease,
-        border-color .22s ease,
-        box-shadow .22s ease;
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
 /* Hilangkan garis dekoratif lama agar lebih bersih */
@@ -4593,9 +4505,8 @@ section.verify-features {
     transform: translateY(-4px);
     border-color: #9ed6e2;
 
-    box-shadow: 0 12px 26px rgba(21, 45, 75, .065);
+    box-shadow: 0 12px 26px rgba(21, 45, 75, 0.065);
 }
-
 
 /* -----------------------------------------
    5. IKON DAN NOMOR
@@ -4625,8 +4536,8 @@ section.verify-features {
 
     transform: none;
     transition:
-        background-color .22s ease,
-        border-color .22s ease;
+        background-color 0.22s ease,
+        border-color 0.22s ease;
 }
 
 .verify-features .verify-feature-icon svg {
@@ -4647,13 +4558,12 @@ section.verify-features {
     font-size: 23px;
     font-weight: 750;
     line-height: 1;
-    letter-spacing: -.8px;
+    letter-spacing: -0.8px;
 }
 
 .verify-features .verify-feature-card:hover .verify-feature-number {
     color: #a6c7d3;
 }
-
 
 /* -----------------------------------------
    6. TEKS KARTU
@@ -4676,7 +4586,7 @@ section.verify-features {
     font-size: 18px;
     font-weight: 750;
     line-height: 1.4;
-    letter-spacing: -.4px;
+    letter-spacing: -0.4px;
 }
 
 .verify-features .verify-feature-card > p {
@@ -4688,7 +4598,6 @@ section.verify-features {
     font-size: 12px;
     line-height: 1.9;
 }
-
 
 /* -----------------------------------------
    7. TAUTAN SEJAJAR DI BAWAH
@@ -4733,9 +4642,9 @@ section.verify-features {
     transform: none;
 
     transition:
-        color .2s ease,
-        background-color .2s ease,
-        border-color .2s ease;
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .verify-features .verify-feature-arrow svg {
@@ -4761,7 +4670,6 @@ section.verify-features {
     border-radius: 4px;
 }
 
-
 /* -----------------------------------------
    8. CATATAN DI BAWAH KARTU
    ----------------------------------------- */
@@ -4774,7 +4682,6 @@ section.verify-features {
     font-size: 10px;
     line-height: 1.8;
 }
-
 
 /* -----------------------------------------
    9. TABLET
@@ -4799,7 +4706,6 @@ section.verify-features {
     }
 }
 
-
 /* -----------------------------------------
    10. MOBILE
    ----------------------------------------- */
@@ -4815,7 +4721,7 @@ section.verify-features {
 
     .verify-features .verify-features-heading h2 {
         font-size: 29px;
-        letter-spacing: -.8px;
+        letter-spacing: -0.8px;
     }
 
     .verify-features .verify-features-grid {
@@ -4832,7 +4738,6 @@ section.verify-features {
         margin-bottom: 21px;
     }
 }
-
 
 /* -----------------------------------------
    11. REDUCED MOTION
@@ -4870,7 +4775,7 @@ footer.verify-footer {
     background:
         radial-gradient(
             ellipse at 95% 0%,
-            rgba(32, 180, 203, .09),
+            rgba(32, 180, 203, 0.09),
             transparent 50%
         ),
         #152d4b;
@@ -4893,8 +4798,8 @@ footer.verify-footer {
     background: linear-gradient(
         90deg,
         transparent 0%,
-        rgba(32, 180, 203, .65) 30%,
-        rgba(32, 180, 203, .2) 70%,
+        rgba(32, 180, 203, 0.65) 30%,
+        rgba(32, 180, 203, 0.2) 70%,
         transparent 100%
     );
 }
@@ -4906,7 +4811,6 @@ footer.verify-footer {
     padding-inline: clamp(24px, 4vw, 64px);
 }
 
-
 /* -----------------------------------------
    1. MAIN LAYOUT
    ----------------------------------------- */
@@ -4916,7 +4820,7 @@ footer.verify-footer {
 
     grid-template-columns:
         minmax(0, 1.2fr)
-        minmax(0, .7fr)
+        minmax(0, 0.7fr)
         minmax(0, 1fr);
 
     gap: clamp(35px, 5vw, 85px);
@@ -4924,7 +4828,6 @@ footer.verify-footer {
     padding-top: 49px;
     padding-bottom: 40px;
 }
-
 
 /* -----------------------------------------
    2. BRAND
@@ -4952,15 +4855,12 @@ footer.verify-footer {
 .verify-footer-wordmark {
     color: #fff;
 
-    font-family:
-        "Plus Jakarta Sans",
-        system-ui,
-        sans-serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
 
     font-size: 23px;
     font-weight: 800;
     line-height: 1.2;
-    letter-spacing: -.9px;
+    letter-spacing: -0.9px;
 }
 
 .verify-footer-wordmark > span {
@@ -4974,7 +4874,7 @@ footer.verify-footer {
     font-size: 18px;
     font-weight: 650;
     line-height: 1.55;
-    letter-spacing: -.3px;
+    letter-spacing: -0.3px;
 }
 
 .verify-footer .verify-footer-description {
@@ -4985,7 +4885,6 @@ footer.verify-footer {
     font-size: 12px;
     line-height: 1.9;
 }
-
 
 /* -----------------------------------------
    3. NAVIGATION
@@ -4998,7 +4897,7 @@ footer.verify-footer {
     font-size: 13px;
     font-weight: 700;
     line-height: 1.5;
-    letter-spacing: .1px;
+    letter-spacing: 0.1px;
 }
 
 .verify-footer-links {
@@ -5017,7 +4916,7 @@ footer.verify-footer {
     line-height: 1.6;
     text-decoration: none;
 
-    transition: color .2s ease;
+    transition: color 0.2s ease;
 }
 
 /* Underline muncul saat hover */
@@ -5036,7 +4935,7 @@ footer.verify-footer {
     transform: scaleX(0);
     transform-origin: left;
 
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
 .verify-footer-links a:hover {
@@ -5047,7 +4946,6 @@ footer.verify-footer {
     transform: scaleX(1);
 }
 
-
 /* -----------------------------------------
    4. MESSAGE CARD
    ----------------------------------------- */
@@ -5057,10 +4955,10 @@ footer.verify-footer {
 
     padding: 23px;
 
-    border: 1px solid rgba(166, 203, 224, .16);
+    border: 1px solid rgba(166, 203, 224, 0.16);
     border-radius: 17px;
 
-    background: rgba(255, 255, 255, .035);
+    background: rgba(255, 255, 255, 0.035);
 }
 
 .verify-footer-message-label {
@@ -5082,7 +4980,7 @@ footer.verify-footer {
     font-size: 20px;
     font-weight: 650;
     line-height: 1.4;
-    letter-spacing: -.4px;
+    letter-spacing: -0.4px;
 }
 
 .verify-footer-message h2 > span {
@@ -5111,7 +5009,7 @@ footer.verify-footer {
     line-height: 1.6;
     text-decoration: none;
 
-    transition: color .2s ease;
+    transition: color 0.2s ease;
 }
 
 .verify-footer-cta svg {
@@ -5119,7 +5017,7 @@ footer.verify-footer {
     height: 15px;
     flex-shrink: 0;
 
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
 .verify-footer-cta:hover {
@@ -5129,7 +5027,6 @@ footer.verify-footer {
 .verify-footer-cta:hover svg {
     transform: translateX(3px);
 }
-
 
 /* -----------------------------------------
    5. BOTTOM BAR
@@ -5145,7 +5042,7 @@ footer.verify-footer {
     padding-top: 21px;
     padding-bottom: 23px;
 
-    border-top: 1px solid rgba(174, 201, 225, .14);
+    border-top: 1px solid rgba(174, 201, 225, 0.14);
 }
 
 .verify-footer .verify-footer-copyright {
@@ -5171,7 +5068,6 @@ footer.verify-footer {
     text-align: right;
 }
 
-
 /* -----------------------------------------
    6. KEYBOARD FOCUS
    ----------------------------------------- */
@@ -5182,7 +5078,6 @@ footer.verify-footer {
     border-radius: 3px;
 }
 
-
 /* -----------------------------------------
    7. TABLET
    ----------------------------------------- */
@@ -5191,7 +5086,7 @@ footer.verify-footer {
     .verify-footer-main {
         grid-template-columns:
             minmax(0, 1.1fr)
-            minmax(0, .8fr);
+            minmax(0, 0.8fr);
 
         gap: 30px;
     }
@@ -5204,7 +5099,6 @@ footer.verify-footer {
         max-width: 560px;
     }
 }
-
 
 /* -----------------------------------------
    8. MOBILE
@@ -5243,8 +5137,7 @@ footer.verify-footer {
     }
 
     .verify-footer-links {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
 
         gap: 11px 20px;
     }
@@ -5271,7 +5164,6 @@ footer.verify-footer {
         text-align: left;
     }
 }
-
 
 /* -----------------------------------------
    9. REDUCED MOTION
@@ -5329,7 +5221,7 @@ footer.verify-footer {
 
 .verify-footer .verify-footer-wordmark {
     font-size: 20px;
-    letter-spacing: -.7px;
+    letter-spacing: -0.7px;
 }
 
 /* Teks identitas lebih ringkas */
@@ -5353,7 +5245,7 @@ footer.verify-footer {
 
     padding: 4px 0 0 25px;
     border: 0;
-    border-left: 1px solid rgba(174, 201, 225, .16);
+    border-left: 1px solid rgba(174, 201, 225, 0.16);
     border-radius: 0;
 
     background: transparent;
@@ -5432,7 +5324,7 @@ footer.verify-footer {
         padding: 18px 0 0;
 
         border-left: 0;
-        border-top: 1px solid rgba(174, 201, 225, .14);
+        border-top: 1px solid rgba(174, 201, 225, 0.14);
     }
 
     .verify-footer .verify-footer-bottom {
@@ -5546,7 +5438,7 @@ footer.verify-footer {
         max-width: 100%;
 
         padding-top: 18px;
-        border-top: 1px solid rgba(174, 201, 225, .14);
+        border-top: 1px solid rgba(174, 201, 225, 0.14);
     }
 
     .verify-footer .verify-footer-bottom {
@@ -5608,12 +5500,7 @@ footer.verify-footer {
     margin: 0 auto;
     padding: 45px 6% 70px;
 
-    background: linear-gradient(
-        120deg,
-        #ffffff 0%,
-        #f5faff 55%,
-        #edf8fb 100%
-    );
+    background: linear-gradient(120deg, #ffffff 0%, #f5faff 55%, #edf8fb 100%);
 }
 
 /* TITLE */
@@ -5623,11 +5510,7 @@ footer.verify-footer {
     align-items: center;
     gap: 12px;
 
-    background: linear-gradient(
-        110deg,
-        #172f50,
-        #205c83
-    );
+    background: linear-gradient(110deg, #172f50, #205c83);
 
     color: #ffffff;
     border-radius: 30px;
@@ -5676,11 +5559,7 @@ footer.verify-footer {
     min-height: 315px;
     padding: 26px;
 
-    background: linear-gradient(
-        145deg,
-        #ffffff,
-        #f7fcff
-    );
+    background: linear-gradient(145deg, #ffffff, #f7fcff);
 
     border: 1px solid #dcebf0;
     border-radius: 22px;
@@ -5688,9 +5567,9 @@ footer.verify-footer {
     box-shadow: 0 5px 20px #172f500c;
 
     transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        border-color .3s ease;
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
 
 /* TOP ACCENT */
@@ -5704,16 +5583,12 @@ footer.verify-footer {
     width: 100%;
     height: 4px;
 
-    background: linear-gradient(
-        90deg,
-        #24afc0,
-        #8ce0e5
-    );
+    background: linear-gradient(90deg, #24afc0, #8ce0e5);
 
     transform: scaleX(0);
     transform-origin: left;
 
-    transition: transform .35s ease;
+    transition: transform 0.35s ease;
 }
 
 .module-section .module-card:hover::before {
@@ -5735,8 +5610,8 @@ footer.verify-footer {
 /* CLICK EFFECT */
 
 .module-section .module-card:active {
-    transform: scale(.975);
-    transition: transform .12s ease;
+    transform: scale(0.975);
+    transition: transform 0.12s ease;
 }
 
 /* BADGE */
@@ -5758,9 +5633,8 @@ footer.verify-footer {
 
     font-size: 11px;
     font-weight: 800;
-    letter-spacing: .4px;
+    letter-spacing: 0.4px;
 }
-
 
 /* ICON */
 
@@ -5789,8 +5663,8 @@ footer.verify-footer {
     box-shadow: 0 5px 14px #24afc015;
 
     transition:
-        transform .35s ease,
-        border-radius .35s ease;
+        transform 0.35s ease,
+        border-radius 0.35s ease;
 }
 
 .module-section .module-card:hover .module-icon {
@@ -5853,10 +5727,10 @@ footer.verify-footer {
     box-shadow: 0 5px 12px #172f5018;
 
     transition:
-        background .3s ease,
-        gap .3s ease,
-        transform .3s ease,
-        box-shadow .3s ease;
+        background 0.3s ease,
+        gap 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .module-section .module-card .mini-button:hover {
@@ -5894,7 +5768,7 @@ footer.verify-footer {
     z-index: 0;
 
     color: #24afc0;
-    opacity: .08;
+    opacity: 0.08;
 
     font-size: 110px;
     font-weight: 900;
@@ -5903,13 +5777,13 @@ footer.verify-footer {
     pointer-events: none;
 
     transition:
-        transform .4s ease,
-        opacity .4s ease;
+        transform 0.4s ease,
+        opacity 0.4s ease;
 }
 
 .module-section .module-card:hover .card-number {
     transform: translateY(-9px);
-    opacity: .15;
+    opacity: 0.15;
 }
 
 /* DECORATION */
@@ -5925,11 +5799,11 @@ footer.verify-footer {
 
     border-radius: 50%;
     background: #24afc0;
-    opacity: .045;
+    opacity: 0.045;
 
     pointer-events: none;
 
-    transition: transform .5s ease;
+    transition: transform 0.5s ease;
 }
 
 .module-section .module-card:hover .card-decoration {
@@ -5953,11 +5827,7 @@ footer.verify-footer {
     padding: 28px 32px;
     margin-bottom: 24px;
 
-    background: linear-gradient(
-        135deg,
-        #172f50,
-        #206080
-    );
+    background: linear-gradient(135deg, #172f50, #206080);
 
     border-radius: 22px;
     color: #ffffff;
@@ -6043,7 +5913,6 @@ footer.verify-footer {
 .module-section .module-card .mini-button:hover span {
     transform: translateX(5px);
 }
-
 
 /* =========================================
    RESPONSIVE
@@ -6169,14 +6038,10 @@ footer.verify-footer {
     background:
         radial-gradient(
             ellipse at 90% 0,
-            rgba(32, 180, 203, .065),
+            rgba(32, 180, 203, 0.065),
             transparent 45%
         ),
-        linear-gradient(
-            180deg,
-            #f7fbfd 0%,
-            #fff 70%
-        );
+        linear-gradient(180deg, #f7fbfd 0%, #fff 70%);
 }
 
 .verify-simulator-container {
@@ -6185,7 +6050,6 @@ footer.verify-footer {
 
     padding-inline: clamp(24px, 4vw, 64px);
 }
-
 
 /* -----------------------------------------
    HEADING
@@ -6214,7 +6078,7 @@ footer.verify-footer {
     border-radius: 50%;
     background: #20b4cb;
 
-    box-shadow: 0 0 0 4px rgba(32, 180, 203, .09);
+    box-shadow: 0 0 0 4px rgba(32, 180, 203, 0.09);
 }
 
 .verify-simulator-heading h1 {
@@ -6266,7 +6130,6 @@ footer.verify-footer {
     color: #2995a9;
 }
 
-
 /* -----------------------------------------
    GRID
    ----------------------------------------- */
@@ -6278,7 +6141,6 @@ footer.verify-footer {
 
     gap: 23px;
 }
-
 
 /* -----------------------------------------
    CARD
@@ -6296,12 +6158,12 @@ footer.verify-footer {
 
     background: #fff;
 
-    box-shadow: 0 5px 18px rgba(21, 45, 75, .025);
+    box-shadow: 0 5px 18px rgba(21, 45, 75, 0.025);
 
     transition:
-        transform .23s ease,
-        border-color .23s ease,
-        box-shadow .23s ease;
+        transform 0.23s ease,
+        border-color 0.23s ease,
+        box-shadow 0.23s ease;
 }
 
 .verify-simulator-card:hover,
@@ -6309,7 +6171,7 @@ footer.verify-footer {
     transform: translateY(-4px);
     border-color: #a4d8e3;
 
-    box-shadow: 0 13px 28px rgba(21, 45, 75, .06);
+    box-shadow: 0 13px 28px rgba(21, 45, 75, 0.06);
 }
 
 .verify-simulator-card-top {
@@ -6332,7 +6194,7 @@ footer.verify-footer {
     font-size: 8px;
     font-weight: 750;
     line-height: 1.4;
-    letter-spacing: .8px;
+    letter-spacing: 0.8px;
 }
 
 .verify-simulator-card-number {
@@ -6341,9 +6203,8 @@ footer.verify-footer {
     font-size: 23px;
     font-weight: 750;
     line-height: 1;
-    letter-spacing: -.8px;
+    letter-spacing: -0.8px;
 }
-
 
 /* -----------------------------------------
    ARTWORK
@@ -6364,12 +6225,7 @@ footer.verify-footer {
     border: 1px solid #e0eff4;
     border-radius: 14px;
 
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #dff3f8,
-            #f4fafc 70%
-        );
+    background: radial-gradient(circle at 50% 50%, #dff3f8, #f4fafc 70%);
 }
 
 .verify-simulator-art-grid {
@@ -6379,23 +6235,15 @@ footer.verify-footer {
 
     background-image: radial-gradient(
         circle,
-        rgba(29, 134, 157, .17) 1px,
+        rgba(29, 134, 157, 0.17) 1px,
         transparent 1px
     );
 
     background-size: 16px 16px;
 
-    -webkit-mask-image: radial-gradient(
-        ellipse,
-        #000,
-        transparent 75%
-    );
+    -webkit-mask-image: radial-gradient(ellipse, #000, transparent 75%);
 
-    mask-image: radial-gradient(
-        ellipse,
-        #000,
-        transparent 75%
-    );
+    mask-image: radial-gradient(ellipse, #000, transparent 75%);
 }
 
 .verify-simulator-orbit {
@@ -6417,17 +6265,17 @@ footer.verify-footer {
     width: 76px;
     height: 76px;
 
-    border: 1px solid rgba(255, 255, 255, .9);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 22px;
 
-    background: rgba(255, 255, 255, .85);
+    background: rgba(255, 255, 255, 0.85);
     color: #2198af;
 
-    box-shadow: 0 8px 20px rgba(33, 126, 150, .07);
+    box-shadow: 0 8px 20px rgba(33, 126, 150, 0.07);
 
     transform: rotate(-6deg);
 
-    transition: transform .23s ease;
+    transition: transform 0.23s ease;
 }
 
 .verify-simulator-art-icon svg {
@@ -6462,7 +6310,6 @@ footer.verify-footer {
     border-radius: 50%;
 }
 
-
 /* -----------------------------------------
    CONTENT
    ----------------------------------------- */
@@ -6478,7 +6325,7 @@ footer.verify-footer {
     font-size: 17px;
     font-weight: 750;
     line-height: 1.5;
-    letter-spacing: -.35px;
+    letter-spacing: -0.35px;
 }
 
 .verify-simulator-card-content p {
@@ -6504,7 +6351,6 @@ footer.verify-footer {
     font-size: 9px;
     line-height: 1.5;
 }
-
 
 /* -----------------------------------------
    START BUTTON
@@ -6533,8 +6379,8 @@ footer.verify-footer {
     cursor: pointer;
 
     transition:
-        background-color .2s ease,
-        border-color .2s ease;
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .verify-simulator-start svg {
@@ -6544,7 +6390,7 @@ footer.verify-footer {
 
     color: #8adce9;
 
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
 .verify-simulator-start:hover {
@@ -6560,7 +6406,6 @@ footer.verify-footer {
     outline: 3px solid #20b4cb;
     outline-offset: 4px;
 }
-
 
 /* -----------------------------------------
    NOTE AND EMPTY STATE
@@ -6611,7 +6456,6 @@ footer.verify-footer {
     color: #788c9e;
 }
 
-
 /* -----------------------------------------
    QUIZ DIALOG
    ----------------------------------------- */
@@ -6629,11 +6473,11 @@ dialog.verify-simulator-dialog {
     background: #fff;
     color: #304761;
 
-    box-shadow: 0 24px 85px rgba(10, 35, 55, .23);
+    box-shadow: 0 24px 85px rgba(10, 35, 55, 0.23);
 }
 
 .verify-simulator-dialog::backdrop {
-    background: rgba(13, 34, 55, .55);
+    background: rgba(13, 34, 55, 0.55);
     backdrop-filter: blur(4px);
 }
 
@@ -6658,7 +6502,7 @@ dialog.verify-simulator-dialog {
     color: #152d4b;
     font-size: 23px;
     line-height: 1.4;
-    letter-spacing: -.5px;
+    letter-spacing: -0.5px;
 }
 
 .verify-simulator-dialog #quiz-message {
@@ -6698,8 +6542,8 @@ dialog.verify-simulator-dialog {
     line-height: 1.65;
 
     transition:
-        border-color .2s ease,
-        background-color .2s ease;
+        border-color 0.2s ease,
+        background-color 0.2s ease;
 }
 
 .verify-simulator-dialog #quiz-options button:not(:disabled):hover {
@@ -6734,7 +6578,6 @@ dialog.verify-simulator-dialog {
     outline: 2px solid #20b4cb;
     outline-offset: 3px;
 }
-
 
 /* -----------------------------------------
    RESPONSIVE
@@ -6807,7 +6650,6 @@ dialog.verify-simulator-dialog {
     }
 }
 
-
 /* -----------------------------------------
    REDUCED MOTION
    ----------------------------------------- */
@@ -6834,7 +6676,6 @@ dialog.verify-simulator-dialog {
    Tampilan publik, tanpa progres pengguna
    ========================================= */
 
-
 /* -----------------------------------------
    1. BACKGROUND
    ----------------------------------------- */
@@ -6848,12 +6689,11 @@ section.verify-simulator {
     background:
         radial-gradient(
             ellipse at 50% 0%,
-            rgba(32, 180, 203, .075),
+            rgba(32, 180, 203, 0.075),
             transparent 48%
         ),
         #f8fbfd;
 }
-
 
 /* -----------------------------------------
    2. HEADING
@@ -6872,7 +6712,7 @@ section.verify-simulator {
     border: 1px solid #d9edf2;
     border-radius: 999px;
 
-    background: rgba(255, 255, 255, .85);
+    background: rgba(255, 255, 255, 0.85);
     color: #548091;
 
     font-size: 9px;
@@ -6927,15 +6767,15 @@ section.verify-simulator {
     color: #4c9bad;
 }
 
-.verify-simulator .verify-simulator-heading-meta
-.verify-simulator-meta-divider {
+.verify-simulator
+    .verify-simulator-heading-meta
+    .verify-simulator-meta-divider {
     width: 3px;
     height: 3px;
 
     border-radius: 50%;
     background: #b7ccd6;
 }
-
 
 /* -----------------------------------------
    3. CARDS
@@ -6954,13 +6794,13 @@ section.verify-simulator {
     background: #fff;
 
     box-shadow:
-        0 3px 8px rgba(21, 45, 75, .015),
-        0 10px 25px rgba(21, 45, 75, .025);
+        0 3px 8px rgba(21, 45, 75, 0.015),
+        0 10px 25px rgba(21, 45, 75, 0.025);
 
     transition:
-        transform .23s ease,
-        border-color .23s ease,
-        box-shadow .23s ease;
+        transform 0.23s ease,
+        border-color 0.23s ease,
+        box-shadow 0.23s ease;
 }
 
 .verify-simulator .verify-simulator-card:hover,
@@ -6969,8 +6809,8 @@ section.verify-simulator {
     border-color: #b1dfe9;
 
     box-shadow:
-        0 7px 15px rgba(21, 45, 75, .025),
-        0 18px 35px rgba(21, 45, 75, .055);
+        0 7px 15px rgba(21, 45, 75, 0.025),
+        0 18px 35px rgba(21, 45, 75, 0.055);
 }
 
 .verify-simulator .verify-simulator-card-top {
@@ -7011,7 +6851,6 @@ section.verify-simulator {
     letter-spacing: 0;
 }
 
-
 /* -----------------------------------------
    4. ARTWORK
    ----------------------------------------- */
@@ -7023,38 +6862,25 @@ section.verify-simulator {
     border: 1px solid #e0f0f4;
     border-radius: 16px;
 
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            #d9f1f6 0%,
-            #edf9fc 48%,
-            #f5fbfd 100%
-        );
+    background: radial-gradient(
+        circle at 50% 50%,
+        #d9f1f6 0%,
+        #edf9fc 48%,
+        #f5fbfd 100%
+    );
 }
 
 /* Variasi arah cahaya, tetap satu palet */
-.verify-simulator .verify-simulator-card:nth-child(2n)
-.verify-simulator-art {
-    background:
-        radial-gradient(
-            circle at 70% 30%,
-            #ddf3f7,
-            #f3fafc 75%
-        );
+.verify-simulator .verify-simulator-card:nth-child(2n) .verify-simulator-art {
+    background: radial-gradient(circle at 70% 30%, #ddf3f7, #f3fafc 75%);
 }
 
-.verify-simulator .verify-simulator-card:nth-child(3n)
-.verify-simulator-art {
-    background:
-        radial-gradient(
-            circle at 30% 70%,
-            #dceff5,
-            #f4fafc 75%
-        );
+.verify-simulator .verify-simulator-card:nth-child(3n) .verify-simulator-art {
+    background: radial-gradient(circle at 30% 70%, #dceff5, #f4fafc 75%);
 }
 
 .verify-simulator .verify-simulator-art-grid {
-    opacity: .65;
+    opacity: 0.65;
     background-size: 18px 18px;
 }
 
@@ -7062,7 +6888,7 @@ section.verify-simulator {
     width: 116px;
     height: 116px;
 
-    border: 1px solid rgba(80, 163, 184, .2);
+    border: 1px solid rgba(80, 163, 184, 0.2);
 }
 
 .verify-simulator .verify-simulator-orbit::after {
@@ -7071,7 +6897,7 @@ section.verify-simulator {
     position: absolute;
     inset: -11px;
 
-    border: 1px dashed rgba(80, 163, 184, .13);
+    border: 1px dashed rgba(80, 163, 184, 0.13);
     border-radius: 50%;
 }
 
@@ -7082,11 +6908,11 @@ section.verify-simulator {
     border: 1px solid #fff;
     border-radius: 23px;
 
-    background: rgba(255, 255, 255, .9);
+    background: rgba(255, 255, 255, 0.9);
     color: #2098af;
 
     box-shadow:
-        0 8px 16px rgba(23, 118, 142, .06),
+        0 8px 16px rgba(23, 118, 142, 0.06),
         inset 0 1px 0 #fff;
 
     transform: rotate(-7deg);
@@ -7097,15 +6923,16 @@ section.verify-simulator {
     height: 43px;
 }
 
-.verify-simulator .verify-simulator-card:nth-child(even)
-.verify-simulator-art-icon {
+.verify-simulator
+    .verify-simulator-card:nth-child(even)
+    .verify-simulator-art-icon {
     transform: rotate(7deg);
 }
 
-.verify-simulator .verify-simulator-card:hover
-.verify-simulator-art-icon,
-.verify-simulator .verify-simulator-card:focus-within
-.verify-simulator-art-icon {
+.verify-simulator .verify-simulator-card:hover .verify-simulator-art-icon,
+.verify-simulator
+    .verify-simulator-card:focus-within
+    .verify-simulator-art-icon {
     transform: rotate(0deg) translateY(-2px);
 }
 
@@ -7127,7 +6954,6 @@ section.verify-simulator {
     border-color: #acd6df;
 }
 
-
 /* -----------------------------------------
    5. TEXT
    ----------------------------------------- */
@@ -7141,7 +6967,7 @@ section.verify-simulator {
 
     font-size: 17px;
     line-height: 1.45;
-    letter-spacing: -.35px;
+    letter-spacing: -0.35px;
 }
 
 .verify-simulator .verify-simulator-card-content p {
@@ -7163,7 +6989,6 @@ section.verify-simulator {
     color: #8da0ae;
     font-size: 9px;
 }
-
 
 /* -----------------------------------------
    6. BUTTON
@@ -7200,7 +7025,6 @@ section.verify-simulator {
     transform: translateX(3px);
 }
 
-
 /* -----------------------------------------
    7. BOTTOM NOTE
    ----------------------------------------- */
@@ -7212,7 +7036,6 @@ section.verify-simulator {
     color: #8a9caa;
     font-size: 10px;
 }
-
 
 /* -----------------------------------------
    8. DIALOG DETAILS
@@ -7235,11 +7058,7 @@ dialog.verify-simulator-dialog {
     border-color: #dceef3;
     border-radius: 15px;
 
-    background: linear-gradient(
-        135deg,
-        #f0f9fc,
-        #f7fbfd
-    );
+    background: linear-gradient(135deg, #f0f9fc, #f7fbfd);
 }
 
 .verify-simulator-dialog #quiz-options button {
@@ -7252,7 +7071,6 @@ dialog.verify-simulator-dialog {
 
     font-size: 12px;
 }
-
 
 /* -----------------------------------------
    9. MOBILE
@@ -7295,7 +7113,6 @@ dialog.verify-simulator-dialog {
     }
 }
 
-
 /* -----------------------------------------
    10. REDUCED MOTION
    ----------------------------------------- */
@@ -7313,12 +7130,11 @@ dialog.verify-simulator-dialog {
         transform: none;
     }
 
-    .verify-simulator .verify-simulator-card
-    .verify-simulator-art-icon,
-    .verify-simulator .verify-simulator-card:hover
-    .verify-simulator-art-icon,
-    .verify-simulator .verify-simulator-card:focus-within
-    .verify-simulator-art-icon,
+    .verify-simulator .verify-simulator-card .verify-simulator-art-icon,
+    .verify-simulator .verify-simulator-card:hover .verify-simulator-art-icon,
+    .verify-simulator
+        .verify-simulator-card:focus-within
+        .verify-simulator-art-icon,
     .verify-simulator .verify-simulator-start:hover svg {
         transform: none;
     }
@@ -7347,7 +7163,7 @@ dialog.verify-simulator-dialog {
 
 .verify-simulator .verify-simulator-badge {
     font-size: 7px;
-    letter-spacing: .9px;
+    letter-spacing: 0.9px;
 }
 
 .verify-simulator .verify-simulator-card-number {
@@ -7535,7 +7351,7 @@ dialog.verify-simulator-dialog {
 
     font-size: 16px;
     line-height: 1.5;
-    letter-spacing: -.3px;
+    letter-spacing: -0.3px;
 }
 
 .verify-simulator .verify-simulator-card-content p {
@@ -7838,8 +7654,7 @@ dialog.verify-story-dialog {
 
 .verify-story-chat-content {
     padding: 17px;
-    background-image:
-        radial-gradient(#a8c9d330 0.8px, transparent 0.8px);
+    background-image: radial-gradient(#a8c9d330 0.8px, transparent 0.8px);
     background-size: 17px 17px;
 }
 
@@ -8292,7 +8107,9 @@ dialog.verify-story-dialog {
 }
 
 @keyframes verify-story-dot {
-    0%, 70%, 100% {
+    0%,
+    70%,
+    100% {
         opacity: 0.4;
         transform: translateY(0);
     }
@@ -8730,5 +8547,1373 @@ dialog.verify-story-dialog {
 @media (prefers-reduced-motion: reduce) {
     .verify-story-save-confirm {
         animation: none;
+    }
+}
+
+/* =========================================
+   VERIFY — REGISTER PAGE
+   ========================================= */
+
+.verify-register {
+    position: relative;
+    padding: 65px 0 75px;
+    background:
+        radial-gradient(
+            ellipse at 5% 15%,
+            rgba(32, 180, 203, 0.075),
+            transparent 50%
+        ),
+        linear-gradient(135deg, #f8fbfd, #ffffff 70%);
+}
+
+.verify-register-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(45px, 7vw, 110px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: 32px;
+}
+
+/* Pengantar */
+
+.verify-register-intro {
+    max-width: 540px;
+}
+
+.verify-register-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #448394;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.verify-register-eyebrow > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #20b4cb;
+    box-shadow: 0 0 0 4px #20b4cb12;
+}
+
+.verify-register-intro h1 {
+    margin: 20px 0;
+    color: #152d4b;
+    font-size: clamp(31px, 3.2vw, 43px);
+    line-height: 1.25;
+    letter-spacing: -1.4px;
+}
+
+.verify-register-intro h1 > span {
+    display: block;
+    margin-top: 5px;
+    color: #168da2;
+}
+
+.verify-register-intro-description {
+    max-width: 430px;
+    margin: 0;
+    color: #74899c;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.verify-register-benefits {
+    display: grid;
+    gap: 21px;
+    margin-top: 32px;
+}
+
+.verify-register-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.verify-register-benefit-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 43px;
+    height: 43px;
+    border: 1px solid #d7eaf0;
+    border-radius: 13px;
+    background: #edf8fb;
+    color: #248da2;
+}
+
+.verify-register-benefit-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+.verify-register-benefit h2 {
+    margin: 1px 0 5px;
+    color: #294b65;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.verify-register-benefit p {
+    max-width: 350px;
+    margin: 0;
+    color: #7d91a2;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.verify-register-intro-note {
+    margin: 31px 0 0;
+    color: #8a9ca9;
+    font-size: 10px;
+    letter-spacing: 0.3px;
+}
+
+/* Kartu form */
+
+.verify-register-card {
+    width: 100%;
+    max-width: 450px;
+    justify-self: end;
+    padding: 32px;
+    border: 1px solid #dfe9f0;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow:
+        0 5px 15px #152d4b03,
+        0 22px 55px #152d4b06;
+}
+
+.verify-register-card-label {
+    color: #4b8b9b;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+}
+
+.verify-register-card-heading h2 {
+    margin: 11px 0 8px;
+    color: #152d4b;
+    font-size: 29px;
+    line-height: 1.3;
+    letter-spacing: -0.8px;
+}
+
+.verify-register-card-heading p {
+    margin: 0;
+    color: #8495a5;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.verify-register-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.verify-register-field {
+    min-width: 0;
+}
+
+.verify-register-field > label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34546c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.verify-register-input {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #dce6ed;
+    border-radius: 11px;
+    background: #fbfdfe;
+    color: #294b64;
+    font-size: 12px;
+    line-height: 1.5;
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
+}
+
+.verify-register-input::placeholder {
+    color: #9aabb9;
+}
+
+.verify-register-input:focus {
+    outline: none;
+    border-color: #53b8cc;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px #20b4cb14;
+}
+
+.verify-register-input.is-invalid {
+    border-color: #d7a4ae;
+    background: #fffafb;
+}
+
+.verify-register-input.is-invalid:focus {
+    border-color: #c78292;
+    box-shadow: 0 0 0 3px rgba(199, 130, 146, 0.10);
+}
+
+/* Password */
+
+.verify-register-password-wrap {
+    position: relative;
+}
+
+.verify-register-password-wrap .verify-register-input {
+    padding-right: 49px;
+}
+
+.verify-register-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #7a95a5;
+    transform: translateY(-50%);
+}
+
+.verify-register-password-toggle:hover {
+    background: #edf7fa;
+    color: #21899e;
+}
+
+.verify-register-password-toggle svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+}
+
+.verify-register-password-toggle[hidden],
+.verify-register-password-toggle svg[hidden] {
+    display: none;
+}
+
+/* Validasi */
+
+.verify-register-field-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 7px 0 0;
+    color: #ad5364;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+.verify-register-field-error::before {
+    content: "!";
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 13px;
+    width: 13px;
+    height: 13px;
+    margin-top: 2px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.verify-register-field-error[hidden],
+.verify-register-field-error:empty {
+    display: none !important;
+}
+
+.verify-register-general-error {
+    margin-top: 18px;
+    padding: 11px 13px;
+    border: 1px solid #efdce1;
+    border-radius: 10px;
+    background: #fff8fa;
+    color: #a45163;
+    font-size: 11px;
+    line-height: 1.75;
+}
+
+.verify-register-error-summary {
+    margin-top: 20px;
+    padding: 11px 13px;
+    border: 1px solid #f0d5dc;
+    border-radius: 10px;
+    background: #fff5f7;
+}
+
+.verify-register-error-summary p {
+    margin: 0;
+    color: #a65366;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.verify-register-error-summary p + p {
+    margin-top: 5px;
+}
+
+/* Tombol */
+
+.verify-register-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px;
+    padding: 12px 17px;
+    border: 1px solid #152d4b;
+    border-radius: 11px;
+    background: #152d4b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.verify-register-submit svg {
+    width: 17px;
+    height: 17px;
+    color: #8edbe8;
+}
+
+.verify-register-submit:hover {
+    border-color: #205b73;
+    background: #205b73;
+}
+
+.verify-register-login {
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid #edf2f6;
+    color: #8193a3;
+    font-size: 12px;
+    text-align: center;
+}
+
+.verify-register-login a {
+    margin-left: 4px;
+    color: #168da2;
+    font-weight: 750;
+}
+
+.verify-register-login a:hover {
+    text-decoration: underline;
+}
+
+.verify-register button:focus-visible,
+.verify-register a:focus-visible {
+    outline: 3px solid #20b4cb;
+    outline-offset: 4px;
+}
+
+/* Tablet dan mobile */
+
+@media (max-width: 850px) {
+    .verify-register {
+        padding: 42px 0 55px;
+    }
+
+    .verify-register-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+        max-width: 580px;
+        padding-inline: 24px;
+    }
+
+    .verify-register-intro,
+    .verify-register-card {
+        max-width: none;
+    }
+
+    .verify-register-intro h1 {
+        font-size: 32px;
+    }
+
+    .verify-register-benefits,
+    .verify-register-intro-note {
+        display: none;
+    }
+
+    .verify-register-card {
+        justify-self: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .verify-register-container {
+        padding-inline: 20px;
+    }
+
+    .verify-register-intro h1 {
+        font-size: 28px;
+        letter-spacing: -0.9px;
+    }
+
+    .verify-register-intro-description {
+        font-size: 12px;
+    }
+
+    .verify-register-card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .verify-register-card-heading h2 {
+        font-size: 26px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verify-register-input,
+    .verify-register-submit {
+        transition: none;
+    }
+}
+
+/* REGISTER — VALIDATION & SUBMIT STATUS */
+
+.verify-register-field-error[hidden],
+.verify-register-spinner[hidden],
+.verify-register-submit svg[hidden] {
+    display: none !important;
+}
+
+.verify-register-submit:disabled {
+    opacity: 0.75;
+    cursor: wait;
+}
+
+.verify-register-spinner {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: verify-register-spin 0.7s linear infinite;
+}
+
+.verify-register-form-status {
+    margin: -7px 0 0;
+    color: #6f899b;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.verify-register-form-status:empty {
+    display: none;
+}
+
+@keyframes verify-register-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verify-register-spinner {
+        animation: none;
+    }
+}
+
+/* =========================================
+   VERIFY — LOGIN PAGE
+   ========================================= */
+
+.verify-login {
+    padding: 70px 0 80px;
+    background:
+        radial-gradient(
+            ellipse at 5% 20%,
+            rgba(32, 180, 203, 0.075),
+            transparent 50%
+        ),
+        linear-gradient(135deg, #f8fbfd, #ffffff 70%);
+}
+
+.verify-login-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: center;
+    gap: clamp(45px, 7vw, 110px);
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: 32px;
+}
+
+/* Pengantar */
+
+.verify-login-intro {
+    max-width: 540px;
+}
+
+.verify-login-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #448394;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.verify-login-eyebrow > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #20b4cb;
+    box-shadow: 0 0 0 4px #20b4cb12;
+}
+
+.verify-login-intro h1 {
+    margin: 20px 0;
+    color: #152d4b;
+    font-size: clamp(31px, 3.2vw, 43px);
+    line-height: 1.25;
+    letter-spacing: -1.4px;
+}
+
+.verify-login-intro h1 > span {
+    display: block;
+    margin-top: 5px;
+    color: #168da2;
+}
+
+.verify-login-intro-description {
+    max-width: 430px;
+    margin: 0;
+    color: #74899c;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.verify-login-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    max-width: 450px;
+    margin-top: 30px;
+    padding-top: 23px;
+    border-top: 1px solid #dfeaf0;
+}
+
+.verify-login-message-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d6eaf0;
+    border-radius: 14px;
+    background: #edf8fb;
+    color: #248da2;
+}
+
+.verify-login-message-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.verify-login-message h2 {
+    margin: 1px 0 6px;
+    color: #294b65;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.verify-login-message p {
+    margin: 0;
+    color: #7d91a2;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.verify-login-intro-note {
+    margin: 28px 0 0;
+    color: #8a9ca9;
+    font-size: 10px;
+    letter-spacing: 0.3px;
+}
+
+/* Kartu form */
+
+.verify-login-card {
+    width: 100%;
+    max-width: 450px;
+    justify-self: end;
+    padding: 32px;
+    border: 1px solid #dfe9f0;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow:
+        0 5px 15px #152d4b03,
+        0 22px 55px #152d4b06;
+}
+
+.verify-login-card-label {
+    color: #4b8b9b;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+}
+
+.verify-login-card-heading h2 {
+    margin: 11px 0 8px;
+    color: #152d4b;
+    font-size: 29px;
+    line-height: 1.3;
+    letter-spacing: -0.8px;
+}
+
+.verify-login-card-heading p {
+    margin: 0;
+    color: #8495a5;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.verify-login-form {
+    display: grid;
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.verify-login-field {
+    min-width: 0;
+}
+
+.verify-login-field > label {
+    display: block;
+    margin-bottom: 8px;
+    color: #34546c;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.verify-login-input {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid #dce6ed;
+    border-radius: 11px;
+    background: #fbfdfe;
+    color: #294b64;
+    font-size: 12px;
+    line-height: 1.5;
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease;
+}
+
+.verify-login-input::placeholder {
+    color: #9aabb9;
+}
+
+.verify-login-input:focus {
+    outline: none;
+    border-color: #53b8cc;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px #20b4cb14;
+}
+
+.verify-login-input.is-invalid {
+    border-color: #d7a4ae;
+    background: #fffafb;
+}
+
+.verify-login-input.is-invalid:focus {
+    border-color: #c78292;
+    box-shadow: 0 0 0 3px rgba(199, 130, 146, 0.1);
+}
+
+/* Password */
+
+.verify-login-password-wrap {
+    position: relative;
+}
+
+.verify-login-password-wrap .verify-login-input {
+    padding-right: 49px;
+}
+
+.verify-login-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #7a95a5;
+    transform: translateY(-50%);
+}
+
+.verify-login-password-toggle:hover {
+    background: #edf7fa;
+    color: #21899e;
+}
+
+.verify-login-password-toggle svg {
+    display: block;
+    width: 19px;
+    height: 19px;
+}
+
+/* Error */
+
+.verify-login-field-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 7px 0 0;
+    color: #ad5364;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+.verify-login-field-error::before {
+    content: "!";
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 13px;
+    width: 13px;
+    height: 13px;
+    margin-top: 2px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.verify-login-general-error {
+    margin-top: 18px;
+    padding: 11px 13px;
+    border: 1px solid #efdce1;
+    border-radius: 10px;
+    background: #fff8fa;
+    color: #a45163;
+    font-size: 11px;
+    line-height: 1.75;
+}
+
+/* Submit */
+
+.verify-login-submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 4px;
+    padding: 12px 17px;
+    border: 1px solid #152d4b;
+    border-radius: 11px;
+    background: #152d4b;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.verify-login-submit svg {
+    width: 17px;
+    height: 17px;
+    color: #8edbe8;
+}
+
+.verify-login-submit:hover:not(:disabled) {
+    border-color: #205b73;
+    background: #205b73;
+}
+
+.verify-login-submit:disabled {
+    opacity: 0.75;
+    cursor: wait;
+}
+
+.verify-login-spinner {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: verify-login-spin 0.7s linear infinite;
+}
+
+.verify-login-form-status {
+    margin: -7px 0 0;
+    color: #6f899b;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.verify-login-form-status:empty {
+    display: none;
+}
+
+/* Tautan Register */
+
+.verify-login-register {
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid #edf2f6;
+    color: #8193a3;
+    font-size: 12px;
+    text-align: center;
+}
+
+.verify-login-register a {
+    margin-left: 4px;
+    color: #168da2;
+    font-weight: 750;
+}
+
+.verify-login-register a:hover {
+    text-decoration: underline;
+}
+
+.verify-login button:focus-visible,
+.verify-login a:focus-visible {
+    outline: 3px solid #20b4cb;
+    outline-offset: 4px;
+}
+
+/* Hidden */
+
+.verify-login [hidden],
+.verify-login-field-error:empty {
+    display: none !important;
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+    .verify-login {
+        padding: 42px 0 55px;
+    }
+
+    .verify-login-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px;
+        max-width: 580px;
+        padding-inline: 24px;
+    }
+
+    .verify-login-intro,
+    .verify-login-card {
+        max-width: none;
+    }
+
+    .verify-login-intro h1 {
+        font-size: 32px;
+    }
+
+    .verify-login-message,
+    .verify-login-intro-note {
+        display: none;
+    }
+
+    .verify-login-card {
+        justify-self: stretch;
+    }
+}
+
+@media (max-width: 480px) {
+    .verify-login-container {
+        padding-inline: 20px;
+    }
+
+    .verify-login-intro h1 {
+        font-size: 28px;
+        letter-spacing: -0.9px;
+    }
+
+    .verify-login-intro-description {
+        font-size: 12px;
+    }
+
+    .verify-login-card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+}
+
+@keyframes verify-login-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verify-login-input,
+    .verify-login-submit {
+        transition: none;
+    }
+
+    .verify-login-spinner {
+        animation: none;
+    }
+}
+
+/* =========================================
+   VERIFY — SETTINGS PAGE
+   ========================================= */
+
+.verify-settings {
+    padding: 48px 0 65px;
+    background:
+        radial-gradient(
+            ellipse at 10% 0,
+            rgba(32, 180, 203, 0.06),
+            transparent 45%
+        ),
+        #f8fbfd;
+}
+
+.verify-settings-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 32px;
+}
+
+/* Heading */
+
+.verify-settings-heading {
+    margin-bottom: 30px;
+}
+
+.verify-settings-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #448394;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.verify-settings-eyebrow > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #20b4cb;
+    box-shadow: 0 0 0 4px #20b4cb12;
+}
+
+.verify-settings-heading h1 {
+    margin: 14px 0 10px;
+    color: #152d4b;
+    font-size: clamp(29px, 3vw, 38px);
+    line-height: 1.25;
+    letter-spacing: -1.1px;
+}
+
+.verify-settings-heading h1 span {
+    color: #168da2;
+}
+
+.verify-settings-heading > p {
+    margin: 0;
+    color: #7a8fa0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* Layout */
+
+.verify-settings-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    align-items: start;
+    gap: 25px;
+}
+
+.verify-settings-profile,
+.verify-settings-card {
+    min-width: 0;
+    border: 1px solid #dfe9f0;
+    border-radius: 19px;
+    background: #ffffff;
+    box-shadow: 0 7px 24px #152d4b03;
+}
+
+/* Profil kiri */
+
+.verify-settings-profile {
+    padding: 28px 23px;
+    text-align: center;
+}
+
+.verify-settings-avatar {
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 17px;
+    border: 1px solid #cce8ef;
+    border-radius: 23px;
+    background: linear-gradient(145deg, #effbfd, #dff1f6);
+    color: #198da2;
+    font-size: 29px;
+    font-weight: 800;
+}
+
+.verify-settings-profile h2 {
+    margin: 0 0 6px;
+    color: #173650;
+    font-size: 18px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.verify-settings-profile-email {
+    margin: 0;
+    color: #7f94a4;
+    font-size: 11px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.verify-settings-account-badge {
+    display: inline-flex;
+    margin-top: 14px;
+    padding: 5px 10px;
+    border: 1px solid #d7eaf0;
+    border-radius: 999px;
+    background: #f0f9fb;
+    color: #448595;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.verify-settings-profile-divider {
+    height: 1px;
+    margin: 23px 0 17px;
+    background: #eaf0f4;
+}
+
+.verify-settings-profile-note {
+    margin: 0;
+    color: #8a9caa;
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.verify-settings-dashboard-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 17px;
+    color: #357f93;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.verify-settings-dashboard-link:hover {
+    color: #152d4b;
+}
+
+/* Kartu kanan */
+
+.verify-settings-content {
+    display: grid;
+    gap: 18px;
+    min-width: 0;
+}
+
+.verify-settings-card {
+    padding: 24px;
+}
+
+.verify-settings-card-heading {
+    margin-bottom: 22px;
+}
+
+.verify-settings-card-title-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.verify-settings-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d8ebf1;
+    border-radius: 12px;
+    background: #eff9fb;
+    color: #278ba0;
+}
+
+.verify-settings-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.verify-settings-card-title-group h2 {
+    margin: 1px 0 4px;
+    color: #24465f;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.verify-settings-card-title-group p {
+    margin: 0;
+    color: #8396a5;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* Informasi profil */
+
+.verify-settings-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0;
+}
+
+.verify-settings-details > div {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e2ebf1;
+    border-radius: 11px;
+    background: #fbfdfe;
+}
+
+.verify-settings-details dt {
+    margin-bottom: 6px;
+    color: #8799a7;
+    font-size: 10px;
+}
+
+.verify-settings-details dd {
+    margin: 0;
+    color: #375a71;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Fitur belum tersedia */
+
+.verify-settings-pending {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 19px;
+    padding-top: 15px;
+    border-top: 1px solid #edf2f6;
+}
+
+.verify-settings-pending-badge {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding: 4px 7px;
+    border-radius: 6px;
+    background: #f0f4f7;
+    color: #7d91a0;
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.verify-settings-pending p {
+    margin: 2px 0 0;
+    color: #8b9ca9;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* Keamanan */
+
+.verify-settings-security-tip {
+    padding: 15px 17px;
+    border: 1px solid #dcecf1;
+    border-radius: 12px;
+    background: #f3fafc;
+}
+
+.verify-settings-security-tip h3 {
+    margin: 0 0 6px;
+    color: #3b6a7e;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.verify-settings-security-tip p {
+    margin: 0;
+    color: #7893a2;
+    font-size: 11px;
+    line-height: 1.85;
+}
+
+/* Sesi dan Logout */
+
+.verify-settings-session {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+}
+
+.verify-settings-session-content h2 {
+    margin: 0 0 6px;
+    color: #34536a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.verify-settings-session-content p {
+    margin: 0;
+    color: #8496a5;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.verify-settings-logout-form {
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.verify-settings-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 40px;
+    padding: 10px 15px;
+    border: 1px solid #ead6dc;
+    border-radius: 10px;
+    background: #fff8fa;
+    color: #a15c6d;
+    font-size: 11px;
+    font-weight: 700;
+    transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+.verify-settings-logout svg {
+    width: 17px;
+    height: 17px;
+}
+
+.verify-settings-logout:hover {
+    border-color: #dcbbc5;
+    background: #fceff3;
+}
+
+.verify-settings a:focus-visible,
+.verify-settings button:focus-visible {
+    outline: 3px solid #20b4cb;
+    outline-offset: 4px;
+}
+
+/* Responsive */
+
+@media (max-width: 850px) {
+    .verify-settings {
+        padding: 35px 0 50px;
+    }
+
+    .verify-settings-container {
+        padding-inline: 24px;
+    }
+
+    .verify-settings-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .verify-settings-profile {
+        padding: 24px;
+    }
+
+    .verify-settings-profile-note {
+        max-width: 340px;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 540px) {
+    .verify-settings-container {
+        padding-inline: 20px;
+    }
+
+    .verify-settings-heading {
+        margin-bottom: 24px;
+    }
+
+    .verify-settings-card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .verify-settings-details {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .verify-settings-pending {
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .verify-settings-session {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 17px;
+    }
+
+    .verify-settings-logout {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verify-settings-logout {
+        transition: none;
     }
 }

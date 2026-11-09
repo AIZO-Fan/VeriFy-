@@ -1,25 +1,292 @@
 @extends('layouts.app')
 
+@section('title', 'Settings')
+
 @section('content')
-<div style="padding: 40px; font-family: sans-serif; max-width: 800px; margin: auto;">
-    <h2>Pengaturan Akun</h2>
 
-    <!-- Menampilkan nama user yang sedang login -->
-    <p>Halo, <strong>{{ auth()->user()->name }}</strong>!</p>
+@php
+    $user = auth()->user();
 
-    <hr style="margin: 20px 0; border: 1px solid #eee;">
+    $initial = mb_strtoupper(
+        mb_substr($user->name ?? 'U', 0, 1)
+    );
+@endphp
 
-    <div style="margin-top: 20px;">
-        <h3>Sesi Akun</h3>
-        <p style="color: gray; margin-bottom: 15px;">Keluar dari sesi aplikasi VeriFy saat ini.</p>
+<section
+    class="verify-settings"
+    aria-labelledby="verify-settings-title">
 
-        <!-- Form Logout -->
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" style="background-color: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
-                Logout
-            </button>
-        </form>
+    <div class="verify-settings-container">
+
+        {{-- HEADING --}}
+        <header class="verify-settings-heading">
+
+            <span class="verify-settings-eyebrow">
+                <span aria-hidden="true"></span>
+                RUANG PERSONALMU
+            </span>
+
+            <h1 id="verify-settings-title">
+                Pengaturan <span>akun.</span>
+            </h1>
+
+            <p>
+                Lihat informasi profil dan kelola sesi akun VeriFy.
+            </p>
+
+        </header>
+
+
+        <div class="verify-settings-layout">
+
+            {{-- RINGKASAN PROFIL --}}
+            <aside
+                class="verify-settings-profile"
+                aria-labelledby="verify-settings-profile-name">
+
+                <div
+                    class="verify-settings-avatar"
+                    aria-hidden="true">
+                    {{ $initial }}
+                </div>
+
+                <h2 id="verify-settings-profile-name">
+                    {{ $user->name }}
+                </h2>
+
+                <p class="verify-settings-profile-email">
+                    {{ $user->email }}
+                </p>
+
+                <span class="verify-settings-account-badge">
+                    Akun VeriFy
+                </span>
+
+                <div class="verify-settings-profile-divider"></div>
+
+                <p class="verify-settings-profile-note">
+                    Belajar mengenali risikonya.
+                    Berlatih mengambil keputusan yang lebih bijak.
+                </p>
+
+                <a
+                    class="verify-settings-dashboard-link"
+                    href="{{ route('home') }}">
+                    Kembali ke Dashboard
+                    <span aria-hidden="true">→</span>
+                </a>
+
+            </aside>
+
+
+            {{-- PENGATURAN --}}
+            <div class="verify-settings-content">
+
+                {{-- INFORMASI PROFIL --}}
+                <section
+                    class="verify-settings-card"
+                    aria-labelledby="verify-settings-info-title">
+
+                    <div class="verify-settings-card-heading">
+
+                        <div class="verify-settings-card-title-group">
+
+                            <span
+                                class="verify-settings-icon"
+                                aria-hidden="true">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <circle cx="12" cy="8" r="4" />
+                                    <path d="M4 21V19C4 15.7 7.6 14 12 14S20 15.7 20 19V21" />
+                                </svg>
+
+                            </span>
+
+                            <div>
+
+                                <h2 id="verify-settings-info-title">
+                                    Informasi profil
+                                </h2>
+
+                                <p>
+                                    Identitas yang terhubung ke akunmu.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <dl class="verify-settings-details">
+
+                        <div>
+                            <dt>Nama lengkap</dt>
+                            <dd>{{ $user->name }}</dd>
+                        </div>
+
+                        <div>
+                            <dt>Email</dt>
+                            <dd>{{ $user->email }}</dd>
+                        </div>
+
+                    </dl>
+
+
+                    <div class="verify-settings-pending">
+
+                        <span class="verify-settings-pending-badge">
+                            Segera tersedia
+                        </span>
+
+                        <p>
+                            Perubahan nama dan email belum tersedia
+                            pada versi ini.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                {{-- KEAMANAN --}}
+                <section
+                    class="verify-settings-card"
+                    aria-labelledby="verify-settings-security-title">
+
+                    <div class="verify-settings-card-heading">
+
+                        <div class="verify-settings-card-title-group">
+
+                            <span
+                                class="verify-settings-icon"
+                                aria-hidden="true">
+
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.7"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect
+                                        x="5"
+                                        y="10"
+                                        width="14"
+                                        height="11"
+                                        rx="3" />
+                                    <path d="M8 10V7A4 4 0 0 1 16 7V10" />
+                                    <path d="M12 14V17" />
+                                </svg>
+
+                            </span>
+
+                            <div>
+
+                                <h2 id="verify-settings-security-title">
+                                    Keamanan akun
+                                </h2>
+
+                                <p>
+                                    Jaga akses akun tetap dalam kendalimu.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="verify-settings-security-tip">
+
+                        <h3>Jangan bagikan password akunmu.</h3>
+
+                        <p>
+                            Gunakan password yang berbeda dari akun lain
+                            dan hindari membagikannya kepada siapa pun.
+                        </p>
+
+                    </div>
+
+                    <div class="verify-settings-pending">
+
+                        <span class="verify-settings-pending-badge">
+                            Segera tersedia
+                        </span>
+
+                        <p>
+                            Fitur ganti password belum tersedia
+                            pada versi ini.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                {{-- SESI AKUN --}}
+                <section
+                    class="verify-settings-card verify-settings-session"
+                    aria-labelledby="verify-settings-session-title">
+
+                    <div class="verify-settings-session-content">
+
+                        <h2 id="verify-settings-session-title">
+                            Selesai menggunakan VeriFy?
+                        </h2>
+
+                        <p>
+                            Keluar dari akun jika kamu menggunakan
+                            perangkat bersama.
+                        </p>
+
+                    </div>
+
+                    <form
+                        class="verify-settings-logout-form"
+                        action="{{ route('logout') }}"
+                        method="POST">
+
+                        @csrf
+
+                        <button
+                            class="verify-settings-logout"
+                            type="submit">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.7"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M9 4H5A2 2 0 0 0 3 6V18A2 2 0 0 0 5 20H9" />
+                                <path d="M10 12H21M17 8L21 12L17 16" />
+                            </svg>
+
+                            <span>Logout</span>
+
+                        </button>
+
+                    </form>
+
+                </section>
+
+            </div>
+
+        </div>
+
     </div>
-</div>
+
+</section>
+
 @endsection
