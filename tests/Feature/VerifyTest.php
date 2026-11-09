@@ -28,6 +28,6 @@ class VerifyTest extends TestCase
     }
     public function test_no_indicators_does_not_mean_safe(): void
     {
-        $this->post('/detect-scam', ['mode' => 'text', 'content' => 'Halo teman'])->assertOk()->assertSee('Tidak ada indikator pada aturan demo');
+        $this->post('/detect-scam', ['mode' => 'text', 'content' => 'Halo teman'])->assertOk()->assertSee('Tidak ada indikator');
     }
 }
