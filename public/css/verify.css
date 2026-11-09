@@ -14145,3 +14145,711 @@ dialog.verify-story-dialog {
         transition: none;
     }
 }
+
+/* LESSON — dummy materi lengkap */
+
+.verify-lesson-sections {
+    padding-top: 5px;
+}
+
+.verify-lesson-section {
+    padding: 27px 0;
+}
+
+.verify-lesson-section + .verify-lesson-section {
+    border-top: 1px solid #e8eff4;
+}
+
+.verify-lesson-section-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-bottom: 15px;
+}
+
+.verify-lesson-section-number {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #dcecf1;
+    border-radius: 9px;
+    background: #f1f9fb;
+    color: #278297;
+    font-size: 10px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.verify-lesson-section-heading h3 {
+    margin: 3px 0 0;
+    color: #203d53;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -.35px;
+}
+
+.verify-lesson-section-body {
+    padding-left: 43px;
+    color: #516b7e;
+    font-size: 14px;
+    line-height: 1.95;
+    overflow-wrap: anywhere;
+}
+
+.verify-lesson-section-body > p {
+    margin: 0 0 13px;
+}
+
+.verify-lesson-section-body > p:last-child {
+    margin-bottom: 0;
+}
+
+.verify-lesson-section-body ul {
+    display: grid;
+    gap: 10px;
+    margin: 15px 0 0;
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.verify-lesson-section-body li {
+    padding-left: 4px;
+}
+
+.verify-lesson-section-body li::marker {
+    color: #3995a8;
+}
+
+.verify-lesson-section-body h4 {
+    margin: 20px 0 10px;
+    color: #29495e;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* Pesan fiktif */
+
+.verify-lesson-message {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #dde7ee;
+    border-left: 3px solid #63afbf;
+    border-radius: 0 12px 12px 0;
+    background: #f6f9fc;
+}
+
+.verify-lesson-message figcaption {
+    margin-bottom: 11px;
+    color: #628092;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.verify-lesson-message blockquote {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #35536a;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.9;
+}
+
+/* Ringkasan */
+
+.verify-lesson-section--summary {
+    margin: 6px 0 24px;
+    padding: 22px;
+    border: 1px solid #dceef2;
+    border-radius: 14px;
+    background: #f1fafb;
+}
+
+.verify-lesson-section--summary .verify-lesson-section-number {
+    border-color: #cce5ec;
+    background: #fff;
+}
+
+.verify-lesson-section--summary .verify-lesson-section-heading h3 {
+    color: #23677a;
+}
+
+/* Preview penyelesaian materi */
+
+.verify-lesson-completion {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 0 24px;
+    padding-top: 23px;
+    border-top: 1px solid #e5edf2;
+}
+
+.verify-lesson-completion-copy {
+    flex: 1 1 240px;
+}
+
+.verify-lesson-completion-copy h3 {
+    margin: 0 0 7px;
+    color: #27465c;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.verify-lesson-completion-copy p {
+    margin: 0;
+    color: #657d8e;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.verify-lesson-complete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 11px 16px;
+    border: 1px solid #bddde6;
+    border-radius: 10px;
+    background: #ecf7fa;
+    color: #26788b;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+.verify-lesson-complete-button:hover {
+    border-color: #95c6d3;
+    background: #dff1f6;
+}
+
+.verify-lesson-complete-button:focus-visible {
+    outline: 3px solid rgba(32, 180, 203, .4);
+    outline-offset: 3px;
+}
+
+.verify-lesson-complete-button:disabled {
+    border-color: #d8e7ec;
+    background: #f2f7f9;
+    color: #587582;
+    cursor: default;
+}
+
+.verify-lesson-demo-note {
+    flex-basis: 100%;
+    color: #718593;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .verify-lesson-section {
+        padding-block: 23px;
+    }
+
+    .verify-lesson-section-heading {
+        gap: 10px;
+    }
+
+    .verify-lesson-section-heading h3 {
+        font-size: 16px;
+    }
+
+    .verify-lesson-section-body {
+        padding-left: 0;
+        font-size: 13px;
+    }
+
+    .verify-lesson-section--summary {
+        padding: 18px;
+    }
+
+    .verify-lesson-message {
+        padding: 17px;
+    }
+
+    .verify-lesson-complete-button {
+        width: 100%;
+    }
+}
+
+/* VERIFY — lesson reader */
+
+.vl-reader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    align-items: start;
+    gap: 25px;
+    scroll-margin-top: 100px;
+}
+
+.vl-reader [hidden] {
+    display: none !important;
+}
+
+.vl-reader-card {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #dfe9f0;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 8px 28px rgba(21, 45, 75, .025);
+}
+
+.vl-reader-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 23px 30px 18px;
+}
+
+.vl-reader-position {
+    flex-shrink: 0;
+    color: #6a8192;
+    font-size: 11px;
+}
+
+.vl-reader-meter {
+    height: 3px;
+    background: #edf4f7;
+}
+
+.vl-reader-meter > span {
+    display: block;
+    height: 100%;
+    background: #28a9bd;
+}
+
+.vl-reader-content {
+    padding: 33px 34px 30px;
+}
+
+.vl-reader-page-label {
+    display: block;
+    margin-bottom: 12px;
+    color: #4c8393;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.vl-reader-title {
+    margin: 0 0 23px;
+    color: #19364e;
+    font-size: clamp(23px, 2vw, 29px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -.75px;
+    overflow-wrap: anywhere;
+}
+
+.vl-reader-title:focus {
+    outline: none;
+}
+
+.vl-reader-copy {
+    color: #526d81;
+    font-size: 14px;
+    line-height: 1.95;
+    overflow-wrap: anywhere;
+}
+
+.vl-reader-copy > p {
+    margin: 0 0 17px;
+}
+
+.vl-reader-copy > :last-child {
+    margin-bottom: 0;
+}
+
+.vl-reader-copy ul {
+    display: grid;
+    gap: 13px;
+    margin: 20px 0 0;
+    padding-left: 21px;
+    list-style: disc;
+}
+
+.vl-reader-copy li {
+    padding-left: 5px;
+}
+
+.vl-reader-copy li::marker {
+    color: #3596a9;
+}
+
+.vl-reader-copy h3 {
+    margin: 23px 0 12px;
+    color: #2b4c62;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Exemple de message */
+
+.vl-reader .verify-lesson-message {
+    margin: 23px 0;
+    padding: 21px;
+    border: 1px solid #dce9ef;
+    border-left: 3px solid #57a6b8;
+    border-radius: 0 12px 12px 0;
+    background: #f5f9fc;
+}
+
+.vl-reader .verify-lesson-message figcaption {
+    margin-bottom: 12px;
+    color: #608194;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.vl-reader .verify-lesson-message blockquote {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #36566c;
+    font-size: 13px;
+    font-style: normal;
+    line-height: 1.95;
+}
+
+/* Ringkasan */
+
+.vl-reader-copy--summary {
+    padding: 23px;
+    border: 1px solid #daedf1;
+    border-radius: 13px;
+    background: #f1fafb;
+}
+
+/* Navigasi bawah */
+
+.vl-reader-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 13px;
+    padding: 22px 30px;
+    border-top: 1px solid #e7eef3;
+}
+
+.vl-reader-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 43px;
+    padding: 11px 16px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+.vl-reader-button--previous {
+    border-color: #dce7ee;
+    background: #fff;
+    color: #4e6a7e;
+}
+
+.vl-reader-button--previous:hover:not(:disabled) {
+    border-color: #bddbe4;
+    background: #f2f9fb;
+}
+
+.vl-reader-button--previous:disabled {
+    border-color: #e9eff3;
+    background: #fafcfd;
+    color: #98a9b5;
+    cursor: default;
+}
+
+.vl-reader-button--next {
+    border-color: #19394f;
+    background: #19394f;
+    color: #fff;
+}
+
+.vl-reader-button--next:hover {
+    border-color: #24556e;
+    background: #24556e;
+}
+
+.vl-reader-button--next > span {
+    color: #9edfe9;
+}
+
+.vl-reader-pagination {
+    color: #758a99;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Daftar isi */
+
+.vl-reader-outline {
+    border: 1px solid #dfe9ef;
+    border-radius: 17px;
+    background: #fff;
+}
+
+.vl-reader-outline summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 23px 22px;
+    color: #28485d;
+    font-size: 14px;
+    font-weight: 700;
+    list-style: none;
+    cursor: pointer;
+}
+
+.vl-reader-outline summary::-webkit-details-marker {
+    display: none;
+}
+
+.vl-reader-outline-toggle {
+    color: #56869a;
+}
+
+.vl-reader-outline[open] .vl-reader-outline-toggle {
+    transform: rotate(180deg);
+}
+
+.vl-reader-outline-body {
+    padding: 0 14px 17px;
+}
+
+.vl-reader-outline-body > p {
+    margin: -6px 8px 19px;
+    color: #758a99;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.vl-reader-outline ol {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.vl-reader-outline-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #617b8c;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.75;
+    text-align: left;
+    cursor: pointer;
+}
+
+.vl-reader-outline-number {
+    flex-shrink: 0;
+    min-width: 20px;
+    color: #879aa7;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+.vl-reader-outline-link:hover {
+    background: #f6fafc;
+    color: #28576b;
+}
+
+.vl-reader-outline-link[aria-current="step"] {
+    border-color: #d9edf2;
+    background: #edf8fb;
+    color: #22778b;
+    font-weight: 700;
+}
+
+.vl-reader-outline-link[aria-current="step"]
+.vl-reader-outline-number {
+    color: #25879a;
+}
+
+.vl-reader-outline-note {
+    margin: 17px 8px 0;
+    padding-top: 16px;
+    border-top: 1px solid #e8eff4;
+    color: #748a99;
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+/* Selesai */
+
+.vl-reader-finished {
+    margin: 0 30px 20px;
+    padding: 23px;
+    border: 1px solid #d7eaf0;
+    border-radius: 13px;
+    background: #f1fafc;
+}
+
+.vl-reader-finished h3 {
+    margin: 10px 0;
+    color: #254b60;
+    font-size: 19px;
+    line-height: 1.5;
+    letter-spacing: -.4px;
+}
+
+.vl-reader-finished > p {
+    margin: 0;
+    color: #5c7b8d;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.vl-reader-finished .verify-lesson-practice-link {
+    max-width: 260px;
+    margin-top: 19px;
+}
+
+.vl-reader-demo-note {
+    margin: 0;
+    padding: 0 30px 20px;
+    color: #7a8e9c;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.vl-reader-empty {
+    padding: 30px;
+    color: #637d8f;
+    font-size: 14px;
+}
+
+.vl-reader button:focus-visible,
+.vl-reader summary:focus-visible {
+    outline: 3px solid rgba(32, 180, 203, .5);
+    outline-offset: 3px;
+}
+
+.vl-reader-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Tablet dan ponsel */
+
+@media (max-width: 1100px) {
+    .vl-reader {
+        grid-template-columns: minmax(0, 1fr) 270px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 850px) {
+    .vl-reader {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .vl-reader-sidebar {
+        grid-row: 1;
+    }
+
+    .vl-reader-outline summary {
+        padding: 18px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .vl-reader-card {
+        border-radius: 16px;
+    }
+
+    .vl-reader-top {
+        padding: 20px;
+    }
+
+    .vl-reader-position {
+        font-size: 10px;
+    }
+
+    .vl-reader-content {
+        padding: 26px 21px;
+    }
+
+    .vl-reader-title {
+        font-size: 24px;
+    }
+
+    .vl-reader-copy {
+        font-size: 13px;
+    }
+
+    .vl-reader-copy--summary {
+        padding: 18px;
+    }
+
+    .vl-reader-navigation {
+        gap: 10px;
+        padding: 19px;
+    }
+
+    .vl-reader-button {
+        padding: 10px 12px;
+    }
+
+    .vl-reader-pagination {
+        font-size: 10px;
+    }
+
+    .vl-reader-finished {
+        margin-inline: 20px;
+        padding: 20px;
+    }
+
+    .vl-reader-demo-note {
+        padding-inline: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .vl-reader-pagination {
+        order: -1;
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .vl-reader-button {
+        flex: 1;
+    }
+}
