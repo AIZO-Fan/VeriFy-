@@ -28,6 +28,29 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
         rel="stylesheet">
 
+    {{-- DARK MODE: terapkan tema sebelum CSS dimuat --}}
+<script>
+    (function () {
+        let savedTheme = null;
+
+        try {
+            savedTheme = localStorage.getItem('verify-theme');
+        } catch (error) {
+            savedTheme = null;
+        }
+
+        const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+        ).matches;
+
+        const theme = savedTheme === 'light' || savedTheme === 'dark'
+            ? savedTheme
+            : (prefersDark ? 'dark' : 'light');
+
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+
     <link
         rel="stylesheet"
         href="{{ asset('css/verify.css') }}">
