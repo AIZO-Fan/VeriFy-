@@ -11,18 +11,29 @@ class Module extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
-        'color',
-        'icon',
-        'lessons',
-        'order',
-        'is_active',
+        'status',
+        'sort_order'
     ];
 
-    protected $casts = [
-        'lessons' => 'array',
-        'is_active' => 'boolean',
-        'order' => 'integer',
-    ];
+    // Relasi ke bagian-bagian materi
+    public function sections()
+    {
+        return $this->hasMany(ModuleSection::class)->orderBy('sort_order', 'asc')->orderBy('id', 'asc');
+    }
+
+    // Relasi ke skenario simulator
+    public function scenarios()
+    {
+        return $this->hasMany(SimulationScenario::class);
+    }
+
+    // Relasi khusus skenario yang sudah dipublikasikan
+    public function publishedScenarios()
+    {
+        return $this->hasMany(SimulationScenario::class)
+            ->where('status', 'published')
+            ->orderBy('sort_order', 'asc');
+    }
 }
-

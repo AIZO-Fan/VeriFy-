@@ -1,124 +1,13 @@
 @extends('layouts.app')
 
-@section('title', $module['title'])
+@section('title', $module->title)
 
 @section('content')
 
 @php
-/*
-* Data dummy frontend.
-* Belum menyimpan posisi membaca atau status selesai ke database.
-*/
-$isDemoModule = (string) $module['id'] === '1';
-
-$demoSections = [
-[
-'type' => 'text',
-'title' => 'Apa yang akan kamu pelajari?',
-'paragraphs' => [
-'Pesan yang terlihat meyakinkan belum tentu berasal dari pihak yang kamu percaya. Dalam modul ini, kamu akan belajar mengambil jeda sebelum mengikuti permintaan yang datang lewat pesan digital.',
-],
-'items' => [
-'Mengenali pola dasar penipuan digital.',
-'Memahami tanda yang perlu diperiksa lebih lanjut.',
-'Memilih langkah verifikasi sebelum bertindak.',
-],
-],
-[
-'type' => 'text',
-'title' => 'Mengenal penipuan digital',
-'paragraphs' => [
-'Penipuan digital dapat dimulai dari pesan, email, atau situs yang menyamar sebagai pihak lain. Pengirim dapat mengaku sebagai layanan yang kamu gunakan agar permintaannya terasa masuk akal.',
-'Salah satu bentuknya adalah phishing: pesan yang berusaha membuatmu membuka tautan, membuka lampiran, atau memberikan informasi dengan memakai alasan tertentu, misalnya masalah pada akun.',
-'Nama pengirim dan tampilan yang terlihat familiar bukan alasan yang cukup untuk langsung mengikuti instruksinya. Periksa permintaannya dan pastikan identitas pengirim melalui saluran lain.',
-],
-'items' => [],
-],
-[
-'type' => 'text',
-'title' => 'Bagaimana pesan tersebut memengaruhi keputusanmu?',
-'paragraphs' => [
-'Bayangkan kamu menerima pesan tentang akun yang akan diblokir. Pesan itu meminta tindakan segera melalui sebuah tautan. Kekhawatiran kehilangan akses dapat membuatmu ingin menyelesaikannya secepat mungkin.',
-'Pada situasi lain, pengirim menawarkan hadiah atau keuntungan. Ceritanya berbeda, tetapi kamu tetap perlu memeriksa apa yang diminta sebelum mengikuti instruksi.',
-],
-'items' => [
-'Mengaku sebagai pihak yang kamu kenal atau percaya.',
-'Menyampaikan masalah atau tawaran untuk menarik perhatian.',
-'Mengarahkanmu melakukan tindakan melalui saluran yang disediakan pengirim.',
-],
-],
-[
-'type' => 'text',
-'title' => 'Tanda yang perlu diperhatikan',
-'paragraphs' => [
-'Gunakan tanda berikut sebagai alasan untuk berhenti dan memeriksa, bukan sebagai penilaian tunggal bahwa sebuah pesan pasti penipuan.',
-],
-'items' => [
-'Pesan tidak terduga yang meminta pembaruan informasi akun atau pembayaran.',
-'Permintaan untuk membuka tautan atau lampiran yang belum kamu pastikan sumbernya.',
-'Tekanan untuk segera bertindak sebelum kamu sempat melakukan verifikasi.',
-'Permintaan informasi pribadi atau kredensial melalui percakapan yang tidak kamu mulai.',
-],
-],
-[
-'type' => 'example',
-'title' => 'Contoh kasus: pemberitahuan akun',
-'paragraphs' => [
-'Bayangkan kamu menerima pesan berikut, padahal kamu tidak sedang mengurus pemulihan akun.',
-],
-'message' => 'Pemberitahuan: akun Anda akan dinonaktifkan dalam 30 menit. Segera lakukan verifikasi melalui tautan pada pesan ini agar akses tetap aktif.',
-'items' => [
-'Ancaman penonaktifan akun dan batas waktu dapat mendorong keputusan terburu-buru.',
-'Pesan mengarahkan penerima ke tautan yang belum diverifikasi.',
-'Informasi perlu diperiksa dengan membuka aplikasi resmi secara mandiri atau menghubungi layanan melalui kontak yang sudah diketahui.',
-],
-],
-[
-'type' => 'text',
-'title' => 'Apa yang bisa kamu lakukan?',
-'paragraphs' => [
-'Kamu tidak harus menyelesaikan permintaan melalui pesan yang masuk. Ambil jeda dan pilih jalur pemeriksaan yang tidak bergantung pada informasi dari pengirim.',
-],
-'items' => [
-'Jangan langsung membuka tautan atau lampiran dari pesan yang mencurigakan.',
-'Buka aplikasi atau situs resmi melalui jalur yang sudah kamu ketahui.',
-'Hubungi pihak terkait memakai nomor atau kontak resmi yang kamu cari secara mandiri.',
-'Jangan memberikan kata sandi atau informasi sensitif kepada pengirim yang menghubungimu secara tidak terduga.',
-],
-],
-[
-'type' => 'summary',
-'title' => 'Ingat sebelum melanjutkan',
-'paragraphs' => [
-'Fokus pada apa yang diminta, bukan hanya siapa yang diklaim sebagai pengirim.',
-],
-'items' => [
-'Ambil jeda sebelum bertindak.',
-'Periksa permintaan dan sumber informasinya.',
-'Verifikasi melalui saluran terpisah yang sudah kamu percaya.',
-],
-],
-];
-
-/*
-* Modul pertama memakai materi dummy lengkap.
-* Modul lainnya tetap memakai materi dari controller.
-*/
-$readerSections = $isDemoModule
-? $demoSections
-: collect($module['lessons'] ?? [])
-->values()
-->map(function ($text, $index) {
-return [
-'type' => 'text',
-'title' => 'Materi ' . ($index + 1),
-'paragraphs' => [$text],
-'items' => [],
-];
-})
-->all();
-
-$sectionCount = count($readerSections);
+// Menggunakan data asli dari database
+$readerSections = $module->sections;
+$sectionCount = $readerSections->count();
 @endphp
 
 <section class="verify-lesson">
@@ -137,7 +26,6 @@ $sectionCount = count($readerSections);
                 <path d="M19 12H5" />
                 <path d="m12 19-7-7 7-7" />
             </svg>
-
             <span>Semua modul</span>
         </a>
 
@@ -145,12 +33,12 @@ $sectionCount = count($readerSections);
         <header class="verify-lesson-heading">
             <span class="verify-lesson-eyebrow">
                 <span aria-hidden="true"></span>
-                MODUL {{ str_pad((string) $module['id'], 2, '0', STR_PAD_LEFT) }}
+                MODUL {{ str_pad((string) $module->id, 2, '0', STR_PAD_LEFT) }}
             </span>
 
-            <h1>{{ $module['title'] }}</h1>
+            <h1>{{ $module->title }}</h1>
 
-            <p>{{ $module['description'] }}</p>
+            <p>{{ $module->description }}</p>
         </header>
 
         @if($sectionCount > 0)
@@ -175,16 +63,16 @@ $sectionCount = count($readerSections);
                 <div class="vl-reader-meter" aria-hidden="true">
                     <span
                         data-reader-meter
-                        style="width: {{ 100 / $sectionCount }}%;"></span>
+                        @style(['width'=> (100 / $sectionCount) . '%'])></span>
                 </div>
 
                 {{-- BAGIAN MATERI --}}
                 <div class="vl-reader-content">
-                    @foreach($readerSections as $section)
+                    @foreach($readerSections as $index => $section)
                     <section
                         class="vl-reader-page"
                         data-reader-page
-                        aria-labelledby="reader-title-{{ $loop->index }}"
+                        aria-labelledby="reader-title-{{ $index }}"
                         @if(!$loop->first) hidden @endif
                         >
                         <span class="vl-reader-page-label">
@@ -192,40 +80,18 @@ $sectionCount = count($readerSections);
                         </span>
 
                         <h2
-                            id="reader-title-{{ $loop->index }}"
+                            id="reader-title-{{ $index }}"
                             class="vl-reader-title"
                             tabindex="-1">
-                            {{ $section['title'] }}
+                            @if($section->type === 'example') 💡
+                            @elseif($section->type === 'summary') 📌
+                            @endif
+                            {{ $section->title }}
                         </h2>
 
-                        <div class="vl-reader-copy vl-reader-copy--{{ $section['type'] }}">
-
-                            @foreach($section['paragraphs'] as $paragraph)
-                            <p>{{ $paragraph }}</p>
-                            @endforeach
-
-                            @if($section['type'] === 'example')
-                            <figure class="verify-lesson-message">
-                                <figcaption>
-                                    CONTOH PESAN FIKTIF
-                                </figcaption>
-
-                                <blockquote>
-                                    {{ $section['message'] ?? '' }}
-                                </blockquote>
-                            </figure>
-
-                            <h3>Apa yang perlu diperiksa?</h3>
-                            @endif
-
-                            @if(!empty($section['items']))
-                            <ul>
-                                @foreach($section['items'] as $item)
-                                <li>{{ $item }}</li>
-                                @endforeach
-                            </ul>
-                            @endif
-
+                        <div class="vl-reader-copy vl-reader-copy--{{ $section->type }}">
+                            {{-- Karena format content sudah berupa string HTML tersanitasi dari database --}}
+                            {!! $section->content !!}
                         </div>
                     </section>
                     @endforeach
@@ -285,18 +151,17 @@ $sectionCount = count($readerSections);
                         dalam cerita interaktif.
                     </p>
 
+                    @if($practice['available'])
                     <a
                         class="verify-lesson-practice-link"
-                        href="{{ route('simulator', ['topic' => $module['id']]) }}">
+                        href="{{ $practice['url'] }}">
                         Latih pemahamanmu
                         <span aria-hidden="true">→</span>
                     </a>
+                    @else
+                    <p style="color: #64748b; font-size: 0.9em; margin-top: 10px;">Latihan simulasi untuk modul ini belum tersedia.</p>
+                    @endif
                 </div>
-
-                <p class="vl-reader-demo-note">
-                    Preview frontend — posisi membaca dan status
-                    selesai belum disimpan ke akun.
-                </p>
 
                 <p
                     class="vl-reader-sr-only"
@@ -329,12 +194,12 @@ $sectionCount = count($readerSections);
 
                         <nav aria-label="Daftar isi modul">
                             <ol>
-                                @foreach($readerSections as $section)
+                                @foreach($readerSections as $index => $section)
                                 <li>
                                     <button
                                         class="vl-reader-outline-link"
                                         type="button"
-                                        data-reader-jump="{{ $loop->index }}"
+                                        data-reader-jump="{{ $index }}"
                                         @if($loop->first) aria-current="step" @endif
                                         >
                                         <span class="vl-reader-outline-number">
@@ -342,7 +207,7 @@ $sectionCount = count($readerSections);
                                         </span>
 
                                         <span>
-                                            {{ $section['title'] }}
+                                            {{ $section->title }}
                                         </span>
                                     </button>
                                 </li>
@@ -474,9 +339,10 @@ $sectionCount = count($readerSections);
             render();
 
             announcement.textContent =
-                'Materi ditandai selesai dalam preview. Progres belum disimpan ke akun.';
+                'Materi ditandai selesai.';
 
-            finished.querySelector('a').focus();
+            const finishedLink = finished.querySelector('a');
+            if (finishedLink) finishedLink.focus();
         });
 
         function syncOutline() {
@@ -489,5 +355,4 @@ $sectionCount = count($readerSections);
         render();
     })();
 </script>
-
 @endsection

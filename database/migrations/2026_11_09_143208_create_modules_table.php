@@ -6,28 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->string('color')->default('blue');
-            $table->string('icon')->default('shield');
-            $table->json('lessons')->nullable();
-            $table->integer('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('modules');
     }

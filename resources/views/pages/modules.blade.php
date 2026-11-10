@@ -60,25 +60,24 @@
         atau kebutuhanmu.
     </p>
 
+    {{-- GRID DAFTAR MODUL --}}
     <div class="module-grid">
         @foreach ($modules as $module)
-
-        <article class="module-card {{ $module['color'] }}">
+        <article class="module-card {{ $module['color'] ?? 'blue' }}">
 
             <span class="badge">
                 Modul {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
             </span>
 
             <div class="module-icon">
-                <x-icon :name="$module['icon']" />
+                <x-icon :name="$module['icon'] ?? 'shield'" />
             </div>
 
             <h2>{{ $module['title'] }}</h2>
 
             <p>{{ $module['description'] }}</p>
 
-            <a class="mini-button"
-                href="{{ route('lesson', $module['id']) }}">
+            <a class="mini-button" href="{{ route('lesson', $module['id']) }}">
                 Explore Module <span>›</span>
             </a>
 
@@ -89,7 +88,6 @@
             <div class="card-decoration"></div>
 
         </article>
-
         @endforeach
     </div>
 
