@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\ScanHistory;
 use App\Models\SimulationAttempt;
 use App\Models\SimulationScenario;
 use App\Models\User;
 
-class DashboardController extends Controllers
+class DashboardController extends Controller
 {
     public function index()
     {

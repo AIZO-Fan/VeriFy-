@@ -117,12 +117,12 @@
                         </div>
                     </div>
                     <div>
-                        @if($scan->status === 'danger')
-                            <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">Bahaya</span>
-                        @elseif($scan->status === 'warning')
-                            <span style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">Waspada</span>
+                        @if($scan->risk_level === 'danger')
+                            <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
+                        @elseif($scan->risk_level === 'warning')
+                            <span style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
                         @else
-                            <span style="background: rgba(34, 197, 94, 0.15); color: #16a34a; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">Aman</span>
+                            <span style="background: rgba(34, 197, 94, 0.15); color: #16a34a; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
                         @endif
                     </div>
                 </div>

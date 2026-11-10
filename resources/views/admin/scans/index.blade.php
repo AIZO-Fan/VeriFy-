@@ -59,11 +59,11 @@
                                 <span style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--theme-border);">
                                     {{ $scan->mode }}
                                 </span>
-                                @if($scan->status === 'danger')
+                                @if($scan->risk_level === 'danger')
                                     <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.8rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">
                                         {{ $scan->score }}% Bahaya
                                     </span>
-                                @elseif($scan->status === 'warning')
+                                @elseif($scan->risk_level === 'warning')
                                     <span style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.8rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">
                                         {{ $scan->score }}% Waspada
                                     </span>
