@@ -103,49 +103,48 @@
 
                         </div>
 
-                        <div class="verify-settings-theme-options">
-
+                        <div class="verify-settings-theme-options" role="group" aria-label="Pilih mode tampilan">
                             <button type="button" class="verify-settings-theme-button" data-theme-option="light"
                                 aria-pressed="false">
-
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-
-                                    <circle cx="12" cy="12" r="4" />
-                                    <path d="M12 2V4M12 20V22M4.93 4.93L6.34 6.34M17.66 17.66L19.07 19.07" />
-                                    <path d="M2 12H4M20 12H22M4.93 19.07L6.34 17.66M17.66 6.34L19.07 4.93" />
-
-                                </svg>
+                                <span class="verify-settings-theme-symbol" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="3.5" />
+                                        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" />
+                                        <path d="m5 5 1.4 1.4M17.6 17.6 19 19" />
+                                        <path d="m5 19 1.4-1.4M17.6 6.4 19 5" />
+                                    </svg>
+                                </span>
 
                                 <span>Light Mode</span>
 
                                 <span class="verify-settings-theme-check" aria-hidden="true">
-                                    ✓
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m5 12 4 4L19 6" />
+                                    </svg>
                                 </span>
-
                             </button>
-
 
                             <button type="button" class="verify-settings-theme-button" data-theme-option="dark"
                                 aria-pressed="false">
-
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-
-                                    <path d="M20.9 13A9 9 0 0 1 11 3.1A9 9 0 1 0 20.9 13Z" />
-
-                                </svg>
+                                <span class="verify-settings-theme-symbol" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20.5 13.1A8.7 8.7 0 0 1 10.9 3.5a8.7 8.7 0 1 0 9.6 9.6Z" />
+                                    </svg>
+                                </span>
 
                                 <span>Dark Mode</span>
 
                                 <span class="verify-settings-theme-check" aria-hidden="true">
-                                    ✓
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m5 12 4 4L19 6" />
+                                    </svg>
                                 </span>
-
                             </button>
-
                         </div>
-
 
                     </section>
 
@@ -214,133 +213,40 @@
                     </section>
 
 
-                    {{-- RIWAYAT DETECT SCAM --}}
-                    <section class="verify-settings-card" aria-labelledby="verify-settings-scans-title">
-
+                    {{-- AKSES RIWAYAT AKTIVITAS --}}
+                    <section class="verify-settings-card" aria-labelledby="verify-settings-activity-title">
                         <div class="verify-settings-card-heading">
-
                             <div class="verify-settings-card-title-group">
-
                                 <span class="verify-settings-icon" aria-hidden="true">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                        <path d="m9 12 2 2 4-4" />
+                                        <path d="M3 11a9 9 0 1 1 2.6 6.4" />
+                                        <path d="M3 4v7h7" />
+                                        <path d="M12 7v5l3 2" />
                                     </svg>
                                 </span>
 
                                 <div>
-                                    <h2 id="verify-settings-scans-title">
-                                        Riwayat Detect Scam
+                                    <h2 id="verify-settings-activity-title">
+                                        Riwayat Aktivitas
                                     </h2>
 
                                     <p>
-                                        Pesan atau tautan mencurigakan yang pernah kamu periksa.
+                                        Pemeriksaan, pembelajaran, dan latihan
+                                        yang terhubung ke akunmu.
                                     </p>
                                 </div>
-
                             </div>
-
                         </div>
 
-                        @if(isset($scanHistories) && $scanHistories->count() > 0)
-                            <div class="verify-settings-history-list">
-                                @foreach($scanHistories as $scan)
-                                    @php
-                                        $score = $scan->score ?? 0;
-                                        $flags = $scan->flags ?? [];
-                                        $badgeClass = match(true) {
-                                            $score >= 60 => 'is-danger',
-                                            $score >= 30 => 'is-warning',
-                                            $score > 0   => 'is-warning',
-                                            default      => 'is-success',
-                                        };
-                                        $badgeLabel = match(true) {
-                                            $score >= 60 => 'Risiko Tinggi',
-                                            $score >= 30 => 'Perlu Waspada',
-                                            $score > 0   => 'Perlu Diperiksa',
-                                            default      => 'Aman',
-                                        };
-                                    @endphp
+                        <a class="verify-settings-activity-link" href="{{ route('activity-history.index') }}">
+                            <span>Lihat riwayat aktivitas</span>
 
-                                    <div class="verify-settings-history-item">
-                                        <div class="verify-settings-history-main">
-                                            <div class="verify-settings-history-header">
-                                                <h3 class="verify-settings-history-scenario" title="{{ $scan->content }}">
-                                                    "{{ Str::limit($scan->content, 65) }}"
-                                                </h3>
-
-                                                <span class="verify-settings-history-badge {{ $badgeClass }}">
-                                                    {{ $badgeLabel }} (Skor {{ $score }}/100)
-                                                </span>
-                                            </div>
-
-                                            @if(!empty($flags) && count($flags) > 0)
-                                                <div class="verify-settings-scan-flags">
-                                                    @foreach(array_slice($flags, 0, 3) as $flag)
-                                                        <span class="verify-settings-scan-tag">{{ $flag }}</span>
-                                                    @endforeach
-                                                    @if(count($flags) > 3)
-                                                        <span class="verify-settings-scan-tag">+{{ count($flags) - 3 }} lainnya</span>
-                                                    @endif
-                                                </div>
-                                            @endif
-
-                                            <div class="verify-settings-history-meta">
-                                                <span>
-                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect x="3" y="4" width="18" height="18" rx="2" />
-                                                        <path d="M16 2v4M8 2v4M3 10h18" />
-                                                    </svg>
-                                                    {{ $scan->created_at->format('d M Y, H:i') }}
-                                                </span>
-
-                                                <span>
-                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                        @if($scan->mode === 'url')
-                                                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                                                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                                                        @else
-                                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                                        @endif
-                                                    </svg>
-                                                    {{ $scan->mode === 'url' ? 'Tautan (URL)' : 'Teks Pesan' }}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <a href="{{ route('detect') }}" class="verify-settings-history-retry" title="Periksa pesan atau tautan baru">
-                                            Periksa lagi
-                                            <span aria-hidden="true">→</span>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @else
-                            <div class="verify-settings-history-empty">
-                                <div class="verify-settings-history-empty-icon" aria-hidden="true">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                                        <path d="m9 12 2 2 4-4" />
-                                    </svg>
-                                </div>
-
-                                <h3>Belum ada riwayat pemeriksaan</h3>
-
-                                <p>
-                                    Kamu belum pernah memeriksa pesan atau tautan. Gunakan fitur Detect Scam sebelum kamu percaya atau mengklik tautan mencurigakan.
-                                </p>
-
-                                <a href="{{ route('detect') }}" class="verify-settings-history-cta">
-                                    Mulai Detect Scam
-                                    <span aria-hidden="true">→</span>
-                                </a>
-                            </div>
-                        @endif
-
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14m-6-6 6 6-6 6" />
+                            </svg>
+                        </a>
                     </section>
 
 
