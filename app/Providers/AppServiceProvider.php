@@ -20,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') === 'production' || isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         view()->composer('*', function ($view) {
             if (!$view->offsetExists('errors')) {
                 $view->with('errors', session('errors', new ViewErrorBag));
