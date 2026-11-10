@@ -108,39 +108,59 @@
     }
 
     function renderScore(node) {
-        const scoring = node.scoring;
+        // Mendukung format node.scoring maupun field langsung pada node.
+        const scoring = node.scoring ?? node;
 
         const valid =
-            scoring &&
             Number.isInteger(scoring.score) &&
             Number.isInteger(scoring.max_score) &&
             scoring.max_score > 0 &&
             scoring.score >= 0 &&
             scoring.score <= scoring.max_score;
 
+        const breakdownList = $("score-breakdown");
+        breakdownList.replaceChildren();
+
         hidden("score", !valid);
 
-        if (!valid) return;
+        if (!valid) {
+            console.warn("Data skor outcome tidak valid:", scoring);
+            return;
+        }
 
-        $("score-value").textContent = scoring.score;
-        $("score-max").textContent = scoring.max_score;
+        $("score-value").textContent = String(scoring.score);
+        $("score-max").textContent = String(scoring.max_score);
 
         $("score-progress").max = scoring.max_score;
         $("score-progress").value = scoring.score;
 
-        $("score-breakdown").replaceChildren();
+        const breakdown = scoring.breakdown ?? [];
 
-        (scoring.breakdown || []).forEach((entry) => {
+        // Format lama: array berisi criterion dan description.
+        // Format seeder: object berisi pasangan judul dan penjelasan.
+        const entries = Array.isArray(breakdown)
+            ? breakdown
+            : typeof breakdown === "object" && breakdown !== null
+              ? Object.entries(breakdown).map(([criterion, description]) => ({
+                    criterion,
+                    description,
+                }))
+              : [];
+
+        entries.forEach((entry) => {
+            if (!entry || typeof entry !== "object") return;
+
             const item = document.createElement("li");
 
             const title = document.createElement("strong");
-            title.textContent = entry.criterion;
+            title.textContent = String(entry.criterion ?? "");
 
             const description = document.createElement("span");
-            description.textContent = entry.description;
+            description.textContent = String(entry.description ?? "");
 
-            item.append(title, description);
-            $("score-breakdown").append(item);
+            item.append(title, document.createTextNode(" "), description);
+
+            breakdownList.append(item);
         });
     }
 
@@ -668,23 +688,92 @@
         showError("Jenis adegan ini belum didukung.");
     }
 
-    /*
-     * Sumber sementara: data contoh lokal.
-     * Nantinya hanya bagian pemuatan data ini yang
-     * disambungkan ke endpoint backend.
-     */
     async function loadScenario(topicId) {
-        const payload = window.verifyStoryMock;
+        const headers = {
+            Accept: "application/json",
+        };
 
-        if (!payload?.data) {
-            throw new Error("File data contoh belum dimuat.");
+        async function getJson(url) {
+            const response = await fetch(url, {
+                method: "GET",
+                headers,
+                credentials: "same-origin",
+            });
+
+            const contentType = response.headers.get("content-type") || "";
+
+            if (!contentType.includes("application/json")) {
+                throw new Error(
+                    `Server tidak mengirim JSON. Periksa alamat endpoint: ${url}`,
+                );
+            }
+
+            const body = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    body.message ||
+                        `Gagal mengambil data (${response.status}).`,
+                );
+            }
+
+            return body;
         }
 
-        if (Number(payload.data.topic_id) !== topicId) {
+        const listUrl = new URL(
+            "/api/simulator/scenarios",
+            window.location.origin,
+        );
+
+        listUrl.searchParams.set("topic_id", String(topicId));
+
+        const listResponse = await getJson(listUrl);
+
+        if (!Array.isArray(listResponse.data)) {
+            throw new Error("Format daftar skenario tidak sesuai.");
+        }
+
+        const scenarios = listResponse.data;
+
+        if (scenarios.length === 0) {
             return null;
         }
 
-        return payload.data;
+        /*
+         * Sementara pilih satu cerita secara acak dalam topik.
+         * Nanti bisa diganti menjadi daftar pilihan skenario.
+         */
+        const selected =
+            scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        if (!selected.slug) {
+            throw new Error("Slug skenario tidak tersedia.");
+        }
+
+        const detailUrl = new URL(
+            `/api/simulator/scenarios/${encodeURIComponent(selected.slug)}`,
+            window.location.origin,
+        );
+
+        const detailResponse = await getJson(detailUrl);
+        const scenario = detailResponse.data;
+
+        if (
+            !scenario ||
+            !scenario.story ||
+            typeof scenario.story !== "object" ||
+            Array.isArray(scenario.story)
+        ) {
+            throw new Error(
+                "Format detail cerita tidak sesuai. Periksa cast story pada model.",
+            );
+        }
+
+        if (Number(scenario.topic_id) !== Number(topicId)) {
+            throw new Error("Topik cerita tidak sesuai.");
+        }
+
+        return scenario;
     }
 
     function resetView() {
@@ -693,7 +782,7 @@
         if (footer) footer.hidden = false;
 
         dialog.scrollTop = 0;
-        
+
         panels.forEach((name) => hidden(name));
 
         hidden("typing");
@@ -781,13 +870,14 @@
 
             if (!data) {
                 hidden("conversation");
+
                 $("title").textContent = "Cerita belum tersedia";
 
                 $("context-title").textContent =
-                    "Topik ini belum memiliki data contoh";
+                    "Belum ada skenario aktif untuk topik ini";
 
                 $("context-description").textContent =
-                    "Untuk sementara, coba topik pertama: Introduction to Digital Scam.";
+                    "Silakan pilih topik lain atau coba kembali setelah cerita ditambahkan.";
 
                 return;
             }

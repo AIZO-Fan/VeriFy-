@@ -120,6 +120,29 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
         rel="stylesheet">
 
+    {{-- DARK MODE: terapkan tema sebelum CSS dimuat --}}
+<script>
+    (function () {
+        let savedTheme = null;
+
+        try {
+            savedTheme = localStorage.getItem('verify-theme');
+        } catch (error) {
+            savedTheme = null;
+        }
+
+        const prefersDark = window.matchMedia(
+            '(prefers-color-scheme: dark)'
+        ).matches;
+
+        const theme = savedTheme === 'light' || savedTheme === 'dark'
+            ? savedTheme
+            : (prefersDark ? 'dark' : 'light');
+
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
+
     <link
         rel="stylesheet"
         href="{{ asset('css/verify.css') }}">
@@ -237,124 +260,65 @@
                     Scam Simulator
                 </a>
 
+                @auth
+                    @if(auth()->user()->isAdmin())
+                        <a
+                            href="{{ route('admin.dashboard') }}"
+                            class="verify-nav-link {{ request()->is('admin*') ? 'is-active' : '' }}"
+                            style="color: #20B4CB; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                            Panel Admin
+                        </a>
+                    @endif
+                @endauth
+
                 {{-- Tombol akun dan Settings --}}
-                <div class="verify-nav-actions">
+<div class="verify-nav-actions">
 
-                    @guest
+    @guest
 
-                    @if(\Illuminate\Support\Facades\Route::has('register'))
-                    <a
-                        class="verify-register-button"
-                        href="{{ route('register') }}">
-                        Register
-                    </a>
-                    @endif
+        @if(\Illuminate\Support\Facades\Route::has('register'))
+            <a
+                class="verify-register-button"
+                href="{{ route('register') }}">
+                Register
+            </a>
+        @endif
 
-                    @if(\Illuminate\Support\Facades\Route::has('login'))
-                    <a
-                        class="verify-login-button"
-                        href="{{ route('login') }}">
-                        Login
-                    </a>
-                    @endif
+        @if(\Illuminate\Support\Facades\Route::has('login'))
+            <a
+                class="verify-login-button"
+                href="{{ route('login') }}">
+                Login
+            </a>
+        @endif
 
-                    @endguest
+    @endguest
 
-                    @auth
+    @auth
 
-                    <span class="verify-navbar-user">
+        {{-- Profil: klik untuk membuka Settings --}}
+        <a
+            class="verify-navbar-user"
+            href="{{ \Illuminate\Support\Facades\Route::has('settings') ? route('settings') : '#' }}"
+            aria-label="Buka pengaturan akun"
+            title="Settings">
 
-                        <span class="verify-avatar">
-                            {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
-                        </span>
+            <span class="verify-avatar">
+                {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
+            </span>
 
-                        <span class="verify-profile-name">
-                            {{ auth()->user()->name ?? 'Pengguna' }}
-                        </span>
+            <span class="verify-profile-name">
+                {{ auth()->user()->name ?? 'Pengguna' }}
+            </span>
 
-                    </span>
+        </a>
 
-                    @endauth
+    @endauth
 
-                    @if(\Illuminate\Support\Facades\Route::has('settings'))
-
-                    <a
-                        class="verify-settings-button"
-                        href="{{ route('settings') }}"
-                        aria-label="Buka Settings"
-                        title="Settings">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true">
-                            <path d="
-                                    M9.5 3H14.5L15.2 5.4
-                                    L17.4 6.7L19.8 6.1
-                                    L22.3 10.4L20.6 12.2
-                                    V14.8L22.3 16.6
-                                    L19.8 20.9L17.4 20.3
-                                    L15.2 21.6L14.5 24
-                                    H9.5L8.8 21.6
-                                    L6.6 20.3L4.2 20.9
-                                    L1.7 16.6L3.4 14.8
-                                    V12.2L1.7 10.4
-                                    L4.2 6.1L6.6 6.7
-                                    L8.8 5.4Z
-                                " transform="translate(1.2 -.4) scale(.9)" />
-
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="3.2" />
-                        </svg>
-                    </a>
-
-                    @else
-
-                    <button
-                        class="verify-settings-button"
-                        type="button"
-                        disabled
-                        aria-label="Settings belum tersedia"
-                        title="Halaman Settings belum dibuat">
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.7"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true">
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="3.2" />
-
-                            <path d="
-                                    M12 2V5
-                                    M12 19V22
-                                    M2 12H5
-                                    M19 12H22
-                                    M5 5L7.1 7.1
-                                    M16.9 16.9L19 19
-                                    M5 19L7.1 16.9
-                                    M16.9 7.1L19 5
-                                " />
-
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="7" />
-                        </svg>
-                    </button>
-
-                    @endif
-
-                </div>
+</div>
 
             </nav>
 

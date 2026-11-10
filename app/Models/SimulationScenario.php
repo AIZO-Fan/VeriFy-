@@ -10,26 +10,33 @@ class SimulationScenario extends Model
     use HasFactory;
 
     protected $fillable = [
-        'module_id', 
+        'module_id',
         'topic_id',
         'slug',
         'title',
         'description',
         'difficulty',
-        'status',    
-        'sort_order', 
+        'status',
+        'sort_order',
         'is_active',
         'version',
         'story'
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
         'story' => 'array',
+        'is_active' => 'boolean',
+        'topic_id' => 'integer',
+        'version' => 'integer',
     ];
 
     public function module()
     {
         return $this->belongsTo(Module::class);
+    }
+
+    public function attempts()
+    {
+        return $this->hasMany(SimulationAttempt::class, 'scenario_id');
     }
 }

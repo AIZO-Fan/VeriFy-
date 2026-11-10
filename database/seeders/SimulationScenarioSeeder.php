@@ -115,15 +115,17 @@ class SimulationScenarioSeeder extends Seeder
         // Validasi JSON sebelum insert (Mencegah salah seeder)
         StoryValidator::validate($storyData);
 
-        SimulationScenario::create([
-            'topic_id' => 1,
-            'slug' => 'hadiah-biaya-administrasi',
-            'title' => 'Hadiah yang Meminta Biaya',
-            'description' => 'Nomor asing menawarkan hadiah dengan biaya awal.',
-            'difficulty' => 'beginner',
-            'is_active' => true,
-            'version' => 1,
-            'story' => $storyData
-        ]);
+        SimulationScenario::updateOrCreate(
+            ['slug' => 'hadiah-biaya-administrasi'],
+            [
+                'topic_id' => 1,
+                'title' => 'Hadiah yang Meminta Biaya',
+                'description' => 'Nomor asing menawarkan hadiah dengan biaya awal.',
+                'difficulty' => 'beginner',
+                'is_active' => true,
+                'version' => 1,
+                'story' => $storyData
+            ]
+        );
     }
 }

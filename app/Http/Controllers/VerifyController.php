@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Module;
 use App\Models\SimulationScenario;
+use App\Services\ScamAnalysisService;
 use Illuminate\Http\Request;
 
 class VerifyController extends Controllers
 {
+    public function __construct(private readonly ScamAnalysisService $scamAnalysisService) {}
+
     public function home()
     {
         return view('pages.home');
@@ -18,24 +21,35 @@ class VerifyController extends Controllers
         return view('pages.detect');
     }
 
-    public function analyze(Request $request)
+    public function analyze(Request $request): \Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
-        $input = $request->validate(['mode' => 'required|in:text,url', 'content' => 'required|string|max:5000']);
-        if ($input['mode'] === 'url') $request->validate(['content' => 'url:http,https']);
-        $text = mb_strtolower($input['content']);
-        $flags = [];
-        $rules = [['/\b(otp|pin|password|kata sandi)\b/u', 'Menyebut kode OTP, PIN, atau kata sandi'], ['/(hadiah|menang|undian|bonus gratis)/u', 'Menggunakan iming-iming hadiah'], ['/(segera|sekarang|blokir|24 jam|mendesak)/u', 'Menggunakan tekanan waktu atau ancaman'], ['/(transfer|biaya admin|bayar dulu|uang muka)/u', 'Meminta pembayaran atau transfer'], ['/(pasti untung|tanpa risiko|profit tetap)/u', 'Menjanjikan keuntungan tanpa risiko']];
-        foreach ($rules as [$pattern, $label]) if (preg_match($pattern, $text)) $flags[] = $label;
-        preg_match_all('~https?://[^\s<>]+~iu', $text, $links);
-        foreach ($links[0] as $link) {
-            $host = parse_url($link, PHP_URL_HOST) ?: '';
-            if (filter_var($host, FILTER_VALIDATE_IP)) $flags[] = 'Tautan menggunakan alamat IP';
-            if (preg_match('/(^|\.)(bit\.ly|tinyurl\.com|t\.co)$/i', $host)) $flags[] = 'Tujuan tautan disamarkan pemendek URL';
-            if (str_starts_with($link, 'http://')) $flags[] = 'Tautan tidak menggunakan HTTPS';
-            if (str_contains($host, 'xn--')) $flags[] = 'Domain memakai karakter terenkode; perlu diperiksa';
+        $input = $request->validate([
+            'mode'    => 'required|in:text,url',
+            'content' => 'required|string|max:5000',
+        ]);
+
+        // Auto-upgrade mode ke 'url' jika input adalah URL murni
+        $trimmed = trim($input['content']);
+        if (preg_match('~^https?://\S+$~i', $trimmed)) {
+            if (!filter_var($trimmed, FILTER_VALIDATE_URL)) {
+                return back()->withErrors(['content' => 'Tautan tidak valid.'])->withInput();
+            }
         }
-        $flags = array_values(array_unique($flags));
-        $result = ['flags' => $flags, 'status' => count($flags) >= 2 ? 'Perlu kewaspadaan tinggi' : (count($flags) ? 'Perlu diperiksa' : 'Tidak ada indikator pada aturan demo')];
+
+        $result = $this->scamAnalysisService->analyze($input['content']);
+
+        if ($user = $request->user()) {
+            $user->scanHistories()->create([
+                'content'      => $input['content'],
+                'mode'         => $input['mode'],
+                'score'        => $result['score'] ?? 0,
+                'status'       => $result['status'] ?? '',
+                'flags'        => $result['flags'] ?? [],
+                'urls_checked' => $result['urls_checked'] ?? 0,
+                'threat_urls'  => $result['threat_urls'] ?? [],
+            ]);
+        }
+
         return view('pages.detect', compact('result'));
     }
 
