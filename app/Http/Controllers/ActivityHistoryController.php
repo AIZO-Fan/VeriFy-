@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SimulationAttempt;
 use Illuminate\Http\Request;
 
-class ActivityHistoryController extends Controllers
+class ActivityHistoryController extends Controller
 {
     public function index(Request $request)
     {

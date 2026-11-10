@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\SimulationScenario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class SimulatorController extends Controllers
+class SimulatorController extends Controller
 {
     public function getScenarios(Request $request)
     {

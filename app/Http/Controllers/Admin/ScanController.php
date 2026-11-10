@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\ScanHistory;
 use Illuminate\Http\Request;
 
-class ScanController extends Controllers
+class ScanController extends Controller
 {
     public function index(Request $request)
     {
