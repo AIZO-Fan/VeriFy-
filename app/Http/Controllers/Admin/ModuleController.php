@@ -31,6 +31,7 @@ class ModuleController extends Controller
             'order' => 'nullable|integer',
             'lessons' => 'required|array|min:1',
             'lessons.*.title' => 'required|string|max:255',
+            'lessons.*.type' => 'nullable|in:text,example,summary',
             'lessons.*.content' => 'required|string|max:5000',
         ]);
 
@@ -53,11 +54,11 @@ class ModuleController extends Controller
             'lessons' => $jsonLessons,
         ]);
 
-        // Simpan setiap poin materi ke tabel module_sections beserta judul kustomnya
+        // Simpan setiap slide materi ke tabel module_sections
         foreach ($validated['lessons'] as $index => $lesson) {
             $module->sections()->create([
                 'title' => $lesson['title'],
-                'type' => 'text',
+                'type' => $lesson['type'] ?? 'text',
                 'content' => '<p>' . e($lesson['content']) . '</p>',
                 'sort_order' => $index + 1,
             ]);
@@ -81,6 +82,7 @@ class ModuleController extends Controller
             'order' => 'nullable|integer',
             'lessons' => 'required|array|min:1',
             'lessons.*.title' => 'required|string|max:255',
+            'lessons.*.type' => 'nullable|in:text,example,summary',
             'lessons.*.content' => 'required|string|max:5000',
         ]);
 
@@ -98,12 +100,12 @@ class ModuleController extends Controller
             'lessons' => $jsonLessons,
         ]);
 
-        // Perbarui data section di database sesuai inputan baru
+        // Perbarui data slide section di database sesuai inputan baru
         $module->sections()->delete();
         foreach ($validated['lessons'] as $index => $lesson) {
             $module->sections()->create([
                 'title' => $lesson['title'],
-                'type' => 'text',
+                'type' => $lesson['type'] ?? 'text',
                 'content' => '<p>' . e($lesson['content']) . '</p>',
                 'sort_order' => $index + 1,
             ]);
