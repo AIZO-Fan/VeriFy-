@@ -214,6 +214,136 @@
                     </section>
 
 
+                    {{-- RIWAYAT DETECT SCAM --}}
+                    <section class="verify-settings-card" aria-labelledby="verify-settings-scans-title">
+
+                        <div class="verify-settings-card-heading">
+
+                            <div class="verify-settings-card-title-group">
+
+                                <span class="verify-settings-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </span>
+
+                                <div>
+                                    <h2 id="verify-settings-scans-title">
+                                        Riwayat Detect Scam
+                                    </h2>
+
+                                    <p>
+                                        Pesan atau tautan mencurigakan yang pernah kamu periksa.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        @if(isset($scanHistories) && $scanHistories->count() > 0)
+                            <div class="verify-settings-history-list">
+                                @foreach($scanHistories as $scan)
+                                    @php
+                                        $score = $scan->score ?? 0;
+                                        $flags = $scan->flags ?? [];
+                                        $badgeClass = match(true) {
+                                            $score >= 60 => 'is-danger',
+                                            $score >= 30 => 'is-warning',
+                                            $score > 0   => 'is-warning',
+                                            default      => 'is-success',
+                                        };
+                                        $badgeLabel = match(true) {
+                                            $score >= 60 => 'Risiko Tinggi',
+                                            $score >= 30 => 'Perlu Waspada',
+                                            $score > 0   => 'Perlu Diperiksa',
+                                            default      => 'Aman',
+                                        };
+                                    @endphp
+
+                                    <div class="verify-settings-history-item">
+                                        <div class="verify-settings-history-main">
+                                            <div class="verify-settings-history-header">
+                                                <h3 class="verify-settings-history-scenario" title="{{ $scan->content }}">
+                                                    "{{ Str::limit($scan->content, 65) }}"
+                                                </h3>
+
+                                                <span class="verify-settings-history-badge {{ $badgeClass }}">
+                                                    {{ $badgeLabel }} (Skor {{ $score }}/100)
+                                                </span>
+                                            </div>
+
+                                            @if(!empty($flags) && count($flags) > 0)
+                                                <div class="verify-settings-scan-flags">
+                                                    @foreach(array_slice($flags, 0, 3) as $flag)
+                                                        <span class="verify-settings-scan-tag">{{ $flag }}</span>
+                                                    @endforeach
+                                                    @if(count($flags) > 3)
+                                                        <span class="verify-settings-scan-tag">+{{ count($flags) - 3 }} lainnya</span>
+                                                    @endif
+                                                </div>
+                                            @endif
+
+                                            <div class="verify-settings-history-meta">
+                                                <span>
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                                                        <path d="M16 2v4M8 2v4M3 10h18" />
+                                                    </svg>
+                                                    {{ $scan->created_at->format('d M Y, H:i') }}
+                                                </span>
+
+                                                <span>
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        @if($scan->mode === 'url')
+                                                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                                        @else
+                                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                                                        @endif
+                                                    </svg>
+                                                    {{ $scan->mode === 'url' ? 'Tautan (URL)' : 'Teks Pesan' }}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <a href="{{ route('detect') }}" class="verify-settings-history-retry" title="Periksa pesan atau tautan baru">
+                                            Periksa lagi
+                                            <span aria-hidden="true">→</span>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <div class="verify-settings-history-empty">
+                                <div class="verify-settings-history-empty-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                        <path d="m9 12 2 2 4-4" />
+                                    </svg>
+                                </div>
+
+                                <h3>Belum ada riwayat pemeriksaan</h3>
+
+                                <p>
+                                    Kamu belum pernah memeriksa pesan atau tautan. Gunakan fitur Detect Scam sebelum kamu percaya atau mengklik tautan mencurigakan.
+                                </p>
+
+                                <a href="{{ route('detect') }}" class="verify-settings-history-cta">
+                                    Mulai Detect Scam
+                                    <span aria-hidden="true">→</span>
+                                </a>
+                            </div>
+                        @endif
+
+                    </section>
+
+
                     {{-- KEAMANAN --}}
                     <section class="verify-settings-card" aria-labelledby="verify-settings-security-title">
 

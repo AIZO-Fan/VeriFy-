@@ -26,4 +26,9 @@ class SimulationScenario extends Model
         'topic_id' => 'integer',
         'version' => 'integer',
     ];
+
+    public function attempts()
+    {
+        return $this->hasMany(SimulationAttempt::class, 'scenario_id');
+    }
 }
