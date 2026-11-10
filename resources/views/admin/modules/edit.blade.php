@@ -29,12 +29,13 @@
                 ->map(
                     fn($section) => [
                         'title' => $section->title,
+                        'type' => $section->type ?? 'text',
                         'content' => strip_tags($section->content),
                     ],
                 )
                 ->values()
                 ->toArray()
-            : [['title' => '', 'content' => '']];
+            : [['title' => '', 'type' => 'text', 'content' => '']];
 
         $currentLessons = array_values(old('lessons', $fallbackLessons));
 
@@ -242,7 +243,7 @@
                 </div>
             </section>
 
-            {{-- MATERI PEMBELAJARAN --}}
+            {{-- MATERI / SLIDE --}}
             <section class="va-editor-card" aria-labelledby="va-module-lessons-title">
                 <header class="va-editor-card-heading va-editor-lessons-heading">
                     <div class="va-editor-heading-group">
@@ -252,12 +253,11 @@
 
                         <div>
                             <h2 id="va-module-lessons-title">
-                                Materi pembelajaran
+                                Slide Materi Pembelajaran
                             </h2>
 
                             <p>
-                                Perbarui isi materi atau tambahkan
-                                bagian pembelajaran baru.
+                                Susun materi slide demi slide. Setiap kartu di bawah akan menjadi <strong>1 halaman geser (slide)</strong> yang dibaca pengguna secara bertahap.
                             </p>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                             <path d="M12 5V19M5 12H19" />
                         </svg>
 
-                        Tambah materi
+                        Tambah Slide Materi
                     </button>
                 </header>
 
@@ -281,58 +281,63 @@
 
                 <div id="lessonsContainer" class="va-lessons-container">
                     @foreach ($currentLessons as $idx => $lesson)
-                        <div class="lesson-row va-lesson-row">
-
-                            <div class="va-lesson-heading">
-                                <span class="lesson-number">
-                                    Materi {{ str_pad($idx + 1, 2, '0', STR_PAD_LEFT) }}
-                                </span>
+                        <div class="lesson-row va-lesson-row" style="background: var(--theme-card-soft); border: 1px solid var(--theme-border); border-radius: 14px; padding: 20px; margin-bottom: 18px;">
+                            <div class="va-lesson-heading" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--theme-border);">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span class="lesson-number" style="font-weight: 800; font-size: 1.05rem; color: var(--theme-heading);">
+                                        Slide {{ str_pad($idx + 1, 2, '0', STR_PAD_LEFT) }}
+                                    </span>
+                                    <span class="lesson-badge" style="font-size: 0.75rem; background: rgba(32, 180, 203, 0.12); color: #20b4cb; padding: 2px 8px; border-radius: 6px; font-weight: 600;">
+                                        Halaman Geser #{{ $idx + 1 }}
+                                    </span>
+                                </div>
 
                                 <button class="btn-remove-lesson va-action-button va-action-button--delete" type="button"
-                                    aria-label="Hapus materi {{ $idx + 1 }}">
-                                    Hapus
+                                    aria-label="Hapus slide {{ $idx + 1 }}">
+                                    Hapus Slide
                                 </button>
                             </div>
 
-                            <div class="va-editor-field">
-                                <label data-lesson-title-label for="va-lesson-title-{{ $idx }}">
-                                    Judul materi
-                                    <span class="va-required" aria-hidden="true">*</span>
-                                </label>
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 14px;">
+                                <div class="va-editor-field">
+                                    <label data-lesson-title-label for="va-lesson-title-{{ $idx }}">
+                                        Judul slide
+                                        <span class="va-required" aria-hidden="true">*</span>
+                                    </label>
 
-                                <input class="va-control va-editor-control" data-lesson-title
-                                    id="va-lesson-title-{{ $idx }}" type="text"
-                                    name="lessons[{{ $idx }}][title]" value="{{ $lesson['title'] ?? '' }}"
-                                    placeholder="Masukkan judul materi" required
-                                    @if ($errors->has('lessons.' . $idx . '.title')) aria-invalid="true"
-                                        aria-describedby="va-lesson-title-error-{{ $idx }}" @endif>
+                                    <input class="va-control va-editor-control" data-lesson-title
+                                        id="va-lesson-title-{{ $idx }}" type="text"
+                                        name="lessons[{{ $idx }}][title]" value="{{ $lesson['title'] ?? '' }}"
+                                        placeholder="Masukkan judul materi slide" required>
+                                </div>
 
-                                @if ($errors->has('lessons.' . $idx . '.title'))
-                                    <p class="va-field-error" data-lesson-title-error
-                                        id="va-lesson-title-error-{{ $idx }}">
-                                        {{ $errors->first('lessons.' . $idx . '.title') }}
-                                    </p>
-                                @endif
+                                <div class="va-editor-field">
+                                    <label for="va-lesson-type-{{ $idx }}">
+                                        Tipe slide
+                                    </label>
+
+                                    <select
+                                        class="va-control va-editor-control"
+                                        data-lesson-type
+                                        id="va-lesson-type-{{ $idx }}"
+                                        name="lessons[{{ $idx }}][type]"
+                                    >
+                                        <option value="text" {{ ($lesson['type'] ?? 'text') === 'text' ? 'selected' : '' }}>Teks Pembahasan</option>
+                                        <option value="example" {{ ($lesson['type'] ?? '') === 'example' ? 'selected' : '' }}>💡 Contoh Kasus / Modus</option>
+                                        <option value="summary" {{ ($lesson['type'] ?? '') === 'summary' ? 'selected' : '' }}>📌 Ringkasan &amp; Poin Kunci</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="va-editor-field">
                                 <label data-lesson-content-label for="va-lesson-content-{{ $idx }}">
-                                    Isi materi
+                                    Isi materi slide
                                     <span class="va-required" aria-hidden="true">*</span>
                                 </label>
 
                                 <textarea class="va-control va-editor-control" data-lesson-content id="va-lesson-content-{{ $idx }}"
-                                    name="lessons[{{ $idx }}][content]" rows="5"
-                                    placeholder="Tuliskan penjelasan materi pembelajaran..." required
-                                    @if ($errors->has('lessons.' . $idx . '.content')) aria-invalid="true"
-                                        aria-describedby="va-lesson-content-error-{{ $idx }}" @endif>{{ $lesson['content'] ?? '' }}</textarea>
-
-                                @if ($errors->has('lessons.' . $idx . '.content'))
-                                    <p class="va-field-error" data-lesson-content-error
-                                        id="va-lesson-content-error-{{ $idx }}">
-                                        {{ $errors->first('lessons.' . $idx . '.content') }}
-                                    </p>
-                                @endif
+                                    name="lessons[{{ $idx }}][content]" rows="4"
+                                    placeholder="Tuliskan penjelasan materi pembelajaran pada slide ini..." required>{{ $lesson['content'] ?? '' }}</textarea>
                             </div>
 
                         </div>
@@ -342,9 +347,7 @@
                 <p id="vaLessonStatus" class="va-editor-status" role="status" aria-live="polite"></p>
 
                 <p class="va-editor-hint">
-                    Modul harus memiliki minimal satu bagian materi.
-                    Perubahan materi diterapkan setelah tombol
-                    Perbarui modul ditekan.
+                    Setiap kartu slide di atas akan menjadi 1 halaman pada modul pembaca. Pengguna dapat berpindah antar-slide menggunakan tombol Selanjutnya &amp; Sebelumnya.
                 </p>
             </section>
 
@@ -367,38 +370,58 @@
         </form>
     </section>
 
-    {{-- TEMPLATE UNTUK MATERI TAMBAHAN --}}
+    {{-- TEMPLATE UNTUK SLIDE MATERI BARU --}}
     <template id="vaLessonTemplate">
-        <div class="lesson-row va-lesson-row">
-
-            <div class="va-lesson-heading">
-                <span class="lesson-number"></span>
+        <div class="lesson-row va-lesson-row" style="background: var(--theme-card-soft); border: 1px solid var(--theme-border); border-radius: 14px; padding: 20px; margin-bottom: 18px;">
+            <div class="va-lesson-heading" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--theme-border);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span class="lesson-number" style="font-weight: 800; font-size: 1.05rem; color: var(--theme-heading);"></span>
+                    <span class="lesson-badge" style="font-size: 0.75rem; background: rgba(32, 180, 203, 0.12); color: #20b4cb; padding: 2px 8px; border-radius: 6px; font-weight: 600;">
+                        Halaman Geser
+                    </span>
+                </div>
 
                 <button class="btn-remove-lesson va-action-button va-action-button--delete" type="button">
-                    Hapus
+                    Hapus Slide
                 </button>
             </div>
 
-            <div class="va-editor-field">
-                <label data-lesson-title-label>
-                    Judul materi
-                    <span class="va-required" aria-hidden="true">*</span>
-                </label>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 14px;">
+                <div class="va-editor-field">
+                    <label data-lesson-title-label>
+                        Judul slide
+                        <span class="va-required" aria-hidden="true">*</span>
+                    </label>
 
-                <input class="va-control va-editor-control" data-lesson-title type="text"
-                    placeholder="Masukkan judul materi" required>
+                    <input class="va-control va-editor-control" data-lesson-title type="text"
+                        placeholder="Masukkan judul materi slide" required>
+                </div>
+
+                <div class="va-editor-field">
+                    <label data-lesson-type-label>
+                        Tipe slide
+                    </label>
+
+                    <select
+                        class="va-control va-editor-control"
+                        data-lesson-type
+                    >
+                        <option value="text">Teks Pembahasan</option>
+                        <option value="example">💡 Contoh Kasus / Modus</option>
+                        <option value="summary">📌 Ringkasan &amp; Poin Kunci</option>
+                    </select>
+                </div>
             </div>
 
             <div class="va-editor-field">
                 <label data-lesson-content-label>
-                    Isi materi
+                    Isi materi slide
                     <span class="va-required" aria-hidden="true">*</span>
                 </label>
 
-                <textarea class="va-control va-editor-control" data-lesson-content rows="5"
-                    placeholder="Tuliskan penjelasan materi pembelajaran..." required></textarea>
+                <textarea class="va-control va-editor-control" data-lesson-content rows="4"
+                    placeholder="Tuliskan penjelasan materi pembelajaran pada slide ini..." required></textarea>
             </div>
-
         </div>
     </template>
 
@@ -418,39 +441,39 @@
                     const number = index + 1;
 
                     const title = row.querySelector('[data-lesson-title]');
+                    const type = row.querySelector('[data-lesson-type]');
                     const content = row.querySelector('[data-lesson-content]');
 
                     const titleLabel = row.querySelector('[data-lesson-title-label]');
+                    const typeLabel = row.querySelector('[data-lesson-type-label]');
                     const contentLabel = row.querySelector('[data-lesson-content-label]');
-
-                    const titleError = row.querySelector('[data-lesson-title-error]');
-                    const contentError = row.querySelector('[data-lesson-content-error]');
+                    const lessonBadge = row.querySelector('.lesson-badge');
 
                     row.querySelector('.lesson-number').textContent =
-                        'Materi ' + String(number).padStart(2, '0');
+                        'Slide ' + String(number).padStart(2, '0');
+
+                    if (lessonBadge) {
+                        lessonBadge.textContent = 'Halaman Geser #' + number;
+                    }
 
                     row.querySelector('.btn-remove-lesson').setAttribute(
                         'aria-label',
-                        'Hapus materi ' + number
+                        'Hapus slide ' + number
                     );
 
                     title.name = `lessons[${index}][title]`;
                     title.id = `va-lesson-title-${index}`;
-                    titleLabel.htmlFor = title.id;
+                    if (titleLabel) titleLabel.htmlFor = title.id;
+
+                    if (type) {
+                        type.name = `lessons[${index}][type]`;
+                        type.id = `va-lesson-type-${index}`;
+                        if (typeLabel) typeLabel.htmlFor = type.id;
+                    }
 
                     content.name = `lessons[${index}][content]`;
                     content.id = `va-lesson-content-${index}`;
-                    contentLabel.htmlFor = content.id;
-
-                    if (titleError) {
-                        titleError.id = `va-lesson-title-error-${index}`;
-                        title.setAttribute('aria-describedby', titleError.id);
-                    }
-
-                    if (contentError) {
-                        contentError.id = `va-lesson-content-error-${index}`;
-                        content.setAttribute('aria-describedby', contentError.id);
-                    }
+                    if (contentLabel) contentLabel.htmlFor = content.id;
                 });
             }
 
@@ -463,7 +486,7 @@
 
                 newRow.querySelector('[data-lesson-title]').focus();
 
-                status.textContent = 'Bagian materi baru ditambahkan.';
+                status.textContent = 'Slide materi baru ditambahkan.';
             });
 
             container.addEventListener('click', function(event) {
@@ -476,8 +499,7 @@
                 const rows = Array.from(container.querySelectorAll('.lesson-row'));
 
                 if (rows.length <= 1) {
-                    status.textContent =
-                        'Modul harus memiliki minimal satu bagian materi.';
+                    alert('Modul harus memiliki minimal satu slide materi.');
                     return;
                 }
 
@@ -489,7 +511,7 @@
                     row.querySelector('[data-lesson-content]').value.trim() !== '';
 
                 if (hasContent && !window.confirm(
-                        'Hapus bagian materi ini? Perubahan akan diterapkan saat modul diperbarui.'
+                        'Hapus slide materi ini? Perubahan akan diterapkan saat modul diperbarui.'
                     )) {
                     return;
                 }
@@ -504,7 +526,7 @@
 
                 nextRow.querySelector('[data-lesson-title]').focus();
 
-                status.textContent = 'Bagian materi dihapus dari form.';
+                status.textContent = 'Slide materi telah dihapus.';
             });
 
             updateNumbers();
