@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controllers
+class AuthController extends Controller
 {
     // Menampilkan halaman form register
     public function showRegister()

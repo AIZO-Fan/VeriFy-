@@ -60,7 +60,9 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                Mysql::ATTR_SSL_CA => ($ca = env('MYSQL_ATTR_SSL_CA'))
+                    ? (file_exists($ca) ? $ca : (file_exists(base_path($ca)) ? base_path($ca) : $ca))
+                    : (file_exists(base_path('database/certs/ca-bundle.crt')) ? base_path('database/certs/ca-bundle.crt') : null),
             ]) : [],
         ],
 
@@ -80,7 +82,9 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                Mysql::ATTR_SSL_CA => ($ca = env('MYSQL_ATTR_SSL_CA'))
+                    ? (file_exists($ca) ? $ca : (file_exists(base_path($ca)) ? base_path($ca) : $ca))
+                    : (file_exists(base_path('database/certs/ca-bundle.crt')) ? base_path('database/certs/ca-bundle.crt') : null),
             ]) : [],
         ],
 

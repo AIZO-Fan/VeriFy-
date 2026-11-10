@@ -1,0 +1,14 @@
+/node_modules
+/tests
+.git
+.github
+.agents
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+
