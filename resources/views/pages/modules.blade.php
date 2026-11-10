@@ -63,26 +63,28 @@
     {{-- GRID DAFTAR MODUL --}}
     <div class="module-grid">
         @foreach ($modules as $module)
-        <article class="module-card {{ $module['color'] ?? 'blue' }}">
+        <article class="module-card {{ $module['color'] ?? ($module->color ?? 'blue') }}">
 
+            {{-- Gunakan $loop->iteration agar nomor urut tampil rapi 1, 2, 3... --}}
             <span class="badge">
-                Modul {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+                Modul {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
             </span>
 
             <div class="module-icon">
-                <x-icon :name="$module['icon'] ?? 'shield'" />
+                <x-icon :name="$module['icon'] ?? ($module->icon ?? 'shield')" />
             </div>
 
-            <h2>{{ $module['title'] }}</h2>
+            <h2>{{ $module['title'] ?? $module->title }}</h2>
 
-            <p>{{ $module['description'] }}</p>
+            <p>{{ $module['description'] ?? $module->description }}</p>
 
-            <a class="mini-button" href="{{ route('lesson', $module['id']) }}">
+            {{-- Link tujuan tetap menggunakan ID database aslinya agar tidak error --}}
+            <a class="mini-button" href="{{ route('lesson', $module['id'] ?? $module->id) }}">
                 Explore Module <span>›</span>
             </a>
 
             <span class="card-number">
-                {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+                {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
             </span>
 
             <div class="card-decoration"></div>

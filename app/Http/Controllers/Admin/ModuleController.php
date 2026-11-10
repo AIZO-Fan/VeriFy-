@@ -5,18 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ModuleController extends Controllers
 {
     public function index()
     {
-        $modules = Module::orderBy('order')->orderBy('id')->get();
+        $modules = Module::orderBy('sort_order', 'asc')->withCount('sections')->get();
         return view('admin.modules.index', compact('modules'));
     }
 
     public function create()
     {
-        return view('admin.modules.create');
+        $nextOrder = (Module::max('sort_order') ?? 0) + 1;
+        return view('admin.modules.create', compact('nextOrder'));
     }
 
     public function store(Request $request)
@@ -28,24 +30,38 @@ class ModuleController extends Controllers
             'icon' => 'required|string|max:50',
             'order' => 'nullable|integer',
             'lessons' => 'required|array|min:1',
-            'lessons.*' => 'required|string|max:2000',
+            'lessons.*.title' => 'required|string|max:255',
+            'lessons.*.content' => 'required|string|max:5000',
         ]);
 
-        $maxId = Module::max('id') ?? 0;
-        $order = $validated['order'] ?? ($maxId + 1);
+        $maxOrder = Module::max('sort_order') ?? 0;
+        $order = $validated['order'] ?? ($maxOrder + 1);
+        $isActive = $request->has('is_active');
 
-        // Filter out empty lessons
-        $cleanLessons = array_values(array_filter($validated['lessons'], fn($l) => !empty(trim($l))));
+        // Format data lessons untuk disimpan ke kolom JSON (opsional cadangan)
+        $jsonLessons = collect($validated['lessons'])->map(fn($l) => $l['title'] . ': ' . $l['content'])->toArray();
 
-        Module::create([
+        $module = Module::create([
             'title' => $validated['title'],
+            'slug' => Str::slug($validated['title']),
             'description' => $validated['description'],
             'color' => $validated['color'],
             'icon' => $validated['icon'],
-            'order' => $order,
-            'is_active' => $request->has('is_active'),
-            'lessons' => $cleanLessons,
+            'sort_order' => $order,
+            'status' => $isActive ? 'published' : 'draft',
+            'is_active' => $isActive,
+            'lessons' => $jsonLessons,
         ]);
+
+        // Simpan setiap poin materi ke tabel module_sections beserta judul kustomnya
+        foreach ($validated['lessons'] as $index => $lesson) {
+            $module->sections()->create([
+                'title' => $lesson['title'],
+                'type' => 'text',
+                'content' => '<p>' . e($lesson['content']) . '</p>',
+                'sort_order' => $index + 1,
+            ]);
+        }
 
         return redirect()->route('admin.modules.index')->with('success', 'Modul pembelajaran berhasil ditambahkan!');
     }
@@ -64,29 +80,50 @@ class ModuleController extends Controllers
             'icon' => 'required|string|max:50',
             'order' => 'nullable|integer',
             'lessons' => 'required|array|min:1',
-            'lessons.*' => 'required|string|max:2000',
+            'lessons.*.title' => 'required|string|max:255',
+            'lessons.*.content' => 'required|string|max:5000',
         ]);
 
-        $cleanLessons = array_values(array_filter($validated['lessons'], fn($l) => !empty(trim($l))));
+        $isActive = $request->has('is_active');
+        $jsonLessons = collect($validated['lessons'])->map(fn($l) => $l['title'] . ': ' . $l['content'])->toArray();
 
         $module->update([
             'title' => $validated['title'],
             'description' => $validated['description'],
             'color' => $validated['color'],
             'icon' => $validated['icon'],
-            'order' => $validated['order'] ?? $module->order,
-            'is_active' => $request->has('is_active'),
-            'lessons' => $cleanLessons,
+            'sort_order' => $validated['order'] ?? $module->sort_order,
+            'status' => $isActive ? 'published' : 'draft',
+            'is_active' => $isActive,
+            'lessons' => $jsonLessons,
         ]);
+
+        // Perbarui data section di database sesuai inputan baru
+        $module->sections()->delete();
+        foreach ($validated['lessons'] as $index => $lesson) {
+            $module->sections()->create([
+                'title' => $lesson['title'],
+                'type' => 'text',
+                'content' => '<p>' . e($lesson['content']) . '</p>',
+                'sort_order' => $index + 1,
+            ]);
+        }
 
         return redirect()->route('admin.modules.index')->with('success', 'Modul berhasil diperbarui!');
     }
 
     public function toggle(Module $module)
     {
-        $module->update(['is_active' => !$module->is_active]);
-        $status = $module->is_active ? 'diaktifkan' : 'dinonaktifkan';
-        return back()->with('success', "Modul {$module->title} berhasil {$status}!");
+        $newStatus = ($module->status === 'published') ? 'draft' : 'published';
+        $newActive = ($newStatus === 'published');
+
+        $module->update([
+            'status' => $newStatus,
+            'is_active' => $newActive
+        ]);
+
+        $statusText = $newActive ? 'diaktifkan' : 'dinonaktifkan';
+        return back()->with('success', "Modul {$module->title} berhasil {$statusText}!");
     }
 
     public function destroy(Module $module)
