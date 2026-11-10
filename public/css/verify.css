@@ -20768,10 +20768,7 @@ html[data-theme="dark"] .va-alert--danger {
 }
 
 .va-table-actions {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 7px;
+    text-align: center;
 }
 
 .va-shell .va-action-button {
@@ -23217,3 +23214,507 @@ html[data-theme="dark"] .va-shell .va-json-status.is-error {
         font-size: 16px;
     }
 }
+
+/* ==================================================
+   VERIFY ADMIN — MANAJEMEN SCAM SIMULATOR
+   ================================================== */
+
+/* Kartu tabel */
+.va-simulator-table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.va-simulator-table-card .va-editor-card-heading {
+    padding: 24px 26px 20px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+/* Area tabel */
+.va-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.va-table {
+    width: 100%;
+    min-width: 920px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.va-table thead th {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--va-border);
+    background: var(--va-soft);
+    color: var(--va-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.va-table tbody td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--va-border);
+    vertical-align: top;
+}
+
+.va-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+/* Isi sel */
+.va-topic-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid rgba(32, 180, 203, 0.25);
+    border-radius: 8px;
+    background: rgba(32, 180, 203, 0.12);
+    color: #087f94;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.va-table-title {
+    display: block;
+    color: var(--va-heading);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.va-table-subtext {
+    display: block;
+    margin-top: 4px;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.va-table-mono {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10px;
+}
+
+.va-table-strong {
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.va-table-empty {
+    color: var(--va-muted);
+    font-size: 11px;
+}
+
+.va-table-empty-state {
+    padding: 42px 24px !important;
+    color: var(--va-muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Badge kesulitan */
+.va-difficulty-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--va-soft);
+    color: var(--va-muted);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.va-difficulty--beginner {
+    background: rgba(34, 197, 94, 0.13);
+    color: #15803d;
+}
+
+.va-difficulty--intermediate {
+    background: rgba(245, 158, 11, 0.14);
+    color: #b45309;
+}
+
+.va-difficulty--advanced {
+    background: rgba(239, 68, 68, 0.13);
+    color: #b91c1c;
+}
+
+/* Status */
+.va-status-toggle {
+    min-width: 72px;
+    padding: 7px 12px;
+    border: 0;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.va-status-toggle.is-active {
+    background: rgba(34, 197, 94, 0.14);
+    color: #15803d;
+}
+
+.va-status-toggle.is-draft {
+    background: rgba(148, 163, 184, 0.16);
+    color: #64748b;
+}
+
+.va-empty-chip {
+    display: inline-flex;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background: var(--va-soft);
+    color: var(--va-muted);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Aksi baris */
+.va-row-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.va-row-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    border: 0;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.va-row-button--edit {
+    background: rgba(40, 123, 237, 0.12);
+    color: #1d6fd8;
+}
+
+.va-row-button--danger {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+.va-row-button--create {
+    background: rgba(32, 180, 203, 0.13);
+    color: #087f94;
+}
+
+/* Dark mode */
+html[data-theme="dark"] .va-topic-chip {
+    background: rgba(53, 197, 220, 0.12);
+    border-color: rgba(53, 197, 220, 0.28);
+    color: #8fd8e7;
+}
+
+html[data-theme="dark"] .va-difficulty--beginner {
+    background: rgba(34, 197, 94, 0.15);
+    color: #86efac;
+}
+
+html[data-theme="dark"] .va-difficulty--intermediate {
+    background: rgba(245, 158, 11, 0.16);
+    color: #fcd34d;
+}
+
+html[data-theme="dark"] .va-difficulty--advanced {
+    background: rgba(239, 68, 68, 0.16);
+    color: #fca5a5;
+}
+
+html[data-theme="dark"] .va-status-toggle.is-active {
+    background: rgba(34, 197, 94, 0.16);
+    color: #86efac;
+}
+
+html[data-theme="dark"] .va-status-toggle.is-draft {
+    background: rgba(148, 163, 184, 0.16);
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] .va-row-button--edit {
+    background: rgba(40, 123, 237, 0.16);
+    color: #93c5fd;
+}
+
+html[data-theme="dark"] .va-row-button--danger {
+    background: rgba(239, 68, 68, 0.16);
+    color: #fca5a5;
+}
+
+html[data-theme="dark"] .va-row-button--create {
+    background: rgba(53, 197, 220, 0.14);
+    color: #8fd8e7;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .va-table thead {
+        display: none;
+    }
+
+    .va-table,
+    .va-table tbody,
+    .va-table tr,
+    .va-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .va-table tbody tr {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--va-border);
+    }
+
+    .va-table tbody td {
+        padding: 8px 0;
+        border-bottom: 0;
+    }
+
+    .va-table tbody td::before {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--va-muted);
+        content: attr(data-label);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+    }
+
+    .va-table-actions {
+        text-align: left;
+    }
+
+    .va-row-actions {
+        justify-content: flex-start;
+    }
+}
+
+/* Jarak banner admin ke konten halaman */
+.va-shell.va-simulator-management {
+    padding-top: 28px;
+}
+
+.va-shell.va-simulator-management .va-management-heading {
+    margin-bottom: 30px;
+}
+
+/* Baris dengan skenario kosong tetap proporsional */
+.va-simulator-management .va-table-empty {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+}
+
+/* Status kosong juga memiliki tinggi sama */
+.va-simulator-management .va-empty-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+}
+
+.va-simulator-management .va-row-button--create {
+    min-width: 118px;
+    min-height: 34px;
+    padding: 8px 14px;
+    border-radius: 9px;
+    background: rgba(32, 180, 203, 0.13);
+    color: #087f94;
+    font-size: 10px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+html[data-theme="dark"] .va-simulator-management .va-row-button--create {
+    background: rgba(53, 197, 220, 0.14);
+    color: #8fd8e7;
+}
+
+.va-simulator-management .va-table-empty {
+    color: var(--va-muted);
+    font-size: 11px;
+    font-style: italic;
+    line-height: 1.7;
+}
+
+/* ==================================================
+   VERIFY ADMIN — SIMULATOR ROW BORDER ALIGNMENT
+   ================================================== */
+
+/* Semua kolom memakai alignment yang sama */
+.va-simulator-management .va-table td {
+    vertical-align: middle;
+}
+
+/* Hilangkan tinggi minimum yang membuat garis bergeser */
+.va-simulator-management .va-table tbody tr {
+    min-height: 0;
+}
+
+.va-simulator-management .va-table td:nth-child(2) {
+    min-height: 0;
+}
+
+/* Hilangkan ruang tambahan pada form dan tombol */
+.va-simulator-management .va-table form {
+    margin: 0;
+    display: inline-flex;
+}
+
+.va-simulator-management .va-row-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    min-height: 0;
+    margin: 0;
+}
+
+/* Status dan aksi memiliki tinggi visual sama */
+.va-simulator-management .va-status-toggle,
+.va-simulator-management .va-empty-chip,
+.va-simulator-management .va-row-button {
+    min-height: 32px;
+}
+
+/* Teks kosong tidak menambah tinggi baris */
+.va-simulator-management .va-table-empty {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    margin: 0;
+    line-height: 1;
+}   
+
+/* ==================================================
+   VERIFY ADMIN — SIMULATOR TABLE BORDER FIX
+   ================================================== */
+
+/* Pastikan border antar kolom menyatu */
+.va-simulator-management .va-table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+}
+
+/* Hapus border per sel agar tidak ada garis yang tidak lurus */
+.va-simulator-management .va-table td,
+.va-simulator-management .va-table th {
+    border: 0 !important;
+}
+
+/* Pasang garis pemisah hanya pada baris */
+.va-simulator-management .va-table tbody tr {
+    border-bottom: 1px solid var(--va-border) !important;
+}
+
+/* Baris terakhir tidak perlu garis bawah */
+.va-simulator-management .va-table tbody tr:last-child {
+    border-bottom: 0 !important;
+}
+
+/* Semua isi sel sejajar di tengah secara konsisten */
+.va-simulator-management .va-table td {
+    vertical-align: middle !important;
+}
+
+/* Hilangkan margin form yang bisa menggeser tombol */
+.va-simulator-management .va-table form {
+    margin: 0 !important;
+    display: inline-flex !important;
+}
+
+/* Tombol aksi dan status memiliki tinggi sama */
+.va-simulator-management .va-status-toggle,
+.va-simulator-management .va-empty-chip,
+.va-simulator-management .va-row-button {
+    min-height: 32px !important;
+    box-sizing: border-box !important;
+}
+
+/* Baris aksi selalu sejajar */
+.va-simulator-management .va-row-actions {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+}
+
+/* Tombol buat skenario sejajar dengan Edit/Hapus */
+.va-simulator-management .va-row-button--create {
+    min-width: 118px !important;
+    min-height: 32px !important;
+    padding: 7px 14px !important;
+    border-radius: 8px !important;
+    background: rgba(32, 180, 203, 0.13) !important;
+    color: #087f94 !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+html[data-theme="dark"] .va-simulator-management .va-row-button--create {
+    background: rgba(53, 197, 220, 0.14) !important;
+    color: #8fd8e7 !important;
+}
+
+/* ==================================================
+   VERIFY ADMIN — SIMULATOR ACTION CENTERING
+   ================================================== */
+
+/* ==================================================
+   VERIFY ADMIN — SIMULATOR ACTION CENTERING FIX
+   ================================================== */
+
+/* Kolom Aksi tetap menjadi sel tabel normal */
+.va-simulator-management .va-table td.va-table-actions {
+    display: table-cell !important;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+/* Seluruh isi kolom Aksi berada di tengah */
+.va-simulator-management .va-row-actions {
+    display: flex !important;
+    width: 100%;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+/* Form tidak mengganggu posisi tombol */
+.va-simulator-management .va-table td.va-table-actions form {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+}
+
+/* Tinggi tombol konsisten */
+.va-simulator-management .va-row-button {
+    min-height: 32px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+
