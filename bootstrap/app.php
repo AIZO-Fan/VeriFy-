@@ -23,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         );
     })->create();
 
-if ($storagePath = env('APP_STORAGE')) {
+if ($storagePath = ($_ENV['APP_STORAGE'] ?? getenv('APP_STORAGE') ?? env('APP_STORAGE'))) {
     $app->useStoragePath($storagePath);
 }
 
