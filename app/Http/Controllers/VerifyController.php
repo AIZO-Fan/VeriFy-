@@ -101,9 +101,7 @@ class VerifyController extends Controllers
         $practice = [
             'available' => $publishedCount > 0,
             'published_scenario_count' => $publishedCount,
-            'url' => $publishedCount === 1
-                ? route('simulator') . '?topic=' . $module->id
-                : ($publishedCount > 1 ? route('simulator') . '?module=' . $module->id : null)
+            'url' => route('simulator') . '?topic=' . $module->id
         ];
 
         return view('pages.lesson', compact('module', 'practice'));

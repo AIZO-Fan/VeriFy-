@@ -33,7 +33,7 @@ $sectionCount = $readerSections->count();
         <header class="verify-lesson-heading">
             <span class="verify-lesson-eyebrow">
                 <span aria-hidden="true"></span>
-                MODUL {{ str_pad((string) $module->id, 2, '0', STR_PAD_LEFT) }}
+                MODUL {{ str_pad((string) ($module->sort_order ?? $module->id), 2, '0', STR_PAD_LEFT) }}
             </span>
 
             <h1>{{ $module->title }}</h1>

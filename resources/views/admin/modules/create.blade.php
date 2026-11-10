@@ -19,13 +19,13 @@
             <div style="margin-bottom: 20px;">
                 <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Judul Modul</label>
                 <input type="text" name="title" value="{{ old('title') }}" required placeholder="Contoh: Mengenali Penipuan Pinjaman Online Ilegal"
-                       style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 1rem;">
+                    style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 1rem;">
             </div>
 
             <div style="margin-bottom: 20px;">
                 <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Deskripsi Singkat</label>
                 <textarea name="description" rows="3" required placeholder="Jelaskan secara ringkas materi apa yang akan dipelajari di modul ini..."
-                          style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 0.95rem;">{{ old('description') }}</textarea>
+                    style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 0.95rem;">{{ old('description') }}</textarea>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
@@ -53,8 +53,8 @@
                 </div>
                 <div>
                     <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Nomor Urutan</label>
-                    <input type="number" name="order" value="{{ old('order', 7) }}" min="1"
-                           style="width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
+                    <input type="number" name="order" value="{{ old('order', $nextOrder) }}" min="1"
+                        style="width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
                 </div>
             </div>
 
@@ -65,27 +65,33 @@
                 </label>
             </div>
 
-            {{-- Lessons list builder --}}
+            {{-- Lessons list builder with custom title --}}
             <div style="margin-bottom: 28px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                     <div>
                         <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--theme-heading);">Poin Materi Pembelajaran (Lessons)</h3>
-                        <p style="margin: 4px 0 0; color: var(--theme-muted); font-size: 0.85rem;">Setiap poin mewakili satu slide materi yang akan dibaca pengguna.</p>
+                        <p style="margin: 4px 0 0; color: var(--theme-muted); font-size: 0.85rem;">Isi judul poin materi dan penjelasan slide edukasinya.</p>
                     </div>
                     <button type="button" id="btnAddLesson" style="background: rgba(32, 180, 203, 0.15); color: #20b4cb; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
                         + Tambah Poin Materi
                     </button>
                 </div>
 
-                <div id="lessonsContainer" style="display: flex; flex-direction: column; gap: 12px;">
-                    @php $oldLessons = old('lessons', ['', '']); @endphp
-                    @foreach($oldLessons as $idx => $lessonText)
-                        <div class="lesson-row" style="display: flex; gap: 10px; align-items: flex-start;">
-                            <span class="lesson-number" style="padding-top: 10px; font-weight: 700; color: var(--theme-muted); min-width: 24px;">{{ $idx + 1 }}.</span>
-                            <textarea name="lessons[]" rows="2" required placeholder="Tuliskan isi materi pembelajaran poin ini..."
-                                      style="flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">{{ $lessonText }}</textarea>
-                            <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 700;">&times;</button>
+                <div id="lessonsContainer" style="display: flex; flex-direction: column; gap: 16px;">
+                    @php 
+                        $oldLessons = old('lessons', [['title' => '', 'content' => '']]); 
+                    @endphp
+                    @foreach($oldLessons as $idx => $lesson)
+                    <div class="lesson-row" style="background: var(--theme-card-soft); padding: 16px; border-radius: 12px; border: 1px solid var(--theme-border); display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="lesson-number" style="font-weight: 700; color: var(--theme-heading);">Poin Materi #{{ $idx + 1 }}</span>
+                            <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.8rem;">Hapus</button>
                         </div>
+                        <input type="text" name="lessons[{{ $idx }}][title]" value="{{ $lesson['title'] ?? '' }}" required placeholder="Judul Poin Materi (Contoh: Cara Kerja Penipuan Hadiah)"
+                            style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem; font-weight: 600;">
+                        <textarea name="lessons[{{ $idx }}][content]" rows="3" required placeholder="Tuliskan isi materi pembelajaran..."
+                            style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem;">{{ $lesson['content'] ?? '' }}</textarea>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -107,22 +113,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateNumbers() {
         container.querySelectorAll('.lesson-row').forEach((row, i) => {
-            row.querySelector('.lesson-number').textContent = (i + 1) + '.';
+            row.querySelector('.lesson-number').textContent = 'Poin Materi #' + (i + 1);
+            row.querySelector('input[type="text"]').name = `lessons[${i}][title]`;
+            row.querySelector('textarea').name = `lessons[${i}][content]`;
         });
     }
 
     btnAdd.addEventListener('click', function () {
+        const i = container.querySelectorAll('.lesson-row').length;
         const div = document.createElement('div');
         div.className = 'lesson-row';
-        div.style.cssText = 'display: flex; gap: 10px; align-items: flex-start;';
+        div.style.cssText = 'background: var(--theme-card-soft); padding: 16px; border-radius: 12px; border: 1px solid var(--theme-border); display: flex; flex-direction: column; gap: 10px;';
         div.innerHTML = `
-            <span class="lesson-number" style="padding-top: 10px; font-weight: 700; color: var(--theme-muted); min-width: 24px;">.</span>
-            <textarea name="lessons[]" rows="2" required placeholder="Tuliskan isi materi pembelajaran poin ini..."
-                      style="flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);"></textarea>
-            <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 10px 14px; border-radius: 8px; cursor: pointer; font-weight: 700;">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="lesson-number" style="font-weight: 700; color: var(--theme-heading);">Poin Materi #${i + 1}</span>
+                <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.8rem;">Hapus</button>
+            </div>
+            <input type="text" name="lessons[${i}][title]" required placeholder="Judul Poin Materi (Contoh: Cara Kerja Penipuan Hadiah)"
+                style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem; font-weight: 600;">
+            <textarea name="lessons[${i}][content]" rows="3" required placeholder="Tuliskan isi materi pembelajaran..."
+                style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem;"></textarea>
         `;
         container.appendChild(div);
-        updateNumbers();
     });
 
     container.addEventListener('click', function (e) {
@@ -138,4 +150,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 @endsection
-
