@@ -19126,3 +19126,2674 @@ html[data-theme="dark"]
         transition: none;
     }
 }
+
+/* ==================================================
+   VERIFY LOGIN & REGISTER — DARK MODE
+   Warna saja; layout dan ukuran tetap.
+   ================================================== */
+
+/* 1. Background halaman */
+html[data-theme="dark"] :is(.verify-login, .verify-register) {
+    background:
+        radial-gradient(
+            ellipse at 12% 15%,
+            rgba(53, 197, 220, .07),
+            transparent 48%
+        ),
+        #0b1220 !important;
+    color: #d3dce6 !important;
+    color-scheme: dark;
+}
+
+/* 2. Judul pengantar */
+html[data-theme="dark"] :is(
+    .verify-login-intro,
+    .verify-register-intro
+) h1 {
+    background: none !important;
+    color: #e8eef5 !important;
+    -webkit-text-fill-color: currentColor;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-intro,
+    .verify-register-intro
+) h1 span {
+    background: none !important;
+    color: #70d3e3 !important;
+    -webkit-text-fill-color: currentColor;
+}
+
+/* Deskripsi pengantar */
+html[data-theme="dark"] :is(
+    .verify-login-intro-description,
+    .verify-register-intro-description
+) {
+    color: #a8b9c9 !important;
+}
+
+/* Eyebrow */
+html[data-theme="dark"] :is(
+    .verify-login-eyebrow,
+    .verify-register-eyebrow
+) {
+    color: #91d6e2 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-eyebrow,
+    .verify-register-eyebrow
+) > span {
+    background: #35c5dc !important;
+    box-shadow: 0 0 0 4px rgba(53, 197, 220, .12) !important;
+}
+
+/* 3. Pesan login dan manfaat register */
+html[data-theme="dark"] :is(
+    .verify-login-message,
+    .verify-register-benefit
+) {
+    background: #132332 !important;
+    border-color: #2b4355 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-message-icon,
+    .verify-register-benefit-icon
+) {
+    background: #193b49 !important;
+    border-color: #305d6d !important;
+    color: #8edbe8 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-message,
+    .verify-register-benefit
+) h2 {
+    color: #dfeaf3 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-message,
+    .verify-register-benefit
+) p {
+    color: #a8bdce !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-intro-note,
+    .verify-register-intro-note
+) {
+    color: #91a8bb !important;
+    border-color: #293b4d !important;
+}
+
+/* 4. Kartu form */
+html[data-theme="dark"] :is(
+    .verify-login-card,
+    .verify-register-card
+) {
+    background: #111a28 !important;
+    border-color: #293b4d !important;
+    color: #d3dce6 !important;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, .2) !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-card-heading,
+    .verify-register-card-heading
+) {
+    border-color: #293b4d !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-card-heading,
+    .verify-register-card-heading
+) h2 {
+    color: #edf3f9 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-card-heading,
+    .verify-register-card-heading
+) p {
+    color: #a4b6c8 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-card-label,
+    .verify-register-card-label
+) {
+    color: #86cbd9 !important;
+}
+
+/* 5. Label dan input */
+html[data-theme="dark"] :is(
+    .verify-login-field,
+    .verify-register-field
+) > label {
+    color: #cbdce8 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+) {
+    background: #0d1826 !important;
+    border-color: #344a5e !important;
+    color: #e0e9f1 !important;
+    caret-color: #70d3e3;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+)::placeholder {
+    color: #8fa4b8 !important;
+    opacity: 1;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):hover {
+    border-color: #4b6b80 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):focus {
+    background: #101e2d !important;
+    border-color: #35c5dc !important;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(53, 197, 220, .12) !important;
+}
+
+/* Autofill browser */
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):-webkit-autofill {
+    -webkit-text-fill-color: #e0e9f1 !important;
+    caret-color: #70d3e3;
+    -webkit-box-shadow: 0 0 0 1000px #0d1826 inset !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):-webkit-autofill:focus {
+    -webkit-box-shadow:
+        0 0 0 1000px #101e2d inset,
+        0 0 0 4px rgba(53, 197, 220, .12) !important;
+}
+
+/* 6. Tombol tampilkan/sembunyikan password */
+html[data-theme="dark"] :is(
+    .verify-login-password-toggle,
+    .verify-register-password-toggle
+) {
+    background: transparent !important;
+    color: #9fb6c9 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-password-toggle,
+    .verify-register-password-toggle
+):hover {
+    background: #1b3041 !important;
+    color: #8edbe8 !important;
+}
+
+/* 7. Tombol utama */
+html[data-theme="dark"] :is(
+    .verify-login-submit,
+    .verify-register-submit
+) {
+    background: #35c5dc !important;
+    border-color: #35c5dc !important;
+    color: #09232f !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-submit,
+    .verify-register-submit
+) :is(span, svg) {
+    color: inherit !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-submit,
+    .verify-register-submit
+):not(:disabled):hover {
+    background: #79ddea !important;
+    border-color: #79ddea !important;
+    color: #09232f !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-submit,
+    .verify-register-submit
+):disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+/* Spinner saat submit */
+html[data-theme="dark"] :is(
+    .verify-login-spinner,
+    .verify-register-spinner
+) {
+    border-color: rgba(9, 35, 47, .25) !important;
+    border-top-color: #09232f !important;
+}
+
+/* 8. Tautan pindah Login / Register */
+html[data-theme="dark"] :is(
+    .verify-login-register,
+    .verify-register-login
+) {
+    color: #a4b6c8 !important;
+    border-color: #293b4d !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-register,
+    .verify-register-login
+) a {
+    color: #7ed9e9 !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-register,
+    .verify-register-login
+) a:hover {
+    color: #b3edf5 !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* 9. Validasi dan error */
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):is(.is-invalid, [aria-invalid="true"]) {
+    border-color: #e18c9c !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-input,
+    .verify-register-input
+):is(.is-invalid, [aria-invalid="true"]):focus {
+    box-shadow: 0 0 0 4px rgba(225, 140, 156, .12) !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-field-error,
+    .verify-register-field-error
+) {
+    color: #ffadbb !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-general-error,
+    .verify-register-general-error
+) {
+    background: #351f2b !important;
+    border-color: #875063 !important;
+    color: #ffc1cd !important;
+}
+
+html[data-theme="dark"] :is(
+    .verify-login-form-status,
+    .verify-register-form-status
+) {
+    color: #a8bdce;
+}
+
+/* 10. Focus keyboard */
+html[data-theme="dark"] :is(
+    .verify-login,
+    .verify-register
+) :is(button, a):focus-visible {
+    outline: 2px solid #70d9e9;
+    outline-offset: 4px;
+}
+
+/* Pertahankan elemen yang disembunyikan oleh form */
+html[data-theme="dark"] :is(
+    .verify-login,
+    .verify-register
+) [hidden] {
+    display: none !important;
+}
+
+/* ==================================================
+   AUTH DARK MODE — RAPikan PANEL INFORMASI KIRI
+   ================================================== */
+
+/* Panel pesan Login dan manfaat Register */
+html[data-theme="dark"] .verify-login .verify-login-message,
+html[data-theme="dark"] .verify-register .verify-register-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 560px;
+    min-width: 0;
+    height: auto;
+
+    padding: 20px 22px;
+
+    border: 1px solid #263d4e !important;
+    border-radius: 18px;
+    background: rgba(20, 37, 51, .65) !important;
+    box-shadow: none !important;
+}
+
+/* Jarak antarpanel Register */
+html[data-theme="dark"] .verify-register .verify-register-benefits {
+    display: grid;
+    gap: 14px;
+
+    width: 100%;
+    max-width: 560px;
+    background: transparent;
+}
+
+html[data-theme="dark"] .verify-register .verify-register-benefit {
+    margin: 0;
+}
+
+/* Ikon lebih ringkas dan sejajar dengan awal teks */
+html[data-theme="dark"] .verify-login .verify-login-message-icon,
+html[data-theme="dark"] .verify-register .verify-register-benefit-icon {
+    display: grid;
+    place-items: center;
+
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    margin: 0;
+
+    border: 1px solid #2b5362 !important;
+    border-radius: 13px;
+    background: #173440 !important;
+    color: #8edbe8 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .verify-login .verify-login-message-icon svg,
+html[data-theme="dark"] .verify-register .verify-register-benefit-icon svg {
+    display: block;
+    width: 23px;
+    height: 23px;
+}
+
+/* Area teks */
+html[data-theme="dark"] .verify-login .verify-login-message > div,
+html[data-theme="dark"] .verify-register .verify-register-benefit > div {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+}
+
+html[data-theme="dark"] .verify-login .verify-login-message h2,
+html[data-theme="dark"] .verify-register .verify-register-benefit h2 {
+    margin: 1px 0 7px;
+    color: #e0ebf3 !important;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -.15px;
+}
+
+html[data-theme="dark"] .verify-login .verify-login-message p,
+html[data-theme="dark"] .verify-register .verify-register-benefit p {
+    margin: 0;
+    color: #a5bacb !important;
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+/* Ponsel */
+@media (max-width: 600px) {
+    html[data-theme="dark"] .verify-login .verify-login-message,
+    html[data-theme="dark"] .verify-register .verify-register-benefit {
+        gap: 12px;
+        padding: 17px;
+        border-radius: 15px;
+    }
+
+    html[data-theme="dark"] .verify-login .verify-login-message-icon,
+    html[data-theme="dark"] .verify-register .verify-register-benefit-icon {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+        border-radius: 12px;
+    }
+}
+
+/* ==================================================
+   DASHBOARD DARK MODE — RAPikan FRAME & LAYAR HP
+   ================================================== */
+
+/* Frame menjadi pembatas seluruh isi layar */
+html[data-theme="dark"] .verify-hero .phone {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    border: 6px solid #40536a !important;
+    border-radius: 36px !important;
+    background: #111a28 !important;
+
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, .35),
+        0 0 0 1px rgba(144, 177, 201, .08) !important;
+}
+
+/* Notch menyatu dengan layar, bukan biru terang */
+html[data-theme="dark"] .verify-hero .phone > .notch {
+    position: relative;
+    z-index: 2;
+
+    flex: 0 0 19px;
+    width: 95px;
+    height: 19px;
+    margin: 0 auto;
+
+    border-radius: 0 0 14px 14px;
+    background: #080e19 !important;
+}
+
+/* Layar mengisi sisa tinggi frame tanpa keluar dari bawah */
+html[data-theme="dark"]
+.verify-hero .phone > .phone-body.verify-phone-demo {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    box-sizing: border-box;
+    flex: 1 1 0;
+    width: 100%;
+    height: auto !important;
+    min-height: 0;
+    margin: 0;
+    padding: 23px 13px 14px;
+
+    border: 0;
+    border-radius: 0;
+    background: #111a28 !important;
+    color: #d3dce6 !important;
+}
+
+/* Konten demo mengambil ruang yang tersedia */
+html[data-theme="dark"]
+.verify-hero .verify-phone-demo .verify-demo-scene {
+    flex: 1 1 0;
+    min-height: 0;
+}
+
+/* Label tetap ringkas di bagian atas */
+html[data-theme="dark"]
+.verify-hero .verify-phone-demo .verify-demo-label {
+    flex-shrink: 0;
+    background: #1a2939 !important;
+    border-color: #31465a !important;
+    color: #a8bdce !important;
+}
+
+/* Kontrol tetap di dalam bagian bawah layar */
+html[data-theme="dark"]
+.verify-hero .verify-phone-demo .verify-demo-controls {
+    position: relative;
+    flex: 0 0 auto;
+
+    justify-content: center;
+    width: 100%;
+    margin-top: 12px;
+    padding-top: 8px;
+
+    border-top: 1px solid #293b4d !important;
+    background: transparent !important;
+}
+
+/* Elemen tersembunyi tetap tersembunyi */
+html[data-theme="dark"]
+.verify-hero .verify-phone-demo [hidden] {
+    display: none !important;
+}
+
+/* ==================================================
+   MODULE DETAIL — LESSON READER DARK MODE
+   ================================================== */
+
+/* 1. Kartu materi dan daftar isi */
+html[data-theme="dark"] .vl-reader {
+    color: #c4d4e1;
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-card,
+html[data-theme="dark"] .vl-reader .vl-reader-outline {
+    background: #111a28 !important;
+    border-color: #293b4d !important;
+    color: #c4d4e1 !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .16) !important;
+}
+
+/* 2. Header kartu dan area materi */
+html[data-theme="dark"] .vl-reader .vl-reader-top,
+html[data-theme="dark"] .vl-reader .vl-reader-content,
+html[data-theme="dark"] .vl-reader .vl-reader-outline-body {
+    background: transparent !important;
+    border-color: #293b4d !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-top {
+    color: #8dc7d5 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-position,
+html[data-theme="dark"] .vl-reader .vl-reader-pagination {
+    color: #a3b8c9 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-page-label {
+    color: #88bfce !important;
+}
+
+/* 3. Progress membaca */
+html[data-theme="dark"] .vl-reader .vl-reader-meter {
+    background: #24384b !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-meter > span {
+    background: #35c5dc !important;
+}
+
+/* 4. Judul dan isi materi */
+html[data-theme="dark"] .vl-reader .vl-reader-title,
+html[data-theme="dark"] .vl-reader .vl-reader-copy :is(h2, h3, h4) {
+    color: #e8eef5 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-copy,
+html[data-theme="dark"] .vl-reader .vl-reader-copy :is(p, li) {
+    color: #bdcddd !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-copy :is(strong, b) {
+    color: #e0ebf3 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-copy li::marker {
+    color: #70d3e3 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-copy a {
+    color: #87dce9 !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-copy a:hover {
+    color: #b5edf5 !important;
+}
+
+/* 5. Contoh pesan fiktif */
+html[data-theme="dark"] .vl-reader .verify-lesson-message {
+    background: #152637 !important;
+    border-color: #30495d !important;
+    border-left-color: #53b7ca !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .vl-reader .verify-lesson-message figcaption {
+    color: #8fc6d5 !important;
+}
+
+html[data-theme="dark"] .vl-reader .verify-lesson-message blockquote,
+html[data-theme="dark"] .vl-reader .verify-lesson-message blockquote p {
+    color: #d0e0ec !important;
+}
+
+/* 6. Ringkasan */
+html[data-theme="dark"] .vl-reader .vl-reader-copy--summary {
+    background: #142d39 !important;
+    border-color: #2b5262 !important;
+    color: #c8dfe8 !important;
+}
+
+/* 7. Navigasi bawah */
+html[data-theme="dark"] .vl-reader .vl-reader-navigation {
+    background: transparent !important;
+    border-top-color: #293b4d !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-button--previous {
+    background: #192b3d !important;
+    border-color: #344d62 !important;
+    color: #cadce9 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-button--previous:not(:disabled):hover {
+    background: #223c50 !important;
+    border-color: #4b788e !important;
+    color: #e7f3fa !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-button--next {
+    background: #35c5dc !important;
+    border-color: #35c5dc !important;
+    color: #09232f !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-button--next:not(:disabled):hover {
+    background: #79ddea !important;
+    border-color: #79ddea !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-button :is(span, svg) {
+    color: inherit !important;
+}
+
+/* Disabled dibedakan tanpa membuat teks terlalu samar */
+html[data-theme="dark"] .vl-reader .vl-reader-button:disabled {
+    background: #142130 !important;
+    border-color: #293b4d !important;
+    color: #8298ab !important;
+    box-shadow: none !important;
+    cursor: not-allowed;
+}
+
+/* 8. Header daftar isi */
+html[data-theme="dark"] .vl-reader .vl-reader-outline summary {
+    background: transparent !important;
+    color: #e0ebf3 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-outline-toggle {
+    color: #87cbd9 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-outline-body > p,
+html[data-theme="dark"] .vl-reader .vl-reader-outline-note {
+    color: #a2b7c8 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-outline-note {
+    border-top-color: #293b4d !important;
+}
+
+/* 9. Item daftar isi */
+html[data-theme="dark"] .vl-reader .vl-reader-outline-link {
+    background: transparent !important;
+    border-color: transparent !important;
+    color: #b5c9d9 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-outline-number {
+    color: #8da7bb !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-outline-link:hover {
+    background: #192c3e !important;
+    border-color: #30495d !important;
+    color: #e0edf5 !important;
+}
+
+/* Bagian yang sedang dibaca */
+html[data-theme="dark"]
+.vl-reader .vl-reader-outline-link[aria-current="step"] {
+    background: #173744 !important;
+    border-color: #326174 !important;
+    color: #a2e4ee !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-outline-link[aria-current="step"]
+.vl-reader-outline-number {
+    color: #83d7e6 !important;
+}
+
+/* 10. Panel selesai dan catatan */
+html[data-theme="dark"] .vl-reader .vl-reader-finished {
+    background: #142d39 !important;
+    border-color: #2d5364 !important;
+    color: #c8dfe8 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-finished h3 {
+    color: #e1f0f6 !important;
+}
+
+html[data-theme="dark"] .vl-reader .vl-reader-finished p,
+html[data-theme="dark"] .vl-reader .vl-reader-demo-note,
+html[data-theme="dark"] .vl-reader .vl-reader-empty {
+    color: #a7bdce !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-finished .verify-lesson-practice-link {
+    background: #35c5dc !important;
+    border-color: #35c5dc !important;
+    color: #09232f !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-finished .verify-lesson-practice-link span {
+    color: inherit !important;
+}
+
+html[data-theme="dark"]
+.vl-reader .vl-reader-finished .verify-lesson-practice-link:hover {
+    background: #79ddea !important;
+    border-color: #79ddea !important;
+}
+
+/* 11. Focus keyboard */
+html[data-theme="dark"]
+.vl-reader :is(button, a, summary):focus-visible {
+    outline: 2px solid #70d9e9;
+    outline-offset: 4px;
+}
+
+/* Jangan tampilkan bagian yang sedang disembunyikan */
+html[data-theme="dark"] .vl-reader [hidden] {
+    display: none !important;
+}
+
+/* ==================================================
+   VERIFY ADMIN — NAVIGASI & RINGKASAN
+   ================================================== */
+
+/* 1. Warna dan tipografi */
+.va-shell {
+    --va-bg: #ffffff;
+    --va-soft: #f5f9fc;
+    --va-border: #dfe9f0;
+    --va-heading: #152d4b;
+    --va-text: #415c72;
+    --va-muted: #637d91;
+    --va-accent: #087f94;
+    --va-tint: #eaf7fa;
+    --va-shadow: rgba(21, 45, 75, .035);
+
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: 32px;
+
+    color: var(--va-text);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+html[data-theme="dark"] .va-shell {
+    --va-bg: #111a28;
+    --va-soft: #162638;
+    --va-border: #293c4f;
+    --va-heading: #e8eef5;
+    --va-text: #c3d3e1;
+    --va-muted: #a1b6c8;
+    --va-accent: #83d8e7;
+    --va-tint: #173542;
+    --va-shadow: rgba(0, 0, 0, .15);
+}
+
+.va-shell *,
+.va-shell *::before,
+.va-shell *::after {
+    box-sizing: border-box;
+}
+
+.va-shell a {
+    text-decoration: none;
+}
+
+/* 2. Navigasi admin */
+.va-nav-shell {
+    margin-top: 28px;
+}
+
+.va-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    padding: 20px 23px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 18px;
+    background: var(--va-bg);
+}
+
+.va-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.va-shell .va-eyebrow {
+    display: block;
+    color: var(--va-accent);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+.va-shell .va-brand-title {
+    margin: 3px 0 0;
+    color: var(--va-heading);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -.4px;
+}
+
+.va-shell .va-icon {
+    display: grid;
+    place-items: center;
+
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 0;
+
+    border: 1px solid var(--va-border);
+    border-radius: 12px;
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+.va-shell .va-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+.va-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.va-shell .va-tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 39px;
+    padding: 9px 12px;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--va-muted);
+
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.va-shell .va-tab:hover {
+    background: var(--va-soft);
+    color: var(--va-heading);
+}
+
+.va-shell .va-tab.is-active {
+    border-color: var(--va-border);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+/* 3. Heading halaman */
+.va-dashboard {
+    margin-top: 30px;
+    margin-bottom: 55px;
+}
+
+.va-page-heading {
+    margin-bottom: 25px;
+}
+
+.va-shell .va-page-heading h1 {
+    margin: 9px 0;
+    color: var(--va-heading);
+    font-size: clamp(23px, 2.2vw, 30px);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -.8px;
+}
+
+.va-shell .va-page-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 12px;
+}
+
+/* 4. Kartu statistik */
+.va-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.va-stat,
+.va-panel {
+    min-width: 0;
+    border: 1px solid var(--va-border);
+    border-radius: 18px;
+    background: var(--va-bg);
+    box-shadow: 0 6px 20px var(--va-shadow);
+}
+
+.va-stat {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+}
+
+.va-stat-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.va-shell .va-stat-top h2 {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.va-shell .va-stat-value {
+    margin: 16px 0 18px;
+    color: var(--va-heading);
+
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+}
+
+.va-stat-footer {
+    margin-top: auto;
+    padding-top: 13px;
+    border-top: 1px solid var(--va-border);
+    color: var(--va-muted);
+    font-size: 10px;
+}
+
+/* 5. Tautan */
+.va-shell .va-text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--va-accent);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.va-shell .va-text-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* 6. Panel data */
+.va-panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.va-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.va-panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.va-shell .va-panel-heading h2 {
+    margin: 0;
+    color: var(--va-heading);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -.35px;
+}
+
+.va-list {
+    flex: 1;
+    min-width: 0;
+}
+
+.va-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 15px 0;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-row-copy {
+    flex: 1;
+    min-width: 0;
+}
+
+.va-shell .va-row h3 {
+    margin: 0 0 4px;
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.va-shell .va-row p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 10px;
+}
+
+.va-shell .va-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.va-panel-footer {
+    margin-top: 23px;
+}
+
+/* 7. Tombol */
+.va-shell .va-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 42px;
+    max-width: 100%;
+    padding: 11px 16px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 10px;
+    background: var(--va-soft);
+    color: var(--va-heading);
+    box-shadow: none;
+
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.va-shell .va-button:hover {
+    border-color: var(--va-accent);
+    background: var(--va-tint);
+}
+
+.va-shell .va-button--primary {
+    border-color: #173b50;
+    background: #173b50;
+    color: #ffffff;
+}
+
+.va-shell .va-button--primary:hover {
+    border-color: #205570;
+    background: #205570;
+}
+
+html[data-theme="dark"] .va-shell .va-button--primary {
+    border-color: #35c5dc;
+    background: #35c5dc;
+    color: #09232f;
+}
+
+html[data-theme="dark"] .va-shell .va-button--primary:hover {
+    border-color: #79ddea;
+    background: #79ddea;
+}
+
+/* 8. Badge status */
+.va-shell .va-badge {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding: 4px 9px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 7px;
+    background: var(--va-soft);
+    color: var(--va-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.va-shell .va-badge--success {
+    border-color: #bce5d2;
+    background: #eaf8f1;
+    color: #176b4d;
+}
+
+.va-shell .va-badge--warning {
+    border-color: #eed5a7;
+    background: #fff7e8;
+    color: #855709;
+}
+
+.va-shell .va-badge--danger {
+    border-color: #edc2cc;
+    background: #fff0f3;
+    color: #a02d49;
+}
+
+html[data-theme="dark"] .va-shell .va-badge--success {
+    border-color: #345e50;
+    background: #18362f;
+    color: #99ddc4;
+}
+
+html[data-theme="dark"] .va-shell .va-badge--warning {
+    border-color: #75603d;
+    background: #332b20;
+    color: #efd197;
+}
+
+html[data-theme="dark"] .va-shell .va-badge--danger {
+    border-color: #754457;
+    background: #351f2b;
+    color: #ffb7c6;
+}
+
+/* 9. Data kosong */
+.va-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-height: 125px;
+    padding: 20px;
+
+    border: 1px dashed var(--va-border);
+    border-radius: 12px;
+    background: var(--va-soft);
+}
+
+.va-shell .va-empty h3 {
+    margin: 0 0 7px;
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.va-shell .va-empty p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+}
+
+/* 10. Notifikasi */
+.va-alert {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.va-alert ul {
+    margin: 7px 0 0;
+    padding-left: 20px;
+}
+
+.va-alert--success {
+    background: #eaf8f1;
+    color: #176b4d;
+}
+
+.va-alert--danger {
+    background: #fff0f3;
+    color: #a02d49;
+}
+
+html[data-theme="dark"] .va-alert--success {
+    background: #18362f;
+    color: #99ddc4;
+}
+
+html[data-theme="dark"] .va-alert--danger {
+    background: #351f2b;
+    color: #ffb7c6;
+}
+
+/* 11. Fokus keyboard */
+.va-shell :is(a, button):focus-visible {
+    outline: 2px solid var(--va-accent);
+    outline-offset: 4px;
+}
+
+.va-shell [hidden] {
+    display: none !important;
+}
+
+/* 12. Tablet */
+@media (max-width: 1150px) {
+    .va-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .va-tabs {
+        width: 100%;
+        padding-top: 15px;
+        border-top: 1px solid var(--va-border);
+    }
+
+    .va-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* 13. Ponsel */
+@media (max-width: 760px) {
+    .va-shell {
+        padding-inline: 20px;
+    }
+
+    .va-nav-shell {
+        margin-top: 20px;
+    }
+
+    .va-topbar {
+        padding: 20px;
+    }
+
+    .va-panels {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+    }
+
+    .va-panel {
+        padding: 21px;
+    }
+
+    .va-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 7px;
+    }
+
+    .va-shell .va-tab {
+        flex-shrink: 0;
+    }
+
+    .va-dashboard {
+        margin-top: 24px;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-stats {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 13px;
+    }
+
+    .va-stat {
+        padding: 20px;
+    }
+
+    .va-panel-footer .va-button {
+        width: 100%;
+    }
+}
+
+/* 14. Preferensi gerakan */
+@media (prefers-reduced-motion: reduce) {
+    .va-shell *,
+    .va-shell *::before,
+    .va-shell *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* ==================================================
+   VERIFY ADMIN — MANAJEMEN SCAM SIMULATOR
+   Memakai variabel dan komponen dasar .va-shell.
+   ================================================== */
+
+/* 1. Layout halaman */
+.va-simulator-page {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.va-management-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 25px;
+}
+
+.va-management-heading-copy {
+    min-width: 0;
+    max-width: 720px;
+}
+
+.va-shell .va-management-heading h1 {
+    margin: 9px 0 10px;
+    color: var(--va-heading);
+
+    font-size: clamp(25px, 2.2vw, 30px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -.8px;
+}
+
+.va-shell .va-management-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.va-management-heading > .va-button {
+    flex-shrink: 0;
+}
+
+.va-shell .va-button > svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+}
+
+/* 2. Bingkai tabel */
+.va-data-card {
+    min-width: 0;
+    overflow: hidden;
+
+    border: 1px solid var(--va-border);
+    border-radius: 18px;
+    background: var(--va-bg);
+
+    box-shadow: 0 6px 20px var(--va-shadow);
+}
+
+.va-data-card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-shell .va-data-card-heading h2 {
+    margin: 0 0 5px;
+    color: var(--va-heading);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -.3px;
+}
+
+.va-shell .va-data-card-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.va-data-caption {
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* 3. Scroll tabel */
+.va-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: var(--va-border) var(--va-bg);
+}
+
+.va-table-scroll:focus-visible {
+    outline: 2px solid var(--va-accent);
+    outline-offset: -3px;
+}
+
+/* 4. Struktur tabel */
+.va-shell .va-table {
+    width: 100%;
+    margin: 0;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    background: var(--va-bg);
+
+    color: var(--va-text);
+    font: inherit;
+    text-align: left;
+}
+
+.va-shell .va-scenario-table {
+    min-width: 920px;
+}
+
+.va-shell .va-table thead {
+    background: var(--va-soft);
+}
+
+.va-shell .va-table th {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--va-border);
+
+    color: var(--va-muted);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.7;
+    letter-spacing: .2px;
+    text-transform: none;
+    white-space: nowrap;
+}
+
+.va-shell .va-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--va-border);
+
+    background: transparent;
+    color: var(--va-text);
+    font-size: 11px;
+    line-height: 1.8;
+    vertical-align: middle;
+}
+
+.va-shell .va-table tbody tr:last-child > td {
+    border-bottom: 0;
+}
+
+.va-shell .va-table tbody tr:hover > td {
+    background: var(--va-soft);
+}
+
+/* 5. Judul dan metadata */
+.va-scenario-name-cell {
+    min-width: 260px;
+}
+
+.va-shell .va-table-title {
+    max-width: 420px;
+    margin-bottom: 5px;
+
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.va-table-meta {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    max-width: 420px;
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.va-scenario-slug {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.va-version {
+    white-space: nowrap;
+}
+
+.va-play-count {
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.va-table-unit {
+    margin-left: 3px;
+    color: var(--va-muted);
+    font-size: 10px;
+}
+
+/* 6. Badge topik dan kesulitan */
+.va-shell .va-badge--topic {
+    border-color: var(--va-border);
+    background: var(--va-tint);
+    color: var(--va-accent);
+    white-space: nowrap;
+}
+
+.va-difficulty-badge {
+    white-space: nowrap;
+}
+
+/* 7. Toggle status */
+.va-inline-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.va-shell button.va-status-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 33px;
+    padding: 6px 10px;
+
+    font-family: inherit;
+    line-height: 1.6;
+    cursor: pointer;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.va-shell button.va-status-toggle:hover {
+    border-color: currentColor;
+    box-shadow: 0 0 0 3px var(--va-tint);
+}
+
+.va-status-dot {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* 8. Tombol aksi */
+.va-shell .va-table .va-cell-actions {
+    text-align: right;
+}
+
+.va-table-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+}
+
+.va-shell .va-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 34px;
+    padding: 7px 10px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 8px;
+    background: var(--va-soft);
+    color: var(--va-text);
+    box-shadow: none;
+
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+.va-action-button svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* Edit */
+.va-shell .va-action-button--edit {
+    border-color: #cde4eb;
+    background: #eef8fb;
+    color: #246d81;
+}
+
+.va-shell .va-action-button--edit:hover {
+    border-color: #99c9d6;
+    background: #dff1f6;
+    color: #15596e;
+}
+
+/* Hapus */
+.va-shell .va-action-button--delete {
+    border-color: #efd2da;
+    background: #fff3f5;
+    color: #a13952;
+}
+
+.va-shell .va-action-button--delete:hover {
+    border-color: #dca4b3;
+    background: #ffe7ed;
+    color: #8e2540;
+}
+
+/* Edit — dark mode */
+html[data-theme="dark"] .va-shell .va-action-button--edit {
+    border-color: #30586b;
+    background: #193442;
+    color: #9bdde9;
+}
+
+html[data-theme="dark"] .va-shell .va-action-button--edit:hover {
+    border-color: #4b91a5;
+    background: #214958;
+    color: #c4f1f7;
+}
+
+/* Hapus — dark mode */
+html[data-theme="dark"] .va-shell .va-action-button--delete {
+    border-color: #674151;
+    background: #30212e;
+    color: #f3adbf;
+}
+
+html[data-theme="dark"] .va-shell .va-action-button--delete:hover {
+    border-color: #9a6074;
+    background: #452939;
+    color: #ffd0dc;
+}
+
+/* 9. Kondisi data kosong */
+.va-shell .va-table td.va-table-empty-cell {
+    padding: 0;
+}
+
+.va-shell .va-table tbody tr:hover > .va-table-empty-cell {
+    background: transparent;
+}
+
+.va-table-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 265px;
+    padding: 38px 24px;
+    text-align: center;
+}
+
+.va-table-empty > .va-icon {
+    width: 49px;
+    height: 49px;
+    margin-bottom: 17px;
+    border-radius: 15px;
+}
+
+.va-shell .va-table-empty h3 {
+    margin: 0 0 8px;
+    color: var(--va-heading);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.va-shell .va-table-empty p {
+    max-width: 370px;
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.va-table-empty > .va-button {
+    margin-top: 20px;
+}
+
+/* 10. Tablet dan ponsel */
+@media (max-width: 760px) {
+    .va-simulator-page {
+        margin-top: 24px;
+        margin-bottom: 42px;
+    }
+
+    .va-management-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+        margin-bottom: 22px;
+    }
+
+    .va-shell .va-management-heading h1 {
+        font-size: 25px;
+    }
+
+    .va-data-card-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+        padding: 19px 20px;
+    }
+
+    .va-data-card {
+        border-radius: 16px;
+    }
+
+    .va-shell .va-table th,
+    .va-shell .va-table td {
+        padding-inline: 20px;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-management-heading > .va-button {
+        width: 100%;
+    }
+}
+
+/* ==================================================
+   VERIFY ADMIN — MANAJEMEN PENGGUNA
+   ================================================== */
+
+/* 1. Layout */
+.va-users-page {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+/* 2. Toolbar */
+.va-users-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-users-toolbar-heading {
+    min-width: 0;
+}
+
+.va-shell .va-users-toolbar-heading h2 {
+    margin: 0 0 5px;
+    color: var(--va-heading);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -.3px;
+}
+
+.va-shell .va-users-toolbar-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* 3. Form filter */
+.va-users-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    max-width: 100%;
+    margin: 0;
+}
+
+.va-shell .va-control {
+    box-sizing: border-box;
+    min-height: 40px;
+    margin: 0;
+    padding: 9px 12px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 9px;
+    background: var(--va-bg);
+    color: var(--va-text);
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.6;
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+}
+
+.va-shell .va-control::placeholder {
+    color: var(--va-muted);
+    opacity: 1;
+}
+
+.va-shell .va-control:hover {
+    border-color: var(--va-accent);
+}
+
+.va-shell .va-control:focus {
+    outline: none;
+    border-color: var(--va-accent);
+    box-shadow: 0 0 0 3px var(--va-tint);
+}
+
+.va-users-search {
+    position: relative;
+    width: 240px;
+    max-width: 100%;
+}
+
+.va-users-search > svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+
+    width: 16px;
+    height: 16px;
+
+    color: var(--va-muted);
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.va-shell .va-users-search-input {
+    width: 100%;
+    padding-left: 37px;
+}
+
+.va-shell .va-users-role-filter {
+    min-width: 125px;
+    padding-right: 28px;
+    cursor: pointer;
+}
+
+.va-users-filter > .va-button {
+    min-height: 40px;
+    padding: 9px 16px;
+}
+
+.va-shell .va-users-reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 8px;
+
+    border-radius: 8px;
+    color: var(--va-muted);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.va-shell .va-users-reset:hover {
+    background: var(--va-soft);
+    color: var(--va-accent);
+}
+
+/* 4. Tabel pengguna */
+.va-shell .va-users-table {
+    min-width: 1040px;
+}
+
+.va-shell .va-users-table td {
+    padding-block: 19px;
+}
+
+/* 5. Identitas pengguna */
+.va-user-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 205px;
+}
+
+.va-user-avatar {
+    display: grid;
+    place-items: center;
+
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 50%;
+    background: var(--va-tint);
+    color: var(--va-accent);
+
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.va-user-name-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+
+    min-width: 0;
+    max-width: 260px;
+}
+
+.va-user-name {
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.va-user-self {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 2px 6px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 5px;
+    background: var(--va-tint);
+    color: var(--va-accent);
+
+    font-size: 8px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+/* 6. Email, aktivitas, dan tanggal */
+.va-user-email {
+    display: block;
+    min-width: 170px;
+    max-width: 260px;
+
+    color: var(--va-text);
+    font-size: 11px;
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+}
+
+.va-user-activity {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.7;
+    white-space: nowrap;
+}
+
+.va-user-activity strong {
+    color: var(--va-text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.va-user-date {
+    color: var(--va-muted);
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* 7. Badge admin */
+.va-shell .va-badge--admin {
+    border-color: var(--va-border);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+/* 8. Form ubah role */
+.va-user-role-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 7px;
+
+    margin: 0;
+}
+
+.va-shell .va-user-role-select {
+    min-width: 92px;
+    min-height: 34px;
+    padding: 6px 24px 6px 10px;
+
+    border-radius: 8px;
+    background: var(--va-soft);
+
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.va-shell .va-user-save {
+    min-height: 34px;
+    padding: 7px 11px;
+
+    border-color: var(--va-border);
+    background: var(--va-soft);
+    color: var(--va-heading);
+}
+
+.va-shell .va-user-save:hover {
+    border-color: var(--va-accent);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+/* 9. Pagination */
+.va-users-pagination {
+    padding: 18px 24px;
+    border-top: 1px solid var(--va-border);
+    color: var(--va-muted);
+    font-size: 11px;
+}
+
+.va-shell .va-users-pagination nav {
+    color: var(--va-text);
+}
+
+.va-shell .va-users-pagination p {
+    color: var(--va-muted);
+    font-size: 11px;
+}
+
+.va-shell .va-users-pagination a {
+    border-color: var(--va-border);
+    background: var(--va-bg);
+    color: var(--va-text);
+}
+
+.va-shell .va-users-pagination a:hover {
+    border-color: var(--va-accent);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+.va-shell .va-users-pagination [aria-current="page"] > span,
+.va-shell .va-users-pagination [aria-disabled="true"] > span {
+    border-color: var(--va-border);
+    background: var(--va-soft);
+    color: var(--va-muted);
+}
+
+/* 10. Autofill pencarian */
+html[data-theme="dark"]
+.va-users-page .va-control:-webkit-autofill {
+    -webkit-text-fill-color: #c3d3e1;
+    -webkit-box-shadow: 0 0 0 1000px #111a28 inset;
+}
+
+/* 11. Ponsel */
+@media (max-width: 760px) {
+    .va-users-page {
+        margin-top: 24px;
+        margin-bottom: 42px;
+    }
+
+    .va-users-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+        padding: 20px;
+    }
+
+    .va-users-filter {
+        width: 100%;
+    }
+
+    .va-users-search {
+        width: auto;
+        flex: 1 1 220px;
+    }
+
+    .va-shell .va-users-role-filter {
+        flex: 0 1 140px;
+    }
+
+    .va-users-pagination {
+        padding: 17px 20px;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-users-search {
+        flex-basis: 100%;
+        width: 100%;
+    }
+
+    .va-shell .va-users-role-filter {
+        min-width: 0;
+        flex: 1;
+    }
+
+    /* Mencegah ukuran input terlalu kecil di layar ponsel */
+    .va-shell .va-users-search-input,
+    .va-shell .va-users-role-filter {
+        font-size: 16px;
+    }
+}
+
+/* ==================================================
+   VERIFY ADMIN — MONITORING DETEKSI SCAM
+   ================================================== */
+
+/* 1. Layout halaman */
+.va-scans-page {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+/* 2. Toolbar */
+.va-scans-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-scans-toolbar-heading {
+    min-width: 0;
+}
+
+.va-shell .va-scans-toolbar-heading h2 {
+    margin: 0 0 5px;
+    color: var(--va-heading);
+
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -.3px;
+}
+
+.va-shell .va-scans-toolbar-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* 3. Filter */
+.va-scans-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    max-width: 100%;
+    margin: 0;
+}
+
+.va-scans-search {
+    position: relative;
+    width: 230px;
+    max-width: 100%;
+}
+
+.va-scans-search > svg {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+
+    width: 16px;
+    height: 16px;
+
+    color: var(--va-muted);
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.va-shell .va-scans-search-input {
+    width: 100%;
+    padding-left: 37px;
+}
+
+.va-shell .va-scans-status-filter,
+.va-shell .va-scans-mode-filter {
+    min-width: 125px;
+    padding-right: 28px;
+    cursor: pointer;
+}
+
+.va-scans-filter > .va-button {
+    min-height: 40px;
+    padding: 9px 16px;
+}
+
+.va-shell .va-scans-reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+    padding: 8px;
+
+    border-radius: 8px;
+    color: var(--va-muted);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.va-shell .va-scans-reset:hover {
+    background: var(--va-soft);
+    color: var(--va-accent);
+}
+
+/* 4. Tabel */
+.va-shell .va-scans-table {
+    min-width: 1100px;
+}
+
+.va-shell .va-scans-table td {
+    padding-block: 20px;
+    vertical-align: top;
+}
+
+/* 5. Waktu */
+.va-scan-time {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    min-width: 90px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.va-scan-date {
+    color: var(--va-text);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.va-scan-hour {
+    color: var(--va-muted);
+    font-size: 10px;
+}
+
+/* 6. Pengguna */
+.va-scan-user {
+    display: block;
+    min-width: 130px;
+    max-width: 190px;
+
+    color: var(--va-heading);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+}
+
+.va-scan-user-type {
+    display: block;
+    margin-top: 4px;
+    color: var(--va-muted);
+    font-size: 10px;
+}
+
+/* 7. Mode dan hasil */
+.va-scan-result {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 115px;
+}
+
+.va-shell .va-scan-mode {
+    padding: 3px 7px;
+    background: var(--va-soft);
+    color: var(--va-muted);
+    font-size: 8px;
+    letter-spacing: .4px;
+}
+
+.va-scan-result > .va-badge {
+    white-space: nowrap;
+}
+
+/* 8. Konten yang diperiksa */
+.va-scan-content-cell {
+    width: 32%;
+    min-width: 280px;
+}
+
+.va-scan-content {
+    max-width: 420px;
+}
+
+.va-scan-content > summary {
+    display: block;
+    border-radius: 6px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.va-scan-content > summary::-webkit-details-marker {
+    display: none;
+}
+
+.va-scan-preview {
+    display: -webkit-box;
+    overflow: hidden;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    color: var(--va-text);
+    font-size: 11px;
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+.va-scan-content-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 7px;
+    color: var(--va-accent);
+
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.va-scan-content > summary:hover .va-scan-content-toggle {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.va-scan-hide-label {
+    display: none;
+}
+
+.va-scan-content[open] .va-scan-show-label {
+    display: none;
+}
+
+.va-scan-content[open] .va-scan-hide-label {
+    display: inline;
+}
+
+.va-scan-content[open] .va-scan-content-arrow {
+    transform: rotate(180deg);
+}
+
+.va-scan-full-content {
+    max-height: 240px;
+    overflow-y: auto;
+
+    margin-top: 12px;
+    padding: 13px 14px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 10px;
+    background: var(--va-soft);
+    color: var(--va-text);
+
+    font-size: 11px;
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* 9. Temuan */
+.va-scan-findings {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 140px;
+    max-width: 190px;
+}
+
+.va-scan-finding {
+    display: block;
+    color: #a13952;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+html[data-theme="dark"] .va-scan-finding {
+    color: #f3adbf;
+}
+
+.va-scan-no-findings {
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* 10. Fokus konten */
+.va-scans-page summary:focus-visible {
+    outline: 2px solid var(--va-accent);
+    outline-offset: 4px;
+}
+
+/* 11. Autofill */
+html[data-theme="dark"]
+.va-scans-page .va-control:-webkit-autofill {
+    -webkit-text-fill-color: #c3d3e1;
+    -webkit-box-shadow: 0 0 0 1000px #111a28 inset;
+}
+
+/* 12. Tablet */
+@media (max-width: 1100px) {
+    .va-scans-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .va-scans-filter {
+        width: 100%;
+    }
+
+    .va-scans-search {
+        width: auto;
+        flex: 1 1 240px;
+    }
+}
+
+/* 13. Ponsel */
+@media (max-width: 760px) {
+    .va-scans-page {
+        margin-top: 24px;
+        margin-bottom: 42px;
+    }
+
+    .va-scans-toolbar {
+        padding: 20px;
+    }
+
+    .va-scans-search {
+        width: 100%;
+        flex-basis: 100%;
+    }
+
+    .va-shell .va-scans-status-filter,
+    .va-shell .va-scans-mode-filter {
+        min-width: 0;
+        flex: 1 1 125px;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-scans-filter > .va-button {
+        flex: 1 1 100%;
+    }
+
+    .va-shell .va-scans-search-input,
+    .va-shell .va-scans-status-filter,
+    .va-shell .va-scans-mode-filter {
+        font-size: 16px;
+    }
+}
+
+/* ==================================================
+   NAVBAR — MENU KELOLA ADMIN
+   ================================================== */
+
+.verify-header .verify-nav-link.verify-nav-admin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: 1px solid transparent;
+    background: transparent;
+    color: #65768b;
+
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 650;
+    line-height: 1.3;
+
+    box-shadow: none;
+}
+
+.verify-header .verify-nav-admin > svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: currentColor;
+}
+
+.verify-header .verify-nav-admin > span {
+    color: inherit;
+}
+
+/* Light mode — hover */
+.verify-header .verify-nav-link.verify-nav-admin:hover {
+    border-color: #dcebf0;
+    background: #f1f8fa;
+    color: #246d81;
+}
+
+/* Light mode — sedang berada di area admin */
+.verify-header .verify-nav-link.verify-nav-admin.is-active {
+    border-color: #cfe7ed;
+    background: #eaf6f9;
+    color: #176f83;
+    box-shadow: none;
+}
+
+.verify-header .verify-nav-admin::after {
+    background: #159eb5;
+}
+
+/* Dark mode — normal */
+html[data-theme="dark"]
+.verify-header .verify-nav-link.verify-nav-admin {
+    border-color: transparent !important;
+    background: transparent !important;
+    color: #a8b9c9 !important;
+    box-shadow: none !important;
+}
+
+/* Dark mode — hover */
+html[data-theme="dark"]
+.verify-header .verify-nav-link.verify-nav-admin:hover {
+    border-color: #2b4758 !important;
+    background: #172b3a !important;
+    color: #a4dfeb !important;
+}
+
+/* Dark mode — aktif */
+html[data-theme="dark"]
+.verify-header .verify-nav-link.verify-nav-admin.is-active {
+    border-color: #305969 !important;
+    background: #173542 !important;
+    color: #8edbe8 !important;
+}
+
+html[data-theme="dark"]
+.verify-header .verify-nav-admin::after {
+    background: #35c5dc;
+}
+
+/* Fokus keyboard */
+.verify-header .verify-nav-admin:focus-visible {
+    outline: 2px solid #20b4cb;
+    outline-offset: 4px;
+}
+
+/* Mobile mengikuti susunan menu lainnya */
+@media (max-width: 1000px) {
+    .verify-header .verify-nav-link.verify-nav-admin {
+        justify-content: flex-start;
+    }
+}

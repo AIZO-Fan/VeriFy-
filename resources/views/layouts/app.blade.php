@@ -96,65 +96,49 @@
     </style>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta
-        name="description"
-        content="VeriFy — belajar mengenali penipuan digital.">
+    <meta name="description" content="VeriFy — belajar mengenali penipuan digital.">
 
     <title>@yield('title', 'VeriFy') | VeriFy</title>
 
     {{-- Font wordmark --}}
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
         rel="stylesheet">
 
     {{-- DARK MODE: terapkan tema sebelum CSS dimuat --}}
-<script>
-    (function () {
-        let savedTheme = null;
+    <script>
+        (function() {
+            let savedTheme = null;
 
-        try {
-            savedTheme = localStorage.getItem('verify-theme');
-        } catch (error) {
-            savedTheme = null;
-        }
+            try {
+                savedTheme = localStorage.getItem('verify-theme');
+            } catch (error) {
+                savedTheme = null;
+            }
 
-        const prefersDark = window.matchMedia(
-            '(prefers-color-scheme: dark)'
-        ).matches;
+            const prefersDark = window.matchMedia(
+                '(prefers-color-scheme: dark)'
+            ).matches;
 
-        const theme = savedTheme === 'light' || savedTheme === 'dark'
-            ? savedTheme
-            : (prefersDark ? 'dark' : 'light');
+            const theme = savedTheme === 'light' || savedTheme === 'dark' ?
+                savedTheme :
+                (prefersDark ? 'dark' : 'light');
 
-        document.documentElement.setAttribute('data-theme', theme);
-    })();
-</script>
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
 
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/verify.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/verify.css') }}">
 
-    <script
-        src="{{ asset('js/verify.js') }}"
-        defer></script>
+    <script src="{{ asset('js/verify.js') }}" defer></script>
 
     {{-- Lucide, dipertahankan untuk halaman yang menggunakannya --}}
-    <script
-        src="https://unpkg.com/lucide@latest"
-        defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
 </head>
 
 <body>
@@ -167,28 +151,13 @@
         <div class="verify-navbar">
 
             {{-- Logo --}}
-            <a
-                class="verify-brand"
-                href="{{ route('home') }}"
-                aria-label="VeriFy — kembali ke Dashboard">
-                <svg
-                    class="verify-brand-symbol"
-                    viewBox="0 0 64 64"
-                    fill="none"
-                    aria-hidden="true">
-                    <path
-                        d="M5 8H19L30 43H16L5 8Z"
-                        fill="currentColor" />
+            <a class="verify-brand" href="{{ route('home') }}" aria-label="VeriFy — kembali ke Dashboard">
+                <svg class="verify-brand-symbol" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                    <path d="M5 8H19L30 43H16L5 8Z" fill="currentColor" />
 
-                    <path
-                        d="M45 8H59L45 43H31L45 8Z"
-                        fill="currentColor" />
+                    <path d="M45 8H59L45 43H31L45 8Z" fill="currentColor" />
 
-                    <circle
-                        cx="31"
-                        cy="55"
-                        r="7"
-                        fill="#20B4CB" />
+                    <circle cx="31" cy="55" r="7" fill="#20B4CB" />
                 </svg>
 
                 <span class="verify-brand-name">
@@ -197,128 +166,97 @@
             </a>
 
             {{-- Tombol menu mobile --}}
-            <button
-                class="verify-menu-toggle"
-                id="verifyMenuToggle"
-                type="button"
-                aria-label="Buka navigasi"
-                aria-expanded="false"
-                aria-controls="verifyNavigation">
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
+            <button class="verify-menu-toggle" id="verifyMenuToggle" type="button" aria-label="Buka navigasi"
+                aria-expanded="false" aria-controls="verifyNavigation">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
                     aria-hidden="true">
                     <path d="M4 6H20M4 12H20M4 18H20" />
                 </svg>
             </button>
 
             {{-- Navigasi utama --}}
-            <nav
-                class="verify-navigation"
-                id="verifyNavigation"
-                aria-label="Navigasi utama">
-                <a
-                    href="{{ route('home') }}"
+            <nav class="verify-navigation" id="verifyNavigation" aria-label="Navigasi utama">
+                <a href="{{ route('home') }}"
                     class="verify-nav-link {{ request()->routeIs('home') ? 'is-active' : '' }}"
-                    @if(request()->routeIs('home'))
-                    aria-current="page"
-                    @endif
-                    >
+                    @if (request()->routeIs('home')) aria-current="page" @endif>
                     Dashboard
                 </a>
 
-                <a
-                    href="{{ route('detect') }}"
+                <a href="{{ route('detect') }}"
                     class="verify-nav-link {{ request()->routeIs('detect', 'analyze') ? 'is-active' : '' }}"
-                    @if(request()->routeIs('detect', 'analyze'))
-                    aria-current="page"
-                    @endif
-                    >
+                    @if (request()->routeIs('detect', 'analyze')) aria-current="page" @endif>
                     Detect Scam
                 </a>
 
-                <a
-                    href="{{ route('modules') }}"
+                <a href="{{ route('modules') }}"
                     class="verify-nav-link {{ request()->routeIs('modules', 'lesson') ? 'is-active' : '' }}"
-                    @if(request()->routeIs('modules', 'lesson'))
-                    aria-current="page"
-                    @endif
-                    >
+                    @if (request()->routeIs('modules', 'lesson')) aria-current="page" @endif>
                     Modules
                 </a>
 
-                <a
-                    href="{{ route('simulator') }}"
+                <a href="{{ route('simulator') }}"
                     class="verify-nav-link {{ request()->routeIs('simulator') ? 'is-active' : '' }}"
-                    @if(request()->routeIs('simulator'))
-                    aria-current="page"
-                    @endif
-                    >
+                    @if (request()->routeIs('simulator')) aria-current="page" @endif>
                     Scam Simulator
                 </a>
 
                 @auth
-                    @if(auth()->user()->isAdmin())
-                        <a
-                            href="{{ route('admin.dashboard') }}"
-                            class="verify-nav-link {{ request()->is('admin*') ? 'is-active' : '' }}"
-                            style="color: #20B4CB; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    @if (auth()->user()->isAdmin())
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="verify-nav-link verify-nav-admin {{ request()->routeIs('admin.*') ? 'is-active' : '' }}"
+                            @if (request()->routeIs('admin.*')) aria-current="page" @endif>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                                <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                                <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                                <rect x="14" y="14" width="7" height="7" rx="1.5" />
                             </svg>
-                            Panel Admin
+
+                            <span>Kelola</span>
                         </a>
                     @endif
                 @endauth
 
                 {{-- Tombol akun dan Settings --}}
-<div class="verify-nav-actions">
+                <div class="verify-nav-actions">
 
-    @guest
+                    @guest
 
-        @if(\Illuminate\Support\Facades\Route::has('register'))
-            <a
-                class="verify-register-button"
-                href="{{ route('register') }}">
-                Register
-            </a>
-        @endif
+                        @if (\Illuminate\Support\Facades\Route::has('register'))
+                            <a class="verify-register-button" href="{{ route('register') }}">
+                                Register
+                            </a>
+                        @endif
 
-        @if(\Illuminate\Support\Facades\Route::has('login'))
-            <a
-                class="verify-login-button"
-                href="{{ route('login') }}">
-                Login
-            </a>
-        @endif
+                        @if (\Illuminate\Support\Facades\Route::has('login'))
+                            <a class="verify-login-button" href="{{ route('login') }}">
+                                Login
+                            </a>
+                        @endif
 
-    @endguest
+                    @endguest
 
-    @auth
+                    @auth
 
-        {{-- Profil: klik untuk membuka Settings --}}
-        <a
-            class="verify-navbar-user"
-            href="{{ \Illuminate\Support\Facades\Route::has('settings') ? route('settings') : '#' }}"
-            aria-label="Buka pengaturan akun"
-            title="Settings">
+                        {{-- Profil: klik untuk membuka Settings --}}
+                        <a class="verify-navbar-user"
+                            href="{{ \Illuminate\Support\Facades\Route::has('settings') ? route('settings') : '#' }}"
+                            aria-label="Buka pengaturan akun" title="Settings">
 
-            <span class="verify-avatar">
-                {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
-            </span>
+                            <span class="verify-avatar">
+                                {{ mb_strtoupper(mb_substr(auth()->user()->name ?? 'U', 0, 1)) }}
+                            </span>
 
-            <span class="verify-profile-name">
-                {{ auth()->user()->name ?? 'Pengguna' }}
-            </span>
+                            <span class="verify-profile-name">
+                                {{ auth()->user()->name ?? 'Pengguna' }}
+                            </span>
 
-        </a>
+                        </a>
 
-    @endauth
+                    @endauth
 
-</div>
+                </div>
 
             </nav>
 
@@ -347,28 +285,14 @@
                 {{-- Identitas --}}
                 <div class="verify-footer-brand-column">
 
-                    <a
-                        class="verify-footer-brand"
-                        href="{{ route('home') }}"
+                    <a class="verify-footer-brand" href="{{ route('home') }}"
                         aria-label="VeriFy — kembali ke Dashboard">
-                        <svg
-                            class="verify-footer-symbol"
-                            viewBox="0 0 64 64"
-                            fill="none"
-                            aria-hidden="true">
-                            <path
-                                d="M5 8H19L30 43H16L5 8Z"
-                                fill="currentColor" />
+                        <svg class="verify-footer-symbol" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                            <path d="M5 8H19L30 43H16L5 8Z" fill="currentColor" />
 
-                            <path
-                                d="M45 8H59L45 43H31L45 8Z"
-                                fill="currentColor" />
+                            <path d="M45 8H59L45 43H31L45 8Z" fill="currentColor" />
 
-                            <circle
-                                cx="31"
-                                cy="55"
-                                r="7"
-                                fill="#20B4CB" />
+                            <circle cx="31" cy="55" r="7" fill="#20B4CB" />
                         </svg>
 
                         <span class="verify-footer-wordmark">
@@ -405,19 +329,11 @@
                         mendesakmu mengambil tindakan.
                     </p>
 
-                    <a
-                        class="verify-footer-cta"
-                        href="{{ route('detect') }}">
+                    <a class="verify-footer-cta" href="{{ route('detect') }}">
                         <span>Periksa pesan mencurigakan</span>
 
-                        <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.8"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M5 12H19M13 6L19 12L13 18" />
                         </svg>
                     </a>
@@ -460,65 +376,68 @@
 
     {{-- SCRIPT AUTO-SAVE SIMULATOR UNTUK USER YANG BARU LOGIN --}}
     @auth
-    {{-- HTML CUSTOM MODAL --}}
-    <div id="verifyAlertModal" class="verify-custom-modal">
-        <div class="verify-custom-modal-box">
-            <div class="verify-custom-modal-header">
-                <div class="verify-custom-modal-icon">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
+        {{-- HTML CUSTOM MODAL --}}
+        <div id="verifyAlertModal" class="verify-custom-modal">
+            <div class="verify-custom-modal-box">
+                <div class="verify-custom-modal-header">
+                    <div class="verify-custom-modal-icon">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h3 class="verify-custom-modal-title">Berhasil Disimpan!</h3>
                 </div>
-                <h3 class="verify-custom-modal-title">Berhasil Disimpan!</h3>
-            </div>
-            <div class="verify-custom-modal-body" id="verifyAlertMessage">
-                <!-- Pesan akan masuk sini secara dinamis -->
-            </div>
-            <div class="verify-custom-modal-footer">
-                <button type="button" class="verify-custom-modal-btn" onclick="closeVerifyModal()">Mengerti</button>
+                <div class="verify-custom-modal-body" id="verifyAlertMessage">
+                    <!-- Pesan akan masuk sini secara dinamis -->
+                </div>
+                <div class="verify-custom-modal-footer">
+                    <button type="button" class="verify-custom-modal-btn" onclick="closeVerifyModal()">Mengerti</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        function showVerifyModal(message) {
-            document.getElementById('verifyAlertMessage').textContent = message;
-            document.getElementById('verifyAlertModal').classList.add('is-open');
-        }
-
-        function closeVerifyModal() {
-            document.getElementById('verifyAlertModal').classList.remove('is-open');
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const pendingKey = "verify.pendingSimulationResult.v1";
-            const pendingData = sessionStorage.getItem(pendingKey);
-
-            if (pendingData) {
-                const data = JSON.parse(pendingData);
-
-                if (data.api_payload) {
-                    data.api_payload.user_id = "{{ auth()->id() }}";
-
-                    fetch('/api/simulator/attempts', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify(data.api_payload)
-                    }).then(response => {
-                        if (response.ok) {
-                            sessionStorage.removeItem(pendingKey);
-                            // Mengganti alert() bawaan browser dengan custom modal kita
-                            showVerifyModal('Selamat datang! Hasil simulasi Scam Simulator Anda sebelumnya telah otomatis disimpan ke riwayat akun.');
-                        }
-                    }).catch(err => console.error("Gagal auto-save:", err));
-                }
+        <script>
+            function showVerifyModal(message) {
+                document.getElementById('verifyAlertMessage').textContent = message;
+                document.getElementById('verifyAlertModal').classList.add('is-open');
             }
-        });
-    </script>
+
+            function closeVerifyModal() {
+                document.getElementById('verifyAlertModal').classList.remove('is-open');
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const pendingKey = "verify.pendingSimulationResult.v1";
+                const pendingData = sessionStorage.getItem(pendingKey);
+
+                if (pendingData) {
+                    const data = JSON.parse(pendingData);
+
+                    if (data.api_payload) {
+                        data.api_payload.user_id = "{{ auth()->id() }}";
+
+                        fetch('/api/simulator/attempts', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(data.api_payload)
+                        }).then(response => {
+                            if (response.ok) {
+                                sessionStorage.removeItem(pendingKey);
+                                // Mengganti alert() bawaan browser dengan custom modal kita
+                                showVerifyModal(
+                                    'Selamat datang! Hasil simulasi Scam Simulator Anda sebelumnya telah otomatis disimpan ke riwayat akun.'
+                                    );
+                            }
+                        }).catch(err => console.error("Gagal auto-save:", err));
+                    }
+                }
+            });
+        </script>
     @endauth
 
 </body>
