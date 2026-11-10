@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controllers;
+use App\Models\Module;
 use App\Models\SimulationScenario;
 use App\Services\StoryValidator;
 use Illuminate\Http\Request;
@@ -12,91 +13,63 @@ class SimulatorController extends Controllers
 {
     public function index()
     {
-        $scenarios = SimulationScenario::withCount('attempts')->latest()->get();
-        return view('admin.simulator.index', compact('scenarios'));
+        // Ambil semua modul terbit untuk dipetakan sebagai topik simulator
+        $modules = Module::orderBy('sort_order', 'asc')->get();
+
+        // Ambil seluruh skenario yang sudah dibuat
+        $scenarios = SimulationScenario::withCount('attempts')->get()->keyBy('topic_id');
+
+        // Gabungkan data modul dengan skenarionya
+        $simulatorRows = $modules->map(function ($module, $index) use ($scenarios) {
+            $scenario = $scenarios->get($module->id);
+
+            return [
+                'topic_id' => $module->id,
+                'display_number' => str_pad($index + 1, 2, '0', STR_PAD_LEFT),
+                'module_title' => $module->title,
+                'scenario' => $scenario, // null jika belum dibuat
+            ];
+        });
+
+        return view('admin.simulator.index', compact('simulatorRows'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        // Default clean story template ready to edit
+        $selectedTopicId = $request->query('topic_id');
+        $selectedModule = null;
+
+        if ($selectedTopicId) {
+            $selectedModule = Module::find($selectedTopicId);
+        }
+
+        // Template JSON bersih/kosong agar admin bisa merancang dari awal dengan leluasa
         $defaultStory = [
             "schema_version" => 1,
-            "start" => "pesan_awal",
+            "start" => "",
             "contact" => [
-                "name" => "Pengirim Mencurigakan",
-                "avatar_text" => "P",
-                "subtitle" => "Nomor tidak dikenal · Simulasi"
+                "name" => "",
+                "avatar_text" => "",
+                "subtitle" => ""
             ],
             "context" => [
-                "title" => "Skenario Penipuan Baru",
-                "description" => "Kamu menerima pesan yang mendesak atau menawarkan sesuatu."
+                "title" => "",
+                "description" => ""
             ],
-            "nodes" => [
-                "pesan_awal" => [
-                    "type" => "conversation",
-                    "stage" => "situation",
-                    "messages" => [
-                        ["sender" => "contact", "text" => "Halo, kami dari pihak layanan. Ada verifikasi mendesak untuk akun Anda."],
-                        ["sender" => "contact", "text" => "Mohon konfirmasi segera sebelum akun Anda dinonaktifkan permanen."]
-                    ],
-                    "prompt" => "Apa tindakan yang kamu ambil?",
-                    "choices" => [
-                        ["id" => "waspada", "label" => "Abaikan & cek kontak resmi", "reply" => null, "next" => "hasil_aman"],
-                        ["id" => "ikuti", "label" => "Tanya apa yang harus dilakukan", "reply" => "Bagaimana cara verifikasinya?", "next" => "permintaan_data"]
-                    ]
-                ],
-                "permintaan_data" => [
-                    "type" => "conversation",
-                    "stage" => "decision",
-                    "messages" => [
-                        ["sender" => "contact", "text" => "Silakan kirimkan 6 digit kode OTP yang baru saja masuk ke SMS Anda."]
-                    ],
-                    "prompt" => "Apakah kamu akan mengirimkan kodenya?",
-                    "choices" => [
-                        ["id" => "tolak", "label" => "Tolak dan laporkan nomor", "reply" => "Kode OTP bersifat rahasia, saya tidak akan memberikannya.", "next" => "hasil_aman"],
-                        ["id" => "kirim", "label" => "Kirimkan kode OTP", "reply" => "Kodenya adalah 123456.", "next" => "hasil_jebakan"]
-                    ]
-                ],
-                "hasil_aman" => [
-                    "type" => "outcome",
-                    "stage" => "consequence",
-                    "tone" => "positive",
-                    "score" => 100,
-                    "max_score" => 100,
-                    "scoring_version" => 1,
-                    "title" => "Keputusan Tepat!",
-                    "summary" => "Kamu waspada dan tidak terburu-buru memberikan data sensitif atau OTP.",
-                    "takeaways" => [
-                        "Pihak resmi tidak pernah meminta kode OTP atau kata sandi Anda.",
-                        "Selalu verifikasi pesan mendesak melalui kontak saluran resmi mandiri."
-                    ]
-                ],
-                "hasil_jebakan" => [
-                    "type" => "outcome",
-                    "stage" => "consequence",
-                    "tone" => "warning",
-                    "score" => 20,
-                    "max_score" => 100,
-                    "scoring_version" => 1,
-                    "title" => "Terjebak Penipuan",
-                    "summary" => "Memberikan kode OTP memberi penipu akses penuh untuk membajak akun Anda.",
-                    "takeaways" => [
-                        "Jangan pernah membagikan kode OTP kepada siapa pun termasuk pihak yang mengaku petugas.",
-                        "Jika terlanjur, segera hubungi customer service resmi untuk mengamankan akun."
-                    ]
-                ]
-            ]
+            "nodes" => []
         ];
 
         $defaultStoryJson = json_encode($defaultStory, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-        return view('admin.simulator.create', compact('defaultStoryJson'));
+        $modules = Module::orderBy('sort_order', 'asc')->get();
+
+        return view('admin.simulator.create', compact('defaultStoryJson', 'selectedTopicId', 'selectedModule', 'modules'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'topic_id' => 'required|integer|between:1,6',
+            'topic_id' => 'required|integer',
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255|unique:simulation_scenarios,slug',
             'description' => 'required|string|max:1000',
@@ -106,7 +79,6 @@ class SimulatorController extends Controllers
 
         $slug = !empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['title']) . '-' . rand(100, 999);
 
-        // Parse and validate story JSON
         $storyArray = json_decode($validated['story_json'], true);
         if (json_last_error() !== JSON_ERROR_NONE || !is_array($storyArray)) {
             return back()->withErrors(['story_json' => 'Format JSON Story tidak valid: ' . json_last_error_msg()])->withInput();
@@ -141,7 +113,7 @@ class SimulatorController extends Controllers
     public function update(Request $request, SimulationScenario $scenario)
     {
         $validated = $request->validate([
-            'topic_id' => 'required|integer|between:1,6',
+            'topic_id' => 'required|integer',
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:simulation_scenarios,slug,' . $scenario->id,
             'description' => 'required|string|max:1000',
@@ -188,4 +160,3 @@ class SimulatorController extends Controllers
         return redirect()->route('admin.simulator.index')->with('success', "Skenario '{$title}' berhasil dihapus!");
     }
 }
-

@@ -94,15 +94,16 @@ $simulatorDescriptions = [
 
                 <div class="verify-simulator-card-top">
 
+                    {{-- Menggunakan $loop->iteration agar nomor urut tampil rapi (01, 02, 03...) --}}
                     <span class="verify-simulator-badge">
                         SIMULATOR
-                        {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </span>
 
                     <span
                         class="verify-simulator-card-number"
                         aria-hidden="true">
-                        {{ str_pad($module['id'], 2, '0', STR_PAD_LEFT) }}
+                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
                     </span>
 
                 </div>
@@ -141,7 +142,6 @@ $simulatorDescriptions = [
                         Latihan berbasis kasus
                     </span>
 
-                    {{-- data-sim dipertahankan untuk JavaScript lama --}}
                     <button
                         class="verify-simulator-start"
                         type="button"
@@ -924,5 +924,22 @@ $simulatorDescriptions = [
 <script
     src="{{ asset('js/verify-story.js') }}"
     defer></script>
+
+{{-- Skrip otomatis untuk membuka pop-up simulator sesuai parameter ?topic=X --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicId = urlParams.get('topic');
+
+        if (topicId) {
+            setTimeout(() => {
+                const targetButton = document.querySelector(`[data-story-sim="${topicId}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            }, 400);
+        }
+    });
+</script>
 
 @endsection

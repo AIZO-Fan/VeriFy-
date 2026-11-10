@@ -28,7 +28,6 @@ class VerifyController extends Controllers
             'content' => 'required|string|max:5000',
         ]);
 
-        // Auto-upgrade mode ke 'url' jika input adalah URL murni
         $trimmed = trim($input['content']);
         if (preg_match('~^https?://\S+$~i', $trimmed)) {
             if (!filter_var($trimmed, FILTER_VALIDATE_URL)) {
@@ -58,7 +57,6 @@ class VerifyController extends Controllers
         return view('pages.how');
     }
 
-    // Halaman Daftar Modul
     public function modules()
     {
         $modulesData = Module::where('status', 'published')
@@ -97,9 +95,9 @@ class VerifyController extends Controllers
         $publishedScenarios = $module->publishedScenarios;
         $publishedCount = $publishedScenarios->count();
 
-        // Menyusun Kontrak Data Practice untuk Frontend
+        // Mengarahkan ke halaman simulator dengan membawa parameter topic
         $practice = [
-            'available' => $publishedCount > 0,
+            'available' => true, // atau $publishedCount > 0
             'published_scenario_count' => $publishedCount,
             'url' => route('simulator') . '?topic=' . $module->id
         ];
@@ -107,7 +105,6 @@ class VerifyController extends Controllers
         return view('pages.lesson', compact('module', 'practice'));
     }
 
-    // Halaman Scam Simulator
     public function simulator(Request $request)
     {
         $modulesData = Module::where('status', 'published')
@@ -115,10 +112,15 @@ class VerifyController extends Controllers
             ->get();
 
         $modules = $modulesData->map(function ($module) {
+            $hasScenario = SimulationScenario::where('topic_id', $module->id)
+                ->where('is_active', true)
+                ->exists();
+
             return [
                 'id' => $module->id,
                 'title' => $module->title,
                 'icon' => 'module-' . ($module->id),
+                'has_scenario' => $hasScenario,
             ];
         });
 
