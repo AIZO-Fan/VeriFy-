@@ -3,110 +3,463 @@
 @section('title', 'Edit Skenario: ' . $scenario->title)
 
 @section('content')
-@include('admin.partials.nav')
+    @include('admin.partials.nav')
 
-<section class="container" style="max-width: 960px; margin: 24px auto 60px; padding: 0 20px;">
-    <div style="margin-bottom: 24px;">
-        <a href="{{ route('admin.simulator.index') }}" style="color: #20b4cb; font-size: 0.9rem; font-weight: 700; text-decoration: none;">&larr; Kembali ke Daftar Simulator</a>
-        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--theme-heading); margin: 8px 0 4px;">Edit Skenario Simulasi</h1>
-        <p style="color: var(--theme-muted); margin: 0; font-size: 0.95rem;">Perbarui skenario #{{ $scenario->id }} &bull; Versi saat ini: v{{ $scenario->version }}</p>
-    </div>
+    @php
+        $difficultyOptions = [
+            'beginner' => 'Pemula',
+            'intermediate' => 'Menengah',
+            'advanced' => 'Tinggi',
+        ];
+    @endphp
 
-    <div style="background: var(--theme-card); border: 1px solid var(--theme-border); border-radius: 16px; padding: 28px; box-shadow: 0 4px 14px var(--theme-shadow);">
-        <form action="{{ route('admin.simulator.update', $scenario) }}" method="POST">
+    <section
+        class="va-shell va-module-editor-page va-scenario-editor-page"
+        aria-labelledby="va-scenario-editor-title"
+    >
+        {{-- KEMBALI --}}
+        <a
+            class="va-editor-back"
+            href="{{ route('admin.simulator.index') }}"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M19 12H5M11 6L5 12L11 18" />
+            </svg>
+
+            Daftar simulator
+        </a>
+
+        {{-- HEADER --}}
+        <header class="va-management-heading">
+            <div class="va-management-heading-copy">
+                <span class="va-eyebrow">
+                    SCAM SIMULATOR
+                </span>
+
+                <h1 id="va-scenario-editor-title">
+                    Edit skenario simulasi
+                </h1>
+
+                <p>
+                    Perbarui skenario #{{ $scenario->id }}.
+                    Versi saat ini: v{{ $scenario->version }}.
+                </p>
+            </div>
+        </header>
+
+        <form
+            id="vaScenarioEditForm"
+            class="va-module-editor"
+            action="{{ route('admin.simulator.update', $scenario) }}"
+            method="POST"
+        >
             @csrf
             @method('PUT')
 
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px;">
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Judul Skenario</label>
-                    <input type="text" name="title" value="{{ old('title', $scenario->title) }}" required
-                           style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 1rem;">
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Topik Terkait</label>
-                    <select name="topic_id" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                        @for($i = 1; $i <= 6; $i++)
-                            <option value="{{ $i }}" {{ old('topic_id', $scenario->topic_id) == $i ? 'selected' : '' }}>Topik {{ $i }}</option>
-                        @endfor
-                    </select>
-                </div>
-            </div>
+            {{-- INFORMASI SKENARIO --}}
+            <section
+                class="va-editor-card"
+                aria-labelledby="va-scenario-info-title"
+            >
+                <header class="va-editor-card-heading">
+                    <span class="va-editor-step" aria-hidden="true">
+                        01
+                    </span>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Slug URL</label>
-                    <input type="text" name="slug" value="{{ old('slug', $scenario->slug) }}" required
-                           style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Tingkat Kesulitan</label>
-                    <select name="difficulty" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                        @foreach(['beginner' => 'Beginner', 'intermediate' => 'Intermediate', 'advanced' => 'Advanced'] as $key => $lbl)
-                            <option value="{{ $key }}" {{ old('difficulty', $scenario->difficulty) == $key ? 'selected' : '' }}>{{ $lbl }}</option>
-                        @endforeach
-                    </select>
-                </div>
-            </div>
-
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Deskripsi Situasi Awal</label>
-                <textarea name="description" rows="2" required
-                          style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 0.95rem;">{{ old('description', $scenario->description) }}</textarea>
-            </div>
-
-            <div style="margin-bottom: 24px; padding: 16px; background: var(--theme-card-soft); border-radius: 12px; border: 1px solid var(--theme-border);">
-                <label style="display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--theme-heading); cursor: pointer;">
-                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', $scenario->is_active) ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: #20b4cb;">
-                    Status Aktif (Tampil dalam daftar simulator)
-                </label>
-            </div>
-
-            {{-- Story JSON Editor --}}
-            <div style="margin-bottom: 28px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div>
-                        <label style="display: block; font-weight: 700; color: var(--theme-heading); margin: 0;">Alur Percakapan Skenario (Story Graph JSON)</label>
-                        <span style="font-size: 0.85rem; color: var(--theme-muted);">Memperbarui skenario akan menaikkan versi menjadi v{{ $scenario->version + 1 }}.</span>
+                        <h2 id="va-scenario-info-title">
+                            Informasi skenario
+                        </h2>
+
+                        <p>
+                            Perbarui judul, topik, dan konteks awal latihan.
+                        </p>
                     </div>
-                    <button type="button" id="btnFormatJson" style="background: var(--theme-card-soft); border: 1px solid var(--theme-border); color: #20b4cb; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer;">
-                        Format JSON Rapi
+                </header>
+
+                <div class="va-editor-fields">
+
+                    <div class="va-scenario-grid va-scenario-grid--title">
+                        {{-- JUDUL --}}
+                        <div class="va-editor-field">
+                            <label for="va-scenario-title">
+                                Judul skenario
+                                <span class="va-required" aria-hidden="true">*</span>
+                            </label>
+
+                            <input
+                                class="va-control va-editor-control"
+                                id="va-scenario-title"
+                                type="text"
+                                name="title"
+                                value="{{ old('title', $scenario->title) }}"
+                                placeholder="Masukkan judul skenario"
+                                required
+                                @error('title')
+                                    aria-invalid="true"
+                                    aria-describedby="va-scenario-title-error"
+                                @enderror
+                            >
+
+                            @error('title')
+                                <p
+                                    class="va-field-error"
+                                    id="va-scenario-title-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- TOPIK --}}
+                        <div class="va-editor-field">
+                            <label for="va-scenario-topic">
+                                Topik terkait
+                            </label>
+
+                            <select
+                                class="va-control va-editor-control"
+                                id="va-scenario-topic"
+                                name="topic_id"
+                                @error('topic_id')
+                                    aria-invalid="true"
+                                    aria-describedby="va-scenario-topic-error"
+                                @enderror
+                            >
+                                @for($i = 1; $i <= 6; $i++)
+                                    <option
+                                        value="{{ $i }}"
+                                        {{ old('topic_id', $scenario->topic_id) == $i ? 'selected' : '' }}
+                                    >
+                                        Topik {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+
+                            @error('topic_id')
+                                <p
+                                    class="va-field-error"
+                                    id="va-scenario-topic-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="va-scenario-grid">
+                        {{-- SLUG --}}
+                        <div class="va-editor-field">
+                            <label for="va-scenario-slug">
+                                Slug URL
+                                <span class="va-required" aria-hidden="true">*</span>
+                            </label>
+
+                            <input
+                                class="va-control va-editor-control"
+                                id="va-scenario-slug"
+                                type="text"
+                                name="slug"
+                                value="{{ old('slug', $scenario->slug) }}"
+                                placeholder="Contoh: undian-palsu-bank"
+                                required
+                                @error('slug')
+                                    aria-invalid="true"
+                                    aria-describedby="va-scenario-slug-error"
+                                @enderror
+                            >
+
+                            @error('slug')
+                                <p
+                                    class="va-field-error"
+                                    id="va-scenario-slug-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- KESULITAN --}}
+                        <div class="va-editor-field">
+                            <label for="va-scenario-difficulty">
+                                Tingkat kesulitan
+                            </label>
+
+                            <select
+                                class="va-control va-editor-control"
+                                id="va-scenario-difficulty"
+                                name="difficulty"
+                                @error('difficulty')
+                                    aria-invalid="true"
+                                    aria-describedby="va-scenario-difficulty-error"
+                                @enderror
+                            >
+                                @foreach($difficultyOptions as $value => $label)
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ old('difficulty', $scenario->difficulty) === $value ? 'selected' : '' }}
+                                    >
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('difficulty')
+                                <p
+                                    class="va-field-error"
+                                    id="va-scenario-difficulty-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- DESKRIPSI --}}
+                    <div class="va-editor-field">
+                        <label for="va-scenario-description">
+                            Deskripsi situasi awal
+                            <span class="va-required" aria-hidden="true">*</span>
+                        </label>
+
+                        <textarea
+                            class="va-control va-editor-control"
+                            id="va-scenario-description"
+                            name="description"
+                            rows="4"
+                            placeholder="Jelaskan konteks yang dihadapi pengguna..."
+                            required
+                            @error('description')
+                                aria-invalid="true"
+                                aria-describedby="va-scenario-description-error"
+                            @enderror
+                        >{{ old('description', $scenario->description) }}</textarea>
+
+                        @error('description')
+                            <p
+                                class="va-field-error"
+                                id="va-scenario-description-error"
+                            >
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    {{-- STATUS --}}
+                    <label
+                        class="va-editor-publish"
+                        for="va-scenario-active"
+                    >
+                        <input
+                            id="va-scenario-active"
+                            type="checkbox"
+                            name="is_active"
+                            value="1"
+                            {{ old('is_active', $scenario->is_active) ? 'checked' : '' }}
+                            @error('is_active')
+                                aria-invalid="true"
+                                aria-describedby="va-scenario-active-error"
+                            @enderror
+                        >
+
+                        <span class="va-editor-publish-copy">
+                            <span class="va-editor-publish-title">
+                                Aktifkan skenario
+                            </span>
+
+                            <span class="va-editor-publish-description">
+                                Tentukan status aktif skenario
+                                setelah perubahan disimpan.
+                            </span>
+                        </span>
+                    </label>
+
+                    @error('is_active')
+                        <p
+                            class="va-field-error"
+                            id="va-scenario-active-error"
+                        >
+                            {{ $message }}
+                        </p>
+                    @enderror
+
+                </div>
+            </section>
+
+            {{-- EDITOR JSON --}}
+            <section
+                class="va-editor-card"
+                aria-labelledby="va-scenario-story-title"
+            >
+                <header class="va-editor-card-heading va-editor-lessons-heading">
+                    <div class="va-editor-heading-group">
+                        <span class="va-editor-step" aria-hidden="true">
+                            02
+                        </span>
+
+                        <div>
+                            <h2 id="va-scenario-story-title">
+                                Alur percakapan
+                            </h2>
+
+                            <p>
+                                Perbarui percakapan dan pilihan
+                                menggunakan format Story Graph JSON.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="va-button va-editor-add"
+                        id="btnFormatJson"
+                        type="button"
+                        aria-controls="storyJsonInput"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.7"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M8 4H6A2 2 0 0 0 4 6V9L2 12L4 15V18A2 2 0 0 0 6 20H8" />
+                            <path d="M16 4H18A2 2 0 0 1 20 6V9L22 12L20 15V18A2 2 0 0 1 18 20H16" />
+                        </svg>
+
+                        Rapikan JSON
+                    </button>
+                </header>
+
+                <p class="va-editor-hint">
+                    Versi saat ini: v{{ $scenario->version }}.
+                    Sesuai keterangan form sebelumnya, pembaruan
+                    menaikkan versi menjadi v{{ $scenario->version + 1 }}.
+                </p>
+
+                <div class="va-json-editor-shell">
+                    <div class="va-json-editor-bar">
+                        <label for="storyJsonInput">
+                            story.json
+                        </label>
+
+                        <span>Story Graph</span>
+                    </div>
+
+                    <textarea
+                        class="va-control va-editor-control va-json-input"
+                        id="storyJsonInput"
+                        name="story_json"
+                        rows="18"
+                        spellcheck="false"
+                        autocapitalize="off"
+                        autocomplete="off"
+                        aria-describedby="va-json-help jsonStatus{{ $errors->has('story_json') ? ' va-story-json-error' : '' }}"
+                        required
+                        @error('story_json')
+                            aria-invalid="true"
+                        @enderror
+                    >{{ old('story_json', $storyJson) }}</textarea>
+                </div>
+
+                <p
+                    id="jsonStatus"
+                    class="va-json-status"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Klik “Rapikan JSON” untuk memeriksa sintaks.
+                </p>
+
+                @error('story_json')
+                    <p
+                        class="va-field-error"
+                        id="va-story-json-error"
+                    >
+                        {{ $message }}
+                    </p>
+                @enderror
+
+                <p class="va-editor-hint" id="va-json-help">
+                    Pemeriksaan di browser hanya memeriksa sintaks JSON.
+                    Struktur cerita dan aturan simulator tetap perlu
+                    divalidasi oleh server saat disimpan.
+                </p>
+            </section>
+
+            {{-- AKSI --}}
+            <footer class="va-editor-actions">
+                <p>
+                    Periksa perubahan informasi dan alur cerita
+                    sebelum memperbarui skenario.
+                </p>
+
+                <div class="va-editor-action-buttons">
+                    <a
+                        class="va-button"
+                        href="{{ route('admin.simulator.index') }}"
+                    >
+                        Batal
+                    </a>
+
+                    <button
+                        class="va-button va-button--primary"
+                        type="submit"
+                    >
+                        Perbarui skenario
                     </button>
                 </div>
-
-                <textarea id="storyJsonInput" name="story_json" rows="18" required
-                          style="width: 100%; font-family: Consolas, monospace; font-size: 0.88rem; line-height: 1.5; padding: 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: #0b1220; color: #38bdf8;">{{ old('story_json', $storyJson) }}</textarea>
-                <div id="jsonStatus" style="margin-top: 6px; font-size: 0.85rem; color: var(--theme-muted);">JSON siap divalidasi.</div>
-            </div>
-
-            <div style="display: flex; justify-content: flex-end; gap: 12px;">
-                <a href="{{ route('admin.simulator.index') }}" style="padding: 12px 20px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-weight: 600;">Batal</a>
-                <button type="submit" style="padding: 12px 24px; border-radius: 10px; background: #20b4cb; color: #fff; border: none; font-weight: 700; cursor: pointer;">
-                    Perbarui Skenario
-                </button>
-            </div>
+            </footer>
         </form>
-    </div>
-</section>
+    </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const textarea = document.getElementById('storyJsonInput');
-    const btnFormat = document.getElementById('btnFormatJson');
-    const status = document.getElementById('jsonStatus');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textarea = document.getElementById('storyJsonInput');
+            const formatButton = document.getElementById('btnFormatJson');
+            const status = document.getElementById('jsonStatus');
 
-    btnFormat.addEventListener('click', function () {
-        try {
-            const parsed = JSON.parse(textarea.value);
-            textarea.value = JSON.stringify(parsed, null, 2);
-            status.textContent = '✅ Format JSON valid dan berhasil dirapikan.';
-            status.style.color = '#16a34a';
-        } catch (e) {
-            status.textContent = '❌ Kesalahan sintaks JSON: ' + e.message;
-            status.style.color = '#dc2626';
-        }
-    });
-});
-</script>
+            if (!textarea || !formatButton || !status) {
+                return;
+            }
+
+            formatButton.addEventListener('click', function () {
+                status.classList.remove('is-success', 'is-error');
+
+                try {
+                    const parsed = JSON.parse(textarea.value);
+
+                    textarea.value = JSON.stringify(parsed, null, 2);
+
+                    status.textContent =
+                        'Sintaks JSON valid dan berhasil dirapikan. ' +
+                        'Struktur cerita akan diperiksa saat disimpan.';
+
+                    status.classList.add('is-success');
+                } catch (error) {
+                    status.textContent =
+                        'Sintaks JSON belum valid: ' + error.message;
+
+                    status.classList.add('is-error');
+                    textarea.focus();
+                }
+            });
+
+            textarea.addEventListener('input', function () {
+                status.classList.remove('is-success', 'is-error');
+
+                status.textContent =
+                    'Isi JSON berubah. Klik “Rapikan JSON” untuk memeriksa ulang.';
+            });
+        });
+    </script>
 @endsection
-

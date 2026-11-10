@@ -67,31 +67,47 @@ class VerifyController extends Controllers
     }
 
     // Halaman Daftar Modul
-    public function modules()
-    {
-        $modulesData = Module::where('status', 'published')
-            ->orderBy('sort_order', 'asc')
-            ->withCount('publishedScenarios')
-            ->get();
+    // Halaman Daftar Modul
+public function modules()
+{
+    $modules = Module::where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->withCount('publishedScenarios')
+        ->paginate(6)
+        ->withQueryString();
 
-        $modules = $modulesData->map(function ($module, $index) {
-            $publishedCount = $module->published_scenarios_count;
+    $firstNumber = $modules->firstItem() ?? 1;
 
-            return [
-                'id' => $module->id,
-                'display_number' => str_pad($index + 1, 2, '0', STR_PAD_LEFT),
-                'title' => $module->title,
-                'slug' => $module->slug,
-                'description' => $module->description,
-                'icon' => 'module-' . ($module->id),
-                'color' => 'blue',
-                'detail_url' => route('lesson', $module->id),
-                'practice_available' => $publishedCount > 0,
-            ];
-        });
+    $modules->setCollection(
+        $modules->getCollection()->map(
+            function ($module, $index) use ($firstNumber) {
+                $publishedCount = $module->published_scenarios_count;
 
-        return view('pages.modules', compact('modules'));
-    }
+                return [
+                    'id' => $module->id,
+                    'display_number' => str_pad(
+                        $firstNumber + $index,
+                        2,
+                        '0',
+                        STR_PAD_LEFT
+                    ),
+                    'title' => $module->title,
+                    'slug' => $module->slug,
+                    'description' => $module->description,
+                    'icon' => 'module-' . $module->id,
+                    'color' => 'blue',
+                    'detail_url' => route('lesson', $module->id),
+                    'practice_available' => $publishedCount > 0,
+                ];
+            }
+        )
+    );
+
+    $modules->fragment('verify-modules-list');
+
+    return view('pages.modules', compact('modules'));
+}
 
     // Halaman Detail Modul (Materi)
     public function lesson($id)
@@ -116,20 +132,37 @@ class VerifyController extends Controllers
     }
 
     // Halaman Scam Simulator
-    public function simulator(Request $request)
-    {
-        $modulesData = Module::where('status', 'published')
-            ->orderBy('sort_order', 'asc')
-            ->get();
+    // Halaman Scam Simulator
+public function simulator(Request $request)
+{
+    $modules = Module::where('status', 'published')
+        ->orderBy('sort_order', 'asc')
+        ->orderBy('id', 'asc')
+        ->paginate(6)
+        ->withQueryString();
 
-        $modules = $modulesData->map(function ($module) {
-            return [
-                'id' => $module->id,
-                'title' => $module->title,
-                'icon' => 'module-' . ($module->id),
-            ];
-        });
+    $firstNumber = $modules->firstItem() ?? 1;
 
-        return view('pages.simulator', compact('modules'));
-    }
+    $modules->setCollection(
+        $modules->getCollection()->map(
+            function ($module, $index) use ($firstNumber) {
+                return [
+                    'id' => $module->id,
+                    'title' => $module->title,
+                    'icon' => 'module-' . $module->id,
+                    'display_number' => str_pad(
+                        $firstNumber + $index,
+                        2,
+                        '0',
+                        STR_PAD_LEFT
+                    ),
+                ];
+            }
+        )
+    );
+
+    $modules->fragment('verify-simulator-list');
+
+    return view('pages.simulator', compact('modules'));
+}
 }

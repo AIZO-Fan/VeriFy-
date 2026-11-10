@@ -21797,3 +21797,1423 @@ html[data-theme="dark"]
         justify-content: flex-start;
     }
 }
+/* ==================================================
+   SETTINGS — LOGOUT DARK MODE
+   ================================================== */
+
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout {
+    border: 1px solid #674151 !important;
+    background: #30212e !important;
+    color: #f3adbf !important;
+    box-shadow: none !important;
+
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+/* Teks dan ikon mengikuti warna tombol */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout :is(span, svg) {
+    color: inherit !important;
+}
+
+/* Hover */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout:not(:disabled):hover {
+    border-color: #9a6074 !important;
+    background: #452939 !important;
+    color: #ffd0dc !important;
+    box-shadow: none !important;
+}
+
+/* Saat ditekan */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout:not(:disabled):active {
+    border-color: #ae7085 !important;
+    background: #512f40 !important;
+    color: #ffe0e8 !important;
+}
+
+/* Fokus keyboard */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout:focus-visible {
+    outline: 2px solid #f3adbf;
+    outline-offset: 4px;
+}
+
+/* Jika tombol dinonaktifkan */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* Hormati pengaturan pengurangan gerakan */
+@media (prefers-reduced-motion: reduce) {
+    html[data-theme="dark"]
+    .verify-settings .verify-settings-logout {
+        transition: none;
+    }
+}
+/* ==================================================
+   SETTINGS — LOGOUT LIGHT & DARK MODE
+   ================================================== */
+
+/* Light mode / tema default */
+.verify-settings .verify-settings-logout {
+    --logout-bg: #fff3f5;
+    --logout-border: #efd2da;
+    --logout-text: #a13952;
+
+    --logout-hover-bg: #ffe7ed;
+    --logout-hover-border: #dca4b3;
+    --logout-hover-text: #8e2540;
+
+    --logout-active-bg: #ffdae4;
+    --logout-focus: #b64060;
+
+    border: 1px solid var(--logout-border) !important;
+    background: var(--logout-bg) !important;
+    color: var(--logout-text) !important;
+    box-shadow: none !important;
+
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+/* Dark mode */
+html[data-theme="dark"]
+.verify-settings .verify-settings-logout {
+    --logout-bg: #30212e;
+    --logout-border: #674151;
+    --logout-text: #f3adbf;
+
+    --logout-hover-bg: #452939;
+    --logout-hover-border: #9a6074;
+    --logout-hover-text: #ffd0dc;
+
+    --logout-active-bg: #512f40;
+    --logout-focus: #f3adbf;
+}
+
+/* Teks dan ikon mengikuti warna tombol */
+.verify-settings .verify-settings-logout :is(span, svg) {
+    color: inherit !important;
+}
+
+/* Hover */
+.verify-settings .verify-settings-logout:not(:disabled):hover {
+    border-color: var(--logout-hover-border) !important;
+    background: var(--logout-hover-bg) !important;
+    color: var(--logout-hover-text) !important;
+    box-shadow: none !important;
+}
+
+/* Saat ditekan */
+.verify-settings .verify-settings-logout:not(:disabled):active {
+    border-color: var(--logout-hover-border) !important;
+    background: var(--logout-active-bg) !important;
+    color: var(--logout-hover-text) !important;
+}
+
+/* Fokus keyboard */
+.verify-settings .verify-settings-logout:focus-visible {
+    outline: 2px solid var(--logout-focus);
+    outline-offset: 4px;
+}
+
+/* Disabled */
+.verify-settings .verify-settings-logout:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* Pengurangan gerakan */
+@media (prefers-reduced-motion: reduce) {
+    .verify-settings .verify-settings-logout {
+        transition: none;
+    }
+}
+/* ==================================================
+   MODULES — PAGINATION LIGHT & DARK MODE
+   ================================================== */
+
+.module-section #verify-modules-list {
+    scroll-margin-top: 110px;
+}
+
+.module-section .verify-modules-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    width: 100%;
+    max-width: 1320px;
+    margin: 28px auto 0;
+    padding-top: 21px;
+
+    border-top: 1px solid #dfe9f0;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.module-section .verify-modules-pagination-info {
+    margin: 0;
+    color: #637d91;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.module-section .verify-modules-pagination-info > span {
+    color: #34556c;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.verify-modules-pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.module-section .verify-modules-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 40px;
+    padding: 10px 15px;
+
+    border: 1px solid #d3e5ed;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #34586e;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+.module-section a.verify-modules-page-button:hover {
+    border-color: #99cbd7;
+    background: #edf8fb;
+    color: #176f83;
+}
+
+.module-section .verify-modules-page-button--next {
+    border-color: #173b50;
+    background: #173b50;
+    color: #ffffff;
+}
+
+.module-section a.verify-modules-page-button--next:hover {
+    border-color: #205570;
+    background: #205570;
+    color: #ffffff;
+}
+
+.module-section .verify-modules-page-button.is-disabled {
+    border-color: #e2eaf0;
+    background: #f2f6f9;
+    color: #8498a8;
+    cursor: default;
+}
+
+.module-section .verify-modules-page-position {
+    color: #637d91;
+    font-size: 10px;
+    line-height: 1.8;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.module-section a.verify-modules-page-button:focus-visible {
+    outline: 2px solid #159eb5;
+    outline-offset: 4px;
+}
+
+/* Empty state */
+.module-section .verify-modules-empty {
+    grid-column: 1 / -1;
+    padding: 35px 24px;
+
+    border: 1px dashed #cedfe8;
+    border-radius: 16px;
+    background: #f5fafc;
+    text-align: center;
+}
+
+.module-section .verify-modules-empty h2 {
+    margin: 0 0 9px;
+    color: #19394f;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.module-section .verify-modules-empty p {
+    margin: 0;
+    color: #637d91;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.module-section .verify-modules-empty a {
+    display: inline-block;
+    margin-top: 16px;
+    color: #087f94;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Dark mode */
+html[data-theme="dark"]
+.module-section .verify-modules-pagination {
+    border-top-color: #293b4d;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-pagination-info,
+html[data-theme="dark"]
+.module-section .verify-modules-page-position {
+    color: #a1b6c8;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-pagination-info > span {
+    color: #d6e5ef;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-page-button {
+    border-color: #344d62;
+    background: #192b3d;
+    color: #cadce9;
+}
+
+html[data-theme="dark"]
+.module-section a.verify-modules-page-button:hover {
+    border-color: #4b788e;
+    background: #223c50;
+    color: #e7f3fa;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-page-button--next {
+    border-color: #35c5dc;
+    background: #35c5dc;
+    color: #09232f;
+}
+
+html[data-theme="dark"]
+.module-section a.verify-modules-page-button--next:hover {
+    border-color: #79ddea;
+    background: #79ddea;
+    color: #09232f;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-page-button.is-disabled {
+    border-color: #293b4d;
+    background: #142130;
+    color: #8298ab;
+}
+
+html[data-theme="dark"]
+.module-section a.verify-modules-page-button:focus-visible {
+    outline-color: #70d9e9;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-empty {
+    border-color: #344d62;
+    background: #111a28;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-empty h2 {
+    color: #e8eef5;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-empty p {
+    color: #a1b6c8;
+}
+
+html[data-theme="dark"]
+.module-section .verify-modules-empty a {
+    color: #83d8e7;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .module-section .verify-modules-pagination {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 23px;
+        padding-top: 20px;
+    }
+
+    .verify-modules-pagination-controls {
+        width: 100%;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 440px) {
+    .module-section .verify-modules-page-position {
+        order: -1;
+        flex-basis: 100%;
+        text-align: center;
+    }
+
+    .module-section .verify-modules-page-button {
+        flex: 1;
+        padding-inline: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .module-section .verify-modules-page-button {
+        transition: none;
+    }
+}
+/* Pagination: informasi kiri, tombol kanan */
+.module-section .verify-modules-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 1320px;
+    margin: 28px auto 0;
+    padding-top: 21px;
+
+    border-top: 1px solid #dfe9f0;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.module-section .verify-modules-pagination-info {
+    margin: 0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.module-section .verify-modules-pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 10px;
+
+    width: auto;
+    margin-left: auto;
+}
+
+/* Ikon panah SVG */
+.module-section .verify-modules-page-button > svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+/* Tetap di kiri, termasuk pada layar kecil */
+@media (max-width: 760px) {
+    .module-section .verify-modules-pagination {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-top: 23px;
+        padding-top: 20px;
+    }
+
+    .module-section .verify-modules-pagination-controls {
+        width: auto;
+        gap: 8px;
+    }
+}
+
+/* Layar sempit: info kiri di atas, tombol di bawah */
+@media (max-width: 440px) {
+    .module-section .verify-modules-pagination-info {
+        flex-basis: 100%;
+        text-align: left;
+    }
+
+    .module-section .verify-modules-pagination-controls {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .module-section .verify-modules-page-button {
+        flex: 1;
+        padding-inline: 12px;
+    }
+}
+/* ==================================================
+   SCAM SIMULATOR — PAGINATION
+   ================================================== */
+
+.verify-simulator {
+    --sim-page-border: #dfe9f0;
+    --sim-page-muted: #637d91;
+    --sim-page-text: #34556c;
+
+    --sim-button-bg: #ffffff;
+    --sim-button-border: #d3e5ed;
+    --sim-button-text: #34586e;
+
+    --sim-button-hover-bg: #edf8fb;
+    --sim-button-hover-border: #99cbd7;
+    --sim-button-hover-text: #176f83;
+
+    --sim-next-bg: #173b50;
+    --sim-next-hover: #205570;
+    --sim-next-text: #ffffff;
+
+    --sim-disabled-bg: #f2f6f9;
+    --sim-disabled-border: #e2eaf0;
+    --sim-disabled-text: #8498a8;
+
+    --sim-page-focus: #159eb5;
+}
+
+html[data-theme="dark"] .verify-simulator {
+    --sim-page-border: #293b4d;
+    --sim-page-muted: #a1b6c8;
+    --sim-page-text: #d6e5ef;
+
+    --sim-button-bg: #192b3d;
+    --sim-button-border: #344d62;
+    --sim-button-text: #cadce9;
+
+    --sim-button-hover-bg: #223c50;
+    --sim-button-hover-border: #4b788e;
+    --sim-button-hover-text: #e7f3fa;
+
+    --sim-next-bg: #35c5dc;
+    --sim-next-hover: #79ddea;
+    --sim-next-text: #09232f;
+
+    --sim-disabled-bg: #142130;
+    --sim-disabled-border: #293b4d;
+    --sim-disabled-text: #8298ab;
+
+    --sim-page-focus: #70d9e9;
+}
+
+/* Tujuan scroll setelah berpindah halaman */
+.verify-simulator #verify-simulator-list {
+    scroll-margin-top: 110px;
+}
+
+/* Informasi kiri, tombol kanan */
+.verify-simulator .verify-simulator-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    width: 100%;
+    margin: 28px 0 0;
+    padding-top: 21px;
+
+    border-top: 1px solid var(--sim-page-border);
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.verify-simulator .verify-simulator-pagination-info {
+    margin: 0;
+    color: var(--sim-page-muted);
+    font-size: 11px;
+    line-height: 1.8;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.verify-simulator .verify-simulator-pagination-info > span {
+    color: var(--sim-page-text);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.verify-simulator .verify-simulator-pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-left: auto;
+}
+
+/* Tombol */
+.verify-simulator .verify-simulator-page-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    min-height: 40px;
+    padding: 10px 15px;
+
+    border: 1px solid var(--sim-button-border);
+    border-radius: 10px;
+    background: var(--sim-button-bg);
+    color: var(--sim-button-text);
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease;
+}
+
+.verify-simulator a.verify-simulator-page-button:hover {
+    border-color: var(--sim-button-hover-border);
+    background: var(--sim-button-hover-bg);
+    color: var(--sim-button-hover-text);
+}
+
+/* Berikutnya */
+.verify-simulator .verify-simulator-page-button--next {
+    border-color: var(--sim-next-bg);
+    background: var(--sim-next-bg);
+    color: var(--sim-next-text);
+}
+
+.verify-simulator a.verify-simulator-page-button--next:hover {
+    border-color: var(--sim-next-hover);
+    background: var(--sim-next-hover);
+    color: var(--sim-next-text);
+}
+
+/* Tidak aktif */
+.verify-simulator .verify-simulator-page-button.is-disabled {
+    border-color: var(--sim-disabled-border);
+    background: var(--sim-disabled-bg);
+    color: var(--sim-disabled-text);
+    cursor: default;
+}
+
+/* Ikon */
+.verify-simulator .verify-simulator-page-button > svg {
+    display: block;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+/* Fokus keyboard */
+.verify-simulator a.verify-simulator-page-button:focus-visible {
+    outline: 2px solid var(--sim-page-focus);
+    outline-offset: 4px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .verify-simulator .verify-simulator-pagination {
+        gap: 14px;
+        margin-top: 23px;
+        padding-top: 20px;
+    }
+
+    .verify-simulator .verify-simulator-pagination-controls {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 440px) {
+    .verify-simulator .verify-simulator-pagination-info {
+        flex-basis: 100%;
+        text-align: left;
+    }
+
+    .verify-simulator .verify-simulator-pagination-controls {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .verify-simulator .verify-simulator-page-button {
+        flex: 1;
+        padding-inline: 12px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .verify-simulator .verify-simulator-page-button {
+        transition: none;
+    }
+}
+
+/* ==================================================
+   VERIFY ADMIN — MODUL PEMBELAJARAN
+   ================================================== */
+
+/* Layout */
+.va-modules-page {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+/* Tabel */
+.va-shell .va-modules-table {
+    min-width: 1120px;
+}
+
+.va-shell .va-modules-table td {
+    padding-block: 20px;
+}
+
+/* Urutan */
+.va-module-order {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 38px;
+    min-height: 32px;
+    padding: 5px 8px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 8px;
+    background: var(--va-soft);
+    color: var(--va-muted);
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.6;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Nama dan deskripsi */
+.va-module-name-cell {
+    width: 35%;
+    min-width: 280px;
+}
+
+.va-shell .va-module-description {
+    display: -webkit-box;
+    overflow: hidden;
+
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    max-width: 420px;
+    margin: 5px 0 0;
+
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.9;
+
+    overflow-wrap: anywhere;
+}
+
+/* Informasi warna dan ikon */
+.va-module-appearance {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+
+    min-width: 110px;
+    max-width: 180px;
+}
+
+.va-shell .va-module-color {
+    border-color: var(--va-border);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+.va-module-icon-name {
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Jumlah materi */
+.va-module-material-count {
+    color: var(--va-heading);
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.va-module-material-label {
+    margin-left: 3px;
+    color: var(--va-muted);
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+/* Tombol Lihat */
+.va-shell .va-action-button--view {
+    border-color: var(--va-border);
+    background: var(--va-soft);
+    color: var(--va-text);
+}
+
+.va-shell .va-action-button--view:hover {
+    border-color: var(--va-accent);
+    background: var(--va-tint);
+    color: var(--va-accent);
+}
+
+/* Kelompok aksi tidak terpotong */
+.va-modules-table .va-table-actions {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .va-modules-page {
+        margin-top: 24px;
+        margin-bottom: 42px;
+    }
+}
+
+/* ==================================================
+   VERIFY ADMIN — FORM TAMBAH MODUL
+   ================================================== */
+
+/* Layout */
+.va-module-editor-page {
+    margin-top: 28px;
+    margin-bottom: 60px;
+}
+
+.va-module-editor {
+    display: grid;
+    gap: 22px;
+}
+
+/* Tombol kembali */
+.va-shell .va-editor-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    min-height: 36px;
+    margin-bottom: 22px;
+    padding: 8px 13px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 999px;
+    background: var(--va-tint);
+    color: var(--va-accent);
+
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+.va-editor-back > svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.va-shell .va-editor-back:hover {
+    border-color: var(--va-accent);
+}
+
+/* Kartu form */
+.va-editor-card {
+    min-width: 0;
+    padding: 28px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 18px;
+    background: var(--va-bg);
+    box-shadow: 0 6px 20px var(--va-shadow);
+}
+
+.va-editor-card-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    margin-bottom: 25px;
+    padding-bottom: 21px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-editor-step {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 10px;
+    background: var(--va-tint);
+    color: var(--va-accent);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.va-shell .va-editor-card-heading h2 {
+    margin: 0 0 5px;
+    color: var(--va-heading);
+
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: -.35px;
+}
+
+.va-shell .va-editor-card-heading p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+/* Fields */
+.va-editor-fields {
+    display: grid;
+    gap: 22px;
+}
+
+.va-editor-field {
+    min-width: 0;
+}
+
+.va-editor-field > label {
+    display: block;
+    margin-bottom: 9px;
+
+    color: var(--va-heading);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+.va-required {
+    margin-left: 3px;
+    color: var(--va-accent);
+}
+
+.va-shell .va-editor-control {
+    display: block;
+
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 14px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 10px;
+    background: var(--va-soft);
+    color: var(--va-text);
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+/* Deskripsi modul — tinggi tetap */
+.va-module-editor-page textarea.va-editor-control {
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+
+    margin: 0;
+    resize: none;
+    overflow-y: auto;
+    box-shadow: none;
+}
+
+/* Isi materi — tinggi tetap */
+.va-module-editor-page .va-lesson-row textarea.va-editor-control {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+
+    resize: none;
+    overflow-y: auto;
+}
+
+.va-shell select.va-editor-control {
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+.va-shell .va-editor-control::placeholder {
+    color: var(--va-muted);
+    opacity: 1;
+}
+
+.va-shell .va-editor-control:focus {
+    outline: none;
+    border-color: var(--va-accent);
+    box-shadow: 0 0 0 3px var(--va-tint);
+}
+
+.va-editor-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* Validation */
+.va-shell .va-editor-control[aria-invalid="true"] {
+    border-color: #bc637a;
+}
+
+.va-shell .va-field-error {
+    margin: 7px 0 0;
+    color: #a13952;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+html[data-theme="dark"] .va-shell .va-field-error {
+    color: #f3adbf;
+}
+
+/* Publikasi */
+.va-editor-publish {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 18px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 12px;
+    background: var(--va-tint);
+
+    cursor: pointer;
+}
+
+.va-editor-publish > input {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    margin: 3px 0 0;
+    accent-color: #159eb5;
+}
+
+.va-editor-publish-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.va-editor-publish-title {
+    color: var(--va-heading);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.7;
+}
+
+.va-editor-publish-description {
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* Heading materi */
+.va-editor-lessons-heading {
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.va-editor-heading-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+}
+
+.va-shell .va-editor-add {
+    flex-shrink: 0;
+    min-height: 38px;
+    padding: 9px 13px;
+
+    background: var(--va-tint);
+    color: var(--va-accent);
+    font-size: 10px;
+}
+
+/* Daftar materi */
+.va-lessons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.va-lesson-row {
+    display: grid;
+    gap: 18px;
+    min-width: 0;
+    padding: 22px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 14px;
+    background: var(--va-soft);
+}
+
+.va-lesson-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--va-border);
+}
+
+.va-lesson-heading .lesson-number {
+    color: var(--va-accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .4px;
+}
+
+.va-shell .va-lesson-row .va-editor-control {
+    background: var(--va-bg);
+}
+
+.va-shell .va-editor-hint {
+    margin: 15px 0 0;
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.va-shell .va-editor-status {
+    margin: 12px 0 0;
+    color: var(--va-accent);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.va-editor-status:empty {
+    display: none;
+}
+
+/* Footer form */
+.va-editor-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+
+    padding: 21px 24px;
+
+    border: 1px solid var(--va-border);
+    border-radius: 16px;
+    background: var(--va-bg);
+}
+
+.va-shell .va-editor-actions > p {
+    margin: 0;
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.va-editor-action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Checkbox focus */
+.va-editor-publish > input:focus-visible {
+    outline: 2px solid var(--va-accent);
+    outline-offset: 4px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .va-module-editor-page {
+        margin-top: 24px;
+        margin-bottom: 42px;
+    }
+
+    .va-editor-card {
+        padding: 21px;
+    }
+
+    .va-editor-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .va-lesson-row {
+        padding: 18px;
+    }
+
+    .va-editor-actions {
+        padding: 20px;
+    }
+
+    .va-editor-actions,
+    .va-editor-action-buttons {
+        width: 100%;
+    }
+
+    .va-editor-action-buttons {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-shell .va-editor-control {
+        font-size: 16px;
+    }
+
+    .va-shell .va-editor-add {
+        width: 100%;
+    }
+
+    .va-editor-action-buttons > .va-button {
+        flex: 1;
+    }
+}
+
+/* Deskripsi modul — tinggi tetap */
+.va-module-editor-page textarea.va-editor-control {
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+
+    margin: 0;
+    resize: none;
+    overflow-y: auto;
+    box-shadow: none;
+}
+
+/* Isi materi — tinggi tetap */
+.va-module-editor-page .va-lesson-row textarea.va-editor-control {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+
+    resize: none;
+    overflow-y: auto;
+}
+
+/* ==================================================
+   VERIFY ADMIN — FORM SKENARIO SIMULATOR
+   ================================================== */
+
+/* Dua kolom */
+.va-scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.va-scenario-grid--title {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+}
+
+/* Keterangan field */
+.va-field-optional {
+    margin-left: 6px;
+    color: var(--va-muted);
+    font-size: 9px;
+    font-weight: 400;
+}
+
+.va-shell .va-field-hint {
+    margin: 7px 0 0;
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+/* Deskripsi — tidak bisa di-resize */
+.va-scenario-editor-page textarea.va-editor-control {
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+
+    margin: 0;
+    resize: none;
+    overflow-y: auto;
+    box-shadow: none;
+}
+
+/* Bingkai editor JSON */
+.va-json-editor-shell {
+    min-width: 0;
+
+    border: 1px solid var(--va-border);
+    border-radius: 12px;
+    background: var(--va-soft);
+}
+
+.va-json-editor-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 11px 15px;
+
+    border-bottom: 1px solid var(--va-border);
+    border-radius: 11px 11px 0 0;
+    background: var(--va-soft);
+}
+
+.va-json-editor-bar > label {
+    color: var(--va-heading);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.va-json-editor-bar > span {
+    color: var(--va-muted);
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+/* JSON — tinggi tetap dan scroll internal */
+.va-shell.va-scenario-editor-page textarea.va-json-input {
+    display: block;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 420px;
+    min-height: 420px;
+    max-height: 420px;
+
+    margin: 0;
+    padding: 18px;
+
+    border: 0;
+    border-radius: 0 0 11px 11px;
+    background: #f8fbfd;
+    color: #28586e;
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.85;
+    tab-size: 2;
+
+    resize: none;
+    overflow: auto;
+    white-space: pre;
+    overflow-wrap: normal;
+    word-break: normal;
+
+    caret-color: #087f94;
+    box-shadow: none;
+}
+
+/* Fokus tetap terlihat di dalam editor */
+.va-shell.va-scenario-editor-page textarea.va-json-input:focus {
+    outline: 2px solid var(--va-accent);
+    outline-offset: -2px;
+    box-shadow: none;
+}
+
+/* Error server */
+.va-shell.va-scenario-editor-page
+textarea.va-json-input[aria-invalid="true"] {
+    outline: 2px solid #bc637a;
+    outline-offset: -2px;
+}
+
+/* JSON dark mode */
+html[data-theme="dark"]
+.va-shell.va-scenario-editor-page textarea.va-json-input {
+    background: #0d1826;
+    color: #b6dce8;
+    caret-color: #83d8e7;
+}
+
+/* Status pemeriksaan JSON */
+.va-shell .va-json-status {
+    margin: 12px 0 0;
+    color: var(--va-muted);
+    font-size: 10px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+.va-shell .va-json-status.is-success {
+    color: #176b4d;
+}
+
+.va-shell .va-json-status.is-error {
+    color: #a13952;
+}
+
+html[data-theme="dark"] .va-shell .va-json-status.is-success {
+    color: #99ddc4;
+}
+
+html[data-theme="dark"] .va-shell .va-json-status.is-error {
+    color: #f3adbf;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    .va-scenario-grid,
+    .va-scenario-grid--title {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .va-shell.va-scenario-editor-page textarea.va-json-input {
+        height: 340px;
+        min-height: 340px;
+        max-height: 340px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 440px) {
+    .va-shell.va-scenario-editor-page textarea.va-json-input {
+        font-size: 16px;
+    }
+}

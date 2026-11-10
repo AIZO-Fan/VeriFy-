@@ -27,10 +27,14 @@ class DatabaseSeeder extends Seeder
         );
 
         // 2. Akun Test User
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+                'role' => 'user',
+            ]
+        );
 
         // 3. Akun Demo User Biasa
         User::updateOrCreate(

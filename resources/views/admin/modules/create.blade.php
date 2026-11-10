@@ -3,150 +3,632 @@
 @section('title', 'Tambah Modul Pembelajaran')
 
 @section('content')
-@include('admin.partials.nav')
+    @include('admin.partials.nav')
 
-<section class="container" style="max-width: 900px; margin: 24px auto 60px; padding: 0 20px;">
-    <div style="margin-bottom: 24px;">
-        <a href="{{ route('admin.modules.index') }}" style="color: #20b4cb; font-size: 0.9rem; font-weight: 700; text-decoration: none;">&larr; Kembali ke Daftar Modul</a>
-        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--theme-heading); margin: 8px 0 4px;">Buat Modul Pembelajaran Baru</h1>
-        <p style="color: var(--theme-muted); margin: 0; font-size: 0.95rem;">Modul baru akan otomatis tampil pada ruang belajar pengguna.</p>
-    </div>
+    @php
+        $colorOptions = [
+            'blue' => 'Biru',
+            'purple' => 'Ungu',
+            'green' => 'Hijau',
+            'orange' => 'Jingga',
+            'cyan' => 'Toska',
+            'pink' => 'Merah muda',
+        ];
 
-    <div style="background: var(--theme-card); border: 1px solid var(--theme-border); border-radius: 16px; padding: 28px; box-shadow: 0 4px 14px var(--theme-shadow);">
-        <form action="{{ route('admin.modules.store') }}" method="POST">
+        $iconOptions = [
+            'shield' => 'Perisai',
+            'brain' => 'Psikologi',
+            'link' => 'Tautan',
+            'cart' => 'Belanja',
+            'lock' => 'Privasi',
+            'report' => 'Laporan',
+        ];
+
+        $oldLessons = array_values(
+            old('lessons', [['title' => '', 'content' => '']])
+        );
+
+        if (count($oldLessons) === 0) {
+            $oldLessons = [['title' => '', 'content' => '']];
+        }
+    @endphp
+
+    <section
+        class="va-shell va-module-editor-page"
+        aria-labelledby="va-module-editor-title"
+    >
+        {{-- KEMBALI --}}
+        <a
+            class="va-editor-back"
+            href="{{ route('admin.modules.index') }}"
+        >
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+            >
+                <path d="M19 12H5M11 6L5 12L11 18" />
+            </svg>
+
+            Daftar modul
+        </a>
+
+        {{-- HEADER --}}
+        <header class="va-management-heading">
+            <div class="va-management-heading-copy">
+                <span class="va-eyebrow">
+                    MODUL PEMBELAJARAN
+                </span>
+
+                <h1 id="va-module-editor-title">
+                    Buat modul baru
+                </h1>
+
+                <p>
+                    Susun informasi modul dan materi pembelajaran,
+                    lalu tentukan apakah modul langsung diaktifkan.
+                </p>
+            </div>
+        </header>
+
+        <form
+            id="vaModuleCreateForm"
+            class="va-module-editor"
+            action="{{ route('admin.modules.store') }}"
+            method="POST"
+        >
             @csrf
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Judul Modul</label>
-                <input type="text" name="title" value="{{ old('title') }}" required placeholder="Contoh: Mengenali Penipuan Pinjaman Online Ilegal"
-                    style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 1rem;">
-            </div>
+            {{-- INFORMASI MODUL --}}
+            <section
+                class="va-editor-card"
+                aria-labelledby="va-module-info-title"
+            >
+                <header class="va-editor-card-heading">
+                    <span class="va-editor-step" aria-hidden="true">
+                        01
+                    </span>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Deskripsi Singkat</label>
-                <textarea name="description" rows="3" required placeholder="Jelaskan secara ringkas materi apa yang akan dipelajari di modul ini..."
-                    style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 0.95rem;">{{ old('description') }}</textarea>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Tema Warna</label>
-                    <select name="color" style="width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                        <option value="blue" {{ old('color') == 'blue' ? 'selected' : '' }}>Blue (Biru)</option>
-                        <option value="purple" {{ old('color') == 'purple' ? 'selected' : '' }}>Purple (Ungu)</option>
-                        <option value="green" {{ old('color') == 'green' ? 'selected' : '' }}>Green (Hijau)</option>
-                        <option value="orange" {{ old('color') == 'orange' ? 'selected' : '' }}>Orange (Jingga)</option>
-                        <option value="cyan" {{ old('color') == 'cyan' ? 'selected' : '' }}>Cyan (Toska)</option>
-                        <option value="pink" {{ old('color') == 'pink' ? 'selected' : '' }}>Pink (Merah Muda)</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Ikon Modul</label>
-                    <select name="icon" style="width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                        <option value="shield" {{ old('icon') == 'shield' ? 'selected' : '' }}>shield (Perisai)</option>
-                        <option value="brain" {{ old('icon') == 'brain' ? 'selected' : '' }}>brain (Otak/Psikologi)</option>
-                        <option value="link" {{ old('icon') == 'link' ? 'selected' : '' }}>link (Tautan/URL)</option>
-                        <option value="cart" {{ old('icon') == 'cart' ? 'selected' : '' }}>cart (Belanja/Toko)</option>
-                        <option value="lock" {{ old('icon') == 'lock' ? 'selected' : '' }}>lock (Gembok/Privasi)</option>
-                        <option value="report" {{ old('icon') == 'report' ? 'selected' : '' }}>report (Laporan)</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Nomor Urutan</label>
-                    <input type="number" name="order" value="{{ old('order', $nextOrder) }}" min="1"
-                        style="width: 100%; padding: 11px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
-                </div>
-            </div>
-
-            <div style="margin-bottom: 24px; padding: 16px; background: var(--theme-card-soft); border-radius: 12px; border: 1px solid var(--theme-border);">
-                <label style="display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--theme-heading); cursor: pointer;">
-                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: #20b4cb;">
-                    Langsung aktifkan dan tampilkan modul ke pengguna
-                </label>
-            </div>
-
-            {{-- Lessons list builder with custom title --}}
-            <div style="margin-bottom: 28px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                     <div>
-                        <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--theme-heading);">Poin Materi Pembelajaran (Lessons)</h3>
-                        <p style="margin: 4px 0 0; color: var(--theme-muted); font-size: 0.85rem;">Isi judul poin materi dan penjelasan slide edukasinya.</p>
-                    </div>
-                    <button type="button" id="btnAddLesson" style="background: rgba(32, 180, 203, 0.15); color: #20b4cb; border: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;">
-                        + Tambah Poin Materi
-                    </button>
-                </div>
+                        <h2 id="va-module-info-title">
+                            Informasi modul
+                        </h2>
 
-                <div id="lessonsContainer" style="display: flex; flex-direction: column; gap: 16px;">
-                    @php 
-                        $oldLessons = old('lessons', [['title' => '', 'content' => '']]); 
-                    @endphp
-                    @foreach($oldLessons as $idx => $lesson)
-                    <div class="lesson-row" style="background: var(--theme-card-soft); padding: 16px; border-radius: 12px; border: 1px solid var(--theme-border); display: flex; flex-direction: column; gap: 10px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="lesson-number" style="font-weight: 700; color: var(--theme-heading);">Poin Materi #{{ $idx + 1 }}</span>
-                            <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.8rem;">Hapus</button>
-                        </div>
-                        <input type="text" name="lessons[{{ $idx }}][title]" value="{{ $lesson['title'] ?? '' }}" required placeholder="Judul Poin Materi (Contoh: Cara Kerja Penipuan Hadiah)"
-                            style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem; font-weight: 600;">
-                        <textarea name="lessons[{{ $idx }}][content]" rows="3" required placeholder="Tuliskan isi materi pembelajaran..."
-                            style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem;">{{ $lesson['content'] ?? '' }}</textarea>
+                        <p>
+                            Berikan judul dan deskripsi yang mudah dipahami.
+                        </p>
                     </div>
+                </header>
+
+                <div class="va-editor-fields">
+                    <div class="va-editor-field">
+                        <label for="va-module-title">
+                            Judul modul
+                            <span class="va-required" aria-hidden="true">*</span>
+                        </label>
+
+                        <input
+                            class="va-control va-editor-control"
+                            id="va-module-title"
+                            type="text"
+                            name="title"
+                            value="{{ old('title') }}"
+                            placeholder="Contoh: Mengenali Penipuan Pinjaman Online Ilegal"
+                            required
+                            @error('title')
+                                aria-invalid="true"
+                                aria-describedby="va-module-title-error"
+                            @enderror
+                        >
+
+                        @error('title')
+                            <p
+                                class="va-field-error"
+                                id="va-module-title-error"
+                            >
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <div class="va-editor-field">
+                        <label for="va-module-description">
+                            Deskripsi singkat
+                            <span class="va-required" aria-hidden="true">*</span>
+                        </label>
+
+                        <textarea
+                            class="va-control va-editor-control"
+                            id="va-module-description"
+                            name="description"
+                            rows="4"
+                            placeholder="Jelaskan secara ringkas materi yang akan dipelajari."
+                            required
+                            @error('description')
+                                aria-invalid="true"
+                                aria-describedby="va-module-description-error"
+                            @enderror
+                        >{{ old('description') }}</textarea>
+
+                        @error('description')
+                            <p
+                                class="va-field-error"
+                                id="va-module-description-error"
+                            >
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
+
+                    <div class="va-editor-grid">
+                        <div class="va-editor-field">
+                            <label for="va-module-color">
+                                Tema warna
+                            </label>
+
+                            <select
+                                class="va-control va-editor-control"
+                                id="va-module-color"
+                                name="color"
+                                @error('color')
+                                    aria-invalid="true"
+                                    aria-describedby="va-module-color-error"
+                                @enderror
+                            >
+                                @foreach($colorOptions as $value => $label)
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ old('color', 'blue') === $value ? 'selected' : '' }}
+                                    >
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('color')
+                                <p
+                                    class="va-field-error"
+                                    id="va-module-color-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <div class="va-editor-field">
+                            <label for="va-module-icon">
+                                Ikon modul
+                            </label>
+
+                            <select
+                                class="va-control va-editor-control"
+                                id="va-module-icon"
+                                name="icon"
+                                @error('icon')
+                                    aria-invalid="true"
+                                    aria-describedby="va-module-icon-error"
+                                @enderror
+                            >
+                                @foreach($iconOptions as $value => $label)
+                                    <option
+                                        value="{{ $value }}"
+                                        {{ old('icon', 'shield') === $value ? 'selected' : '' }}
+                                    >
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @error('icon')
+                                <p
+                                    class="va-field-error"
+                                    id="va-module-icon-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        <div class="va-editor-field">
+                            <label for="va-module-order">
+                                Nomor urutan
+                            </label>
+
+                            <input
+                                class="va-control va-editor-control"
+                                id="va-module-order"
+                                type="number"
+                                name="order"
+                                value="{{ old('order', $nextOrder) }}"
+                                min="1"
+                                @error('order')
+                                    aria-invalid="true"
+                                    aria-describedby="va-module-order-error"
+                                @enderror
+                            >
+
+                            @error('order')
+                                <p
+                                    class="va-field-error"
+                                    id="va-module-order-error"
+                                >
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- STATUS --}}
+                    <label
+                        class="va-editor-publish"
+                        for="va-module-active"
+                    >
+                        <input
+                            id="va-module-active"
+                            type="checkbox"
+                            name="is_active"
+                            value="1"
+                            {{ old('is_active', '1') ? 'checked' : '' }}
+                            @error('is_active')
+                                aria-invalid="true"
+                                aria-describedby="va-module-active-error"
+                            @enderror
+                        >
+
+                        <span class="va-editor-publish-copy">
+                            <span class="va-editor-publish-title">
+                                Aktifkan modul setelah disimpan
+                            </span>
+
+                            <span class="va-editor-publish-description">
+                                Centang untuk meminta modul langsung
+                                ditampilkan kepada pengguna.
+                            </span>
+                        </span>
+                    </label>
+
+                    @error('is_active')
+                        <p
+                            class="va-field-error"
+                            id="va-module-active-error"
+                        >
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+            </section>
+
+            {{-- MATERI --}}
+            <section
+                class="va-editor-card"
+                aria-labelledby="va-module-lessons-title"
+            >
+                <header class="va-editor-card-heading va-editor-lessons-heading">
+                    <div class="va-editor-heading-group">
+                        <span class="va-editor-step" aria-hidden="true">
+                            02
+                        </span>
+
+                        <div>
+                            <h2 id="va-module-lessons-title">
+                                Materi pembelajaran
+                            </h2>
+
+                            <p>
+                                Tambahkan judul dan penjelasan
+                                untuk setiap bagian materi.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="va-button va-editor-add"
+                        id="btnAddLesson"
+                        type="button"
+                        aria-controls="lessonsContainer"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 5V19M5 12H19" />
+                        </svg>
+
+                        Tambah materi
+                    </button>
+                </header>
+
+                @error('lessons')
+                    <p class="va-field-error">{{ $message }}</p>
+                @enderror
+
+                <div
+                    id="lessonsContainer"
+                    class="va-lessons-container"
+                >
+                    @foreach($oldLessons as $idx => $lesson)
+                        <div class="lesson-row va-lesson-row">
+                            <div class="va-lesson-heading">
+                                <span class="lesson-number">
+                                    Materi {{ str_pad($idx + 1, 2, '0', STR_PAD_LEFT) }}
+                                </span>
+
+                                <button
+                                    class="btn-remove-lesson va-action-button va-action-button--delete"
+                                    type="button"
+                                    aria-label="Hapus materi {{ $idx + 1 }}"
+                                >
+                                    Hapus
+                                </button>
+                            </div>
+
+                            <div class="va-editor-field">
+                                <label
+                                    data-lesson-title-label
+                                    for="va-lesson-title-{{ $idx }}"
+                                >
+                                    Judul materi
+                                    <span class="va-required" aria-hidden="true">*</span>
+                                </label>
+
+                                <input
+                                    class="va-control va-editor-control"
+                                    data-lesson-title
+                                    id="va-lesson-title-{{ $idx }}"
+                                    type="text"
+                                    name="lessons[{{ $idx }}][title]"
+                                    value="{{ $lesson['title'] ?? '' }}"
+                                    placeholder="Contoh: Cara Kerja Penipuan Hadiah"
+                                    required
+                                    @if($errors->has('lessons.' . $idx . '.title'))
+                                        aria-invalid="true"
+                                        aria-describedby="va-lesson-title-error-{{ $idx }}"
+                                    @endif
+                                >
+
+                                @if($errors->has('lessons.' . $idx . '.title'))
+                                    <p
+                                        class="va-field-error"
+                                        data-lesson-title-error
+                                        id="va-lesson-title-error-{{ $idx }}"
+                                    >
+                                        {{ $errors->first('lessons.' . $idx . '.title') }}
+                                    </p>
+                                @endif
+                            </div>
+
+                            <div class="va-editor-field">
+                                <label
+                                    data-lesson-content-label
+                                    for="va-lesson-content-{{ $idx }}"
+                                >
+                                    Isi materi
+                                    <span class="va-required" aria-hidden="true">*</span>
+                                </label>
+
+                                <textarea
+                                    class="va-control va-editor-control"
+                                    data-lesson-content
+                                    id="va-lesson-content-{{ $idx }}"
+                                    name="lessons[{{ $idx }}][content]"
+                                    rows="5"
+                                    placeholder="Tuliskan penjelasan materi pembelajaran..."
+                                    required
+                                    @if($errors->has('lessons.' . $idx . '.content'))
+                                        aria-invalid="true"
+                                        aria-describedby="va-lesson-content-error-{{ $idx }}"
+                                    @endif
+                                >{{ $lesson['content'] ?? '' }}</textarea>
+
+                                @if($errors->has('lessons.' . $idx . '.content'))
+                                    <p
+                                        class="va-field-error"
+                                        data-lesson-content-error
+                                        id="va-lesson-content-error-{{ $idx }}"
+                                    >
+                                        {{ $errors->first('lessons.' . $idx . '.content') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
                     @endforeach
                 </div>
-            </div>
 
-            <div style="display: flex; justify-content: flex-end; gap: 12px;">
-                <a href="{{ route('admin.modules.index') }}" style="padding: 12px 20px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-weight: 600;">Batal</a>
-                <button type="submit" style="padding: 12px 24px; border-radius: 10px; background: #20b4cb; color: #fff; border: none; font-weight: 700; cursor: pointer;">
-                    Simpan Modul
+                <p
+                    id="vaLessonStatus"
+                    class="va-editor-status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <p class="va-editor-hint">
+                    Modul harus memiliki minimal satu bagian materi.
+                    Urutan materi mengikuti susunannya di atas.
+                </p>
+            </section>
+
+            {{-- AKSI FORM --}}
+            <footer class="va-editor-actions">
+                <p>
+                    Periksa kembali judul dan isi materi sebelum menyimpan.
+                </p>
+
+                <div class="va-editor-action-buttons">
+                    <a
+                        class="va-button"
+                        href="{{ route('admin.modules.index') }}"
+                    >
+                        Batal
+                    </a>
+
+                    <button
+                        class="va-button va-button--primary"
+                        type="submit"
+                    >
+                        Simpan modul
+                    </button>
+                </div>
+            </footer>
+        </form>
+    </section>
+
+    {{-- TEMPLATE MATERI BARU --}}
+    <template id="vaLessonTemplate">
+        <div class="lesson-row va-lesson-row">
+            <div class="va-lesson-heading">
+                <span class="lesson-number"></span>
+
+                <button
+                    class="btn-remove-lesson va-action-button va-action-button--delete"
+                    type="button"
+                >
+                    Hapus
                 </button>
             </div>
-        </form>
-    </div>
-</section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const container = document.getElementById('lessonsContainer');
-    const btnAdd = document.getElementById('btnAddLesson');
+            <div class="va-editor-field">
+                <label data-lesson-title-label>
+                    Judul materi
+                    <span class="va-required" aria-hidden="true">*</span>
+                </label>
 
-    function updateNumbers() {
-        container.querySelectorAll('.lesson-row').forEach((row, i) => {
-            row.querySelector('.lesson-number').textContent = 'Poin Materi #' + (i + 1);
-            row.querySelector('input[type="text"]').name = `lessons[${i}][title]`;
-            row.querySelector('textarea').name = `lessons[${i}][content]`;
-        });
-    }
-
-    btnAdd.addEventListener('click', function () {
-        const i = container.querySelectorAll('.lesson-row').length;
-        const div = document.createElement('div');
-        div.className = 'lesson-row';
-        div.style.cssText = 'background: var(--theme-card-soft); padding: 16px; border-radius: 12px; border: 1px solid var(--theme-border); display: flex; flex-direction: column; gap: 10px;';
-        div.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="lesson-number" style="font-weight: 700; color: var(--theme-heading);">Poin Materi #${i + 1}</span>
-                <button type="button" class="btn-remove-lesson" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 700; font-size: 0.8rem;">Hapus</button>
+                <input
+                    class="va-control va-editor-control"
+                    data-lesson-title
+                    type="text"
+                    placeholder="Contoh: Cara Kerja Penipuan Hadiah"
+                    required
+                >
             </div>
-            <input type="text" name="lessons[${i}][title]" required placeholder="Judul Poin Materi (Contoh: Cara Kerja Penipuan Hadiah)"
-                style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem; font-weight: 600;">
-            <textarea name="lessons[${i}][content]" rows="3" required placeholder="Tuliskan isi materi pembelajaran..."
-                style="width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--theme-border); background: var(--theme-card); color: var(--theme-text); font-size: 0.95rem;"></textarea>
-        `;
-        container.appendChild(div);
-    });
 
-    container.addEventListener('click', function (e) {
-        if (e.target.classList.contains('btn-remove-lesson')) {
-            if (container.querySelectorAll('.lesson-row').length > 1) {
-                e.target.closest('.lesson-row').remove();
-                updateNumbers();
-            } else {
-                alert('Modul harus memiliki minimal 1 poin materi.');
+            <div class="va-editor-field">
+                <label data-lesson-content-label>
+                    Isi materi
+                    <span class="va-required" aria-hidden="true">*</span>
+                </label>
+
+                <textarea
+                    class="va-control va-editor-control"
+                    data-lesson-content
+                    rows="5"
+                    placeholder="Tuliskan penjelasan materi pembelajaran..."
+                    required
+                ></textarea>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.getElementById('lessonsContainer');
+            const addButton = document.getElementById('btnAddLesson');
+            const template = document.getElementById('vaLessonTemplate');
+            const status = document.getElementById('vaLessonStatus');
+
+            if (!container || !addButton || !template || !status) {
+                return;
             }
-        }
-    });
-});
-</script>
+
+            function updateNumbers() {
+                container.querySelectorAll('.lesson-row').forEach((row, index) => {
+                    const number = index + 1;
+                    const title = row.querySelector('[data-lesson-title]');
+                    const content = row.querySelector('[data-lesson-content]');
+                    const titleLabel = row.querySelector('[data-lesson-title-label]');
+                    const contentLabel = row.querySelector('[data-lesson-content-label]');
+                    const titleError = row.querySelector('[data-lesson-title-error]');
+                    const contentError = row.querySelector('[data-lesson-content-error]');
+
+                    row.querySelector('.lesson-number').textContent =
+                        'Materi ' + String(number).padStart(2, '0');
+
+                    row.querySelector('.btn-remove-lesson').setAttribute(
+                        'aria-label',
+                        'Hapus materi ' + number
+                    );
+
+                    title.name = `lessons[${index}][title]`;
+                    title.id = `va-lesson-title-${index}`;
+                    titleLabel.htmlFor = title.id;
+
+                    content.name = `lessons[${index}][content]`;
+                    content.id = `va-lesson-content-${index}`;
+                    contentLabel.htmlFor = content.id;
+
+                    if (titleError) {
+                        titleError.id = `va-lesson-title-error-${index}`;
+                        title.setAttribute('aria-describedby', titleError.id);
+                    }
+
+                    if (contentError) {
+                        contentError.id = `va-lesson-content-error-${index}`;
+                        content.setAttribute('aria-describedby', contentError.id);
+                    }
+                });
+            }
+
+            addButton.addEventListener('click', function () {
+                const fragment = template.content.cloneNode(true);
+                const newRow = fragment.querySelector('.lesson-row');
+
+                container.appendChild(fragment);
+                updateNumbers();
+
+                newRow.querySelector('[data-lesson-title]').focus();
+
+                status.textContent = 'Bagian materi baru ditambahkan.';
+            });
+
+            container.addEventListener('click', function (event) {
+                const removeButton = event.target.closest('.btn-remove-lesson');
+
+                if (!removeButton || !container.contains(removeButton)) {
+                    return;
+                }
+
+                const rows = Array.from(container.querySelectorAll('.lesson-row'));
+
+                if (rows.length <= 1) {
+                    status.textContent =
+                        'Modul harus memiliki minimal satu bagian materi.';
+                    return;
+                }
+
+                const row = removeButton.closest('.lesson-row');
+                const index = rows.indexOf(row);
+
+                const hasContent =
+                    row.querySelector('[data-lesson-title]').value.trim() !== '' ||
+                    row.querySelector('[data-lesson-content]').value.trim() !== '';
+
+                if (hasContent && !window.confirm(
+                    'Hapus bagian materi ini? Isian yang belum disimpan akan dihapus.'
+                )) {
+                    return;
+                }
+
+                row.remove();
+                updateNumbers();
+
+                const remainingRows = container.querySelectorAll('.lesson-row');
+                const nextRow = remainingRows[
+                    Math.min(index, remainingRows.length - 1)
+                ];
+
+                nextRow.querySelector('[data-lesson-title]').focus();
+
+                status.textContent = 'Bagian materi dihapus.';
+            });
+
+            updateNumbers();
+        });
+    </script>
 @endsection
