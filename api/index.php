@@ -26,6 +26,10 @@ putenv('APP_STORAGE=' . $storagePath);
 $_ENV['APP_STORAGE'] = $storagePath;
 $_SERVER['APP_STORAGE'] = $storagePath;
 
+putenv('LOG_CHANNEL=stderr');
+$_ENV['LOG_CHANNEL'] = 'stderr';
+$_SERVER['LOG_CHANNEL'] = 'stderr';
+
 try {
     // Forward the request to Laravel public entrypoint
     require __DIR__ . '/../public/index.php';
