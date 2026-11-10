@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    @if($errors->any())
+    @if(isset($errors) && $errors->any())
         <div
             class="va-alert va-alert--danger"
             role="alert"

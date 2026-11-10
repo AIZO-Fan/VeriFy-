@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\Module;
 use App\Models\SimulationScenario;
 use App\Services\StoryValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class SimulatorController extends Controllers
+class SimulatorController extends Controller
 {
     public function index()
     {
@@ -34,8 +34,9 @@ class SimulatorController extends Controllers
         return view('admin.simulator.index', compact('simulatorRows'));
     }
 
-    public function create(Request $request)
+    public function create(?Request $request = null)
     {
+        $request = $request ?? request();
         $selectedTopicId = $request->query('topic_id');
         $selectedModule = null;
 

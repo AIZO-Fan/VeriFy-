@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controllers;
+use App\Http\Controllers\Controller;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ModuleController extends Controllers
+class ModuleController extends Controller
 {
     public function index()
     {
