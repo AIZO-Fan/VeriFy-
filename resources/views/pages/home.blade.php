@@ -36,34 +36,30 @@
                 class="verify-mini-stats"
                 role="group"
                 aria-label="Ringkasan platform VeriFy">
-                {{-- Pemeriksaan URL --}}
-                <div class="verify-mini-stat">
+                {{-- Pemeriksaan URL / Checklink --}}
+                <a
+                    class="verify-mini-stat"
+                    href="{{ route('detect') }}">
 
                     <span class="verify-mini-stat-value">
-                        @if(isset($urlChecksCount))
                         <span
-                            data-verify-counter="{{ (int) $urlChecksCount }}">
-                            {{ number_format((int) $urlChecksCount, 0, ',', '.') }}
+                            data-verify-counter="{{ (int) ($urlChecksCount ?? 0) }}">
+                            {{ number_format((int) ($urlChecksCount ?? 0), 0, ',', '.') }}
                         </span>
-                        @else
-                        <span aria-label="Data belum tersedia">
-                            —
-                        </span>
-                        @endif
                     </span>
 
                     <span class="verify-mini-stat-label">
-                        Pemeriksaan URL
+                        {{ auth()->check() ? 'Pemeriksaan Anda' : 'Pemeriksaan URL' }}
                     </span>
 
-                </div>
+                </a>
 
                 {{-- Modul --}}
                 <a
                     class="verify-mini-stat"
                     href="{{ route('modules') }}">
                     <span class="verify-mini-stat-value">
-                        <span data-verify-counter="6">6</span>
+                        <span data-verify-counter="{{ (int) ($modulesCount ?? 6) }}">{{ $modulesCount ?? 6 }}</span>
                     </span>
 
                     <span class="verify-mini-stat-label">
@@ -76,7 +72,7 @@
                     class="verify-mini-stat"
                     href="{{ route('simulator') }}">
                     <span class="verify-mini-stat-value">
-                        <span data-verify-counter="6">6</span>
+                        <span data-verify-counter="{{ (int) ($simulationsCount ?? 6) }}">{{ $simulationsCount ?? 6 }}</span>
                     </span>
 
                     <span class="verify-mini-stat-label">
@@ -86,11 +82,11 @@
 
             </div>
 
-            @unless(isset($urlChecksCount))
-            <p class="verify-mini-stats-note">
-                Statistik pemeriksaan URL belum tersedia.
+            @if(auth()->check())
+            <p class="verify-mini-stats-note" style="color: var(--theme-muted); font-size: 0.85rem; margin-top: 10px;">
+                Statistik akun Anda: <strong>{{ (int) ($urlChecksCount ?? 0) }}</strong> riwayat pemeriksaan scam &bull; <strong>{{ (int) ($userAttemptsCount ?? 0) }}</strong> simulasi diselesaikan.
             </p>
-            @endunless
+            @endif
 
         </div>
 

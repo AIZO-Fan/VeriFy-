@@ -1,86 +1,183 @@
-# VeriFy — Laravel UI Kit
+# 🛡️ VeriFy — Platform Edukasi & Deteksi Penipuan Digital
 
-Implementasi lima halaman berdasarkan referensi pengguna. Paket ini adalah overlay kode aplikasi, bukan instalasi Laravel lengkap. Tidak berisi vendor, kredensial, ataupun aset gambar pihak ketiga. Ilustrasi dibuat dengan CSS dan SVG lokal. Tata letak mendekati referensi, bukan reproduksi pixel-perfect.
+**VeriFy** adalah platform berbasis web modern yang dirancang untuk membantu masyarakat mengenali, mempelajari, dan mendeteksi berbagai modus penipuan digital (*online scam*) di Indonesia. Aplikasi ini dilengkapi dengan mesin analisis keamanan cerdas, simulator percakapan interaktif, modul edukasi berbasis data dinamis, serta panel kontrol administrasi (*Control Center*).
 
-## Instalasi pada proyek baru
+---
 
-Siapkan PHP dan Composer sesuai kebutuhan versi Laravel yang Anda pasang.
+## 🌟 Fitur Utama Aplikasi
 
-1. Buat proyek Laravel:
+1. **🔍 Mesin Deteksi Scam Cerdas (*Detect Scam*)**
+   - **Google Safe Browsing Lookup API v4**: Memeriksa URL secara *real-time* terhadap basis data ancaman global Google (*Malware*, *Social Engineering/Phishing*, *Unwanted Software*).
+   - **Heuristik & Karakteristik URL**:
+     - Deteksi ekstensi domain murah/bebas berisiko tinggi (`.xyz`, `.top`, `.online`, `.site`, `.buzz`, `.club`, `.work`, `.icu`, `.vip`, dll.).
+     - Deteksi pemendek tautan (*URL shorteners*: `bit.ly`, `s.id`, `tinyurl.com`, `cutt.ly`, `wa.me`, dll.).
+     - Deteksi unduhan file berbahaya / malware Android (`.apk`, `.exe`, dll.).
+     - Deteksi penipuan *subdomain spoofing* (mencatut nama institusi resmi sebagai subdomain, misal `link.dana.id.daget.xyz`).
+   - **Sistem Whitelist Domain Resmi Terverifikasi**: Mencegah *false positive* untuk institusi perbankan (`bca.co.id`, `bri.co.id`, `mandiri.co.id`), dompet digital (`dana.id`, `gopay.co.id`), e-commerce, serta seluruh portal resmi pemerintah (`.go.id`).
+   - **Intelijen Regex Pola Penipuan Indonesia**: Mengenali pola file APK (undangan nikah, surat tilang ETLE, resi kurir paket), klaim saldo/DANA Kaget, undian & giveaway palsu, kenaikan tarif transfer, lowongan freelance fiktif, pinjaman online ilegal, desakan waktu, serta permintaan kode OTP/data rahasia.
 
-   ```bash
-   composer create-project laravel/laravel verify
-   ```
+2. **🎭 Scam Simulator Interaktif**
+   - Simulasi percakapan interaktif berbasis graf skenario (*Story Graph JSON*).
+   - Percabangan keputusan (*branching decision*) dengan umpan balik edukatif, skor kewaspadaan, dan konsekuensi tindakan.
+   - Riwayat penyelesaian simulasi otomatis tersimpan ke akun pengguna.
 
-2. Ekstrak ZIP ini ke folder sementara. Salin isi folder `verify` dari paket (`app`, `routes`, `resources`, `public`, `tests`) ke root proyek Laravel tersebut. Gabungkan folder dan ganti file dengan nama sama. Cadangkan terlebih dahulu jika memakai proyek lama. File `routes/web.php` akan diganti.
+3. **📚 Modul Pembelajaran Dinamis (*Learning Modules*)**
+   - Modul materi interaktif dengan pembagian topik per kategori.
+   - Terintegrasi langsung dengan basis data cloud (dapat ditambah, diubah urutannya, dan diedit secara dinamis).
 
-3. Masuk ke root proyek:
+4. **👤 Autentikasi & Profil Pengguna**
+   - Sistem registrasi, login, dan manajemen sesi.
+   - Halaman **Pengaturan / Profil** yang menampilkan **Riwayat Deteksi Scam** akun pengguna.
 
-   ```bash
-   cd verify
-   ```
+5. **⚙️ Panel Administrasi Lengkap (*Admin Control Center*)**
+   - **Dashboard Ringkasan**: Metrik total pengguna, total modul, skenario simulator, dan log pemindaian scam.
+   - **Manajemen Modul (`/admin/modules`)**: CRUD modul pembelajaran, kustomisasi ikon/warna, pengaturan nomor urutan, serta penambahan poin materi secara dinamis.
+   - **Manajemen Scam Simulator (`/admin/simulator`)**: CRUD skenario simulator lengkap dengan *JSON Story Graph Editor*, validasi struktur alur (*StoryValidator*), dan tombol *Format JSON*.
+   - **Manajemen Pengguna (`/admin/users`)**: Pemantauan pengguna, pencarian, filter, dan fitur ubah level/role (User ↔ Admin).
+   - **Monitoring Deteksi Scam (`/admin/scans`)**: Log seluruh pemindaian teks/tautan yang masuk ke sistem beserta skor risiko dan temuan ancamannya.
 
-4. Pastikan `.env` tersedia dari instalasi Laravel. Jika belum, salin `.env.example` ke `.env` dan jalankan:
+---
 
-   ```bash
-   php artisan key:generate
-   ```
+## 🛠️ Teknologi & Sumber Pustaka (*Tech Stack & Libraries*)
 
-5. Untuk demo tanpa database, ubah atau tambahkan pada `.env`:
+### 1. Backend (Server-Side)
+| Pustaka / Teknologi | Versi | Sumber / Dokumentasi | Kegunaan |
+| :--- | :--- | :--- | :--- |
+| **PHP** | `^8.3` | [php.net](https://www.php.net/) | Bahasa pemrograman utama server-side |
+| **Laravel Framework** | `13.x / 11.x` | [laravel.com](https://laravel.com/) | Framework MVC modern untuk perutean, controller, model, dan middleware |
+| **GuzzleHTTP** | `^7.8` | [docs.guzzlephp.org](https://docs.guzzlephp.org/) | HTTP Client untuk integrasi API Google Safe Browsing |
+| **Laravel Sanctum** | `^4.3` | [laravel.com/docs/sanctum](https://laravel.com/docs/sanctum) | Autentikasi API token untuk endpoint Simulator |
+| **Laravel Tinker** | `^3.0` | [github.com/laravel/tinker](https://github.com/laravel/tinker) | REPL interaktif untuk pengujian dan debugging basis data |
 
-   ```dotenv
-   APP_NAME=VeriFy
-   SESSION_DRIVER=file
-   CACHE_STORE=file
-   CACHE_DRIVER=file
-   QUEUE_CONNECTION=sync
-   ```
+### 2. Frontend & Antarmuka Pengguna (UI/UX)
+| Pustaka / Aset | Sumber / Lisensi | Kegunaan |
+| :--- | :--- | :--- |
+| **Laravel Blade Engine** | Bawaan Laravel | Template rendering view dinamis modular |
+| **VeriFy Design System** | Custom CSS (`public/css/verify.css`) | Tema kustom responsif dengan dukungan Dark & Light Mode |
+| **Plus Jakarta Sans** | [Google Fonts](https://fonts.google.com/specimen/Plus+Jakarta+Sans) | Tipografi wordmark dan antarmuka modern |
+| **Lucide Icons** | [lucide.dev](https://lucide.dev/) (Unpkg CDN) | Ikon antarmuka vektor ringan dan bersih |
+| **Vite & TailwindCSS** | [vite.dev](https://vite.dev/) / `package.json` | Build tool aset frontend & utilitas pendukung |
 
-6. Bersihkan cache dan jalankan server:
+### 3. Basis Data & Cloud Infrastructure
+| Layanan / Komponen | Provider / Sumber | Spesifikasi / Konfigurasi |
+| :--- | :--- | :--- |
+| **TiDB Cloud Serverless** | [PingCAP TiDB Cloud](https://tidbcloud.com/) | Basis data Distributed SQL kompatibel MySQL (Region AWS Singapore `ap-southeast-1`, Port `4000`) |
+| **SSL/TLS Encryption** | cURL CA Bundle (`curl-ca-bundle.crt`) | Koneksi terenkripsi aman antara Laravel dan TiDB Cloud |
+| **Database Sessions** | Laravel Session Driver | Sesi login pengguna disimpan langsung dan tersinkronisasi di cloud |
 
-   ```bash
-   php artisan optimize:clear
-   php artisan serve
-   ```
+### 4. Layanan Eksternal & API Keamanan
+| Layanan / API | Penyedia | Fungsi |
+| :--- | :--- | :--- |
+| **Google Safe Browsing Lookup API v4** | [Google Cloud Platform](https://developers.google.com/safe-browsing/v4/lookup-api) | Pemeriksaan reputasi tautan terhadap ancaman global Google |
 
-7. Buka http://127.0.0.1:8000.
+---
 
-CSS dan JavaScript ada langsung di `public` sehingga tidak memerlukan npm atau proses build Vite untuk halaman dalam paket ini. Data modul disimpan dalam controller; tidak memerlukan migrasi untuk fitur paket.
+## 🗄️ Struktur Tabel Basis Data (TiDB Cloud)
 
-## Halaman
+1. **`users`**: Data pengguna, email, kata sandi terenkripsi, serta kolom `role` (`admin` / `user`).
+2. **`modules`**: Data modul pembelajaran, deskripsi, tema warna, ikon, nomor urut, status aktif, dan daftar poin materi (JSON).
+3. **`simulation_scenarios`**: Skenario scam simulator, tingkat kesulitan, nomor topik (1–6), status aktif, versi, dan struktur alur percakapan (JSON).
+4. **`simulation_attempts`**: Hasil simulasi yang dimainkan pengguna, riwayat pilihan rute (*decision path*), skor, dan nilai maksimal.
+5. **`scan_histories`**: Riwayat input pemindaian detect scam, skor risiko, status keamanan, daftar temuan ancaman, dan URL berbahaya yang teridentifikasi.
+6. **`sessions`**: Manajemen sesi pengguna aktif.
+7. **`migrations`, `cache`, `jobs`, `personal_access_tokens`**: Tabel sistem pendukung Laravel.
 
-- `/` : Landing page dengan ilustrasi ponsel CSS/SVG.
-- `/detect-scam` : Form POST, validasi server, CSRF, pembatasan permintaan, dan hasil berbasis aturan.
-- `/how-it-works` : Tiga tab dengan navigasi keyboard.
-- `/modules` : Enam modul dan halaman detail `/modules/1` sampai `/modules/6`.
-- `/scam-simulator` : Carousel enam skenario, dialog latihan, dan umpan balik. Satu soal per topik. Parameter `?topic=1` membuka topik terkait.
+---
 
-## Batasan
+## 🚀 Panduan Menjalankan Proyek Secara Lokal
 
-Deteksi hanya demo heuristik, bukan AI, antivirus, pemeriksa reputasi domain, ataupun jaminan keamanan. Penyebutan OTP bisa terdeteksi meskipun konteksnya edukatif. Tautan tidak dikunjungi dan tidak dicocokkan dengan basis data pihak ketiga.
+### 1. Prasyarat Sistem
+* PHP `>= 8.3` dengan ekstensi `pdo_mysql`, `curl`, `mbstring`, `openssl`.
+* Composer `>= 2.x`.
+* Node.js & NPM (opsional, untuk build frontend).
 
-Tidak ada login, penyimpanan hasil, backend pelaporan, atau integrasi layanan keamanan. Jawaban simulator ada di JavaScript dan tidak cocok untuk ujian berskor yang memerlukan integritas jawaban. Navbar hanya berisi lima halaman yang diminta; ikon bantuan menuju How It Works.
-
-Permintaan tidak sengaja disimpan ke basis data oleh fitur ini. Namun, validasi gagal dapat menyimpan input sementara pada session Laravel; jangan masukkan data sensitif.
-
-Untuk produksi, tambahkan kebijakan privasi, retensi session/log, audit keamanan, dan layanan analisis yang sesuai.
-
-## Pengujian
-
-Disertakan `tests/Feature/VerifyTest.php`.
-
-Jalankan setelah pemasangan:
-
+### 2. Kloning & Instalasi Dependensi
 ```bash
-php artisan test --filter=VerifyTest
+# Masuk ke direktori proyek
+cd VeriFy-
+
+# Pasang dependensi PHP
+composer install
+
+# Salin file konfigurasi environment
+cp .env.example .env
 ```
 
-Test dan aplikasi belum dieksekusi dalam runtime PHP/Laravel saat paket ini dibuat; verifikasi pada lingkungan lokal Anda diperlukan.
+### 3. Konfigurasi Database TiDB Cloud (`.env`)
+Pastikan konfigurasi basis data pada `.env` telah mengarah ke TiDB Cloud:
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=gateway01.ap-southeast-1.prod.aws.tidbcloud.com
+DB_PORT=4000
+DB_DATABASE=verify_db
+DB_USERNAME=3VdejVq1rUm6iGr.root
+DB_PASSWORD=<PASSWORD_TIDB_ANDA>
+MYSQL_ATTR_SSL_CA="C:/xampp/apache/bin/curl-ca-bundle.crt"
 
-## Penyesuaian
+# Google Safe Browsing API Key
+GOOGLE_SAFE_BROWSING_API_KEY=AIzaSyDSvcA-lI_smfzlhK9DsvDDuFieBDApdvc
+```
 
-- Warna, responsivitas, ilustrasi: `public/css/verify.css`
-- Interaksi dan soal latihan: `public/js/verify.js`
-- Materi dan aturan analisis: `app/Http/Controllers/VerifyController.php`
-- Halaman: `resources/views/pages`
-- Navigasi: `resources/views/layouts/app.blade.php`
+### 4. Migrasi & Seeder Database
+```bash
+# Jalankan migrasi tabel ke TiDB Cloud
+php artisan migrate
+
+# Isi data awal (Akun Admin default & Modul Pembelajaran)
+php artisan db:seed
+```
+
+### 5. Jalankan Server Pengembangan
+```bash
+php artisan serve
+```
+Akses aplikasi melalui browser di **`http://localhost:8000`**.
+
+---
+
+## 🔐 Kredensial Akun Default
+
+| Peran (*Role*) | Email / Username | Kata Sandi | Hak Akses |
+| :--- | :--- | :--- | :--- |
+| **Administrator** | `admin@verify.id` | `admin123` | Akses penuh: Panel Admin, CRUD Modul, CRUD Simulator, Manajemen Pengguna, dan Monitoring Scam |
+| **User Biasa** | `user@verify.id` | `user123` | Akses publik: Detect Scam, Belajar Modul, Bermain Simulator, dan Riwayat Profil |
+
+---
+
+## 📁 Struktur Direktori Utama
+
+```
+VeriFy-/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/             # Controller khusus Panel Admin (Dashboard, Modul, Simulator, User, Scan)
+│   │   │   ├── Api/               # API Controller untuk Simulator (Attempt & Scenarios)
+│   │   │   ├── AuthController.php # Autentikasi Login, Register, Logout
+│   │   │   └── VerifyController.php # Controller halaman utama (Home, Detect, Modules, Lesson, Simulator)
+│   │   └── Middleware/
+│   │       └── AdminMiddleware.php # Middleware proteksi level Admin (403 Forbidden untuk non-admin)
+│   ├── Models/                    # Eloquent Model (User, Module, SimulationScenario, ScanHistory, dll.)
+│   └── Services/
+│       ├── ScamAnalysisService.php # Mesin analisis URL, Safe Browsing & Intelijen Regex
+│       └── StoryValidator.php      # Validasi graf skenario simulator (DFS cycle & reachability)
+├── database/
+│   ├── migrations/                # Skema basis data
+│   └── seeders/                   # Data awal (Admin, Modul edukasi, Skenario simulasi)
+├── resources/
+│   └── views/
+│       ├── admin/                 # Blade templates untuk halaman-halaman Control Center Admin
+│       ├── layouts/               # Master layout aplikasi (Header navbar, footer, modal auto-save)
+│       └── pages/                 # Halaman pengguna (Home, Detect, Modules, Lesson, Settings)
+├── routes/
+│   ├── web.php                    # Rute publik, autentikasi, dan grup admin
+│   └── api.php                    # Rute endpoint RESTful API Simulator
+└── public/
+    ├── css/verify.css             # Desain antarmuka & tema aplikasi
+    └── js/verify.js              # Skrip interaktivitas klien
+```
+
+---
+
+## ⚖️ Lisensi
+Proyek ini dikembangkan di bawah lisensi **MIT**. Digunakan untuk tujuan edukasi keamanan digital dan kesadaran siber (*cybersecurity awareness*).

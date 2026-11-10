@@ -20,10 +20,88 @@
                     Monitoring Deteksi Scam
                 </h1>
 
-                <p>
-                    Pantau pesan dan URL yang diperiksa,
-                    beserta hasil analisis dan indikator yang ditemukan.
-                </p>
+    <div style="background: var(--theme-card); border: 1px solid var(--theme-border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 14px var(--theme-shadow);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background: var(--theme-card-soft); border-bottom: 1px solid var(--theme-border); font-size: 0.85rem; color: var(--theme-muted); text-transform: uppercase;">
+                    <th style="padding: 14px 20px;">Waktu</th>
+                    <th style="padding: 14px 20px;">Pengguna</th>
+                    <th style="padding: 14px 20px;">Mode & Skor</th>
+                    <th style="padding: 14px 20px;">Konten yang Diperiksa</th>
+                    <th style="padding: 14px 20px;">Temuan Ancaman</th>
+                    <th style="padding: 14px 20px; text-align: right;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($scans as $scan)
+                    <tr style="border-bottom: 1px solid var(--theme-border);">
+                        <td style="padding: 16px 20px; font-size: 0.82rem; color: var(--theme-muted); white-space: nowrap;">
+                            {{ $scan->created_at->format('d/m/Y H:i') }}
+                        </td>
+                        <td style="padding: 16px 20px; font-size: 0.9rem; font-weight: 600; color: var(--theme-heading);">
+                            {{ $scan->user ? $scan->user->name : 'Pengunjung Tamu' }}
+                        </td>
+                        <td style="padding: 16px 20px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="text-transform: uppercase; font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: var(--theme-border);">
+                                    {{ $scan->mode }}
+                                </span>
+                                @if($scan->risk_level === 'danger')
+                                    <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.8rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">
+                                        {{ $scan->score }}% Bahaya
+                                    </span>
+                                @elseif($scan->risk_level === 'warning')
+                                    <span style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.8rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">
+                                        {{ $scan->score }}% Waspada
+                                    </span>
+                                @else
+                                    <span style="background: rgba(34, 197, 94, 0.15); color: #16a34a; font-size: 0.8rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">
+                                        {{ $scan->score }}% Aman
+                                    </span>
+                                @endif
+                            </div>
+                        </td>
+                        <td style="padding: 16px 20px; max-width: 320px;">
+                            <div style="font-size: 0.88rem; color: var(--theme-text); word-break: break-all; max-height: 54px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                {{ $scan->content }}
+                            </div>
+                        </td>
+                        <td style="padding: 16px 20px; font-size: 0.82rem;">
+                            @if(!empty($scan->flags))
+                                <div style="color: #dc2626; font-weight: 600;">
+                                    {{ count($scan->flags) }} Indikator Ditemukan
+                                </div>
+                            @elseif(!empty($scan->threat_urls))
+                                <div style="color: #dc2626; font-weight: 600;">
+                                    {{ count($scan->threat_urls) }} URL Berbahaya
+                                </div>
+                            @else
+                                <span style="color: var(--theme-muted);">Tidak ada ancaman</span>
+                            @endif
+                        </td>
+                        <td style="padding: 16px 20px; text-align: right;">
+                            <form action="{{ route('admin.scans.destroy', $scan) }}" method="POST" onsubmit="return confirm('Hapus log scan ini?');" style="margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="padding: 6px 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; background: rgba(239, 68, 68, 0.12); color: #dc2626; border: none; cursor: pointer;">
+                                    Hapus
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="6" style="padding: 40px; text-align: center; color: var(--theme-muted);">
+                            Belum ada riwayat deteksi.
+                        </td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+
+        @if($scans->hasPages())
+            <div style="padding: 16px 20px; border-top: 1px solid var(--theme-border);">
+                {{ $scans->links() }}
             </div>
         </header>
 

@@ -3,17 +3,56 @@
 namespace App\Http\Controllers;
 
 use App\Models\Module;
+use App\Models\ScanHistory;
+use App\Models\SimulationAttempt;
 use App\Models\SimulationScenario;
 use App\Services\ScamAnalysisService;
 use Illuminate\Http\Request;
 
-class VerifyController extends Controllers
+class VerifyController extends Controller
 {
     public function __construct(private readonly ScamAnalysisService $scamAnalysisService) {}
 
-    public function home()
+    private function data(): array
     {
-        return view('pages.home');
+        $dbModules = Module::where('is_active', true)->orderBy('order')->orderBy('id')->get();
+        if ($dbModules->isNotEmpty()) {
+            return $dbModules->toArray();
+        }
+
+        return [['id' => 1, 'title' => 'Introduction to Digital Scam', 'description' => 'Kenali penipuan digital dan cara melindungi diri.', 'color' => 'blue', 'icon' => 'shield', 'lessons' => ['Penipuan digital menggunakan pesan, situs, atau identitas palsu untuk mengambil uang maupun informasi pribadi.', 'Periksa identitas pengirim melalui saluran yang sudah Anda kenal, bukan nomor yang tercantum dalam pesan mencurigakan.', 'Jangan terburu-buru mengambil keputusan. Hentikan interaksi ketika Anda diminta merahasiakan transaksi.']], ['id' => 2, 'title' => 'Social Engineering', 'description' => 'Kenali teknik manipulasi psikologis yang digunakan penipu.', 'color' => 'purple', 'icon' => 'brain', 'lessons' => ['Penipu dapat menyamar sebagai petugas, teman, atau pihak berwenang untuk membangun kepercayaan.', 'Waspadai desakan waktu dan permintaan kode OTP, PIN, atau kata sandi.', 'Verifikasi permintaan melalui kontak resmi yang Anda cari sendiri.']], ['id' => 3, 'title' => 'Phishing & Malicious Link', 'description' => 'Pelajari cara mengenali pesan dan tautan berbahaya.', 'color' => 'green', 'icon' => 'link', 'lessons' => ['Phishing berusaha mengarahkan Anda ke halaman palsu yang meminta data sensitif.', 'Periksa domain, bukan hanya logo atau tampilan situs. HTTPS saja tidak membuktikan suatu situs dapat dipercaya.', 'Jangan memasukkan kata sandi dari tautan pesan yang tidak Anda harapkan.']], ['id' => 4, 'title' => 'Online Shopping & Investment Scams', 'description' => 'Kenali modus penipuan belanja online dan investasi.', 'color' => 'orange', 'icon' => 'cart', 'lessons' => ['Waspadai harga yang tidak masuk akal dan janji keuntungan pasti tanpa risiko.', 'Hindari transaksi di luar platform ketika Anda tidak mengenal penjual.', 'Periksa legalitas penyedia layanan keuangan melalui otoritas terkait.']], ['id' => 5, 'title' => 'Account & Data Protection', 'description' => 'Pelajari cara melindungi akun dan data pribadi.', 'color' => 'cyan', 'icon' => 'lock', 'lessons' => ['Gunakan kata sandi unik untuk setiap akun dan pengelola kata sandi bila memungkinkan.', 'Aktifkan autentikasi multifaktor dan jangan bagikan kode verifikasi.', 'Tinjau perangkat yang login serta perbarui aplikasi secara berkala.']], ['id' => 6, 'title' => 'Scam Reporting & Prevention', 'description' => 'Ketahui cara merespons, melapor, dan mencegah penipuan.', 'color' => 'pink', 'icon' => 'report', 'lessons' => ['Simpan tangkapan layar, waktu kejadian, identitas pengirim, dan bukti transaksi.', 'Jika data akun terungkap, ubah kata sandi melalui aplikasi atau situs resmi.', 'Jika terjadi transfer dana, segera hubungi bank atau penyedia pembayaran melalui saluran resmi.']]];
+    }
+
+    public function home(): \Illuminate\View\View
+    {
+        $user = auth()->user();
+
+        // 1. Pemeriksaan URL / Scan:
+        // Jika login, gunakan riwayat scan akun user; jika belum login, gunakan total pemeriksaan platform
+        $urlChecksCount = $user
+            ? $user->scanHistories()->count()
+            : ScanHistory::count();
+
+        // 2. Modul:
+        // Jumlah modul aktif dari database (fallback ke data default jika belum ada)
+        $modulesCount = Module::where('is_active', true)->count();
+        if ($modulesCount === 0) {
+            $modulesCount = count($this->data());
+        }
+
+        // 3. Topik Simulasi:
+        // Topik simulasi pada Scam Simulator mencakup seluruh topik latihan yang tersedia di simulator (6 topik)
+        $userAttemptsCount = $user ? $user->simulationAttempts()->count() : 0;
+        $activeScenariosCount = SimulationScenario::where('is_active', true)->count();
+        $simulationsCount = max($modulesCount, $activeScenariosCount, count($this->data()), 6);
+
+        return view('pages.home', compact(
+            'urlChecksCount',
+            'modulesCount',
+            'simulationsCount',
+            'userAttemptsCount',
+            'activeScenariosCount'
+        ));
     }
 
     public function detect()

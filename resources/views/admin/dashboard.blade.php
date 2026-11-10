@@ -47,14 +47,32 @@
                     {{ $stats['total_modules'] }}
                 </p>
 
-                <div class="va-stat-footer">
-                    <a
-                        class="va-text-link"
-                        href="{{ route('admin.modules.create') }}"
-                    >
-                        Tambah modul baru
-                        <span aria-hidden="true">↗</span>
-                    </a>
+        {{-- Deteksi Scam Terkini --}}
+        <div style="background: var(--theme-card); border: 1px solid var(--theme-border); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px var(--theme-shadow);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+                <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: var(--theme-heading);">Deteksi Scam Terkini</h3>
+                <a href="{{ route('admin.scans.index') }}" style="font-size: 0.85rem; color: #20b4cb; font-weight: 700;">Lihat Semua &rarr;</a>
+            </div>
+
+            @forelse($recentScans as $scan)
+                <div style="padding: 12px 0; border-bottom: 1px solid var(--theme-border); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                    <div style="min-width: 0; flex: 1;">
+                        <div style="font-weight: 600; color: var(--theme-heading); font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {{ $scan->content }}
+                        </div>
+                        <div style="font-size: 0.78rem; color: var(--theme-muted);">
+                            {{ $scan->user ? $scan->user->name : 'Tamu' }} &bull; {{ $scan->created_at->diffForHumans() }}
+                        </div>
+                    </div>
+                    <div>
+                        @if($scan->risk_level === 'danger')
+                            <span style="background: rgba(239, 68, 68, 0.15); color: #ef4444; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
+                        @elseif($scan->risk_level === 'warning')
+                            <span style="background: rgba(245, 158, 11, 0.15); color: #d97706; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
+                        @else
+                            <span style="background: rgba(34, 197, 94, 0.15); color: #16a34a; font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 6px;">{{ $scan->risk_label }}</span>
+                        @endif
+                    </div>
                 </div>
             </article>
 

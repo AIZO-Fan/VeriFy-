@@ -35,4 +35,35 @@ class ScanHistory extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Dapatkan level risiko standar untuk badge tampilan: danger, warning, safe.
+     */
+    public function getRiskLevelAttribute(): string
+    {
+        $status = strtolower($this->status ?? '');
+        $score = (int) ($this->score ?? 0);
+
+        if ($score >= 60 || str_contains($status, 'bahaya') || str_contains($status, 'kewaspadaan')) {
+            return 'danger';
+        }
+
+        if ($score >= 20 || str_contains($status, 'waspada') || str_contains($status, 'lebih lanjut')) {
+            return 'warning';
+        }
+
+        return 'safe';
+    }
+
+    /**
+     * Dapatkan label ringkas status untuk badge.
+     */
+    public function getRiskLabelAttribute(): string
+    {
+        return match ($this->risk_level) {
+            'danger'  => 'Bahaya',
+            'warning' => 'Waspada',
+            default   => 'Aman',
+        };
+    }
 }
