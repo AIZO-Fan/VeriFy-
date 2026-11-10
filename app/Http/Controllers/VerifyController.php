@@ -51,11 +51,19 @@ class VerifyController extends Controllers
             'content' => 'required|string|max:5000',
         ]);
 
-        // Auto-upgrade mode ke 'url' jika input adalah URL murni
+        // Auto-upgrade mode ke 'url' jika input adalah URL murni, atau normalisasi URL
         $trimmed = trim($input['content']);
-        if (preg_match('~^https?://\S+$~i', $trimmed)) {
+        if ($input['mode'] === 'url') {
+            if (!preg_match('~^https?://~i', $trimmed)) {
+                $trimmed = 'https://' . $trimmed;
+                $input['content'] = $trimmed;
+            }
             if (!filter_var($trimmed, FILTER_VALIDATE_URL)) {
-                return back()->withErrors(['content' => 'Tautan tidak valid.'])->withInput();
+                return back()->withErrors(['content' => 'Format tautan URL tidak valid.'])->withInput();
+            }
+        } elseif (preg_match('~^https?://\S+$~i', $trimmed)) {
+            if (!filter_var($trimmed, FILTER_VALIDATE_URL)) {
+                return back()->withErrors(['content' => 'Format tautan URL tidak valid.'])->withInput();
             }
         }
 
