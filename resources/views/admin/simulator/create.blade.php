@@ -72,16 +72,56 @@
         >
             @csrf
 
-            {{-- INFORMASI SKENARIO --}}
-            <section
-                class="va-editor-card"
-                aria-labelledby="va-scenario-info-title"
-            >
-                <header class="va-editor-card-heading">
-                    <span class="va-editor-step" aria-hidden="true">
-                        01
-                    </span>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px;">
+                <div>
+                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Judul Skenario</label>
+                    <input type="text" id="scenarioTitle" name="title" value="{{ old('title', $selectedModule->title ?? '') }}" required placeholder="Contoh: Modus Undian Berhadiah Mengatasnamakan Bank"
+                        style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 1rem;">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Topik Terkait</label>
+                    <select name="topic_id" id="topicSelect" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
+                        @foreach($modules as $mod)
+                        <option value="{{ $mod->id }}" {{ (old('topic_id', $selectedTopicId) == $mod->id) ? 'selected' : '' }} data-title="{{ $mod->title }}" data-desc="{{ $mod->description }}">
+                            Topik {{ $mod->sort_order ?? $mod->id }}: {{ $mod->title }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                <div>
+                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Slug URL (Opsional)</label>
+                    <input type="text" name="slug" value="{{ old('slug') }}" placeholder="Contoh: undian-palsu-bank (otomatis jika dikosongkan)"
+                        style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Tingkat Kesulitan</label>
+                    <select name="difficulty" style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text);">
+                        <option value="beginner" {{ old('difficulty') == 'beginner' ? 'selected' : '' }}>Beginner (Pemula)</option>
+                        <option value="intermediate" {{ old('difficulty') == 'intermediate' ? 'selected' : '' }}>Intermediate (Menengah)</option>
+                        <option value="advanced" {{ old('difficulty') == 'advanced' ? 'selected' : '' }}>Advanced (Tinggi)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 700; color: var(--theme-heading); margin-bottom: 8px;">Deskripsi Situasi Awal</label>
+                <textarea name="description" id="scenarioDesc" rows="2" required placeholder="Jelaskan konteks yang dihadapi pengguna sebelum interaksi dimulai..."
+                    style="width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-size: 0.95rem;">{{ old('description', $selectedModule->description ?? '') }}</textarea>
+            </div>
+
+            <div style="margin-bottom: 24px; padding: 16px; background: var(--theme-card-soft); border-radius: 12px; border: 1px solid var(--theme-border);">
+                <label style="display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--theme-heading); cursor: pointer;">
+                    <input type="checkbox" name="is_active" value="1" {{ old('is_active', '1') ? 'checked' : '' }} style="width: 18px; height: 18px; accent-color: #20b4cb;">
+                    Publikasikan langsung (Status Aktif)
+                </label>
+            </div>
+
+            {{-- Story JSON Editor --}}
+            <div style="margin-bottom: 28px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div>
                         <h2 id="va-scenario-info-title">
                             Informasi skenario
@@ -427,48 +467,57 @@
                         Simpan skenario
                     </button>
                 </div>
-            </footer>
+
+                <textarea id="storyJsonInput" name="story_json" rows="18" required
+                    style="width: 100%; font-family: Consolas, monospace; font-size: 0.88rem; line-height: 1.5; padding: 14px; border-radius: 10px; border: 1px solid var(--theme-border); background: #0b1220; color: #38bdf8;">{{ old('story_json', $defaultStoryJson) }}</textarea>
+                <div id="jsonStatus" style="margin-top: 6px; font-size: 0.85rem; color: var(--theme-muted);">Format JSON siap disimpan.</div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+                <a href="{{ route('admin.simulator.index') }}" style="padding: 12px 20px; border-radius: 10px; border: 1px solid var(--theme-border); background: var(--theme-card-soft); color: var(--theme-text); font-weight: 600;">Batal</a>
+                <button type="submit" style="padding: 12px 24px; border-radius: 10px; background: #20b4cb; color: #fff; border: none; font-weight: 700; cursor: pointer;">
+                    Simpan Skenario
+                </button>
+            </div>
         </form>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const textarea = document.getElementById('storyJsonInput');
-            const formatButton = document.getElementById('btnFormatJson');
-            const status = document.getElementById('jsonStatus');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textarea = document.getElementById('storyJsonInput');
+        const btnFormat = document.getElementById('btnFormatJson');
+        const status = document.getElementById('jsonStatus');
+        const topicSelect = document.getElementById('topicSelect');
+        const titleInput = document.getElementById('scenarioTitle');
+        const descInput = document.getElementById('scenarioDesc');
 
-            if (!textarea || !formatButton || !status) {
-                return;
-            }
+        // Ubah judul dan deskripsi otomatis ketika pilihan topik dropdown diubah
+        if (topicSelect) {
+            topicSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const modTitle = selectedOption.getAttribute('data-title');
+                const modDesc = selectedOption.getAttribute('data-desc');
 
-            formatButton.addEventListener('click', function () {
-                status.classList.remove('is-success', 'is-error');
-
-                try {
-                    const parsed = JSON.parse(textarea.value);
-
-                    textarea.value = JSON.stringify(parsed, null, 2);
-
-                    status.textContent =
-                        'Sintaks JSON valid dan berhasil dirapikan. ' +
-                        'Struktur cerita akan diperiksa saat disimpan.';
-
-                    status.classList.add('is-success');
-                } catch (error) {
-                    status.textContent =
-                        'Sintaks JSON belum valid: ' + error.message;
-
-                    status.classList.add('is-error');
-                    textarea.focus();
+                if (modTitle && !titleInput.value) {
+                    titleInput.value = modTitle;
+                }
+                if (modDesc && !descInput.value) {
+                    descInput.value = modDesc;
                 }
             });
+        }
 
-            textarea.addEventListener('input', function () {
-                status.classList.remove('is-success', 'is-error');
-
-                status.textContent =
-                    'Isi JSON berubah. Klik “Rapikan JSON” untuk memeriksa ulang.';
-            });
+        btnFormat.addEventListener('click', function() {
+            try {
+                const parsed = JSON.parse(textarea.value);
+                textarea.value = JSON.stringify(parsed, null, 2);
+                status.textContent = '✅ Format JSON valid dan berhasil dirapikan.';
+                status.style.color = '#16a34a';
+            } catch (e) {
+                status.textContent = '❌ Kesalahan sintaks JSON: ' + e.message;
+                status.style.color = '#dc2626';
+            }
         });
-    </script>
+    });
+</script>
 @endsection

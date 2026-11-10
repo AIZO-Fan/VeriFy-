@@ -28,7 +28,6 @@ class VerifyController extends Controllers
             'content' => 'required|string|max:5000',
         ]);
 
-        // Auto-upgrade mode ke 'url' jika input adalah URL murni, atau normalisasi URL
         $trimmed = trim($input['content']);
         if ($input['mode'] === 'url') {
             if (!preg_match('~^https?://~i', $trimmed)) {
@@ -66,16 +65,12 @@ class VerifyController extends Controllers
         return view('pages.how');
     }
 
-    // Halaman Daftar Modul
-    // Halaman Daftar Modul
-public function modules()
-{
-    $modules = Module::where('status', 'published')
-        ->orderBy('sort_order', 'asc')
-        ->orderBy('id', 'asc')
-        ->withCount('publishedScenarios')
-        ->paginate(6)
-        ->withQueryString();
+    public function modules()
+    {
+        $modulesData = Module::where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->withCount('publishedScenarios')
+            ->get();
 
     $firstNumber = $modules->firstItem() ?? 1;
 
@@ -121,9 +116,9 @@ public function modules()
         $publishedScenarios = $module->publishedScenarios;
         $publishedCount = $publishedScenarios->count();
 
-        // Menyusun Kontrak Data Practice untuk Frontend
+        // Mengarahkan ke halaman simulator dengan membawa parameter topic
         $practice = [
-            'available' => $publishedCount > 0,
+            'available' => true, // atau $publishedCount > 0
             'published_scenario_count' => $publishedCount,
             'url' => route('simulator') . '?topic=' . $module->id
         ];
@@ -131,17 +126,24 @@ public function modules()
         return view('pages.lesson', compact('module', 'practice'));
     }
 
-    // Halaman Scam Simulator
-    // Halaman Scam Simulator
-public function simulator(Request $request)
-{
-    $modules = Module::where('status', 'published')
-        ->orderBy('sort_order', 'asc')
-        ->orderBy('id', 'asc')
-        ->paginate(6)
-        ->withQueryString();
+    public function simulator(Request $request)
+    {
+        $modulesData = Module::where('status', 'published')
+            ->orderBy('sort_order', 'asc')
+            ->get();
 
-    $firstNumber = $modules->firstItem() ?? 1;
+        $modules = $modulesData->map(function ($module) {
+            $hasScenario = SimulationScenario::where('topic_id', $module->id)
+                ->where('is_active', true)
+                ->exists();
+
+            return [
+                'id' => $module->id,
+                'title' => $module->title,
+                'icon' => 'module-' . ($module->id),
+                'has_scenario' => $hasScenario,
+            ];
+        });
 
     $modules->setCollection(
         $modules->getCollection()->map(

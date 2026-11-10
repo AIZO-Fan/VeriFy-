@@ -89,13 +89,17 @@
                             <span class="verify-simulator-art-dot"></span>
                         </div>
 
-                        <div class="verify-simulator-card-content">
-                            <h2>{{ $module['title'] }}</h2>
+                    {{-- Menggunakan $loop->iteration agar nomor urut tampil rapi (01, 02, 03...) --}}
+                    <span class="verify-simulator-badge">
+                        SIMULATOR
+                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                    </span>
 
-                            <p>
-                                {{ $simulatorDescriptions[$module['id']] ?? 'Cermati skenario dan latih kemampuanmu mengenali dugaan penipuan.' }}
-                            </p>
-                        </div>
+                    <span
+                        class="verify-simulator-card-number"
+                        aria-hidden="true">
+                        {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                    </span>
 
                         <div class="verify-simulator-card-bottom">
                             <span class="verify-simulator-exercise-label">
@@ -171,10 +175,15 @@
                             </a>
                         @endif
 
-                        @if ($modules->hasMorePages())
-                            <a class="verify-simulator-page-button verify-simulator-page-button--next"
-                                href="{{ $modules->nextPageUrl() }}" rel="next">
-                                Berikutnya
+                    <button
+                        class="verify-simulator-start"
+                        type="button"
+                        data-story-sim="{{ $module['id'] }}"
+                        data-story-title="{{ $module['title'] }}"
+                        aria-haspopup="dialog"
+                        aria-controls="verify-story-dialog"
+                        aria-label="Mulai simulasi {{ $module['title'] }}">
+                        <span>Mulai Simulasi</span>
 
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -648,5 +657,48 @@
     <script src="{{ asset('js/verify-story-data.js') }}" defer></script>
 
     <script src="{{ asset('js/verify-story.js') }}" defer></script>
+
+            <p>
+                Tidak perlu terburu-buru. Kamu boleh berhenti
+                dan mempertimbangkan kembali pilihanmu.
+            </p>
+
+            <button
+                class="verify-story-exit"
+                type="button"
+                data-story-close>
+                Keluar dari simulasi
+            </button>
+
+        </footer>
+
+    </div>
+
+</dialog>
+
+<script
+    src="{{ asset('js/verify-story-data.js') }}"
+    defer></script>
+
+<script
+    src="{{ asset('js/verify-story.js') }}"
+    defer></script>
+
+{{-- Skrip otomatis untuk membuka pop-up simulator sesuai parameter ?topic=X --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicId = urlParams.get('topic');
+
+        if (topicId) {
+            setTimeout(() => {
+                const targetButton = document.querySelector(`[data-story-sim="${topicId}"]`);
+                if (targetButton) {
+                    targetButton.click();
+                }
+            }, 400);
+        }
+    });
+</script>
 
 @endsection

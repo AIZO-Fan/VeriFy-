@@ -5,273 +5,149 @@
 @section('content')
     @include('admin.partials.nav')
 
-    <section
-        class="va-shell va-simulator-page"
-        aria-labelledby="va-simulator-title"
-    >
-        {{-- HEADER HALAMAN --}}
-        <header class="va-management-heading">
-            <div class="va-management-heading-copy">
-                <span class="va-eyebrow">
-                    KELOLA KONTEN
-                </span>
+<style>
+    .simulator-status-button {
+        border: none;
+        cursor: pointer;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
 
-                <h1 id="va-simulator-title">
-                    Scam Simulator
-                </h1>
+    .simulator-status-button.is-active {
+        background: rgba(34, 197, 94, 0.15);
+        color: #16a34a;
+    }
 
-                <p>
-                    Kelola skenario percakapan interaktif
-                    untuk latihan mengenali penipuan digital.
-                </p>
-            </div>
+    .simulator-status-button.is-draft {
+        background: rgba(148, 163, 184, 0.2);
+        color: #64748b;
+    }
 
-            <a
-                class="va-button va-button--primary"
-                href="{{ route('admin.simulator.create') }}"
-            >
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    aria-hidden="true"
-                >
-                    <path d="M12 5V19M5 12H19" />
-                </svg>
+    .simulator-difficulty-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: capitalize;
+        background: rgba(148, 163, 184, 0.2);
+        color: #64748b;
+    }
 
-                Buat skenario baru
-            </a>
-        </header>
+    .simulator-difficulty-beginner {
+        background: rgba(34, 197, 94, 0.15);
+        color: #16a34a;
+    }
 
-        {{-- DAFTAR SKENARIO --}}
-        <div class="va-data-card">
-            <div class="va-data-card-heading">
-                <div>
-                    <h2 id="va-simulator-list-title">
-                        Daftar skenario
-                    </h2>
+    .simulator-difficulty-intermediate {
+        background: rgba(245, 158, 11, 0.15);
+        color: #d97706;
+    }
 
-                    <p>
-                        Atur materi, tingkat kesulitan,
-                        dan status publikasi skenario.
-                    </p>
-                </div>
+    .simulator-difficulty-advanced {
+        background: rgba(239, 68, 68, 0.15);
+        color: #dc2626;
+    }
+</style>
 
-                <span class="va-data-caption">
-                    Klik status untuk mengubah Aktif atau Draft.
-                </span>
-            </div>
+<section class="container" style="max-width: 1200px; margin: 24px auto 60px; padding: 0 20px;">
+    <div style="margin-bottom: 24px;">
+        <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--theme-heading); margin: 0 0 6px;">Scam Simulator</h1>
+        <p style="color: var(--theme-muted); margin: 0; font-size: 0.95rem;">Kelola skenario percakapan interaktif simulasi penipuan digital berdasarkan modul pembelajaran.</p>
+    </div>
 
-            <div
-                class="va-table-scroll"
-                role="region"
-                aria-labelledby="va-simulator-list-title"
-                tabindex="0"
-            >
-                <table class="va-table va-scenario-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Topik</th>
-                            <th scope="col">Skenario</th>
-                            <th scope="col">Kesulitan</th>
-                            <th scope="col">Dimainkan</th>
-                            <th scope="col">Status</th>
-                            <th scope="col" class="va-cell-actions">
-                                Aksi
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @forelse($scenarios as $scen)
-                            @php
-                                $difficultyClasses = [
-                                    'beginner' => 'va-badge--success',
-                                    'intermediate' => 'va-badge--warning',
-                                    'advanced' => 'va-badge--danger',
-                                ];
-
-                                $difficultyClass =
-                                    $difficultyClasses[$scen->difficulty] ?? '';
-                            @endphp
-
-                            <tr>
-                                <td>
-                                    <span class="va-badge va-badge--topic">
-                                        Topik {{ $scen->topic_id }}
-                                    </span>
-                                </td>
-
-                                <td class="va-scenario-name-cell">
-                                    <div class="va-table-title">
-                                        {{ $scen->title }}
-                                    </div>
-
-                                    <div class="va-table-meta">
-                                        <span class="va-scenario-slug">
-                                            /{{ $scen->slug }}
-                                        </span>
-
-                                        <span aria-hidden="true">&bull;</span>
-
-                                        <span class="va-version">
-                                            v{{ $scen->version }}
-                                        </span>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    <span
-                                        class="va-badge {{ $difficultyClass }} va-difficulty-badge"
-                                    >
-                                        {{ ucfirst($scen->difficulty) }}
-                                    </span>
-                                </td>
-
-                                <td>
-                                    <span class="va-play-count">
-                                        {{ $scen->attempts_count }}
-                                    </span>
-
-                                    <span class="va-table-unit">kali</span>
-                                </td>
-
-                                <td>
-                                    <form
-                                        class="va-inline-form"
-                                        action="{{ route('admin.simulator.toggle', $scen) }}"
-                                        method="POST"
-                                    >
-                                        @csrf
-
-                                        <button
-                                            class="va-badge va-status-toggle {{ $scen->is_active ? 'va-badge--success' : '' }}"
-                                            type="submit"
-                                            aria-label="{{ $scen->is_active
-                                                ? 'Ubah skenario ' . $scen->title . ' menjadi Draft'
-                                                : 'Aktifkan skenario ' . $scen->title }}"
-                                            title="{{ $scen->is_active
-                                                ? 'Klik untuk mengubah menjadi Draft'
-                                                : 'Klik untuk mengaktifkan' }}"
-                                        >
-                                            <span
-                                                class="va-status-dot"
-                                                aria-hidden="true"
-                                            ></span>
-
-                                            {{ $scen->is_active ? 'Aktif' : 'Draft' }}
-                                        </button>
-                                    </form>
-                                </td>
-
-                                <td class="va-cell-actions">
-                                    <div class="va-table-actions">
-                                        <a
-                                            class="va-action-button va-action-button--edit"
-                                            href="{{ route('admin.simulator.edit', $scen) }}"
-                                            aria-label="Edit skenario {{ $scen->title }}"
-                                        >
-                                            <svg
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.7"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                aria-hidden="true"
-                                            >
-                                                <path d="M12 20H21" />
-                                                <path d="M16.5 3.5A2.12 2.12 0 0 1 19.5 6.5L9 17L5 18L6 14Z" />
-                                            </svg>
-
-                                            Edit
-                                        </a>
-
-                                        <form
-                                            class="va-inline-form"
-                                            action="{{ route('admin.simulator.destroy', $scen) }}"
-                                            method="POST"
-                                            data-scenario-title="{{ $scen->title }}"
-                                            onsubmit="return confirm('Hapus skenario ' + this.dataset.scenarioTitle + '?');"
-                                        >
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button
-                                                class="va-action-button va-action-button--delete"
-                                                type="submit"
-                                                aria-label="Hapus skenario {{ $scen->title }}"
-                                            >
-                                                <svg
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.7"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    aria-hidden="true"
-                                                >
-                                                    <path d="M3 6H21M9 6V4H15V6" />
-                                                    <path d="M5 6L6 20H18L19 6" />
-                                                    <path d="M10 10V16M14 10V16" />
-                                                </svg>
-
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="6" class="va-table-empty-cell">
-                                    <div class="va-table-empty">
-                                        <span
-                                            class="va-icon"
-                                            aria-hidden="true"
-                                        >
-                                            <svg
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="1.7"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            >
-                                                <rect
-                                                    x="3"
-                                                    y="4"
-                                                    width="18"
-                                                    height="13"
-                                                    rx="2"
-                                                />
-
-                                                <path d="M8 21H16M12 17V21" />
-                                            </svg>
-                                        </span>
-
-                                        <h3>Belum ada skenario simulator</h3>
-
-                                        <p>
-                                            Tambahkan skenario pertama
-                                            untuk memulai latihan interaktif.
-                                        </p>
-
-                                        <a
-                                            class="va-button va-button--primary"
-                                            href="{{ route('admin.simulator.create') }}"
-                                        >
-                                            Buat skenario baru
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+    <div style="background: var(--theme-card); border: 1px solid var(--theme-border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 14px var(--theme-shadow);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background: var(--theme-card-soft); border-bottom: 1px solid var(--theme-border); font-size: 0.85rem; color: var(--theme-muted); text-transform: uppercase;">
+                    <th style="padding: 14px 20px;">Topik / Modul</th>
+                    <th style="padding: 14px 20px;">Judul Skenario & Slug</th>
+                    <th style="padding: 14px 20px;">Tingkat Kesulitan</th>
+                    <th style="padding: 14px 20px;">Dimainkan</th>
+                    <th style="padding: 14px 20px;">Status</th>
+                    <th style="padding: 14px 20px; text-align: right;">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($simulatorRows as $row)
+                @php $scen = $row['scenario']; @endphp
+                <tr style="border-bottom: 1px solid var(--theme-border);">
+                    <td style="padding: 16px 20px;">
+                        <span style="background: rgba(32, 180, 203, 0.15); color: #20b4cb; padding: 4px 10px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
+                            Topik {{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}
+                        </span>
+                        <div style="font-size: 0.8rem; color: var(--theme-muted); margin-top: 4px;">
+                            Modul: {{ $row['module_title'] }}
+                        </div>
+                    </td>
+                    <td style="padding: 16px 20px;">
+                        @if($scen)
+                        <div style="font-weight: 700; color: var(--theme-heading); font-size: 1rem;">
+                            {{ $scen->title }}
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--theme-muted); font-family: monospace;">
+                            /{{ $scen->slug }} &bull; v{{ $scen->version }}
+                        </div>
+                        @else
+                        <span style="color: var(--theme-muted); font-style: italic; font-size: 0.9rem;">Belum ada skenario untuk topik ini</span>
+                        @endif
+                    </td>
+                    <td style="padding: 16px 20px;">
+                        @if($scen)
+                        <span class="simulator-difficulty-badge simulator-difficulty-{{ $scen->difficulty }}">
+                            {{ $scen->difficulty }}
+                        </span>
+                        @else
+                        -
+                        @endif
+                    </td>
+                    <td style="padding: 16px 20px; font-size: 0.95rem; font-weight: 600; color: var(--theme-heading);">
+                        {{ $scen ? $scen->attempts_count . ' kali' : '-' }}
+                    </td>
+                    <td style="padding: 16px 20px;">
+                        @if($scen)
+                        <form action="{{ route('admin.simulator.toggle', $scen) }}" method="POST" style="margin: 0;">
+                            @csrf
+                            <button type="submit" class="simulator-status-button {{ $scen->is_active ? 'is-active' : 'is-draft' }}">
+                                {{ $scen->is_active ? 'Aktif' : 'Draft' }}
+                            </button>
+                        </form>
+                        @else
+                        <span style="background: rgba(148, 163, 184, 0.15); color: var(--theme-muted); padding: 4px 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 600;">Kosong</span>
+                        @endif
+                    </td>
+                    <td style="padding: 16px 20px; text-align: right;">
+                        <div style="display: inline-flex; align-items: center; gap: 8px;">
+                            @if($scen)
+                            <a href="{{ route('admin.simulator.edit', $scen) }}" style="padding: 6px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: rgba(40, 123, 237, 0.12); color: #287bed; text-decoration: none;">
+                                Edit
+                            </a>
+                            <form action="{{ route('admin.simulator.destroy', $scen) }}" method="POST" onsubmit="return confirm('Hapus skenario {{ $scen->title }}?');" style="margin: 0;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="padding: 6px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: rgba(239, 68, 68, 0.12); color: #dc2626; border: none; cursor: pointer;">
+                                    Hapus
+                                </button>
+                            </form>
+                            @else
+                            <a href="{{ route('admin.simulator.create', ['topic_id' => $row['topic_id']]) }}" style="padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; background: rgba(32, 180, 203, 0.15); color: #20b4cb; text-decoration: none;">
+                                + Buat Skenario
+                            </a>
+                            @endif
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="6" style="padding: 40px; text-align: center; color: var(--theme-muted);">
+                        Belum ada modul pembelajaran yang terdaftar.
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</section>
 @endsection
