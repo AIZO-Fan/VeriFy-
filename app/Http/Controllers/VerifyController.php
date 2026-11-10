@@ -104,106 +104,91 @@ class VerifyController extends Controller
         return view('pages.how');
     }
 
-    public function modules()
+    public function modules(): \Illuminate\View\View
     {
-        $modulesData = Module::where('status', 'published')
+        $modules = Module::where('is_active', true)
+            ->orWhere('status', 'published')
             ->orderBy('sort_order', 'asc')
-            ->withCount('publishedScenarios')
-            ->get();
+            ->paginate(6);
 
-    $firstNumber = $modules->firstItem() ?? 1;
+        $firstNumber = $modules->firstItem() ?? 1;
 
-    $modules->setCollection(
-        $modules->getCollection()->map(
-            function ($module, $index) use ($firstNumber) {
-                $publishedCount = $module->published_scenarios_count;
+        $modules->setCollection(
+            $modules->getCollection()->map(
+                function ($module, $index) use ($firstNumber) {
+                    return [
+                        'id' => $module->id,
+                        'display_number' => str_pad(
+                            $firstNumber + $index,
+                            2,
+                            '0',
+                            STR_PAD_LEFT
+                        ),
+                        'title' => $module->title,
+                        'slug' => $module->slug,
+                        'description' => $module->description,
+                        'icon' => $module->icon ?? ('module-' . $module->id),
+                        'color' => $module->color ?? 'blue',
+                        'detail_url' => route('lesson', $module->id),
+                    ];
+                }
+            )
+        );
 
-                return [
-                    'id' => $module->id,
-                    'display_number' => str_pad(
-                        $firstNumber + $index,
-                        2,
-                        '0',
-                        STR_PAD_LEFT
-                    ),
-                    'title' => $module->title,
-                    'slug' => $module->slug,
-                    'description' => $module->description,
-                    'icon' => 'module-' . $module->id,
-                    'color' => 'blue',
-                    'detail_url' => route('lesson', $module->id),
-                    'practice_available' => $publishedCount > 0,
-                ];
-            }
-        )
-    );
+        $modules->fragment('verify-modules-list');
 
-    $modules->fragment('verify-modules-list');
-
-    return view('pages.modules', compact('modules'));
-}
+        return view('pages.modules', compact('modules'));
+    }
 
     // Halaman Detail Modul (Materi)
-    public function lesson($id)
+    public function lesson($id): \Illuminate\View\View
     {
-        $module = Module::where('status', 'published')
+        $module = Module::where('id', $id)
+            ->where(function ($q) {
+                $q->where('is_active', true)->orWhere('status', 'published');
+            })
             ->with(['sections' => function ($query) {
                 $query->orderBy('sort_order', 'asc')->orderBy('id', 'asc');
-            }, 'publishedScenarios'])
-            ->findOrFail($id);
+            }])
+            ->firstOrFail();
 
-        $publishedScenarios = $module->publishedScenarios;
-        $publishedCount = $publishedScenarios->count();
-
-        // Mengarahkan ke halaman simulator dengan membawa parameter topic
         $practice = [
-            'available' => true, // atau $publishedCount > 0
-            'published_scenario_count' => $publishedCount,
-            'url' => route('simulator') . '?topic=' . $module->id
+            'available' => true,
+            'url' => route('simulator') . '?topic=' . $module->id,
         ];
 
         return view('pages.lesson', compact('module', 'practice'));
     }
 
-    public function simulator(Request $request)
+    public function simulator(Request $request): \Illuminate\View\View
     {
-        $modulesData = Module::where('status', 'published')
+        $modules = Module::where('is_active', true)
+            ->orWhere('status', 'published')
             ->orderBy('sort_order', 'asc')
-            ->get();
+            ->paginate(6);
 
-        $modules = $modulesData->map(function ($module) {
-            $hasScenario = SimulationScenario::where('topic_id', $module->id)
-                ->where('is_active', true)
-                ->exists();
+        $firstNumber = $modules->firstItem() ?? 1;
 
-            return [
-                'id' => $module->id,
-                'title' => $module->title,
-                'icon' => 'module-' . ($module->id),
-                'has_scenario' => $hasScenario,
-            ];
-        });
+        $modules->setCollection(
+            $modules->getCollection()->map(
+                function ($module, $index) use ($firstNumber) {
+                    return [
+                        'id' => $module->id,
+                        'title' => $module->title,
+                        'icon' => $module->icon ?? ('module-' . $module->id),
+                        'display_number' => str_pad(
+                            $firstNumber + $index,
+                            2,
+                            '0',
+                            STR_PAD_LEFT
+                        ),
+                    ];
+                }
+            )
+        );
 
-    $modules->setCollection(
-        $modules->getCollection()->map(
-            function ($module, $index) use ($firstNumber) {
-                return [
-                    'id' => $module->id,
-                    'title' => $module->title,
-                    'icon' => 'module-' . $module->id,
-                    'display_number' => str_pad(
-                        $firstNumber + $index,
-                        2,
-                        '0',
-                        STR_PAD_LEFT
-                    ),
-                ];
-            }
-        )
-    );
+        $modules->fragment('verify-simulator-list');
 
-    $modules->fragment('verify-simulator-list');
-
-    return view('pages.simulator', compact('modules'));
-}
+        return view('pages.simulator', compact('modules'));
+    }
 }

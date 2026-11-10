@@ -175,15 +175,9 @@
                             </a>
                         @endif
 
-                    <button
-                        class="verify-simulator-start"
-                        type="button"
-                        data-story-sim="{{ $module['id'] }}"
-                        data-story-title="{{ $module['title'] }}"
-                        aria-haspopup="dialog"
-                        aria-controls="verify-story-dialog"
-                        aria-label="Mulai simulasi {{ $module['title'] }}">
-                        <span>Mulai Simulasi</span>
+                        @if ($modules->hasMorePages())
+                            <a class="verify-simulator-page-button" href="{{ $modules->nextPageUrl() }}" rel="next">
+                                Berikutnya
 
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
                                     stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
