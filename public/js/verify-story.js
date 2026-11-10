@@ -25,10 +25,7 @@
     let generation = 0;
 
     const pendingTimers = new Map();
-    /*
-     * Susun ulang panel hasil:
-     * skor di atas, tanda mencurigakan dapat dilipat.
-     */
+
     const reflectionPanel = $("reflection");
     const scorePanel = $("score");
 
@@ -108,7 +105,6 @@
     }
 
     function renderScore(node) {
-        // Mendukung format node.scoring maupun field langsung pada node.
         const scoring = node.scoring ?? node;
 
         const valid =
@@ -136,8 +132,6 @@
 
         const breakdown = scoring.breakdown ?? [];
 
-        // Format lama: array berisi criterion dan description.
-        // Format seeder: object berisi pasangan judul dan penjelasan.
         const entries = Array.isArray(breakdown)
             ? breakdown
             : typeof breakdown === "object" && breakdown !== null
@@ -167,10 +161,6 @@
     function prepareResult(node) {
         completedAt = new Date().toISOString();
 
-        /*
-         * Ini hanya data permintaan penyimpanan.
-         * Skor dan hasil resmi nanti ditentukan backend.
-         */
         pendingResult = {
             attempt_uuid: attemptUuid,
             scenario_id: scenario.id,
@@ -232,14 +222,12 @@
         const authenticated = dialog.dataset.authenticated === "true";
         const loginUrl = dialog.dataset.loginUrl;
 
-       // 1. JIKA BELUM LOGIN: Titipkan format JSON API ke Session Storage dan arahkan ke Login
         if (!authenticated) {
             try {
                 const pathData = history.map(entry => entry.choice_id || entry.action);
                 const outcomeNode = scenario.story.nodes[currentNodeId];
                 const scoring = outcomeNode.scoring ?? outcomeNode;
 
-                // Kita simpan format payload API-nya langsung agar gampang dieksekusi setelah login
                 sessionStorage.setItem(
                     PENDING_RESULT_KEY,
                     JSON.stringify({
@@ -268,16 +256,12 @@
             return;
         }
 
-        // 2. JIKA SUDAH LOGIN: Tembak ke API Backend (Tugas Kamu Beraksi Di Sini)
         $("save-button").disabled = true;
         $("save-button").textContent = "Menyimpan...";
         $("save-status").textContent = "Sedang menyimpan hasil simulasi...";
 
         try {
-            // Kita bungkus data history decision path hanya dengan array ID
             const pathData = history.map(entry => entry.choice_id || entry.action);
-            
-            // Ambil informasi skor
             const outcomeNode = scenario.story.nodes[currentNodeId];
             const scoring = outcomeNode.scoring ?? outcomeNode;
 
@@ -302,7 +286,6 @@
                 $("save-button").textContent = "Tersimpan ✔";
                 $("save-status").textContent = "Mantap! Hasil latihanmu berhasil disimpan ke riwayat akun.";
                 
-                // Tambahan: Otomatis tutup dialog setelah 2 detik
                 setTimeout(() => {
                     dialog.close();
                 }, 2000);
@@ -426,25 +409,27 @@
     }
 
     async function playMessages(messages, token) {
-        for (const message of messages) {
-            if (token !== generation || !dialog.open) {
-                return false;
-            }
+    $("messages").replaceChildren();
 
-            const isContact = message.sender === "contact";
-
-            hidden("typing", !isContact);
-
-            const active = await pause(isContact ? 850 : 300, token);
-
-            if (!active) return false;
-
-            hidden("typing");
-            appendMessage(message);
+    for (const message of messages) {
+        if (token !== generation || !dialog.open) {
+            return false;
         }
 
-        return true;
+        const isContact = message.sender === "contact";
+
+        hidden("typing", !isContact);
+
+        const active = await pause(isContact ? 850 : 300, token);
+
+        if (!active) return false;
+
+        hidden("typing");
+        appendMessage(message);
     }
+
+    return true;
+}
 
     function recordChoice(choice, action = "choice") {
         history.push({
@@ -566,25 +551,28 @@
     }
 
     function renderReflection(node) {
-        const reflection = node.reflection;
+        const summaryText = node.reflection?.summary || node.summary || "";
+        $("reflection-summary").textContent = summaryText;
 
-        $("reflection-summary").textContent = reflection.summary;
+        const whatText = node.reflection?.what_happened || node.learning?.what || node.takeaways?.[0] || "";
+        $("learning-what").textContent = whatText;
 
-        $("learning-what").textContent = reflection.what_happened;
+        const whyText = node.reflection?.why_it_matters || node.learning?.why || node.takeaways?.[1] || "";
+        $("learning-why").textContent = whyText;
 
-        $("learning-why").textContent = reflection.why_it_matters;
+        const altText = node.reflection?.safer_alternative || node.learning?.alternative || "";
+        $("learning-alternative").textContent = altText;
 
-        $("learning-alternative").textContent = reflection.safer_alternative;
-
+        const signalsList = node.reflection?.signals || node.signals || [];
         $("signals-list").replaceChildren();
 
-        reflection.signals.forEach((signal) => {
+        signalsList.forEach((signal) => {
             const item = document.createElement("li");
             item.textContent = signal;
             $("signals-list").append(item);
         });
 
-        hidden("signals", reflection.signals.length === 0);
+        hidden("signals", signalsList.length === 0);
 
         $("history-list").replaceChildren();
 
@@ -603,15 +591,9 @@
                 neutral: "neutral",
             }[node.tone] || "neutral";
 
-        $("consequence-title").textContent = node.title;
-        $("consequence-description").textContent = node.description;
-
         renderReflection(node);
         prepareResult(node);
 
-        /*
-         * Layar hasil tidak lagi menumpuk di bawah chat.
-         */
         panels.forEach((name) => hidden(name));
 
         hidden("context");
@@ -620,11 +602,14 @@
 
         hidden("reflection", false);
 
-        $("reflection-title").textContent = node.title;
+        $("reflection-title").textContent = node.title || "Hasil Simulasi";
+
+        const summaryDesc = node.summary || node.description || "";
+        const impactText = node.impact?.text || "";
 
         $("reflection-summary").textContent = [
-            node.description,
-            node.impact?.text,
+            summaryDesc,
+            impactText,
         ]
             .filter(Boolean)
             .join(" ");
@@ -643,9 +628,6 @@
         setStage("reflection");
         busy = false;
 
-        /*
-         * Tampilkan bagian paling atas agar skor langsung terlihat.
-         */
         dialog.scrollTop = 0;
         $("reflection-title").focus({ preventScroll: true });
     }
@@ -739,10 +721,6 @@
             return null;
         }
 
-        /*
-         * Sementara pilih satu cerita secara acak dalam topik.
-         * Nanti bisa diganti menjadi daftar pilihan skenario.
-         */
         const selected =
             scenarios[Math.floor(Math.random() * scenarios.length)];
 
@@ -912,19 +890,20 @@
         });
     });
 
-    dialog
-        .querySelector("[data-story-show-reflection]")
-        .addEventListener("click", () => {
+    const reflectionBtn = dialog.querySelector("[data-story-show-reflection]");
+    if (reflectionBtn) {
+        reflectionBtn.addEventListener("click", () => {
             hidden("consequence");
             hidden("reflection", false);
 
             setStage("reflection");
             focusHeading("reflection-title");
         });
+    }
 
-    dialog
-        .querySelector("[data-story-restart]")
-        .addEventListener("click", () => {
+    const restartBtn = dialog.querySelector("[data-story-restart]");
+    if (restartBtn) {
+        restartBtn.addEventListener("click", () => {
             if (!scenario) return;
 
             cancelTasks();
@@ -935,13 +914,11 @@
             resetView();
             startScenario(data);
         });
+    }
 
     $("save-button").addEventListener("click", saveProgress);
 
     $("save-later").addEventListener("click", () => {
-        /*
-         * Hapus titipan hanya jika milik percobaan yang sedang dibuka.
-         */
         try {
             const raw = sessionStorage.getItem(PENDING_RESULT_KEY);
             const draft = raw ? JSON.parse(raw) : null;
@@ -956,13 +933,15 @@
         dialog.close();
     });
 
-    dialog
-        .querySelector("[data-story-finish]")
-        .addEventListener("click", showSaveConfirmation);
+    const finishBtn = dialog.querySelector("[data-story-finish]");
+    if (finishBtn) {
+        finishBtn.addEventListener("click", showSaveConfirmation);
+    }
 
-    dialog
-        .querySelector("[data-story-back-result]")
-        .addEventListener("click", backToResult);
+    const backResultBtn = dialog.querySelector("[data-story-back-result]");
+    if (backResultBtn) {
+        backResultBtn.addEventListener("click", backToResult);
+    }
 
     dialog.addEventListener("close", () => {
         cancelTasks();
